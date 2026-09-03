@@ -17,14 +17,20 @@ export function Sobretitulo({
   return (
     <p
       className={cn(
-        'flex items-center gap-3 font-mono text-[0.68rem] uppercase tracking-[0.22em]',
+        // `items-start` + o deslocamento no traço mantêm o fio alinhado à
+        // PRIMEIRA linha quando o sobretítulo quebra no celular; com
+        // `items-center` ele flutuaria no meio das duas linhas.
+        'flex items-start gap-3 font-mono text-[0.68rem] uppercase leading-[1.7] tracking-[0.22em]',
         invertido ? 'text-gold-400' : 'text-gold-700',
         className,
       )}
     >
       <span
         aria-hidden
-        className={cn('h-px w-6', invertido ? 'bg-gold-400/70' : 'bg-gold-600/70')}
+        className={cn(
+          'mt-[0.8em] h-px w-6 shrink-0',
+          invertido ? 'bg-gold-400/70' : 'bg-gold-600/70',
+        )}
       />
       {children}
     </p>

@@ -23,7 +23,7 @@ export function Capa() {
 
       <Container largura="larga">
         <Revelar className="max-w-4xl">
-          <Sobretitulo invertido>Consultoria de transformação em IA · Brasil</Sobretitulo>
+          <Sobretitulo invertido>Transformação em IA · Brasil</Sobretitulo>
 
           <h1 className="mt-8 text-[2.4rem] leading-[1.08] text-ice-100 sm:text-[3.4rem] lg:text-[4rem]">
             {HEADLINE.titulo}

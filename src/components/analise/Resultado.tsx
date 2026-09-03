@@ -248,7 +248,7 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
         Deixe um contato só se quiser essa conversa.
       </p>
 
-      <form onSubmit={enviar} className="mt-8 grid gap-5 sm:grid-cols-2" noValidate>
+      <form onSubmit={enviar} className="mt-8 grid items-end gap-5 sm:grid-cols-2" noValidate>
         <div className="[&_label]:text-ice-200 [&_input]:border-ice-200/25 [&_input]:bg-navy-800 [&_input]:text-ice-100 [&_p]:text-ice-300/60">
           <CampoTexto id="contato-nome" rotulo="Seu nome" valor={nome} aoMudar={setNome} obrigatorio />
         </div>

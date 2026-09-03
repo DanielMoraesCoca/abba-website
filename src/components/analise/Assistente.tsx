@@ -124,7 +124,7 @@ export function Assistente() {
 
   if (resultado) {
     return (
-      <div ref={topo}>
+      <div ref={topo} className="scroll-mt-[calc(var(--header-h)+2rem)]">
         <Resultado
           dados={resultado}
           aoRecomecar={() => {
@@ -140,7 +140,7 @@ export function Assistente() {
   const ultimo = passo === PASSOS.length - 1;
 
   return (
-    <div ref={topo}>
+    <div ref={topo} className="scroll-mt-[calc(var(--header-h)+2rem)]">
       <ol className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Etapas da análise">
         {PASSOS.map((p, i) => {
           const feito = i < passo;
@@ -187,7 +187,7 @@ export function Assistente() {
           <div className="mt-10 space-y-14">
             {passo === 0 && (
               <>
-                <div className="grid gap-6 sm:grid-cols-2">
+                <div className="grid items-end gap-6 sm:grid-cols-2">
                   <CampoTexto
                     id="empresa"
                     rotulo="Nome da empresa"

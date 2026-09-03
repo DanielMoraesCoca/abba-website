@@ -59,7 +59,7 @@ export function FormularioContato() {
   }
 
   return (
-    <form onSubmit={enviar} className="grid gap-6 sm:grid-cols-2" noValidate>
+    <form onSubmit={enviar} className="grid items-end gap-6 sm:grid-cols-2" noValidate>
       <CampoTexto id="nome" rotulo="Seu nome" valor={campos.nome} aoMudar={definir('nome')} obrigatorio />
       <CampoTexto id="cargo" rotulo="Cargo" valor={campos.cargo} aoMudar={definir('cargo')} />
       <CampoTexto

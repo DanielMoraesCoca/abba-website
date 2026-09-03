@@ -32,7 +32,7 @@ contradizem o que você lembra.
 
 ```bash
 npm run check     # typecheck + lint + 71 unitários + build
-npm run test:e2e  # 36 testes de ponta a ponta, desktop e celular
+npm run test:e2e  # 46 testes de ponta a ponta, desktop e celular
 ```
 
 A régua do revisor (`tests/unit/regua-do-revisor.test.ts`) varre o código

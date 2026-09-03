@@ -258,13 +258,22 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
       </p>
 
       <form onSubmit={enviar} className="mt-8 grid items-end gap-5 sm:grid-cols-2" noValidate>
-        <div className="[&_label]:text-ice-200 [&_input]:border-ice-200/25 [&_input]:bg-navy-800 [&_input]:text-ice-100 [&_p]:text-ice-300/60">
-          <CampoTexto id="contato-nome" rotulo="Seu nome" valor={nome} aoMudar={setNome} obrigatorio />
-        </div>
-        <div className="[&_label]:text-ice-200 [&_input]:border-ice-200/25 [&_input]:bg-navy-800 [&_input]:text-ice-100 [&_p]:text-ice-300/60">
-          <CampoTexto id="contato-cargo" rotulo="Cargo" valor={cargo} aoMudar={setCargo} />
-        </div>
-        <div className="sm:col-span-2 [&_label]:text-ice-200 [&_input]:border-ice-200/25 [&_input]:bg-navy-800 [&_input]:text-ice-100 [&_p]:text-ice-300/60">
+        <CampoTexto
+          id="contato-nome"
+          rotulo="Seu nome"
+          valor={nome}
+          aoMudar={setNome}
+          obrigatorio
+          tom="escuro"
+        />
+        <CampoTexto
+          id="contato-cargo"
+          rotulo="Cargo"
+          valor={cargo}
+          aoMudar={setCargo}
+          tom="escuro"
+        />
+        <div className="sm:col-span-2">
           <CampoTexto
             id="contato-email"
             rotulo="E-mail corporativo"
@@ -272,6 +281,7 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
             valor={email}
             aoMudar={setEmail}
             obrigatorio
+            tom="escuro"
           />
         </div>
 
@@ -296,7 +306,7 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
           >
             {estado === 'enviando' ? 'Enviando…' : 'Quero a conversa de 45 minutos'}
           </button>
-          <p className="font-mono text-[0.72rem] leading-relaxed text-ice-300/50">
+          <p className="font-mono text-[0.72rem] leading-relaxed text-ice-300/60">
             Só usamos para responder. Nada de lista, nada de sequência automática.
           </p>
         </div>

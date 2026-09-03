@@ -55,10 +55,10 @@ export function NumeroComFonte({
       <figcaption
         className={cn(
           'mt-auto pt-6 font-mono text-[0.68rem] leading-relaxed',
-          escuro ? 'text-ice-300/55' : 'text-slate-500',
+          escuro ? 'text-ice-300/65' : 'text-slate-500',
         )}
       >
-        <span className={escuro ? 'text-gold-500/80' : 'text-gold-700'}>Fonte · </span>
+        <span className={escuro ? 'text-gold-400' : 'text-gold-700'}>Fonte · </span>
         {evidencia.fonte} ({evidencia.ano}) · {ROTULO_CONFIANCA[evidencia.confianca]}
         {evidencia.ressalva && (
           <span className="mt-2 block italic">Ressalva: {evidencia.ressalva}</span>

@@ -39,7 +39,7 @@ export default function PaginaManifesto() {
               key={crenca.numero}
               className="grid gap-5 border-t border-navy-700/15 py-9 md:grid-cols-[4rem_1fr] md:gap-10"
             >
-              <p className="nums font-display text-[2rem] leading-none text-gold-500">
+              <p className="nums font-display text-[2rem] leading-none text-gold-700">
                 {String(crenca.numero).padStart(2, '0')}
               </p>
               <div>

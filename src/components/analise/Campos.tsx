@@ -79,6 +79,15 @@ export function GrupoDeOpcoes<T extends string>({
   );
 }
 
+/**
+ * `tom` existe porque este campo aparece nos dois fundos do site: branco no
+ * formulário de contato, navy no bloco que fecha a Análise. A primeira
+ * versão resolvia isso com sobrescritas de classe no elemento pai
+ * (`[&_label]:text-ice-200`) — e elas alcançavam o rótulo mas esqueciam o
+ * "(opcional)" e a linha de ajuda, que ficavam em ardósia escura sobre
+ * navy: 2,8:1, reprovado. A auditoria pegou. Uma prop explícita não tem
+ * como esquecer um pedaço.
+ */
 export function CampoTexto({
   id,
   rotulo,
@@ -89,6 +98,7 @@ export function CampoTexto({
   tipo = 'text',
   obrigatorio = false,
   erro,
+  tom = 'claro',
 }: {
   readonly id: string;
   readonly rotulo: string;
@@ -99,14 +109,31 @@ export function CampoTexto({
   readonly tipo?: 'text' | 'email' | 'tel';
   readonly obrigatorio?: boolean;
   readonly erro?: string;
+  readonly tom?: 'claro' | 'escuro';
 }) {
+  const escuro = tom === 'escuro';
+
   return (
     <div>
-      <label htmlFor={id} className="block text-[0.95rem] font-medium text-navy-700">
+      <label
+        htmlFor={id}
+        className={cn(
+          'block text-[0.95rem] font-medium',
+          escuro ? 'text-ice-100' : 'text-navy-700',
+        )}
+      >
         {rotulo}
-        {!obrigatorio && <span className="ml-2 text-[0.82rem] text-slate-500">(opcional)</span>}
+        {!obrigatorio && (
+          <span className={cn('ml-2 text-[0.82rem]', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
+            (opcional)
+          </span>
+        )}
       </label>
-      {ajuda && <p className="mt-1.5 text-[0.86rem] text-slate-500">{ajuda}</p>}
+      {ajuda && (
+        <p className={cn('mt-1.5 text-[0.86rem]', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
+          {ajuda}
+        </p>
+      )}
       <input
         id={id}
         type={tipo}
@@ -117,13 +144,21 @@ export function CampoTexto({
         aria-invalid={erro ? true : undefined}
         aria-describedby={erro ? `${id}-erro` : undefined}
         className={cn(
-          'mt-3 w-full rounded-[3px] border bg-paper px-4 py-3 text-[1rem] text-navy-700 transition-colors duration-300',
-          'placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/40',
-          erro ? 'border-alerta-700' : 'border-navy-700/20 focus:border-navy-700/50',
+          'mt-3 w-full rounded-[3px] border px-4 py-3 text-[1rem] transition-colors duration-300',
+          'focus:outline-none focus:ring-2 focus:ring-teal-500/40',
+          escuro
+            ? 'border-ice-200/30 bg-navy-800 text-ice-100 placeholder:text-ice-300/50'
+            : 'border-navy-700/20 bg-paper text-navy-700 placeholder:text-slate-400',
+          erro && (escuro ? 'border-gold-400' : 'border-alerta-700'),
+          !erro && (escuro ? 'focus:border-ice-200/60' : 'focus:border-navy-700/50'),
         )}
       />
       {erro && (
-        <p id={`${id}-erro`} role="alert" className="mt-2 text-[0.86rem] text-alerta-700">
+        <p
+          id={`${id}-erro`}
+          role="alert"
+          className={cn('mt-2 text-[0.86rem]', escuro ? 'text-gold-300' : 'text-alerta-700')}
+        >
           {erro}
         </p>
       )}

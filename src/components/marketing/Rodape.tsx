@@ -33,7 +33,7 @@ export function Rodape() {
 
           {GRUPOS.map((grupo) => (
             <nav key={grupo.titulo} aria-label={grupo.titulo}>
-              <h2 className="font-mono text-[0.66rem] uppercase tracking-[0.2em] text-gold-500/80">
+              <h2 className="font-mono text-[0.66rem] uppercase tracking-[0.2em] text-gold-400">
                 {grupo.titulo}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -58,7 +58,7 @@ export function Rodape() {
 
         <div className="rule-gold mt-16" aria-hidden />
 
-        <div className="mt-8 flex flex-col gap-3 font-mono text-[0.72rem] tracking-wide text-ice-300/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-3 font-mono text-[0.72rem] tracking-wide text-ice-300/60 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {ano} {EMPRESA.assinatura} · {EMPRESA.dominio}
           </p>

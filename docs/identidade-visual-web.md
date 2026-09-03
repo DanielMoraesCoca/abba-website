@@ -36,6 +36,37 @@ canônica nunca precisou dele. É o mínimo necessário para sinalizar erro com
 contraste AA sobre branco, dessaturado para não brigar com o navy. **Precisa
 ser registrado no abba-ops.**
 
+## Os degraus que o contraste define, não a estética
+
+Três valores da rampa **não** foram escolhidos por gosto. Eles são o degrau
+mais claro que ainda passa nos 4,5:1 que a WCAG 2.2 AA exige para texto
+pequeno — que é justamente onde eles aparecem:
+
+| Token | Valor | Sobre branco | Sobre gelo | O que reprovava antes |
+|---|---|---|---|---|
+| `--color-gold-700` | `#836B34` | 5,1:1 | 4,8:1 | `#8C7439` dava 4,32 |
+| `--color-slate-500` | `#66707D` | 5,0:1 | 4,7:1 | `#79828F` dava 3,89 |
+| `--color-alerta-700` | `#9A2A2A` | 7,5:1 | — | (nasceu correto) |
+
+`--color-slate-400` fica abaixo do piso **de propósito**: é reservado a
+placeholder e a controle desabilitado, que a norma isenta. Não use em texto
+que o leitor precise ler.
+
+### Piso de opacidade em texto sobre fundo escuro
+
+Escurecer texto com opacidade é confortável de escrever e é como o contraste
+se perde sem ninguém notar. Medido sobre o navy:
+
+| Cor | Opacidade mínima |
+|---|---|
+| `ice-100` / `ice-200` / `ice-300` | 0,60 |
+| `gold-400` | 0,75 |
+| `gold-500` | 0,85 — prefira o `gold-400` cheio |
+
+A auditoria automática (`tests/e2e/acessibilidade.spec.ts`) derruba o build
+se algum desses pisos for furado. Ela roda o axe-core com as regras WCAG 2.2
+AA nas onze páginas, em desktop e celular.
+
 ## Como o dourado se comporta
 
 O documento canônico diz: "usar com parcimônia". Na web isso virou regra

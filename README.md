@@ -34,6 +34,12 @@ npm run test:e2e   # 46 testes de ponta a ponta (Chromium, desktop e celular)
 npm run medir      # desempenho real contra o build de produção
 ```
 
+Os 72 testes de ponta a ponta incluem uma auditoria **WCAG 2.2 AA** com
+axe-core nas onze páginas, em desktop e celular. Ela derrubou seis
+violações reais de contraste na primeira execução e hoje trava o build se
+alguma voltar — inclusive uma que forçou um diagrama melhor
+(`docs/identidade-visual-web.md`).
+
 **O site funciona sem `ANTHROPIC_API_KEY`.** A Análise ABBA cai no texto
 determinístico e o número — que nunca dependeu do modelo — sai idêntico.
 

@@ -109,8 +109,11 @@ export function Logotipo({
         <span className="font-display text-[1.35rem] font-semibold tracking-[0.14em] text-current">
           ABBA
         </span>
+        {/* A opacidade é 80 e não 60: a 8,8px, 60 dava 4,0:1 sobre branco e
+            reprovava. Texto minúsculo por desenho exige que o contraste
+            compense — não o contrário. */}
         {!compacto && (
-          <span className="mt-1 font-mono text-[0.55rem] uppercase tracking-[0.22em] text-current opacity-60">
+          <span className="mt-1 font-mono text-[0.55rem] uppercase tracking-[0.22em] text-current opacity-80">
             Consultoria de IA
           </span>
         )}

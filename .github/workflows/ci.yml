@@ -37,6 +37,9 @@ jobs:
       - name: Instalar o Chromium do Playwright
         run: npx playwright install --with-deps chromium
 
+      # Inclui a auditoria WCAG 2.2 AA em todas as onze páginas: contraste,
+      # rótulo de campo, ordem de cabeçalho, marco sem nome. Violação
+      # derruba o build.
       - name: Testes de ponta a ponta
         run: npx playwright test
 

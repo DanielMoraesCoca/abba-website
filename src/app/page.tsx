@@ -239,7 +239,7 @@ export default function PaginaInicial() {
               Falar com um sócio
             </Botao>
           </div>
-          <p className="mt-8 font-mono text-[0.74rem] tracking-wide text-ice-300/45">
+          <p className="mt-8 font-mono text-[0.74rem] tracking-wide text-ice-300/60">
             Sem cadastro em lista. Sem cobrança depois. Leva cerca de três minutos.
           </p>
         </Revelar>

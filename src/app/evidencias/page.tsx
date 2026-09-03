@@ -1,4 +1,5 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { Convergencia } from '@/components/marketing/Convergencia';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
@@ -57,6 +58,26 @@ export default function PaginaEvidencias() {
             </RevelarItem>
           ))}
         </RevelarLista>
+      </Secao>
+
+      {/* A convergência vem depois do cânone: primeiro o leitor vê que
+          cada número tem fonte, depois vê que três fontes independentes
+          apontam para o mesmo lugar. A ordem é o argumento. */}
+      <Secao tom="navy" espaco="amplo">
+        <TituloDeSecao
+          invertido
+          sobretitulo="A convergência"
+          titulo="Três medições independentes, uma conclusão."
+          apoio={
+            <p>
+              A objeção mais forte que a gente recebe é que todo consultor de IA diz que a culpa é
+              da adoção. A resposta não é dizer mais alto.
+            </p>
+          }
+        />
+        <Revelar className="mt-16">
+          <Convergencia />
+        </Revelar>
       </Secao>
 
       <Secao tom="gelo" largura="estreita">

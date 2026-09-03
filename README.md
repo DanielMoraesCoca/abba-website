@@ -31,6 +31,7 @@ npm run dev                  # http://localhost:3000
 ```bash
 npm run check      # typecheck + lint + 71 unitários + build
 npm run test:e2e   # 46 testes de ponta a ponta (Chromium, desktop e celular)
+npm run medir      # desempenho real contra o build de produção
 ```
 
 **O site funciona sem `ANTHROPIC_API_KEY`.** A Análise ABBA cai no texto
@@ -95,6 +96,36 @@ aviso de faixa sempre renderizado, e nada persistido.
 O resultado aparece **antes** de qualquer formulário. Cadastro obrigatório é
 uma forma de cobrança, e o Mapa de Vazamento nunca se cobra. Nada das
 respostas é gravado: elas entram, o resultado sai, a requisição acaba.
+
+## Desempenho
+
+Medido contra o build de produção (`npm run medir`), em rede local:
+
+| | rede | parse | LCP | CLS |
+|---|---|---|---|---|
+| Home | 318 KB | 873 KB | ~1,0 s | 0 |
+| Demais páginas | ~305 KB | ~810 KB | ~0,95 s | 0 |
+
+**Rede** é o que atravessa o cabo, já comprimido; **parse** é o que o
+navegador tem que interpretar. Reportar um pelo outro seria o tipo de número
+impreciso que esta casa não publica, então os dois aparecem.
+
+Três decisões que produziram esses números, em ordem de efeito:
+
+1. **A biblioteca de animação saiu.** Ela custava mais de 100 KB em toda
+   página para fazer opacidade e dez pixels de deslocamento. No lugar: um
+   `IntersectionObserver` compartilhado e duas propriedades de CSS
+   (`components/motion/Revelar.tsx`). Mesmo resultado na tela.
+2. **O prefetch do menu e do rodapé foi desligado.** Dezoito links visíveis
+   prefaziam a rota inteira antes de o visitante demonstrar qualquer
+   intenção — 231 KB, caiu para 95 KB. O prefetch fica onde a intenção é
+   real: a análise gratuita e os cartões dos três caminhos.
+3. **Duas famílias de fonte eram baixadas e nunca usadas** (o itálico
+   serifado e o peso 500 do mono): 80 KB por visita, em regra nenhuma.
+
+CLS zero não é sorte: nenhuma fonte troca de métrica depois de carregar
+(`display: swap` com fallback dimensionado pelo `next/font`), e a transição
+de entrada anima só opacidade e `transform`, que não reflow.
 
 ## O que falta
 

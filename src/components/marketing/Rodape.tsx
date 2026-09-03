@@ -41,6 +41,10 @@ export function Rodape() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      /* O rodapé tem doze links e aparece em toda página:
+                         prefazer todos seria o maior gasto de rede do site,
+                         para a área de menor intenção de clique. */
+                      prefetch={false}
                       className="text-[0.94rem] text-ice-300/75 transition-colors duration-300 hover:text-ice-100"
                     >
                       {item.rotulo}

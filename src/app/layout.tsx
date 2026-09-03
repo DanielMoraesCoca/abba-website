@@ -19,18 +19,21 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+// Só os pesos que o site realmente usa. O itálico serifado e o peso 500 do
+// mono estavam sendo baixados — 80 KB por visita — e nenhuma regra os
+// pedia. Antes de acrescentar um peso aqui, confira que existe elemento
+// usando ele.
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '600'],
-  style: ['normal', 'italic'],
   variable: '--font-source-serif',
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500'],
+  weight: ['400'],
   variable: '--font-jetbrains',
 });
 

@@ -61,6 +61,14 @@ export function Cabecalho() {
               <Link
                 key={item.href}
                 href={item.href}
+                /* Sem prefetch. Os seis itens do menu entram na tela junto
+                   com a página, e prefazer os seis custava cerca de 180 KB
+                   antes de o visitante demonstrar qualquer intenção. Como
+                   toda rota aqui é estática, o clique busca uma carga só, na
+                   hora, e a navegação continua rápida. O prefetch fica
+                   reservado para o link que a gente REALMENTE quer que seja
+                   instantâneo: a análise gratuita, logo abaixo. */
+                prefetch={false}
                 aria-current={ativo ? 'page' : undefined}
                 className={cn(
                   'relative py-1 text-[0.92rem] transition-colors duration-300',

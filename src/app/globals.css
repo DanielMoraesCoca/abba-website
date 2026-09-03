@@ -224,3 +224,81 @@
     animation: none;
   }
 }
+
+/* ==========================================================================
+   A transição de entrada
+   --------------------------------------------------------------------------
+   O componente `Revelar` só troca um atributo; toda a animação vive aqui.
+   Uma curva, uma distância, uma duração — as mesmas dos tokens no topo
+   deste arquivo.
+   ========================================================================== */
+
+[data-revelar] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--duration-reveal) var(--ease-abba) var(--atraso, 0ms),
+    transform var(--duration-reveal) var(--ease-abba) var(--atraso, 0ms);
+  /* Avisa o navegador antes da transição começar, e só nos elementos que
+     ainda não entraram — depois de revelado a dica sai de cena. */
+  will-change: opacity, transform;
+}
+
+[data-revelar='visivel'] {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Escalonamento: o atraso de cada item sai da sua posição na lista, no CSS.
+   Doze é o teto deliberado — acima disso o escalonamento vira espera, e o
+   décimo terceiro item em diante entra junto com o décimo segundo. */
+[data-revelar-lista] > [data-revelar] {
+  --atraso: calc(var(--passo, 90ms) * var(--indice, 0));
+}
+[data-revelar-lista] > *:nth-child(1)  { --indice: 0; }
+[data-revelar-lista] > *:nth-child(2)  { --indice: 1; }
+[data-revelar-lista] > *:nth-child(3)  { --indice: 2; }
+[data-revelar-lista] > *:nth-child(4)  { --indice: 3; }
+[data-revelar-lista] > *:nth-child(5)  { --indice: 4; }
+[data-revelar-lista] > *:nth-child(6)  { --indice: 5; }
+[data-revelar-lista] > *:nth-child(7)  { --indice: 6; }
+[data-revelar-lista] > *:nth-child(8)  { --indice: 7; }
+[data-revelar-lista] > *:nth-child(9)  { --indice: 8; }
+[data-revelar-lista] > *:nth-child(10) { --indice: 9; }
+[data-revelar-lista] > *:nth-child(11) { --indice: 10; }
+[data-revelar-lista] > *:nth-child(n + 12) { --indice: 11; }
+
+/* Quem pediu menos movimento recebe o conteúdo posicionado — não uma
+   versão apressada da animação. */
+@media (prefers-reduced-motion: reduce) {
+  [data-revelar] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* Entrada de um passo do assistente da Análise. A `key` no React remonta o
+   bloco; a animação é toda daqui. */
+[data-passo] {
+  animation: passo-entra 420ms var(--ease-abba) both;
+}
+
+@keyframes passo-entra {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-passo] {
+    animation: none;
+  }
+}

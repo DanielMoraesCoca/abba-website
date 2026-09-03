@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { CampoTexto, GrupoDeOpcoes } from './Campos';
 import { Resultado, type RespostaAnalise } from './Resultado';
 import {
@@ -70,7 +69,6 @@ export function Assistente() {
   const [erro, setErro] = useState('');
   const [resultado, setResultado] = useState<RespostaAnalise | null>(null);
   const topo = useRef<HTMLDivElement | null>(null);
-  const semMovimento = useReducedMotion();
 
   const definir = useCallback((campo: string, valor: string) => {
     setRascunho((atual) => ({ ...atual, [campo]: valor }));
@@ -173,15 +171,11 @@ export function Assistente() {
         })}
       </ol>
 
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={passo}
-          initial={semMovimento ? false : { opacity: 0, x: 16 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={semMovimento ? undefined : { opacity: 0, x: -16 }}
-          transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10"
-        >
+      {/* A `key` no passo remonta a árvore a cada avanço, e o CSS anima a
+          entrada. Uma biblioteca de presença resolveria o mesmo problema
+          com muito mais código enviado — e aqui não há saída para animar:
+          o passo antigo sai da tela junto com a remontagem. */}
+      <div key={passo} data-passo className="mt-10">
           <p className="text-[0.95rem] leading-relaxed text-slate-600">{passoAtual?.resumo}</p>
 
           <div className="mt-10 space-y-14">
@@ -296,8 +290,7 @@ export function Assistente() {
               </>
             )}
           </div>
-        </motion.div>
-      </AnimatePresence>
+      </div>
 
       {erro && (
         <p role="alert" className="mt-8 border-l-2 border-alerta-700 pl-4 text-[0.95rem] text-alerta-700">

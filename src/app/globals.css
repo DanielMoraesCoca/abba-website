@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   ABBA · Sistema visual do site institucional
+   --------------------------------------------------------------------------
+   Fonte da verdade da marca: abba-ops/00-identidade/identidade-visual.md
+   As seis cores canônicas (navy, dourado, ardósia, gelo, petróleo, branco)
+   aparecem abaixo marcadas com "CANÔNICA". Todo o resto é uma variação de
+   luminância da MESMA matiz, criada para dar contraste acessível na tela;
+   a régua registrada em docs/identidade-visual-web.md explica cada degrau.
+   Cor de matiz nova não entra aqui sem passar antes pelo abba-ops.
+   ========================================================================== */
+
+@theme {
+  /* --- Azul-marinho profundo · primária ---------------------------------- */
+  --color-navy-950: #080D18;
+  --color-navy-900: #0E1729;
+  --color-navy-800: #142038;
+  --color-navy-700: #1B2A4A; /* CANÔNICA */
+  --color-navy-600: #243660;
+  --color-navy-500: #33497D;
+  --color-navy-400: #536896;
+  --color-navy-300: #8D9BB8;
+
+  /* --- Dourado · acento (usar com parcimônia) ---------------------------- */
+  --color-gold-800: #6E5A2C;
+  --color-gold-700: #8C7439;
+  --color-gold-600: #A88C46;
+  --color-gold-500: #C2A35B; /* CANÔNICA */
+  --color-gold-400: #D3B87F;
+  --color-gold-300: #E2CEA5;
+  --color-gold-200: #EFE4CC;
+  --color-gold-100: #F8F3E8;
+
+  /* --- Cinza-ardósia · neutro escuro ------------------------------------- */
+  --color-slate-800: #2F3641;
+  --color-slate-700: #414A57;
+  --color-slate-600: #5A6472; /* CANÔNICA */
+  --color-slate-500: #79828F;
+  --color-slate-400: #9BA3AE;
+
+  /* --- Cinza-gelo · neutro claro ----------------------------------------- */
+  --color-ice-500: #D5D7DA;
+  --color-ice-400: #E8E8E8; /* CANÔNICA */
+  --color-ice-300: #F1F2F4;
+  --color-ice-200: #F7F8F9;
+  --color-ice-100: #FBFBFC;
+
+  /* --- Azul-petróleo · apoio / interativo -------------------------------- */
+  --color-teal-700: #1F6673;
+  --color-teal-600: #266F7D;
+  --color-teal-500: #2E8B9A; /* CANÔNICA */
+  --color-teal-400: #55A6B3;
+  --color-teal-100: #E6F1F3;
+
+  --color-paper: #FFFFFF; /* CANÔNICA */
+
+  /* --- Alerta · estado de erro de formulário -----------------------------
+     Não está na paleta do abba-ops porque material impresso não tem campo
+     inválido. É o vermelho mínimo necessário para sinalizar erro com
+     contraste AA sobre branco, dessaturado para não brigar com o navy.
+     Registrar no abba-ops junto com a régua web (docs/identidade-visual-web.md). */
+  --color-alerta-700: #9A2A2A;
+  --color-alerta-100: #FBEDED;
+
+  /* --- Tipografia --------------------------------------------------------
+     Display serifado (Source Serif 4) para títulos: é a tradução para tela
+     do Aptos Display dos documentos. Inter no corpo, alinhado ao design
+     system da Plataforma. Mono para número, prazo e referência — o tom da
+     casa é "número, prazo, nome", e o mono deixa isso visível.            */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-source-serif), "Iowan Old Style", Georgia,
+    "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", SFMono-Regular,
+    Menlo, Consolas, monospace;
+
+  /* --- Ritmo e movimento -------------------------------------------------
+     Uma curva só para tudo que entra em cena. Transição é assinatura de
+     marca: se cada componente inventa a sua, o site perde a cara.        */
+  --ease-abba: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-reveal: 720ms;
+
+  --shadow-card: 0 1px 2px rgb(27 42 74 / 0.04), 0 8px 24px -12px rgb(27 42 74 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(27 42 74 / 0.06), 0 24px 48px -20px rgb(27 42 74 / 0.28);
+
+  --radius-card: 4px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  :root {
+    color-scheme: light;
+    /* Altura da barra fixa: usada por scroll-margin e pelo espaçador do
+       layout. Um valor só, para o cabeçalho nunca cobrir uma âncora. */
+    --header-h: 4.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-navy-700);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv05" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :is(h1, h2, h3, section, article)[id] {
+    scroll-margin-top: calc(var(--header-h) + 2rem);
+  }
+
+  ::selection {
+    background-color: var(--color-gold-200);
+    color: var(--color-navy-800);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Um só lugar decide o que acontece com quem pediu menos movimento. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Utilitários de marca
+   ========================================================================== */
+
+@utility text-balance-none {
+  text-wrap: initial;
+}
+
+/* Fio dourado: o divisor da casa. Nunca uma linha cheia — o dourado é
+   detalhe, e um fio que desvanece nas pontas lê como acabamento, não como
+   régua. */
+@utility rule-gold {
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold-500) 12%,
+    var(--color-gold-500) 88%,
+    transparent
+  );
+  opacity: 0.55;
+}
+
+/* Numeral tabular para tudo que é número comparável (stat-cards, faixas em
+   R$, placar). Coluna que dança destrói a leitura de tabela. */
+@utility nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}

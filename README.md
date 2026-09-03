@@ -29,12 +29,12 @@ npm run dev                  # http://localhost:3000
 ```
 
 ```bash
-npm run check      # typecheck + lint + 71 unitários + build
-npm run test:e2e   # 46 testes de ponta a ponta (Chromium, desktop e celular)
+npm run check      # typecheck + lint + 81 unitários + build
+npm run test:e2e   # 74 testes de ponta a ponta (Chromium, desktop e celular)
 npm run medir      # desempenho real contra o build de produção
 ```
 
-Os 72 testes de ponta a ponta incluem uma auditoria **WCAG 2.2 AA** com
+Os 74 testes de ponta a ponta incluem uma auditoria **WCAG 2.2 AA** com
 axe-core nas onze páginas, em desktop e celular. Ela derrubou seis
 violações reais de contraste na primeira execução e hoje trava o build se
 alguma voltar — inclusive uma que forçou um diagrama melhor
@@ -97,7 +97,16 @@ As cinco regras de honestidade do Mapa de Vazamento estão travadas em teste:
 faixa nunca ponto, premissa sempre com base declarada, sem piso artificial,
 aviso de faixa sempre renderizado, e nada persistido.
 
-### 3. A análise não cobra nada — nem cadastro
+### 3. O resultado da Análise é um documento
+
+A ABBA vive de documento — proposta, relatório, termo —, e quem termina a
+análise vai levar aquilo para a diretoria. A folha de estilo de impressão
+entrega um documento com a assinatura da casa em vez de uma captura da
+página com menu no meio do argumento; o gráfico da conta carrega
+`print-color-adjust: exact`, senão sumiria do papel (fundo de elemento não
+imprime por padrão) e levaria junto a prova de que a conta é conferível.
+
+### 4. A análise não cobra nada — nem cadastro
 
 O resultado aparece **antes** de qualquer formulário. Cadastro obrigatório é
 uma forma de cobrança, e o Mapa de Vazamento nunca se cobra. Nada das

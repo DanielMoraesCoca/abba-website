@@ -32,6 +32,11 @@ export default defineConfig({
   ],
   webServer: {
     command: `npx next start -p ${PORTA}`,
+    // O conjunto percorre o fluxo da Análise umas dez vezes, do mesmo IP,
+    // em poucos minutos — e a trava de produção bloqueia isso, com razão.
+    // Não é um furo na trava: é o mesmo código lendo outro limite, do jeito
+    // que qualquer ambiente configuraria o seu.
+    env: { ABBA_LIMITE_ANALISE: '400', ABBA_LIMITE_CONTATO: '400' },
     url: `http://localhost:${PORTA}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

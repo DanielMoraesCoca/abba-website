@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { DadosEstruturados } from '@/components/marketing/DadosEstruturados';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
 import { ALINHAMENTO, CAMINHOS, FASES } from '@/content/caminhos';
+import { PERGUNTAS } from '@/content/perguntas';
 import { PRECO_PUBLICO, REGRAS_DE_INVESTIMENTO } from '@/content/precos';
-import { metadadosDaPagina } from '@/lib/seo';
+import { jsonLdPerguntas, jsonLdServico, metadadosDaPagina } from '@/lib/seo';
 
 export const metadata = metadadosDaPagina({
   titulo: 'O que fazemos',
@@ -162,6 +164,43 @@ export default function PaginaOQueFazemos() {
           </Botao>
         </Revelar>
       </Secao>
+
+      {/* As objeções, respondidas antes da reunião. Publicar a resposta
+          difícil — "não temos histórico" — é o que mais separa a ABBA de
+          quem promete média de mercado. */}
+      <Secao tom="gelo" espaco="amplo" id="perguntas">
+        <TituloDeSecao
+          sobretitulo="As perguntas que a gente ouve"
+          titulo="Inclusive a difícil, respondida do mesmo jeito que respondemos na sala."
+        />
+
+        <RevelarLista as="ul" className="mt-14 space-y-px" passo={0.05}>
+          {PERGUNTAS.map((item) => (
+            <RevelarItem
+              as="li"
+              key={item.pergunta}
+              className="grid gap-4 border-t border-navy-700/15 py-8 md:grid-cols-[1fr_1.4fr] md:gap-12"
+            >
+              <h3 className="text-[1.08rem] font-medium leading-snug text-navy-700">
+                {item.pergunta}
+              </h3>
+              <p className="text-[0.98rem] leading-[1.7] text-slate-700">{item.resposta}</p>
+            </RevelarItem>
+          ))}
+        </RevelarLista>
+      </Secao>
+
+      <DadosEstruturados dados={jsonLdPerguntas(PERGUNTAS)} />
+      <DadosEstruturados
+        dados={jsonLdServico({
+          nome: 'AI Native · Ano 1',
+          descricao:
+            'Programa de doze meses que instala capacidade de IA e prova o resultado como terceiro, ' +
+            'com três fases e três portões de saída sem multa.',
+          caminho: '/o-que-fazemos',
+          etapas: FASES.map((f) => ({ nome: f.nome, texto: f.promessa })),
+        })}
+      />
     </>
   );
 }

@@ -31,8 +31,8 @@ contradizem o que você lembra.
 ## 4. Antes de commitar
 
 ```bash
-npm run check     # typecheck + lint + 71 unitários + build
-npm run test:e2e  # 46 testes de ponta a ponta, desktop e celular
+npm run check     # typecheck + lint + 81 unitários + build
+npm run test:e2e  # 74 e2e, incluindo auditoria WCAG 2.2 AA com axe-core
 ```
 
 A régua do revisor (`tests/unit/regua-do-revisor.test.ts`) varre o código

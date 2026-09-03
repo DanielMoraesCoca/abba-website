@@ -144,6 +144,7 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
                 return (
                   <div
                     key={parcela.id}
+                    data-tinta
                     style={{
                       width: `${largura}%`,
                       background: parcela.cor,
@@ -188,6 +189,7 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
           <li key={parcela.id} className="grid gap-x-4 gap-y-1 sm:grid-cols-[0.75rem_1fr_auto]">
             <span
               aria-hidden
+              data-tinta
               className="mt-[0.45rem] h-2.5 w-2.5 shrink-0 rounded-[1px]"
               style={{ background: parcela.cor }}
             />

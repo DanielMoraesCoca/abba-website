@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { esquemaPedidoAnalise } from '@/lib/analise/schema';
 import { estimar, qualificar, type RespostasAnalise } from '@/lib/analise/modelo';
 import { gerarNarrativa } from '@/lib/analise/narrativa';
-import { identificar, verificarLimite } from '@/lib/limite';
+import { identificar, limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 
 /**
  * A Análise ABBA.
@@ -19,7 +19,7 @@ import { identificar, verificarLimite } from '@/lib/limite';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const MAXIMO_POR_JANELA = 8;
+const MAXIMO_POR_JANELA = limiteDoAmbiente('ABBA_LIMITE_ANALISE', 8);
 const JANELA_MS = 10 * 60 * 1000;
 
 export async function POST(requisicao: Request) {

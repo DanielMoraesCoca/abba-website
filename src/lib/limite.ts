@@ -54,6 +54,26 @@ export function verificarLimite(
   };
 }
 
+/**
+ * Lê um limite de variável de ambiente, com o valor de produção como padrão.
+ *
+ * Existe porque o próprio conjunto de testes de ponta a ponta esbarrou no
+ * limite: ele percorre o fluxo da Análise várias vezes, do mesmo IP, em
+ * menos de dez minutos — que é exatamente o comportamento que a trava
+ * bloqueia, e ela estava certa em bloquear.
+ *
+ * A saída NÃO é um atalho de teste no código de produção. É configuração:
+ * um limite razoável por padrão, ajustável por ambiente. Um valor ausente,
+ * vazio ou não numérico cai no padrão — configuração errada nunca deve
+ * abrir a porta, sempre deve manter a trava.
+ */
+export function limiteDoAmbiente(variavel: string, padrao: number): number {
+  const bruto = process.env[variavel];
+  if (!bruto) return padrao;
+  const valor = Number.parseInt(bruto, 10);
+  return Number.isFinite(valor) && valor > 0 ? valor : padrao;
+}
+
 /** Identifica o cliente pelo cabeçalho do proxy, com queda para um balde comum. */
 export function identificar(headers: Headers): string {
   const encaminhado = headers.get('x-forwarded-for');

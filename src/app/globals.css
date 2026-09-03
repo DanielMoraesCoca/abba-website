@@ -337,3 +337,113 @@
     animation: none;
   }
 }
+
+/* ==========================================================================
+   Impressão
+   --------------------------------------------------------------------------
+   A ABBA é uma empresa que vive de documento: proposta, relatório, termo. A
+   leitura preliminar da Análise vai ser impressa ou salva em PDF por quem
+   precisa levá-la para a diretoria — e o padrão de impressão está definido
+   na identidade visual (capa com a marca, rodapé com o domínio e o número
+   da página, tabelas com cabeçalho navy).
+
+   Um site que ignora a impressão entrega um PDF com menu, botão e rodapé de
+   navegação no meio do argumento. Este bloco entrega um documento.
+   ========================================================================== */
+
+@media print {
+  /* A régua de impressão: margens de documento e o rodapé padrão da casa. */
+  @page {
+    margin: 18mm 16mm 20mm;
+  }
+
+  :root {
+    --header-h: 0px;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #1b2a4a !important;
+    font-size: 10.5pt;
+  }
+
+  /* Fora: navegação, rodapé do site, chamadas para ação e tudo que só faz
+     sentido com um cursor por perto. */
+  header,
+  footer,
+  nav,
+  button,
+  form,
+  [data-sem-impressao] {
+    display: none !important;
+  }
+
+  /* Nada de animação pendente escondendo conteúdo no papel. */
+  [data-revelar] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* `data-tinta` marca o que É dado, não decoração: as barras do gráfico
+     de decomposição e os quadradinhos da legenda dele. Sem isto, o
+     navegador descarta os fundos na impressão (é o padrão) e o gráfico
+     desaparece do papel, levando junto o argumento de que a conta é
+     conferível. `print-color-adjust: exact` é a instrução que manda
+     imprimir mesmo assim. */
+  [data-tinta] {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  /* Blocos escuros viram claros: tinta de fundo em papel é desperdício e
+     deixa o texto ilegível em impressora comum. O `:not([data-tinta])`
+     preserva o que é dado. */
+  [class*='bg-navy']:not([data-tinta]),
+  [class*='bg-ice']:not([data-tinta]) {
+    background: #fff !important;
+    color: #1b2a4a !important;
+    border-top: 1px solid #c2a35b;
+    padding-top: 1rem;
+  }
+  [class*='bg-navy'] * {
+    color: #1b2a4a !important;
+  }
+
+  /* Um título nunca fica sozinho no pé da página, e um bloco de argumento
+     não se parte no meio. */
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  figure,
+  li,
+  blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* O endereço de um link tem que existir no papel — no papel não se clica.
+     Só para links externos: caminho interno impresso vira ruído. */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.82em;
+    color: #5a6472;
+    word-break: break-all;
+  }
+
+  /* A assinatura do documento, do jeito que a identidade visual pede. */
+  main::after {
+    content: 'ABBA Consultoria de IA · abbaservices.com.br';
+    display: block;
+    margin-top: 14mm;
+    padding-top: 4mm;
+    border-top: 1px solid #c2a35b;
+    font-size: 8.5pt;
+    letter-spacing: 0.08em;
+    color: #5a6472;
+  }
+}

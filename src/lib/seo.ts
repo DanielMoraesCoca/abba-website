@@ -60,3 +60,61 @@ export function jsonLdOrganizacao() {
     ],
   };
 }
+
+/**
+ * Dados estruturados por página.
+ *
+ * O JSON-LD da organização (acima) vale para o site inteiro. Estes descrevem
+ * o que cada página específica é — um serviço, uma lista de perguntas
+ * frequentes — e é o que faz a diferença entre um resultado de busca com uma
+ * linha e um com contexto.
+ *
+ * Regra que vale aqui como vale em qualquer peça externa: **nada de número
+ * que não esteja no cânone**, e nada de `aggregateRating` ou depoimento
+ * inventado para ganhar estrela na busca. Marcação estruturada é uma
+ * declaração ao mecanismo de busca; mentir nela é mentir por escrito.
+ */
+
+interface ServicoDescrito {
+  readonly nome: string;
+  readonly descricao: string;
+  readonly caminho: string;
+  readonly etapas?: readonly { readonly nome: string; readonly texto: string }[];
+}
+
+export function jsonLdServico({ nome, descricao, caminho, etapas }: ServicoDescrito) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: nome,
+    description: descricao,
+    url: new URL(caminho, URL_BASE).toString(),
+    serviceType: 'Consultoria de transformação em IA',
+    provider: { '@type': 'Organization', name: EMPRESA.assinatura, url: URL_BASE },
+    areaServed: { '@type': 'Country', name: 'Brasil' },
+    availableLanguage: 'pt-BR',
+    ...(etapas
+      ? {
+          hasPart: etapas.map((e) => ({
+            '@type': 'Service',
+            name: e.nome,
+            description: e.texto,
+          })),
+        }
+      : {}),
+  };
+}
+
+export function jsonLdPerguntas(
+  perguntas: readonly { readonly pergunta: string; readonly resposta: string }[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: perguntas.map((p) => ({
+      '@type': 'Question',
+      name: p.pergunta,
+      acceptedAnswer: { '@type': 'Answer', text: p.resposta },
+    })),
+  };
+}

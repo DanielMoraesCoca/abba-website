@@ -171,9 +171,14 @@ export function Resultado({ dados, aoRecomecar }: {
         </p>
       </Revelar>
 
-      <FormularioDeContato empresaSugerida={empresa} />
+      <div data-sem-impressao>
+        <FormularioDeContato empresaSugerida={empresa} />
+      </div>
 
-      <div className="flex flex-col gap-4 border-t border-navy-700/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        data-sem-impressao
+        className="flex flex-col gap-4 border-t border-navy-700/15 pt-8 sm:flex-row sm:items-center sm:justify-between"
+      >
         <p className="font-mono text-[0.72rem] leading-relaxed text-slate-500">
           Texto de apoio gerado{' '}
           {narrativa.origem === 'modelo'
@@ -181,13 +186,25 @@ export function Resultado({ dados, aoRecomecar }: {
             : 'sem modelo de linguagem (modo determinístico)'}
           . O número nunca sai de um modelo de linguagem.
         </p>
-        <button
-          type="button"
-          onClick={aoRecomecar}
-          className="self-start font-mono text-[0.78rem] uppercase tracking-[0.12em] text-navy-700 underline-offset-4 hover:underline"
-        >
-          Refazer com outras respostas
-        </button>
+        <div className="flex flex-wrap gap-6">
+          {/* Levar isto para a diretoria é o próximo passo natural, e a
+              folha de estilo de impressão entrega um documento em vez de
+              uma captura de página com menu no meio. */}
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="font-mono text-[0.78rem] uppercase tracking-[0.12em] text-navy-700 underline-offset-4 hover:underline"
+          >
+            Salvar em PDF
+          </button>
+          <button
+            type="button"
+            onClick={aoRecomecar}
+            className="font-mono text-[0.78rem] uppercase tracking-[0.12em] text-slate-600 underline-offset-4 hover:underline"
+          >
+            Refazer com outras respostas
+          </button>
+        </div>
       </div>
     </div>
   );

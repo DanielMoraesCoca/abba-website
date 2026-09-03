@@ -4,6 +4,7 @@ import { EVIDENCIAS, evidencia } from '@/content/evidencias';
 import { EMPRESA } from '@/content/identidade';
 import { DIMENSOES, TOTAL_DIMENSOES } from '@/content/metodo';
 import { NAV_PRINCIPAL, NAV_RODAPE } from '@/content/navegacao';
+import { PERGUNTAS } from '@/content/perguntas';
 import { PRECO_PUBLICO } from '@/content/precos';
 
 describe('cânone de evidências', () => {
@@ -102,5 +103,35 @@ describe('marca', () => {
     expect(EMPRESA.dominio).toBe('abbaservices.com.br');
     expect(EMPRESA.email).toBe('contato@abbaservices.com.br');
     expect(EMPRESA.site).toBe('https://abbaservices.com.br');
+  });
+});
+
+describe('perguntas frequentes', () => {
+  it('toda resposta é substantiva — nada de recheio de busca', () => {
+    // A régua é sobre a RESPOSTA. A primeira versão deste teste também
+    // exigia perguntas longas e reprovou "Quanto custa?", que é a melhor
+    // pergunta da página justamente por ser curta. Padding de copy para
+    // satisfazer um limite arbitrário é o teste mandando no conteúdo.
+    for (const p of PERGUNTAS) {
+      // Interrogação de verdade: estas entradas viram Question/Answer no
+      // JSON-LD, e uma afirmação no lugar da pergunta é marcação errada.
+      // As objeções chegam como afirmação na sala; aqui elas viram a
+      // pergunta que estava por trás.
+      expect(p.pergunta.trim().endsWith('?'), p.pergunta).toBe(true);
+      expect(p.resposta.length, p.pergunta).toBeGreaterThan(120);
+    }
+  });
+
+  it('a pergunta difícil está publicada, e a resposta não finge portfólio', () => {
+    const historico = PERGUNTAS.find((p) => /quantas empresas/i.test(p.pergunta));
+    expect(historico, 'a pergunta sobre histórico não pode sumir do site').toBeTruthy();
+    expect(historico!.resposta).toMatch(/novos como firma/i);
+    expect(historico!.resposta).not.toMatch(/dezenas|centenas|líder de mercado/i);
+  });
+
+  it('nenhuma resposta se declara auditoria', () => {
+    for (const p of PERGUNTAS) {
+      expect(p.resposta).not.toMatch(/somos (a|uma) auditoria/i);
+    }
   });
 });

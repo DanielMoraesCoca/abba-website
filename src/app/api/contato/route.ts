@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { esquemaContato } from '@/lib/analise/schema';
 import { registrarLead } from '@/lib/leads';
-import { identificar, verificarLimite } from '@/lib/limite';
+import { identificar, limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const MAXIMO_POR_JANELA = 5;
+const MAXIMO_POR_JANELA = limiteDoAmbiente('ABBA_LIMITE_CONTATO', 5);
 const JANELA_MS = 15 * 60 * 1000;
 
 export async function POST(requisicao: Request) {

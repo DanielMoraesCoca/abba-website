@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { esquemaContato, esquemaPedidoAnalise } from '@/lib/analise/schema';
-import { verificarLimite } from '@/lib/limite';
+import { limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 
 const RESPOSTAS_VALIDAS = {
   colaboradores: '51-200',
@@ -97,4 +97,30 @@ describe('limite de taxa', () => {
     expect(r.reinicioEmSegundos).toBeGreaterThan(0);
     expect(r.reinicioEmSegundos).toBeLessThanOrEqual(30);
   });
+});
+
+describe('limite configurável por ambiente', () => {
+  const original = process.env.ABBA_TESTE_LIMITE;
+  afterEach(() => {
+    if (original === undefined) delete process.env.ABBA_TESTE_LIMITE;
+    else process.env.ABBA_TESTE_LIMITE = original;
+  });
+
+  it('usa o padrão quando a variável não existe', () => {
+    delete process.env.ABBA_TESTE_LIMITE;
+    expect(limiteDoAmbiente('ABBA_TESTE_LIMITE', 8)).toBe(8);
+  });
+
+  it('usa o valor configurado quando ele é um número positivo', () => {
+    process.env.ABBA_TESTE_LIMITE = '400';
+    expect(limiteDoAmbiente('ABBA_TESTE_LIMITE', 8)).toBe(400);
+  });
+
+  it.each(['', 'muitos', '0', '-5', 'NaN'])(
+    'cai no padrão quando o valor é inválido (%s) — configuração errada nunca abre a porta',
+    (valor) => {
+      process.env.ABBA_TESTE_LIMITE = valor;
+      expect(limiteDoAmbiente('ABBA_TESTE_LIMITE', 8)).toBe(8);
+    },
+  );
 });

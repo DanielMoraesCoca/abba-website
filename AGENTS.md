@@ -31,8 +31,8 @@ contradizem o que você lembra.
 ## 4. Antes de commitar
 
 ```bash
-npm run check   # typecheck + 71 testes, incluindo a régua do revisor
-npm run build
+npm run check     # typecheck + lint + 71 unitários + build
+npm run test:e2e  # 36 testes de ponta a ponta, desktop e celular
 ```
 
 A régua do revisor (`tests/unit/regua-do-revisor.test.ts`) varre o código

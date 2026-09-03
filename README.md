@@ -29,8 +29,8 @@ npm run dev                  # http://localhost:3000
 ```
 
 ```bash
-npm run check                # typecheck + testes
-npm run build                # build de produção
+npm run check      # typecheck + lint + 71 unitários + build
+npm run test:e2e   # 36 testes de ponta a ponta (Chromium, desktop e celular)
 ```
 
 **O site funciona sem `ANTHROPIC_API_KEY`.** A Análise ABBA cai no texto

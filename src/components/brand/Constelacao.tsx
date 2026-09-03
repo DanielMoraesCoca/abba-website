@@ -62,7 +62,7 @@ function gerarNos(): No[] {
 export function Constelacao({ className }: { readonly className?: string }) {
   const ref = useRef<HTMLCanvasElement | null>(null);
   const [pronto, setPronto] = useState(false);
-  const nos = useMemo(gerarNos, []);
+  const nos = useMemo(() => gerarNos(), []);
 
   useEffect(() => {
     const canvas = ref.current;

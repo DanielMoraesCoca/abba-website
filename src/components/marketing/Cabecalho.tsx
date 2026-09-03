@@ -24,7 +24,14 @@ export function Cabecalho() {
     return () => window.removeEventListener('scroll', aoRolar);
   }, []);
 
-  useEffect(() => setAberto(false), [caminho]);
+  // Fecha o menu quando a rota muda. É o padrão do React para ajustar estado
+  // em resposta a uma mudança de prop — feito durante a renderização, não num
+  // efeito, que causaria uma renderização em cascata.
+  const [caminhoAnterior, setCaminhoAnterior] = useState(caminho);
+  if (caminho !== caminhoAnterior) {
+    setCaminhoAnterior(caminho);
+    setAberto(false);
+  }
 
   return (
     <header

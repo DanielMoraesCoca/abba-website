@@ -23,6 +23,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Lint
+        run: npm run lint
+
       # Inclui a régua do revisor: número do índice proibido, vocabulário
       # banido e URL fora de abbaservices.com.br derrubam o build.
       - name: Testes unitários

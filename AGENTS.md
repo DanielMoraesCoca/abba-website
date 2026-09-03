@@ -32,7 +32,7 @@ contradizem o que você lembra.
 
 ```bash
 npm run check     # typecheck + lint + 81 unitários + build
-npm run test:e2e  # 74 e2e, incluindo auditoria WCAG 2.2 AA com axe-core
+npm run test:e2e  # 98 e2e: WCAG 2.2 AA, regressão visual, impressão, segurança
 ```
 
 A régua do revisor (`tests/unit/regua-do-revisor.test.ts`) varre o código
@@ -48,7 +48,20 @@ linguagem nunca toca em cifra — e há uma verificação de saída que descarta
 geração inteira se um número escapar. Não mude isso sem decisão de sócio
 registrada.
 
-## 6. Idioma
+## 6. Mudou o desenho? A referência visual muda junto
+
+`npm run test:visual` compara cada página com a foto versionada. Quando a
+diferença for intencional:
+
+```bash
+npm run test:visual -- --update-snapshots
+```
+
+e **olhe o diff das imagens no commit antes de aceitar**. A referência é
+código: revisar a mudança dela é revisar o desenho. Nunca atualize a
+referência só para o teste passar.
+
+## 7. Idioma
 
 Tudo em português brasileiro: copy, nome de arquivo, nome de variável,
 comentário, mensagem de commit. Anglicismo só quando o termo não tem tradução

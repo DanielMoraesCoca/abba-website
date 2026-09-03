@@ -26,9 +26,82 @@ export default defineConfig({
       ? { launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM } }
       : {}),
   },
+  /* Uma foto é comparada pixel a pixel: um viewport diferente é uma foto
+     diferente. Fixar o tamanho aqui evita que a referência dependa da
+     janela padrão do dispositivo emulado. */
+  expect: { toHaveScreenshot: { maxDiffPixelRatio: 0.002 } },
+
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
-    { name: 'celular', use: { ...devices['Pixel 7'] } },
+    {
+      name: 'desktop',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
+      testIgnore: /regressao-visual/,
+    },
+    {
+      name: 'celular',
+      use: { ...devices['Pixel 7'], viewport: { width: 412, height: 900 } },
+      testIgnore: /regressao-visual/,
+    },
+
+    /* A regressão visual tem projeto próprio por causa de uma coisa só: a
+       escala em que a foto é gravada. As referências são páginas inteiras,
+       e em escala de dispositivo cheia pesavam quase 1 MB cada — 14 MB por
+       rodada de mudança de desenho, no histórico do git para sempre.
+       
+       A escala de cada projeto foi MEDIDA, não escolhida:
+       
+       - Desktop a 0,5 (720px de largura). Encolhe a referência em quatro
+         vezes e o texto continua estável entre execuções.
+       - Celular a 1,0 (412px). A primeira tentativa usou 0,5 aqui também, e
+         o teste começou a falhar sozinho: 5% dos pixels diferentes entre
+         duas execuções idênticas. O motivo é o contrário do que eu supus —
+         meia escala AUMENTA o ruído de antialiasing, porque cada pixel
+         passa a carregar mais glifo. A 412px o Pixel 7 já dá uma imagem
+         pequena, e o texto volta a ser determinístico.
+       
+       O ganho colateral de versionar as referências: a mudança de desenho
+       aparece no diff do pull request, revisável como código. */
+    {
+      name: 'visual-desktop',
+      testMatch: /regressao-visual/,
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1440, height: 900 },
+        deviceScaleFactor: 0.5,
+      },
+    },
+    {
+      name: 'visual-celular',
+      testMatch: /regressao-visual/,
+      use: { ...devices['Pixel 7'], viewport: { width: 412, height: 900 }, deviceScaleFactor: 1 },
+    },
+
+    /* Safari e Firefox só no CI.
+       
+       Motivo honesto: o ambiente onde este site foi construído bloqueia o
+       download desses dois navegadores, então esta configuração NUNCA foi
+       executada aqui. Ela roda pela primeira vez no CI — e se falhar lá, é
+       porque encontrou algo real, não porque está errada. O Safari é o que
+       mais diverge (`backdrop-filter`, unidades de viewport, a API de
+       transição de rota), e é o navegador de boa parte de uma diretoria.
+       
+       A regressão visual fica de fora: o antialiasing difere entre motores
+       e a comparação pixel a pixel viraria alarme falso. O que se quer aqui
+       é comportamento, não pixel. */
+    ...(process.env.CI
+      ? [
+          {
+            name: 'safari',
+            testIgnore: /regressao-visual/,
+            use: { ...devices['Desktop Safari'] },
+          },
+          {
+            name: 'firefox',
+            testIgnore: /regressao-visual/,
+            use: { ...devices['Desktop Firefox'] },
+          },
+        ]
+      : []),
   ],
   webServer: {
     command: `npx next start -p ${PORTA}`,

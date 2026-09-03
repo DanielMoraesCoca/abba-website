@@ -29,6 +29,26 @@ const BASE = process.env.BASE ?? 'http://localhost:3265';
 const ROTAS = ['/', '/analise', '/evidencias', '/programa', '/metodo'];
 const ESPERA_MS = 2600;
 
+/**
+ * O orçamento. Medir sem orçamento é passatempo: alguém acrescenta uma
+ * biblioteca, o número piora dez por cento, e ninguém percebe até o site
+ * estar duas vezes mais lento um ano depois.
+ *
+ * Os valores são folgados de propósito — cerca de 30% acima do que o site
+ * marca hoje. Um orçamento apertado demais vira alarme falso e o time
+ * aprende a ignorar. Este só dispara quando alguma coisa mudou de verdade.
+ *
+ * Se estourar: não afrouxe o número antes de saber o que engordou. Rode
+ * `npm run medir` e olhe a tabela por tipo de recurso, que é onde a
+ * resposta costuma estar.
+ */
+const ORCAMENTO = {
+  redeKB: 420,
+  cls: 0.02,
+};
+
+let estourou = false;
+
 const navegador = await chromium.launch({
   executablePath: process.env.PLAYWRIGHT_CHROMIUM || undefined,
 });
@@ -88,14 +108,19 @@ for (const rota of ROTAS) {
     ESPERA_MS,
   );
 
+  const redeKB = rede / 1024;
+  const foraDoOrcamento = redeKB > ORCAMENTO.redeKB || medidas.cls > ORCAMENTO.cls;
+  if (foraDoOrcamento) estourou = true;
+
   console.log(
     rota.padEnd(14),
     `LCP ${Math.round(medidas.lcp)}ms`.padEnd(11),
     `CLS ${medidas.cls.toFixed(4)}`.padEnd(12),
     `tarefas longas ${medidas.tarefasLongas}`.padEnd(18),
-    `rede ${(rede / 1024).toFixed(0)}KB`.padEnd(13),
+    `rede ${redeKB.toFixed(0)}KB`.padEnd(13),
     `parse ${(parse / 1024).toFixed(0)}KB`.padEnd(14),
     `${pedidos} pedidos`,
+    foraDoOrcamento ? ' ← FORA DO ORÇAMENTO' : '',
   );
 
   await contexto.close();
@@ -109,3 +134,16 @@ for (const [tipo, b] of Object.entries(porTipo).sort((a, c) => c[1].rede - a[1].
 }
 
 await navegador.close();
+
+if (estourou) {
+  console.error(
+    `\nOrçamento estourado: o teto é ${ORCAMENTO.redeKB} KB de rede e ${ORCAMENTO.cls} de CLS por página.` +
+      '\nAntes de afrouxar o número, descubra o que engordou — a tabela por tipo de recurso, acima,' +
+      '\ncostuma responder em dez segundos.',
+  );
+  process.exitCode = 1;
+} else {
+  console.log(
+    `\nDentro do orçamento (teto: ${ORCAMENTO.redeKB} KB de rede, ${ORCAMENTO.cls} de CLS).`,
+  );
+}

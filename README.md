@@ -30,11 +30,12 @@ npm run dev                  # http://localhost:3000
 
 ```bash
 npm run check      # typecheck + lint + 95 unitários + build
-npm run test:e2e   # 74 testes de ponta a ponta (Chromium, desktop e celular)
-npm run medir      # desempenho real contra o build de produção
+npm run test:e2e   # 98 testes de ponta a ponta (Chromium, desktop e celular)
+npm run medir      # desempenho real, com orçamento que falha se estourar
+npm run test:visual  # regressão visual contra as referências versionadas
 ```
 
-Os 74 testes de ponta a ponta incluem uma auditoria **WCAG 2.2 AA** com
+Os 98 testes de ponta a ponta incluem uma auditoria **WCAG 2.2 AA** com
 axe-core nas onze páginas, em desktop e celular. Ela derrubou seis
 violações reais de contraste na primeira execução e hoje trava o build se
 alguma voltar — inclusive uma que forçou um diagrama melhor
@@ -151,6 +152,13 @@ Três decisões que produziram esses números, em ordem de efeito:
 CLS zero não é sorte: nenhuma fonte troca de métrica depois de carregar
 (`display: swap` com fallback dimensionado pelo `next/font`), e a transição
 de entrada anima só opacidade e `transform`, que não reflow.
+
+## As ferramentas, e as recusas
+
+[`docs/ferramentas.md`](docs/ferramentas.md) registra o ferramental e o
+motivo de cada escolha — inclusive por que este site não usa gerador de IA
+nem construtor visual, e qual é a única ferramenta que fecharia a lacuna
+real (o servidor MCP da Figma, no dia em que houver um designer).
 
 ## O que falta
 

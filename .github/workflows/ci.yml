@@ -34,14 +34,23 @@ jobs:
       - name: Build de produção
         run: npm run build
 
-      - name: Instalar o Chromium do Playwright
-        run: npx playwright install --with-deps chromium
+      - name: Instalar os navegadores do Playwright
+        run: npx playwright install --with-deps chromium firefox webkit
 
-      # Inclui a auditoria WCAG 2.2 AA em todas as onze páginas: contraste,
-      # rótulo de campo, ordem de cabeçalho, marco sem nome. Violação
-      # derruba o build.
+      # Inclui a auditoria WCAG 2.2 AA em todas as onze páginas (contraste,
+      # rótulo de campo, ordem de cabeçalho) e a regressão visual, que
+      # compara cada página com a referência versionada em
+      # tests/e2e/*-snapshots/. Violação derruba o build.
       - name: Testes de ponta a ponta
         run: npx playwright test
+
+      # O orçamento existe para que ninguém acrescente uma biblioteca e o
+      # site fique 10% mais lento sem ninguém perceber.
+      - name: Orçamento de desempenho
+        run: |
+          npx next start -p 3265 &
+          npx wait-on http://localhost:3265 --timeout 60000
+          npm run medir
 
       - uses: actions/upload-artifact@v4
         if: failure()

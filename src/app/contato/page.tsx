@@ -1,0 +1,68 @@
+import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { FormularioContato } from '@/components/marketing/FormularioContato';
+import { Revelar } from '@/components/motion/Revelar';
+import { Secao } from '@/components/ui/Secao';
+import { CONTATO, EMPRESA } from '@/content/identidade';
+import { metadadosDaPagina } from '@/lib/seo';
+
+export const metadata = metadadosDaPagina({
+  titulo: 'Contato',
+  descricao:
+    'Fale com um sócio da ABBA. Todo contato é respondido em 24 horas úteis — e a primeira conversa é de descoberta, ' +
+    'não de apresentação.',
+  caminho: '/contato',
+});
+
+export default function PaginaContato() {
+  return (
+    <>
+      <CapaDePagina
+        sobretitulo="Contato"
+        titulo="A primeira conversa é de descoberta. A gente chega com pergunta, não com apresentação."
+        apoio={<p>{CONTATO.prazoResposta}</p>}
+      />
+
+      <Secao tom="claro" espaco="amplo">
+        <div className="grid gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-24">
+          <Revelar className="space-y-10">
+            <div>
+              <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-gold-700">
+                Direto
+              </h2>
+              <a
+                href={`mailto:${EMPRESA.email}`}
+                className="mt-4 block font-display text-[1.35rem] text-navy-700 underline-offset-4 hover:underline"
+              >
+                {EMPRESA.email}
+              </a>
+            </div>
+
+            <div>
+              <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-gold-700">
+                Capacidade
+              </h2>
+              <p className="mt-4 text-[0.98rem] leading-[1.7] text-slate-700">
+                {CONTATO.capacidade}
+              </p>
+            </div>
+
+            <div>
+              <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-gold-700">
+                Antes de escrever
+              </h2>
+              <p className="mt-4 text-[0.98rem] leading-[1.7] text-slate-700">
+                Se você quiser chegar na conversa com material, comece pela análise gratuita: ela
+                leva três minutos e devolve uma faixa em reais com as premissas na mesa. A conversa
+                fica melhor com ela do que sem.
+              </p>
+            </div>
+          </Revelar>
+
+          <Revelar>
+            <FormularioContato />
+          </Revelar>
+        </div>
+      </Secao>
+    </>
+  );
+}

@@ -119,6 +119,8 @@ export const EVIDENCIAS = [
     fonte: 'Declaração pública da própria McKinsey',
     ano: 2025,
     confianca: 'media',
+    ressalva:
+      'É a firma falando da própria receita, sem auditoria de terceiro — vale como ordem de grandeza do topo do mercado, não como dado conferível.',
     leitura:
       'No topo do mercado, um quarto da receita já é atrelada a resultado. No médio porte brasileiro, quase ninguém oferece isso.',
   },

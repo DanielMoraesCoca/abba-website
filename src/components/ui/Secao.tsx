@@ -11,10 +11,25 @@ const FUNDOS: Record<Tom, string> = {
 };
 
 /**
- * A seção é a unidade de ritmo do site. Alternar `tom` entre claro, gelo e
- * navy é o que dá cadência à rolagem — sem isso a página vira um documento
- * longo. A regra é simples: nunca dois navy seguidos, e o dourado nunca
- * vira fundo.
+ * A seção é a unidade de ritmo do site.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * O QUE ESTAVA ERRADO ATÉ AQUI, E POR QUE `alinhamento` EXISTE.
+ *
+ * A primeira versão tinha um recurso de ritmo só: alternar o tom do fundo.
+ * Resultado — sete seções seguidas com a MESMA forma, todas começando no
+ * mesmo x, todas com a mesma largura. Um documento bem composto, não uma
+ * página desenhada.
+ *
+ * `alinhamento` é a correção mínima e estrutural: a seção pode deslocar o
+ * próprio conteúdo para a direita, quebrando a linha vertical que o olho
+ * segue. Combinado com `sangria`, que ignora a coluna de vez, o site ganha
+ * três formas em vez de uma.
+ *
+ * A disciplina continua: nunca dois navy seguidos, o dourado nunca vira
+ * fundo, e o deslocamento só existe acima de `lg` — em telas estreitas
+ * qualquer recuo vira aperto.
+ * ────────────────────────────────────────────────────────────────────────
  */
 export function Secao({
   children,
@@ -23,6 +38,8 @@ export function Secao({
   id,
   className,
   espaco = 'normal',
+  alinhamento = 'esquerda',
+  sangria = false,
 }: {
   readonly children: React.ReactNode;
   readonly tom?: Tom;
@@ -30,7 +47,17 @@ export function Secao({
   readonly id?: string;
   readonly className?: string;
   readonly espaco?: 'normal' | 'amplo' | 'curto';
+  /** `deslocada` empurra o conteúdo para a direita a partir de `lg`. */
+  readonly alinhamento?: 'esquerda' | 'deslocada';
+  /** Ignora a coluna e ocupa a largura inteira da tela. */
+  readonly sangria?: boolean;
 }) {
+  const conteudo = sangria ? (
+    <>{children}</>
+  ) : (
+    <Container largura={largura}>{children}</Container>
+  );
+
   return (
     <section
       id={id}
@@ -42,7 +69,13 @@ export function Secao({
         className,
       )}
     >
-      <Container largura={largura}>{children}</Container>
+      {alinhamento === 'deslocada' && !sangria ? (
+        <Container largura={largura}>
+          <div className="lg:pl-[16%]">{children}</div>
+        </Container>
+      ) : (
+        conteudo
+      )}
     </section>
   );
 }

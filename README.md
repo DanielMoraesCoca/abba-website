@@ -153,6 +153,13 @@ CLS zero não é sorte: nenhuma fonte troca de métrica depois de carregar
 (`display: swap` com fallback dimensionado pelo `next/font`), e a transição
 de entrada anima só opacidade e `transform`, que não reflow.
 
+## De onde vem o desenho
+
+[`docs/referencias.md`](docs/referencias.md) registra os sites que os sócios
+trouxeram como referência e — o que importa — **qual decisão de desenho saiu
+de cada um**. Referência que não vira decisão é moodboard, e moodboard não
+se versiona.
+
 ## As ferramentas, e as recusas
 
 [`docs/ferramentas.md`](docs/ferramentas.md) registra o ferramental e o

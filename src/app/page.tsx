@@ -1,13 +1,16 @@
 import Link from 'next/link';
+import { FaixaDeGrafo } from '@/components/brand/Grafo';
 import { Capa } from '@/components/marketing/Capa';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
+import { Tese } from '@/components/marketing/Tese';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
+import { cn } from '@/lib/utils';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { evidencia } from '@/content/evidencias';
-import { HEADLINE, PRATELEIRA } from '@/content/identidade';
+import { PRATELEIRA } from '@/content/identidade';
 import { RECUSAS } from '@/content/manifesto';
 
 /** Os três números da home. O resto do cânone vive em /evidencias. */
@@ -18,38 +21,41 @@ export default function PaginaInicial() {
     <>
       <Capa />
 
-      {/* ── A prateleira ───────────────────────────────────────────────── */}
+      {/* ── A prateleira ─────────────────────────────────────────────────
+          Assimetria de 2:3: o título ocupa um terço e o argumento dois. A
+          proporção desigual é o ponto — colunas iguais leem como tabela. */}
       <Secao tom="claro" espaco="amplo">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
+        <div className="grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
           <TituloDeSecao
             sobretitulo="A prateleira"
             titulo={PRATELEIRA.titulo}
             className="max-w-none"
           />
-          <Revelar className="space-y-7">
-            <p className="text-[1.15rem] leading-[1.65] text-navy-700">{PRATELEIRA.texto}</p>
-            <div className="rule-gold" aria-hidden />
-            <p className="text-[1.02rem] leading-[1.7] text-slate-600">{PRATELEIRA.analogia}</p>
+          <Revelar className="space-y-7 lg:pt-3">
+            <p className="max-w-[54ch] text-[1.22rem] leading-[1.6] text-navy-700">
+              {PRATELEIRA.texto}
+            </p>
+            <div className="rule-gold max-w-[54ch]" aria-hidden />
+            <p className="max-w-[54ch] text-[1.02rem] leading-[1.7] text-slate-600">
+              {PRATELEIRA.analogia}
+            </p>
           </Revelar>
         </div>
       </Secao>
 
-      {/* ── A tese ─────────────────────────────────────────────────────── */}
-      <Secao tom="gelo" largura="estreita">
-        <Revelar>
-          <p className="font-display text-[1.5rem] leading-[1.55] text-navy-700 sm:text-[1.85rem]">
-            {HEADLINE.corpo}
-          </p>
-          {/* A honestidade sobre o que é tese e o que é medição É o
-              posicionamento — por isso a nota fica ao lado da tese, não
-              escondida numa página de metodologia. */}
-          <p className="mt-8 border-l-2 border-gold-500 pl-5 font-mono text-[0.82rem] leading-relaxed text-slate-600">
-            {HEADLINE.notaDaTese}
-          </p>
-        </Revelar>
-      </Secao>
+      {/* A faixa de grafo é o respiro entre a abertura e a tese: o único
+          elemento que ignora a coluna, e por isso funciona como marco. */}
+      <FaixaDeGrafo semente={20260101} />
+
+      {/* ── A tese, em escala ──────────────────────────────────────────── */}
+      <Tese />
 
       {/* ── Os três caminhos ───────────────────────────────────────────── */}
+      {/* ── Os três caminhos ───────────────────────────────────────────
+          A grade é 1,35 : 1 : 1 de propósito. O Mapa de Vazamento é a porta
+          única de entrada e é gratuito; dar a ele a mesma largura dos outros
+          dois seria desenhar um cardápio, que é exatamente o que a doutrina
+          proíbe. A hierarquia visual repete a hierarquia comercial. */}
       <Secao tom="claro" espaco="amplo" id="caminhos">
         <TituloDeSecao
           sobretitulo="A vitrine inteira"
@@ -62,17 +68,32 @@ export default function PaginaInicial() {
           }
         />
 
-        <RevelarLista className="mt-16 grid gap-8 lg:grid-cols-3" passo={0.1}>
+        <RevelarLista
+          className="mt-16 grid gap-x-10 gap-y-14 lg:grid-cols-[1.35fr_1fr_1fr]"
+          passo={0.1}
+        >
           {CAMINHOS.map((caminho) => (
             <RevelarItem
               as="article"
               key={caminho.id}
-              className="group flex flex-col border-t border-navy-700/15 pt-8 transition-colors duration-500 hover:border-gold-500"
+              className={cn(
+                'group flex flex-col border-t pt-8 transition-colors duration-500 hover:border-gold-500',
+                caminho.ordem === 1
+                  ? 'border-gold-500/70'
+                  : 'border-navy-700/15',
+              )}
             >
               <p className="nums font-mono text-[0.72rem] tracking-[0.2em] text-gold-700">
                 {String(caminho.ordem).padStart(2, '0')}
               </p>
-              <h3 className="mt-5 text-[1.45rem] leading-tight text-navy-700">{caminho.nome}</h3>
+              <h3
+                className={cn(
+                  'mt-5 leading-tight text-navy-700',
+                  caminho.ordem === 1 ? 'text-[1.95rem]' : 'text-[1.4rem]',
+                )}
+              >
+                {caminho.nome}
+              </h3>
               <p className="mt-2 font-mono text-[0.78rem] uppercase tracking-[0.12em] text-slate-500">
                 {caminho.chamada}
               </p>
@@ -109,7 +130,11 @@ export default function PaginaInicial() {
         </RevelarLista>
       </Secao>
 
-      {/* ── A evidência ────────────────────────────────────────────────── */}
+      {/* ── A evidência ────────────────────────────────────────────────
+          Sem faixa de grafo aqui. A primeira versão tinha uma, escura, e ela
+          não se justificava: navy sobre navy lê como acidente, e um recurso
+          usado duas vezes na mesma página deixa de ser marco e vira
+          maneirismo. Uma vez, no lugar certo. */}
       <Secao tom="navy" espaco="amplo">
         <TituloDeSecao
           invertido
@@ -138,8 +163,11 @@ export default function PaginaInicial() {
         </Revelar>
       </Secao>
 
-      {/* ── As três fases ──────────────────────────────────────────────── */}
-      <Secao tom="claro" espaco="amplo">
+      {/* ── As três fases ──────────────────────────────────────────────
+          Deslocada: depois de cinco seções alinhadas à esquerda, o olho já
+          decorou a linha vertical. Quebrá-la aqui é o que faz a próxima
+          seção ser lida em vez de folheada. */}
+      <Secao tom="claro" espaco="amplo" alinhamento="deslocada">
         <TituloDeSecao
           sobretitulo="AI Native · Ano 1"
           titulo="Doze meses, três fases, três portões de saída sem multa."

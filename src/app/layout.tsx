@@ -1,3 +1,4 @@
+import { ViewTransition } from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono, Source_Serif_4 } from 'next/font/google';
 import { Cabecalho } from '@/components/marketing/Cabecalho';
@@ -77,7 +78,14 @@ export default function LayoutRaiz({ children }: { readonly children: React.Reac
         </a>
 
         <Cabecalho />
-        <main id="conteudo">{children}</main>
+        {/* Transição de rota. O React aciona a View Transitions API do
+            navegador a cada navegação; as regras de animação vivem em
+            globals.css, onde `prefers-reduced-motion` também as desliga.
+            Sem suporte no navegador, a navegação acontece normalmente,
+            sem animação — degradação limpa, nada de polyfill. */}
+        <ViewTransition name="conteudo">
+          <main id="conteudo">{children}</main>
+        </ViewTransition>
         <Rodape />
 
         <script

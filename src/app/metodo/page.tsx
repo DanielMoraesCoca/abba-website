@@ -1,10 +1,10 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { Camadas } from '@/components/marketing/Camadas';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
 import {
-  CAMADAS,
   DIMENSOES,
   PRINCIPIO_DO_ORGANISMO,
   PROTOCOLO_DE_PROVA,
@@ -40,20 +40,9 @@ export default function PaginaMetodo() {
           titulo="Cada camada é uma pergunta que a anterior não consegue responder."
         />
 
-        <RevelarLista className="mt-16 space-y-px" passo={0.06}>
-          {CAMADAS.map((camada) => (
-            <RevelarItem
-              key={camada.num}
-              className="grid items-baseline gap-4 border-t border-navy-700/15 py-6 sm:grid-cols-[3.5rem_10rem_1fr] sm:gap-8"
-            >
-              <span className="nums font-mono text-[0.8rem] text-gold-700">
-                {String(camada.num).padStart(2, '0')}
-              </span>
-              <span className="text-[1.1rem] text-navy-700">{camada.nome}</span>
-              <span className="text-[1rem] leading-relaxed text-slate-600">{camada.pergunta}</span>
-            </RevelarItem>
-          ))}
-        </RevelarLista>
+        <Revelar className="mt-16">
+          <Camadas />
+        </Revelar>
       </Secao>
 
       <Secao tom="navy" largura="estreita" espaco="amplo">

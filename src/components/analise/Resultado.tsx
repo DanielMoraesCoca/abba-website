@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Revelar } from '@/components/motion/Revelar';
 import { Sobretitulo } from '@/components/ui/Sobretitulo';
 import { CampoTexto } from './Campos';
+import { Decomposicao } from './Decomposicao';
 import { formatarFaixa, ROTULO_DO_VETOR, type Estimativa, type Qualificacao } from '@/lib/analise/modelo';
 import type { Narrativa } from '@/lib/analise/narrativa';
 import { EMPRESA } from '@/content/identidade';
@@ -28,6 +29,7 @@ const CORES_DA_LEITURA: Record<Qualificacao['leitura'], string> = {
  *
  * A ordem dos blocos não é estética, é doutrina (mapa-de-vazamento.md):
  *   1. a faixa em reais   — um número faz o leitor reagir
+ *   1b. a conta desenhada — de que partes a faixa é feita
  *   2. o vetor            — por onde o dinheiro sai
  *   3. as premissas       — numeradas, com a base de cada uma
  *   4. o aviso de faixa   — foi calculado de fora
@@ -72,6 +74,13 @@ export function Resultado({ dados, aoRecomecar }: {
           </>
         )}
       </Revelar>
+
+      {/* 1b · A conta desenhada — só quando houve conta. */}
+      {estimativa.decomposicao && (
+        <Revelar as="section" className="border-t border-navy-700/15 pt-10">
+          <Decomposicao estimativa={estimativa} />
+        </Revelar>
+      )}
 
       {/* 2 · O vetor */}
       <Revelar as="section" className="border-t border-navy-700/15 pt-10">

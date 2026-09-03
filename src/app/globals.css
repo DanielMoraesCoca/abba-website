@@ -179,3 +179,48 @@
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
 }
+
+/* ==========================================================================
+   Transição entre rotas
+   --------------------------------------------------------------------------
+   A assimetria é deliberada e é a mesma gramática do resto do site: o que
+   sai, sai rápido (não deve competir por atenção); o que entra, entra com
+   calma (o leitor precisa registrar). A distância é a mesma de `Revelar`.
+
+   O cabeçalho e o rodapé ficam de fora da transição de propósito: eles são
+   moldura, e moldura que pisca a cada navegação faz o site parecer instável.
+   ========================================================================== */
+
+::view-transition-old(conteudo) {
+  animation: 160ms var(--ease-abba) both esvanecer-saida;
+}
+
+::view-transition-new(conteudo) {
+  animation: 420ms var(--ease-abba) 120ms both esvanecer-entrada;
+}
+
+@keyframes esvanecer-saida {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes esvanecer-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Quem pediu menos movimento não recebe uma versão rápida da animação —
+   recebe navegação sem animação nenhuma. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(conteudo),
+  ::view-transition-new(conteudo) {
+    animation: none;
+  }
+}

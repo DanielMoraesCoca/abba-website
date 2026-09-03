@@ -1,4 +1,5 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { LinhaDoPrograma } from '@/components/marketing/LinhaDoPrograma';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
@@ -39,7 +40,15 @@ export default function PaginaPrograma() {
         }
       />
 
-      <Secao tom="claro" espaco="amplo">
+      {/* A régua do ano, antes das fases em detalhe: primeiro o mapa,
+          depois o território. */}
+      <Secao tom="claro" espaco="normal">
+        <Revelar>
+          <LinhaDoPrograma />
+        </Revelar>
+      </Secao>
+
+      <Secao tom="gelo" espaco="amplo">
         <RevelarLista className="space-y-px" passo={0.09}>
           {FASES.map((fase) => (
             <RevelarItem

@@ -29,7 +29,7 @@ npm run dev                  # http://localhost:3000
 ```
 
 ```bash
-npm run check      # typecheck + lint + 81 unitários + build
+npm run check      # typecheck + lint + 95 unitários + build
 npm run test:e2e   # 74 testes de ponta a ponta (Chromium, desktop e celular)
 npm run medir      # desempenho real contra o build de produção
 ```
@@ -78,7 +78,17 @@ varre o repositório inteiro atrás dele a cada `npm test`.
 Esse mesmo teste checa vocabulário (nunca "curso de IA", nunca "auditamos",
 nunca nome interno de ferramenta) e domínio (só `abbaservices.com.br`).
 
-### 2. O número é aritmética; o modelo de linguagem só escreve a prosa
+### 2. Texto livre do visitante é tratado como dado, nunca como instrução
+
+Nome da empresa e setor são os únicos campos livres que chegam ao modelo de
+linguagem — e por isso são a superfície de injeção de prompt do site. A
+defesa é em três camadas: o esquema recusa quebra de linha, caractere de
+controle e qualquer coisa fora do conjunto que um nome de empresa
+brasileiro usa; o prompt entrega esses valores delimitados e declarados
+como dado; e a saída passa pela verificação de número antes de aparecer na
+tela.
+
+### 3. O número é aritmética; o modelo de linguagem só escreve a prosa
 
 Na Análise ABBA:
 
@@ -97,7 +107,7 @@ As cinco regras de honestidade do Mapa de Vazamento estão travadas em teste:
 faixa nunca ponto, premissa sempre com base declarada, sem piso artificial,
 aviso de faixa sempre renderizado, e nada persistido.
 
-### 3. O resultado da Análise é um documento
+### 4. O resultado da Análise é um documento
 
 A ABBA vive de documento — proposta, relatório, termo —, e quem termina a
 análise vai levar aquilo para a diretoria. A folha de estilo de impressão
@@ -106,7 +116,7 @@ página com menu no meio do argumento; o gráfico da conta carrega
 `print-color-adjust: exact`, senão sumiria do papel (fundo de elemento não
 imprime por padrão) e levaria junto a prova de que a conta é conferível.
 
-### 4. A análise não cobra nada — nem cadastro
+### 5. A análise não cobra nada — nem cadastro
 
 O resultado aparece **antes** de qualquer formulário. Cadastro obrigatório é
 uma forma de cobrança, e o Mapa de Vazamento nunca se cobra. Nada das

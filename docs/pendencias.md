@@ -75,7 +75,20 @@ lugar onde uma foto real ganharia muito: **os retratos dos sócios**, na página
 de contato ou numa página "quem somos" que ainda não existe. Duas fotos boas,
 em luz natural, valem mais que vinte de catálogo.
 
-## 8. Domínio, hospedagem e e-mail · **chapéu Tecnologia**
+## 8. Testar a camada de linguagem com chave real · **chapéu Tecnologia**
+
+**Onde:** [`src/lib/analise/narrativa.ts`](../src/lib/analise/narrativa.ts)
+
+O caminho determinístico está testado e é o que vai ao ar sem chave. O
+caminho com o modelo — incluindo a verificação que descarta a geração
+inteira se um número escapar para o texto — nunca rodou contra a API de
+verdade, porque o ambiente onde este site foi construído não tinha chave.
+
+Antes de ligar em produção: rodar umas dez análises com `ANTHROPIC_API_KEY`
+definida, conferir que o texto sai no tom da casa e que nenhuma cifra
+aparece na prosa. Se aparecer, a trava funciona — mas é melhor saber antes.
+
+## 9. Domínio, hospedagem e e-mail · **chapéu Tecnologia**
 
 Apontar `abbaservices.com.br` para o site e confirmar que
 `contato@abbaservices.com.br` chega em alguém. Enquanto o domínio não estiver

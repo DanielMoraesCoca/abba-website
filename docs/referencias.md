@@ -17,11 +17,15 @@ como → Arquivo web) e subiu os `.webarchive` aqui. Um webarchive é um plist
 binário da Apple que embrulha o HTML, o CSS, as fontes e o JS da página
 inteira. Deu para abrir e ler o código de produção de:
 
-| Site | HTML | Sub-recursos | CSS lido |
-|---|---|---|---|
-| otsuka-air.jp | 246 KB | 150 | 328 KB |
-| sharplink.com | 1,58 MB | 74 | 3,09 MB |
-| alethia.earth | 776 KB | 61 | 266 KB (inline) |
+| Site | CSS lido | Feito à mão? |
+|---|---|---|
+| otsuka-air.jp | 328 KB | sim |
+| sharplink.com | 3,09 MB | sim |
+| hobro.digital | 105 KB | sim |
+| alethia.earth | 266 KB (inline) | não — Framer |
+| stateofaidesign.com | 640 KB (inline) | não — Framer |
+
+Faltam três: paulkalkbrenner.net, pxpush.com, verostudio.com.
 
 **O que está na seção "O vocabulário de movimento" abaixo foi medido no
 código deles, não inferido.** É a diferença entre dizer "a transição é
@@ -74,12 +78,55 @@ Três decisões numa linha só, todas contra o instinto:
 - **Sharplink** — uma família só, duas larguras: `Archivo` (4000 usos) e
   `Archivo Narrow` (2400). Identidade tipográfica sem custo de segunda fonte.
 
+### O segundo lote, e um resultado negativo
+
+**stateofaidesign.com não ensina quase nada, e o motivo importa.** São 640 KB
+de CSS, mas é um site Framer — o mesmo estúdio da Alethia. Os 12 usos de
+`mask-image` que pareciam técnica de desenho são ícones do próprio Framer, e
+os 52 blocos `@supports` são detecção de Safari da plataforma. O que sobra do
+designer: uma curva, `cubic-bezier(.44,0,.56,1)` (simétrica, suave), e
+durações curtíssimas — `.15s` e `.2s`. Isso corrobora o nosso `--ease-micro`
+a 240 ms; não muda nada.
+
+A lição de método: **num site Framer, o CSS é da ferramenta, não de quem
+desenhou.** Vale ver, não vale copiar. Dos cinco lidos, dois são assim.
+
+**hobro.digital é feita à mão, e é a mais densa por byte.** 105 KB de CSS —
+um trigésimo da Sharplink — e mais técnica dentro.
+
+| Técnica | Uso | O que faz |
+|---|---|---|
+| `mix-blend-mode: difference` | 10× | inverte o elemento contra o que passa atrás |
+| `cubic-bezier(.785,.135,.15,.86)` | 12× | *easeInOutCirc*, a 1s–1,2s, para momentos grandes |
+| `transition: clip-path 1s` | 1× | revelação por corte, não por opacidade |
+| quatro papéis tipográficos | — | `--font-title`, `--font-text`, `--font-typewriter`, `--font-cursive` |
+
+O achado é este:
+
+```css
+.header.header-inverse { mix-blend-mode: difference }
+```
+
+O cabeçalho da hobro **não sabe onde a página está — ele reage ao que passa
+por baixo.** Sobre claro fica escuro, sobre escuro fica claro, sem
+JavaScript e sem medir scroll.
+
+O nosso faz o contrário: `scrollY > 24` decide entre transparente-com-texto-
+gelo e claro-com-texto-navy. É um palpite sobre o que está atrás, e ele só
+acerta porque toda página começa com capa escura. Ver a discussão em
+`pendencias.md` — a técnica da hobro garante contraste mas destrói cor de
+marca, e o ouro e o navy da ABBA não são negociáveis.
+
 ### Onde nós estamos à frente
 
-Nenhum dos três — nem os premiados — tem uma única regra
-`prefers-reduced-motion`. Quem configurou o sistema para reduzir movimento
-recebe a animação inteira. A ABBA respeita desde o começo. Não vamos abrir
-mão disso para parecer com eles.
+Dos cinco lidos — todos premiados —, **quatro não têm uma única regra
+`prefers-reduced-motion`**. O quinto, a hobro, tem exatamente uma:
+`html { scroll-behavior: auto }`. Desliga a rolagem suave e deixa todas as
+animações rodando.
+
+Quem configurou o sistema operacional para reduzir movimento recebe a
+animação inteira nos cinco. A ABBA respeita desde o começo, no bloco inteiro.
+Não vamos abrir mão disso para parecer com eles.
 
 ### O que foi lido e recusado
 

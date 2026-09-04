@@ -94,3 +94,39 @@ Apontar `abbaservices.com.br` para o site e confirmar que
 `contato@abbaservices.com.br` chega em alguém. Enquanto o domínio não estiver
 apontado, a regra da marca proíbe mandar qualquer URL de pré-visualização para
 prospect.
+
+## 10. O cabeçalho sobre fundo escuro · **chapéu Desenho**
+
+Hoje o cabeçalho decide a própria cor por distância de rolagem: acima de
+24px vira claro com texto navy, abaixo fica transparente com texto gelo.
+Isso é um **palpite sobre o que está atrás**, e ele só acerta porque toda
+página começa com capa escura. Nas seções `tom="navy"` e no rodapé, uma
+barra clara atravessa a faixa escura.
+
+A hobro.digital resolve isso com uma linha, sem JavaScript:
+
+```css
+.header.header-inverse { mix-blend-mode: difference }
+```
+
+O cabeçalho inverte contra o que passa por baixo. Sobre claro fica escuro,
+sobre escuro fica claro. Contraste garantido por construção — é literalmente
+a diferença máxima entre duas cores.
+
+**Por que não apliquei direto:** `difference` garante contraste e destrói
+cor. A hobro pode porque a paleta dela é branco, preto e cinza. O ouro
+`#836B34` invertido sobre navy não é ouro — é uma cor que a ABBA não possui.
+Trocaríamos identidade por conveniência técnica.
+
+Três saídas, para os sócios escolherem:
+
+1. **Deixar como está.** Não há falha de contraste — o axe passa nas 12
+   páginas. É só uma barra clara cortando uma faixa escura. Custo zero.
+2. **Inversão ciente do conteúdo.** Um `IntersectionObserver` marca quando
+   uma seção escura está sob o cabeçalho e troca para uma variante escura
+   feita com os tokens da ABBA. Mesma ideia da hobro, cor da casa preservada.
+   Custo: um observador, uma variante, e regravar as 20 referências visuais.
+3. **`difference` só no logotipo.** O logotipo é monocromático; inverter só
+   ele não toca no ouro. Meio-termo barato.
+
+Minha recomendação é a 2. A 1 é defensável e a 3 é um remendo.

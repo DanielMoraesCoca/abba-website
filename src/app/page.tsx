@@ -120,7 +120,7 @@ export default function PaginaInicial() {
                 {caminho.cta.texto}
                 <span
                   aria-hidden
-                  className="transition-transform duration-300 ease-[var(--ease-abba)] group-hover:translate-x-1"
+                  className="transition-transform duration-[var(--duration-micro)] ease-[var(--ease-micro)] group-hover:translate-x-1"
                 >
                   →
                 </span>

@@ -41,7 +41,7 @@ export function GrupoDeOpcoes<T extends string>({
             <label
               key={opcao.valor}
               className={cn(
-                'group flex cursor-pointer items-start gap-3.5 rounded-[3px] border px-5 py-4 transition-all duration-300 ease-[var(--ease-abba)]',
+                'group flex cursor-pointer items-start gap-3.5 rounded-[3px] border px-5 py-4 transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)]',
                 'has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-teal-500',
                 selecionado
                   ? 'border-navy-700 bg-navy-700/[0.04] shadow-[inset_2px_0_0_var(--color-gold-500)]'

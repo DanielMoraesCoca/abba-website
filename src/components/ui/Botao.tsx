@@ -6,7 +6,7 @@ type Variante = 'primario' | 'secundario' | 'fantasma' | 'primario-invertido';
 const BASE =
   'group relative inline-flex items-center justify-center gap-2.5 rounded-[3px] px-6 py-3.5 ' +
   'font-sans text-[0.94rem] font-medium tracking-[0.01em] transition-[background-color,color,border-color,box-shadow,transform] ' +
-  'duration-300 ease-[var(--ease-abba)] will-change-transform active:translate-y-px';
+  'duration-[var(--duration-micro)] ease-[var(--ease-micro)] will-change-transform active:translate-y-px';
 
 const VARIANTES: Record<Variante, string> = {
   primario:
@@ -25,7 +25,7 @@ function Seta() {
     <svg
       aria-hidden
       viewBox="0 0 16 16"
-      className="h-[0.9em] w-[0.9em] translate-x-0 transition-transform duration-300 ease-[var(--ease-abba)] group-hover:translate-x-1"
+      className="h-[0.9em] w-[0.9em] translate-x-0 transition-transform duration-[var(--duration-micro)] ease-[var(--ease-micro)] group-hover:translate-x-1"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.6}

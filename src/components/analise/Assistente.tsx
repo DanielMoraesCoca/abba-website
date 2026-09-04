@@ -160,7 +160,7 @@ export function Assistente() {
                 <span
                   aria-hidden
                   className={cn(
-                    'h-px transition-all duration-500 ease-[var(--ease-abba)]',
+                    'h-px transition-all duration-500 ease-[var(--ease-micro)]',
                     atual ? 'w-8 bg-gold-500' : 'w-4 bg-current opacity-50',
                   )}
                 />
@@ -313,7 +313,7 @@ export function Assistente() {
           onClick={() => (ultimo ? enviar() : irPara(passo + 1))}
           disabled={!completo || enviando}
           className={cn(
-            'inline-flex items-center justify-center gap-2.5 rounded-[3px] px-7 py-3.5 font-medium transition-all duration-300 ease-[var(--ease-abba)]',
+            'inline-flex items-center justify-center gap-2.5 rounded-[3px] px-7 py-3.5 font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)]',
             'bg-navy-700 text-ice-100 hover:bg-navy-600',
             'disabled:cursor-not-allowed disabled:bg-slate-400 disabled:text-ice-100/80',
           )}

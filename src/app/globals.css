@@ -100,10 +100,27 @@
     Menlo, Consolas, monospace;
 
   /* --- Ritmo e movimento -------------------------------------------------
-     Uma curva só para tudo que entra em cena. Transição é assinatura de
-     marca: se cada componente inventa a sua, o site perde a cara.        */
+     Duas curvas, não uma. Ler o CSS de produção de sites de referência
+     (Otsuka Air, Sharplink) mostrou o erro de usar a mesma curva para
+     tudo: a curva que faz um bloco entrar bem é longa demais para um
+     hover, e a que responde bem ao mouse é curta demais para uma entrada.
+
+     --ease-abba  entrada em cena. Desacelera forte no fim: o elemento
+                  chega e assenta.
+     --ease-micro resposta ao ponteiro. Sai mais devagar e assenta mais
+                  cedo — parece imediata sem parecer brusca.
+
+     E, dentro de uma entrada, transform e opacity não andam juntos: o
+     deslocamento lidera, a opacidade entra atrasada. É a diferença entre
+     um bloco que chega e um bloco que pisca.                            */
   --ease-abba: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-reveal: 720ms;
+  --ease-micro: cubic-bezier(0.32, 0.24, 0.36, 1);
+
+  --duration-reveal: 900ms; /* transform — lidera */
+  --duration-fade: 560ms; /* opacity  — vem atrás */
+  --atraso-fade: 160ms;
+  --duration-micro: 240ms;
+  --distancia-revelar: 18px;
 
   --shadow-card: 0 1px 2px rgb(27 42 74 / 0.04), 0 8px 24px -12px rgb(27 42 74 / 0.16);
   --shadow-lift: 0 2px 4px rgb(27 42 74 / 0.06), 0 24px 48px -20px rgb(27 42 74 / 0.28);
@@ -264,16 +281,18 @@
    A transição de entrada
    --------------------------------------------------------------------------
    O componente `Revelar` só troca um atributo; toda a animação vive aqui.
-   Uma curva, uma distância, uma duração — as mesmas dos tokens no topo
-   deste arquivo.
+   Duas propriedades, dois tempos: o transform sai na frente com a curva de
+   entrada, a opacidade entra 160ms depois com a curva de micro. Todos os
+   valores vêm dos tokens no topo deste arquivo.
    ========================================================================== */
 
 [data-revelar] {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(var(--distancia-revelar));
   transition:
-    opacity var(--duration-reveal) var(--ease-abba) var(--atraso, 0ms),
-    transform var(--duration-reveal) var(--ease-abba) var(--atraso, 0ms);
+    transform var(--duration-reveal) var(--ease-abba) var(--atraso, 0ms),
+    opacity var(--duration-fade) var(--ease-micro)
+      calc(var(--atraso, 0ms) + var(--atraso-fade));
   /* Avisa o navegador antes da transição começar, e só nos elementos que
      ainda não entraram — depois de revelado a dica sai de cena. */
   will-change: opacity, transform;
@@ -286,10 +305,12 @@
 }
 
 /* Escalonamento: o atraso de cada item sai da sua posição na lista, no CSS.
+   Passo de 60ms, não 90: com doze itens, 90ms empilha mais de um segundo de
+   espera até o último — o escalonamento deixa de ser ritmo e vira fila.
    Doze é o teto deliberado — acima disso o escalonamento vira espera, e o
    décimo terceiro item em diante entra junto com o décimo segundo. */
 [data-revelar-lista] > [data-revelar] {
-  --atraso: calc(var(--passo, 90ms) * var(--indice, 0));
+  --atraso: calc(var(--passo, 60ms) * var(--indice, 0));
 }
 [data-revelar-lista] > *:nth-child(1)  { --indice: 0; }
 [data-revelar-lista] > *:nth-child(2)  { --indice: 1; }

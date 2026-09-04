@@ -36,7 +36,7 @@ export function Cabecalho() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-abba)]',
+        'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-micro)]',
         rolou || aberto
           ? 'border-b border-navy-700/10 bg-paper/92 backdrop-blur-md'
           : 'border-b border-transparent bg-transparent',
@@ -78,7 +78,7 @@ export function Cabecalho() {
                   ativo && (rolou ? 'text-navy-700' : 'text-ice-100'),
                   // O sublinhado dourado cresce da esquerda; é o mesmo gesto
                   // do fio dourado que separa as seções.
-                  'after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-gold-500 after:transition-[width] after:duration-400 after:ease-[var(--ease-abba)]',
+                  'after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-gold-500 after:transition-[width] after:duration-[var(--duration-micro)] after:ease-[var(--ease-micro)]',
                   ativo ? 'after:w-full' : 'after:w-0 hover:after:w-full',
                 )}
               >
@@ -92,7 +92,7 @@ export function Cabecalho() {
           <Link
             href="/analise"
             className={cn(
-              'hidden rounded-[3px] px-5 py-2.5 text-[0.9rem] font-medium transition-all duration-300 ease-[var(--ease-abba)] sm:inline-flex',
+              'hidden rounded-[3px] px-5 py-2.5 text-[0.9rem] font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)] sm:inline-flex',
               rolou
                 ? 'bg-navy-700 text-ice-100 hover:bg-navy-600'
                 : 'border border-ice-200/30 text-ice-100 hover:border-gold-400/80 hover:text-gold-300',

@@ -17,15 +17,36 @@ como → Arquivo web) e subiu os `.webarchive` aqui. Um webarchive é um plist
 binário da Apple que embrulha o HTML, o CSS, as fontes e o JS da página
 inteira. Deu para abrir e ler o código de produção de:
 
-| Site | CSS lido | Feito à mão? |
-|---|---|---|
-| otsuka-air.jp | 328 KB | sim |
-| sharplink.com | 3,09 MB | sim |
-| hobro.digital | 105 KB | sim |
-| alethia.earth | 266 KB (inline) | não — Framer |
-| stateofaidesign.com | 640 KB (inline) | não — Framer |
+Sete das oito lidas. Falta uma: paulkalkbrenner.net.
 
-Faltam três: paulkalkbrenner.net, pxpush.com, verostudio.com.
+| Site | Feito | CSS | `clip-path` | `sticky` | `blend` | reduced-motion |
+|---|---|---:|---:|---:|---:|---:|
+| verostudio.com | à mão | 241 KB | **37** | 18 | 0 | **2** |
+| pxpush.com | à mão | 62 KB | 15 | 6 | 9 | 0 |
+| otsuka-air.jp | à mão | 320 KB | 7 | 18 | 0 | 0 |
+| hobro.digital | à mão | 102 KB | 6 | 3 | 13 | 1 |
+| sharplink.com | à mão | 3015 KB | 0 | 2 | 0 | 0 |
+| alethia.earth | Framer | 259 KB | 2 | 2 | 2 | 0 |
+| stateofaidesign.com | Framer | 625 KB | 2 | 4 | 0 | 0 |
+| **ABBA hoje** | à mão | **16 KB** | **0** | **0** | 0 | **4** |
+
+Duas leituras saltam da tabela.
+
+**A primeira: `clip-path` é a técnica que nos falta.** As três referências
+mais elogiadas e feitas à mão usam 37, 15 e 7 vezes; nós, zero. Não é
+enfeite — é como se revela conteúdo sem depender de opacidade. A Vero anima
+`inset(0 0 100%)` → `inset(0 0 0%)`, uma cortina que abre, e monta polígonos
+a partir de uma variável CSS que o JavaScript atualiza:
+
+```css
+clip-path: polygon(calc(50% - 50% * var(--progress)) ... );
+```
+
+O deslocamento é do CSS; o JavaScript só escreve um número entre 0 e 1.
+
+**A segunda: tamanho não é qualidade.** A Sharplink entrega 3 MB de CSS e
+não usa `clip-path` uma vez sequer. A PX Push faz mais técnica em 62 KB.
+A ABBA inteira são 16 KB de folha de estilo.
 
 **O que está na seção "O vocabulário de movimento" abaixo foi medido no
 código deles, não inferido.** É a diferença entre dizer "a transição é
@@ -119,14 +140,32 @@ marca, e o ouro e o navy da ABBA não são negociáveis.
 
 ### Onde nós estamos à frente
 
-Dos cinco lidos — todos premiados —, **quatro não têm uma única regra
-`prefers-reduced-motion`**. O quinto, a hobro, tem exatamente uma:
-`html { scroll-behavior: auto }`. Desliga a rolagem suave e deixa todas as
-animações rodando.
+**Correção.** Eu escrevi, com três e depois com cinco sites lidos, que
+nenhuma referência respeitava `prefers-reduced-motion`. Com sete lidos isso
+não se sustenta: a **Vero respeita, e tão bem quanto nós** — o mesmo reset
+universal, mais uma degradação pensada.
 
-Quem configurou o sistema operacional para reduzir movimento recebe a
-animação inteira nos cinco. A ABBA respeita desde o começo, no bloco inteiro.
-Não vamos abrir mão disso para parecer com eles.
+O placar honesto: das sete, **cinco ignoram**, a hobro tem uma regra mínima
+(`html { scroll-behavior: auto }`, que desliga a rolagem suave e deixa as
+animações rodando) e a Vero cobre de verdade.
+
+E a Vero ensina uma distinção que vale mais que o placar. O reset universal
+congela tudo em `0.01ms`; para a maioria dos elementos isso basta, porque o
+estado final é o estado certo. Mas há elementos cujo estado congelado não
+serve — e para esses ela dá um estado **substituto**:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .ScrollCue .chevron { opacity: .45; animation: none }
+}
+```
+
+A seta que pulsava não some nem trava: fica visível e parada, a 45%.
+
+Isso a ABBA já fazia em quatro lugares — `[data-revelar]` volta a
+`opacity: 1; transform: none`, `[data-passo]` perde a animação, a transição
+de rota é anulada, e a constelação em canvas desenha o quadro final e para.
+Aqui a Vero confirma o método em vez de corrigi-lo.
 
 ### O que foi lido e recusado
 
@@ -148,6 +187,14 @@ Duas curvas com papéis definidos, não vinte à disposição.
 | 3 | Entrada mais longa (900 ms) e fade mais curto (560 ms) | `globals.css` |
 | 4 | Micro-interação a 240 ms, não 300 | 6 componentes |
 | 5 | Escalonamento de 90 ms para 60 ms | `globals.css` |
+| 6 | `--ease-abba-reverso` para o que sai de cena | `globals.css` |
+
+A 6 corrigiu um erro nosso. A saída da transição de rota usava
+`--ease-abba` — uma curva de **entrada**, que desacelera forte no fim.
+Numa saída isso faz o elemento perder quase toda a opacidade nos primeiros
+quadros e depois pairar quase invisível: parece travamento. A Vero mantém o
+par `--ease-custom-1` / `--ease-custom-1-reverse`, e espelhar é aritmética —
+`cubic-bezier(x1,y1,x2,y2)` vira `cubic-bezier(1-x2,1-y2,1-x1,1-y1)`.
 
 As 20 referências de regressão visual passaram sem regravar nenhuma: a
 mudança é de tempo, não de estado final.

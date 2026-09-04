@@ -115,6 +115,13 @@
      um bloco que chega e um bloco que pisca.                            */
   --ease-abba: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-micro: cubic-bezier(0.32, 0.24, 0.36, 1);
+  /* O espelho de --ease-abba, para o que SAI de cena. A Vero mantém o par
+     (--ease-custom-1 / --ease-custom-1-reverse) e o motivo é aritmético:
+     espelhar cubic-bezier(x1,y1,x2,y2) é cubic-bezier(1-x2,1-y2,1-x1,1-y1).
+     Uma curva de entrada usada numa saída faz o elemento perder quase toda
+     a opacidade nos primeiros quadros e depois pairar quase invisível —
+     parece travamento, não saída.                                        */
+  --ease-abba-reverso: cubic-bezier(0.7, 0, 0.84, 0);
 
   --duration-reveal: 900ms; /* transform — lidera */
   --duration-fade: 560ms; /* opacity  — vem atrás */
@@ -244,7 +251,7 @@
    ========================================================================== */
 
 ::view-transition-old(conteudo) {
-  animation: 160ms var(--ease-abba) both esvanecer-saida;
+  animation: 160ms var(--ease-abba-reverso) both esvanecer-saida;
 }
 
 ::view-transition-new(conteudo) {

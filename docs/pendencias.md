@@ -130,3 +130,39 @@ Três saídas, para os sócios escolherem:
    ele não toca no ouro. Meio-termo barato.
 
 Minha recomendação é a 2. A 1 é defensável e a 3 é um remendo.
+
+## 11. `clip-path`: a técnica que falta · **chapéu Desenho**
+
+Das sete referências lidas, as três feitas à mão mais elogiadas usam
+`clip-path` 37 (Vero), 15 (PX Push) e 7 vezes (Otsuka). A ABBA usa zero.
+
+Não é enfeite. É o segundo jeito de revelar conteúdo — por corte, não por
+opacidade. Uma cortina que abre revela sem que o texto passe por estados
+semitransparentes, o que é melhor para leitura e melhor para contraste.
+
+A forma mínima é uma linha:
+
+```css
+transition: clip-path 1s var(--ease-abba);
+clip-path: inset(0 0 100%);   /* fechado */
+clip-path: inset(0 0 0%);     /* aberto  */
+```
+
+A forma avançada da Vero liga o corte a uma variável que o JavaScript
+atualiza — o cálculo do polígono fica no CSS, o JS só escreve um número
+entre 0 e 1.
+
+**Por que não apliquei:** trocar ou somar um segundo modo de revelação muda
+o estado intermediário de praticamente toda seção, e regrava as 20
+referências de regressão visual. É decisão de desenho, não correção.
+
+Duas saídas:
+
+1. **Variante, não substituição.** `[data-revelar='corte']` como segundo
+   modo, aplicado só onde a cortina diz algo — a faixa de grafo, a tese, os
+   números das evidências. O modo atual continua padrão.
+2. **Deixar como está.** O `translateY` + opacidade que temos é correto e
+   passa em tudo. `clip-path` é ganho de repertório, não de qualidade.
+
+Recomendo a 1, restrita a três lugares. Repertório usado em toda seção vira
+maneirismo.

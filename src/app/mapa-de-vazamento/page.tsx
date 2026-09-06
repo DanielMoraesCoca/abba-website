@@ -101,7 +101,7 @@ export default function PaginaMapaDeVazamento() {
           titulo="Cinco regras que não se negociam, nem quando custam a venda."
         />
 
-        <RevelarLista className="mt-16 space-y-px" passo={0.07}>
+        <RevelarLista className="mt-16 space-y-px" passo={0.05}>
           {REGRAS.map((regra, i) => (
             <RevelarItem
               key={regra.titulo}
@@ -131,7 +131,7 @@ export default function PaginaMapaDeVazamento() {
             className="max-w-none"
           />
 
-          <RevelarLista as="ol" className="space-y-7" passo={0.07}>
+          <RevelarLista as="ol" className="space-y-7" passo={0.05}>
             {CONVERSA.map((pergunta, i) => (
               <RevelarItem as="li" key={pergunta} className="flex gap-5">
                 <span className="nums mt-1 font-display text-[1.4rem] leading-none text-gold-500">

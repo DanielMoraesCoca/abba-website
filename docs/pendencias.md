@@ -95,7 +95,10 @@ Apontar `abbaservices.com.br` para o site e confirmar que
 apontado, a regra da marca proíbe mandar qualquer URL de pré-visualização para
 prospect.
 
-## 10. O cabeçalho sobre fundo escuro · **chapéu Desenho**
+## 10. O cabeçalho sobre fundo escuro · **RESOLVIDA em 06/09**
+
+> Decidida pela saída 2 — inversão ciente do conteúdo, com os tokens da
+> casa. O registro do raciocínio fica abaixo.
 
 Hoje o cabeçalho decide a própria cor por distância de rolagem: acima de
 24px vira claro com texto navy, abaixo fica transparente com texto gelo.
@@ -131,7 +134,39 @@ Três saídas, para os sócios escolherem:
 
 Minha recomendação é a 2. A 1 é defensável e a 3 é um remendo.
 
-## 11. `clip-path`: a técnica que falta · **chapéu Desenho**
+### O que foi feito
+
+As superfícies escuras se anunciam com `data-fundo="escuro"` — `Secao` nos
+tons navy, `FaixaDeGrafo` escura, `Capa`, `CapaDePagina` e o rodapé. Nenhuma
+delas sabe que o cabeçalho existe: só declaram o próprio fundo.
+
+O cabeçalho observa com um `IntersectionObserver` cujo recorte é achatado
+numa faixa de 1px na base dele — só intersecta o que está exatamente atrás.
+Três superfícies em vez de duas: transparente no topo, clara sobre claro,
+navy-900 sobre escuro. O botão da Análise, que era sólido navy, vira
+contorno sobre escuro, onde o sólido desapareceria.
+
+**Um erro no caminho, e ele importa.** A primeira versão lia a altura do
+cabeçalho do token: `parseFloat(--header-h)`. O token é `4.5rem`, e
+`parseFloat('4.5rem')` devolve `4.5` — a faixa de detecção nasceu a quatro
+pixels do topo da tela e nunca encostou em nada. O cabeçalho continuava
+claro sobre navy e nenhum teste reclamava. Agora a altura é medida do
+elemento, que sabe o próprio tamanho em pixels.
+
+**A cobertura que faltava.** A auditoria do axe roda no topo de cada página,
+onde o cabeçalho é transparente — o estado escuro nunca foi auditado por
+ninguém. Um estado que só aparece rolando é um estado que ninguém revisa.
+`acessibilidade.spec.ts` agora rola até uma seção escura e audita ali; o
+teste foi verificado reintroduzindo o bug do `parseFloat`, e ele reprova.
+
+**E uma confirmação:** medi o comportamento antigo (barra sempre clara sobre
+seção navy) com o axe. Zero violações. O que eu disse acima continua de pé —
+não era falha de contraste, era composição. A troca foi de desenho, não
+correção de acessibilidade.
+
+## 11. `clip-path`: a técnica que falta · **RESOLVIDA em 06/09**
+
+> Decidida pela saída 1 — variante, não substituição, em três lugares.
 
 Das sete referências lidas, as três feitas à mão mais elogiadas usam
 `clip-path` 37 (Vero), 15 (PX Push) e 7 vezes (Otsuka). A ABBA usa zero.
@@ -166,3 +201,19 @@ Duas saídas:
 
 Recomendo a 1, restrita a três lugares. Repertório usado em toda seção vira
 maneirismo.
+
+### O que foi feito
+
+`Revelar` e `RevelarItem` ganharam `modo`: `desloca` (o padrão, inalterado)
+e `corte`. Os três lugares:
+
+| Onde | Por quê |
+|---|---|
+| o numeral **70%** da tese | num numeral de 13rem, meio segundo de meio-tom é meio segundo de borrão |
+| o **diagrama das sete camadas** | a cortina desce na direção em que o diagrama deve ser lido |
+| a **faixa de grafo** da home | a malha abre de borda a borda, como marco |
+
+Quem pediu menos movimento recebe `clip-path: none`, não a cortina
+congelada — sem essa regra o conteúdo sumiria para sempre. É a distinção
+que a Vero aplica na seta do scroll cue: estado substituto, não estado
+congelado.

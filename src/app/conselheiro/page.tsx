@@ -87,7 +87,7 @@ export default function PaginaConselheiro() {
       <Secao tom="navy" espaco="amplo">
         <TituloDeSecao invertido sobretitulo="O que entra" titulo="Cinco entregas, todo ciclo." />
 
-        <RevelarLista className="mt-16 space-y-px" passo={0.07}>
+        <RevelarLista className="mt-16 space-y-px" passo={0.05}>
           {ENTREGAS.map((entrega, i) => (
             <RevelarItem
               key={entrega.titulo}
@@ -108,7 +108,7 @@ export default function PaginaConselheiro() {
           sobretitulo="O que não é"
           titulo="A seção do que não fazemos vem antes da conversa de preço."
         />
-        <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.07}>
+        <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.05}>
           {NAO_E.map((item) => (
             <RevelarItem key={item.rotulo} className="border-t border-navy-700/15 pt-5">
               <h3 className="text-[1.06rem] font-medium leading-snug text-navy-700">{item.rotulo}</h3>
@@ -123,7 +123,7 @@ export default function PaginaConselheiro() {
           sobretitulo="Por que a cadeira nasce fracionária"
           titulo="No médio porte brasileiro, disputar esse talento é uma briga perdida."
         />
-        <RevelarLista className="mt-14 grid gap-10 lg:grid-cols-2" passo={0.1}>
+        <RevelarLista className="mt-14 grid gap-10 lg:grid-cols-2" passo={0.07}>
           <RevelarItem>
             <NumeroComFonte evidencia={evidencia('talento-98')} />
           </RevelarItem>

@@ -61,6 +61,10 @@ export function Secao({
   return (
     <section
       id={id}
+      /* O cabeçalho lê este atributo para saber o que está passando por
+         baixo dele. A seção não sabe que o cabeçalho existe — ela só declara
+         o próprio fundo, e quem precisa que leia. */
+      data-fundo={tom === 'navy' || tom === 'navy-profundo' ? 'escuro' : 'claro'}
       className={cn(
         FUNDOS[tom],
         espaco === 'curto' && 'py-14 sm:py-16',

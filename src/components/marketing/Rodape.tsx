@@ -14,7 +14,7 @@ export function Rodape() {
   const ano = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy-900 text-ice-300">
+    <footer data-fundo="escuro" className="bg-navy-900 text-ice-300">
       <Container largura="larga" className="py-16 sm:py-20">
         <div className="grid gap-12 md:grid-cols-[1.3fr_repeat(3,minmax(0,1fr))]">
           <div>

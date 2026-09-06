@@ -33,7 +33,7 @@ const REGRAS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 /**
  * Põe todo elemento no estado final ANTES de auditar.
  *
- * A transição de entrada leva 720ms; auditar durante ela mede cores
+ * A transição de entrada leva 900ms; auditar durante ela mede cores
  * misturadas com o fundo e produz reprovações que não existem na tela
  * parada. Desligar a transição, em vez de esperar por ela, torna o teste
  * determinístico — esperar seria uma corrida que às vezes ganha.
@@ -115,5 +115,54 @@ test('o assistente da Análise passa no axe também na tela de resultado', async
   await revelarTudo(page);
 
   const { violations } = await new AxeBuilder({ page }).withTags(REGRAS).analyze();
+  expect(violations, relatar(violations)).toEqual([]);
+});
+
+/**
+ * O cabeçalho sobre fundo escuro.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * Este teste existe porque a auditoria acima NÃO cobre o estado novo. Ela
+ * roda no topo de cada página, onde o cabeçalho é transparente. O estado
+ * escuro — o que o observador liga quando uma seção navy passa por baixo —
+ * só existe rolando, e é exatamente ele que muda cor de texto sobre fundo.
+ *
+ * Um estado que só aparece rolando é um estado que ninguém revisa. Por isso
+ * ele é rolado aqui, e auditado com a mesma régua.
+ * ──────────────────────────────────────────────────────────────────────── */
+test('o cabeçalho mantém contraste sobre uma seção escura', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await revelarTudo(page);
+
+  const cabecalho = page.locator('header').first();
+  const alturaCabecalho = await cabecalho.evaluate((el) => el.getBoundingClientRect().height);
+
+  // Rola até que uma superfície escura esteja de fato sob o cabeçalho —
+  // a mesma condição que o componente observa, verificada aqui de fora.
+  await page.evaluate((altura) => {
+    const escuras = [...document.querySelectorAll('[data-fundo="escuro"]')];
+    const alvo = escuras
+      .map((el) => el.getBoundingClientRect().top + window.scrollY)
+      .filter((topo) => topo > window.innerHeight)
+      .sort((a, b) => a - b)[0];
+    if (alvo === undefined) throw new Error('nenhuma seção escura abaixo da dobra na home');
+    window.scrollTo({ top: alvo - altura + 40, behavior: 'instant' });
+  }, alturaCabecalho);
+
+  // O fundo é comparado por luminosidade, não por string: o Tailwind v4
+  // calcula em `oklab(...)`, e o primeiro número é o L. Claro é ~1, o navy
+  // da casa é ~0,2 — a distância é grande o bastante para não haver dúvida.
+  const luminosidade = () =>
+    cabecalho.evaluate((el) => {
+      const [, l] = /oklab\(([0-9.]+)/.exec(getComputedStyle(el).backgroundColor) ?? [];
+      return l ? Number(l) : Number.NaN;
+    });
+
+  await expect.poll(luminosidade, { timeout: 5000 }).toBeLessThan(0.5);
+
+  const { violations } = await new AxeBuilder({ page })
+    .include('header')
+    .withTags(REGRAS)
+    .analyze();
   expect(violations, relatar(violations)).toEqual([]);
 });

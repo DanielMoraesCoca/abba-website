@@ -32,7 +32,7 @@ export default function PaginaManifesto() {
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao sobretitulo="O que acreditamos" titulo="Sete convicções." />
 
-        <RevelarLista className="mt-16 space-y-px" passo={0.06}>
+        <RevelarLista className="mt-16 space-y-px" passo={0.04}>
           {CRENCAS.map((crenca) => (
             <RevelarItem
               as="article"
@@ -60,7 +60,7 @@ export default function PaginaManifesto() {
           titulo="Cada recusa, com o que ela nos custa."
         />
 
-        <RevelarLista className="mt-16 grid gap-x-14 gap-y-10 lg:grid-cols-2" passo={0.06}>
+        <RevelarLista className="mt-16 grid gap-x-14 gap-y-10 lg:grid-cols-2" passo={0.04}>
           {RECUSAS.map((item) => (
             <RevelarItem key={item.recusa} className="border-t border-gold-500/35 pt-6">
               <h3 className="text-[1.1rem] leading-snug text-ice-100">{item.recusa}</h3>
@@ -76,7 +76,7 @@ export default function PaginaManifesto() {
           titulo="Postura que não muda comportamento é decoração. Estas são as marcas visíveis."
         />
 
-        <RevelarLista as="ul" className="mt-14 space-y-6" passo={0.06}>
+        <RevelarLista as="ul" className="mt-14 space-y-6" passo={0.04}>
           {NA_PRATICA.map((item) => (
             <RevelarItem as="li" key={item} className="flex gap-5">
               <span aria-hidden className="mt-3.5 h-px w-7 shrink-0 bg-gold-500" />
@@ -99,7 +99,7 @@ export default function PaginaManifesto() {
           }
         />
 
-        <RevelarLista className="mt-14 space-y-px" passo={0.07}>
+        <RevelarLista className="mt-14 space-y-px" passo={0.05}>
           {QUANDO_DIZEMOS_NAO.map((item) => (
             <RevelarItem
               key={item.recusa}

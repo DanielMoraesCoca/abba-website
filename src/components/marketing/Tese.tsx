@@ -33,9 +33,12 @@ export function Tese() {
     <section className="bg-ice-200 pt-10 pb-20 sm:pt-14 sm:pb-28">
       <Container largura="larga">
         <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[auto_1fr] lg:items-start">
-          <Revelar>
+          <Revelar modo="corte">
             {/* O número em escala de display. É o único lugar do site em que
-                um numeral ocupa a tela — e por isso ele funciona. */}
+                um numeral ocupa a tela — e por isso ele funciona.
+
+                Revelado por corte, não por opacidade: num numeral desta
+                altura, meio segundo de meio-tom é meio segundo de borrão. */}
             <p
               className="nums font-display text-[7rem] leading-[0.82] tracking-[-0.04em] text-navy-700 sm:text-[11rem] lg:text-[13rem]"
               aria-hidden

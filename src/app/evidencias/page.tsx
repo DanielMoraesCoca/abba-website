@@ -45,7 +45,7 @@ export default function PaginaEvidencias() {
           }
         />
 
-        <RevelarLista className="mt-16 grid gap-x-12 gap-y-14 lg:grid-cols-2" passo={0.06}>
+        <RevelarLista className="mt-16 grid gap-x-12 gap-y-14 lg:grid-cols-2" passo={0.04}>
           {EVIDENCIAS.map((item) => (
             <RevelarItem key={item.id} className="flex flex-col">
               <NumeroComFonte evidencia={item} />
@@ -111,7 +111,7 @@ export default function PaginaEvidencias() {
           }
         />
 
-        <RevelarLista className="mt-16 space-y-px" passo={0.07}>
+        <RevelarLista className="mt-16 space-y-px" passo={0.05}>
           {INDICE_PROIBIDO.map((item) => (
             <RevelarItem
               key={item.rotulo}

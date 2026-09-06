@@ -188,6 +188,21 @@ Duas curvas com papéis definidos, não vinte à disposição.
 | 4 | Micro-interação a 240 ms, não 300 | 6 componentes |
 | 5 | Escalonamento de 90 ms para 60 ms | `globals.css` |
 | 6 | `--ease-abba-reverso` para o que sai de cena | `globals.css` |
+| 7 | Revelação por corte (`clip-path`), em três lugares | `globals.css`, `Revelar.tsx` |
+| 8 | Cabeçalho ciente do que passa por baixo | `Cabecalho.tsx`, `Secao.tsx` |
+| 9 | Escalonamento corrigido de verdade: 40–80 ms | 8 páginas |
+
+A 9 corrigiu um erro **meu**, da decisão 5. Eu baixei o escalonamento de
+90 ms para 60 ms no `globals.css` e declarei a mudança feita. Ela não teve
+efeito nenhum: `RevelarLista` injeta `--passo` como estilo em linha, e todos
+os 25 chamadores passavam o próprio valor — de 70 a 120 ms. Estilo em linha
+vence token. Agora o componente só injeta quando quem chama pede outro
+valor, e os 25 chamadores foram reescalonados para uma escada de 40 a 80 ms,
+com piso de 40 — o valor medido na Otsuka. A espera do décimo segundo item
+caiu de 1320 ms para 880 ms.
+
+A lição, que vale mais que o número: **uma mudança em token não é uma
+mudança até você conferir que ninguém a sobrepõe.**
 
 A 6 corrigiu um erro nosso. A saída da transição de rota usava
 `--ease-abba` — uma curva de **entrada**, que desacelera forte no fim.

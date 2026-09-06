@@ -44,8 +44,11 @@ export default function PaginaInicial() {
       </Secao>
 
       {/* A faixa de grafo é o respiro entre a abertura e a tese: o único
-          elemento que ignora a coluna, e por isso funciona como marco. */}
-      <FaixaDeGrafo semente={20260101} />
+          elemento que ignora a coluna, e por isso funciona como marco.
+          Revelada por corte — a malha abre de borda a borda. */}
+      <Revelar modo="corte">
+        <FaixaDeGrafo semente={20260101} />
+      </Revelar>
 
       {/* ── A tese, em escala ──────────────────────────────────────────── */}
       <Tese />
@@ -70,7 +73,7 @@ export default function PaginaInicial() {
 
         <RevelarLista
           className="mt-16 grid gap-x-10 gap-y-14 lg:grid-cols-[1.35fr_1fr_1fr]"
-          passo={0.1}
+          passo={0.07}
         >
           {CAMINHOS.map((caminho) => (
             <RevelarItem
@@ -148,7 +151,7 @@ export default function PaginaInicial() {
           }
         />
 
-        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.12}>
+        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.08}>
           {NUMEROS_DA_HOME.map((id) => (
             <RevelarItem key={id}>
               <NumeroComFonte evidencia={evidencia(id)} tom="escuro" />
@@ -179,7 +182,7 @@ export default function PaginaInicial() {
           }
         />
 
-        <RevelarLista className="mt-16 space-y-px" passo={0.1}>
+        <RevelarLista className="mt-16 space-y-px" passo={0.07}>
           {FASES.map((fase) => (
             <RevelarItem
               as="article"
@@ -230,7 +233,7 @@ export default function PaginaInicial() {
           }
         />
 
-        <RevelarLista className="mt-14 grid gap-x-12 gap-y-8 sm:grid-cols-2" passo={0.07}>
+        <RevelarLista className="mt-14 grid gap-x-12 gap-y-8 sm:grid-cols-2" passo={0.05}>
           {RECUSAS.slice(0, 6).map((item) => (
             <RevelarItem key={item.recusa} className="border-t border-navy-700/15 pt-5">
               <h3 className="text-[1.05rem] font-medium leading-snug text-navy-700">

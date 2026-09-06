@@ -2,20 +2,96 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 import { Logotipo } from '@/components/brand/Marca';
 import { Container } from '@/components/ui/Container';
 import { NAV_PRINCIPAL } from '@/content/navegacao';
 import { cn } from '@/lib/utils';
 
 /**
+ * Observa o que está passando POR BAIXO do cabeçalho.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A versão anterior decidia a cor por distância de rolagem: acima de 24px,
+ * claro com texto navy. Isso não é observação, é palpite — e o palpite só
+ * acertava porque toda página começa com capa escura. Nas seções navy e no
+ * rodapé, uma barra clara atravessava a faixa escura.
+ *
+ * A hobro.digital resolve com uma linha, `mix-blend-mode: difference`: o
+ * cabeçalho inverte contra o que passa atrás. Contraste garantido por
+ * construção. Não copiamos, e o motivo é de marca — `difference` garante
+ * contraste e DESTRÓI cor. A hobro pode porque a paleta dela é branco,
+ * preto e cinza; o ouro #836B34 invertido sobre navy não é ouro.
+ *
+ * Aqui a mesma ideia com a cor da casa: as superfícies escuras se anunciam
+ * com `data-fundo="escuro"`, e um observador com o recorte colapsado numa
+ * faixa fina na altura do cabeçalho diz qual delas está embaixo agora.
+ * ──────────────────────────────────────────────────────────────────────── */
+function useFundoSobOCabecalho(ref: RefObject<HTMLElement | null>) {
+  // Começa em `false` de propósito. Enquanto a página não rolou, a superfície
+  // é transparente e esta resposta não é consultada; quando passa a ser, o
+  // observador já disparou — ele emite uma leitura inicial por alvo
+  // observado. Assim não existe um estado inicial para adivinhar.
+  const [escuro, setEscuro] = useState(false);
+
+  useEffect(() => {
+    const escuras = document.querySelectorAll('[data-fundo="escuro"]');
+    if (escuras.length === 0) return;
+
+    let observador: IntersectionObserver | null = null;
+    const emCena = new Set<Element>();
+
+    const montar = () => {
+      observador?.disconnect();
+      emCena.clear();
+
+      // Medido do elemento, não lido do token. `--header-h` é `4.5rem`, e
+      // `parseFloat('4.5rem')` devolve 4.5 — a faixa de detecção nasceu a
+      // quatro pixels do topo e nunca encostou em nada. O elemento sabe a
+      // própria altura em pixels; o token, não.
+      const altura = ref.current?.getBoundingClientRect().height ?? 0;
+      if (altura === 0) return;
+
+      // Achata o recorte numa linha de 1px na base do cabeçalho: só
+      // intersecta o que está exatamente ali atrás.
+      const base = Math.max(0, window.innerHeight - altura - 1);
+
+      observador = new IntersectionObserver(
+        (entradas) => {
+          for (const entrada of entradas) {
+            if (entrada.isIntersecting) emCena.add(entrada.target);
+            else emCena.delete(entrada.target);
+          }
+          setEscuro(emCena.size > 0);
+        },
+        { rootMargin: `-${altura}px 0px -${base}px 0px`, threshold: 0 },
+      );
+
+      for (const elemento of escuras) observador.observe(elemento);
+    };
+
+    montar();
+    window.addEventListener('resize', montar);
+    return () => {
+      window.removeEventListener('resize', montar);
+      observador?.disconnect();
+    };
+  }, [ref]);
+
+  return escuro;
+}
+
+/**
  * Barra fixa. Nasce transparente sobre a capa e ganha fundo quando a página
- * rola — a marca aparece sobre a imagem, não sobre uma faixa branca.
+ * rola — a marca aparece sobre a imagem, não sobre uma faixa branca. Rolando,
+ * a cor do fundo segue o que estiver passando por baixo.
  */
 export function Cabecalho() {
   const [rolou, setRolou] = useState(false);
   const [aberto, setAberto] = useState(false);
   const caminho = usePathname();
+  const refCabecalho = useRef<HTMLElement | null>(null);
+  const sobreEscuro = useFundoSobOCabecalho(refCabecalho);
 
   useEffect(() => {
     const aoRolar = () => setRolou(window.scrollY > 24);
@@ -23,6 +99,11 @@ export function Cabecalho() {
     window.addEventListener('scroll', aoRolar, { passive: true });
     return () => window.removeEventListener('scroll', aoRolar);
   }, []);
+
+  // Três estados, não dois. O menu aberto força a superfície clara porque
+  // o painel que ele abre é claro.
+  const superficie = aberto ? 'clara' : !rolou ? 'transparente' : sobreEscuro ? 'escura' : 'clara';
+  const textoClaro = superficie !== 'clara';
 
   // Fecha o menu quando a rota muda. É o padrão do React para ajustar estado
   // em resposta a uma mudança de prop — feito durante a renderização, não num
@@ -35,11 +116,12 @@ export function Cabecalho() {
 
   return (
     <header
+      ref={refCabecalho}
       className={cn(
         'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-micro)]',
-        rolou || aberto
-          ? 'border-b border-navy-700/10 bg-paper/92 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent',
+        superficie === 'clara' && 'border-b border-navy-700/10 bg-paper/92 backdrop-blur-md',
+        superficie === 'escura' && 'border-b border-ice-100/10 bg-navy-900/92 backdrop-blur-md',
+        superficie === 'transparente' && 'border-b border-transparent bg-transparent',
       )}
     >
       <Container largura="larga" className="flex h-full items-center justify-between gap-8">
@@ -48,7 +130,7 @@ export function Cabecalho() {
           aria-label="ABBA — página inicial"
           className={cn(
             'transition-colors duration-500',
-            rolou || aberto ? 'text-navy-700' : 'text-ice-100',
+            textoClaro ? 'text-ice-100' : 'text-navy-700',
           )}
         >
           <Logotipo />
@@ -72,10 +154,10 @@ export function Cabecalho() {
                 aria-current={ativo ? 'page' : undefined}
                 className={cn(
                   'relative py-1 text-[0.92rem] transition-colors duration-300',
-                  rolou
-                    ? 'text-slate-600 hover:text-navy-700'
-                    : 'text-ice-200/80 hover:text-ice-100',
-                  ativo && (rolou ? 'text-navy-700' : 'text-ice-100'),
+                  textoClaro
+                    ? 'text-ice-200/80 hover:text-ice-100'
+                    : 'text-slate-600 hover:text-navy-700',
+                  ativo && (textoClaro ? 'text-ice-100' : 'text-navy-700'),
                   // O sublinhado dourado cresce da esquerda; é o mesmo gesto
                   // do fio dourado que separa as seções.
                   'after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-gold-500 after:transition-[width] after:duration-[var(--duration-micro)] after:ease-[var(--ease-micro)]',
@@ -93,9 +175,12 @@ export function Cabecalho() {
             href="/analise"
             className={cn(
               'hidden rounded-[3px] px-5 py-2.5 text-[0.9rem] font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)] sm:inline-flex',
-              rolou
-                ? 'bg-navy-700 text-ice-100 hover:bg-navy-600'
-                : 'border border-ice-200/30 text-ice-100 hover:border-gold-400/80 hover:text-gold-300',
+              // Sólido navy sobre fundo claro. Sobre escuro, o mesmo sólido
+              // desapareceria no fundo — ali ele vira contorno, o mesmo
+              // tratamento que já tinha sobre a capa.
+              textoClaro
+                ? 'border border-ice-200/30 text-ice-100 hover:border-gold-400/80 hover:text-gold-300'
+                : 'bg-navy-700 text-ice-100 hover:bg-navy-600',
             )}
           >
             Análise gratuita
@@ -109,7 +194,7 @@ export function Cabecalho() {
             aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
             className={cn(
               'flex h-10 w-10 items-center justify-center lg:hidden',
-              rolou || aberto ? 'text-navy-700' : 'text-ice-100',
+              textoClaro ? 'text-ice-100' : 'text-navy-700',
             )}
           >
             <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.5}>

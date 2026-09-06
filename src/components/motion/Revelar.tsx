@@ -82,10 +82,28 @@ function useRevelar<T extends HTMLElement>(atraso: number) {
 
 type Tag = 'div' | 'section' | 'article' | 'header' | 'li' | 'ul' | 'ol' | 'figure';
 
+/**
+ * Como o elemento entra em cena.
+ *
+ * `desloca` — dez pixels e opacidade. O padrão da casa, e o certo para
+ *   texto corrido: nada muda de forma, só de posição.
+ *
+ * `corte` — uma cortina que abre de cima para baixo, com `clip-path`. Lido
+ *   no CSS de produção da Vero (37 usos) e da PX Push (15). A diferença que
+ *   importa não é estética: o conteúdo NUNCA passa por um estado
+ *   semitransparente. Cada pixel ou está em contraste pleno ou não está
+ *   desenhado — o que é melhor para leitura e para quem depende de
+ *   contraste. Em troca, o corte é uma forma forte demais para usar em toda
+ *   seção: usado em tudo, vira maneirismo. Fica nos três lugares onde a
+ *   cortina diz alguma coisa.
+ */
+type Modo = 'desloca' | 'corte';
+
 interface Props {
   readonly children: ReactNode;
   readonly className?: string;
   readonly as?: Tag;
+  readonly modo?: Modo;
 }
 
 export function Revelar({
@@ -93,12 +111,13 @@ export function Revelar({
   atraso = 0,
   className,
   as = 'div',
+  modo = 'desloca',
 }: Props & { readonly atraso?: number }) {
   const ref = useRevelar<HTMLElement>(Math.round(atraso * 1000));
   const Componente = as as ElementType;
 
   return (
-    <Componente ref={ref} data-revelar="" className={className}>
+    <Componente ref={ref} data-revelar="" data-modo={modo} className={className}>
       {children}
     </Componente>
   );
@@ -111,15 +130,22 @@ export function Revelar({
 export function RevelarLista({
   children,
   className,
-  passo = 0.09,
+  passo,
   as = 'div',
 }: Props & { readonly passo?: number }) {
   const ref = useRef<HTMLElement | null>(null);
 
+  // Sem `passo`, o valor vem do CSS — que é onde o ritmo da casa mora. Uma
+  // propriedade injetada aqui venceria o token por ser estilo em linha, e
+  // foi exatamente o que aconteceu: baixamos o padrão para 60ms no
+  // `globals.css` e nada mudou, porque todo chamador injetava o seu.
   useEffect(() => {
     const elemento = ref.current;
-    if (!elemento) return;
+    if (!elemento || passo === undefined) return;
     elemento.style.setProperty('--passo', `${Math.round(passo * 1000)}ms`);
+    return () => {
+      elemento.style.removeProperty('--passo');
+    };
   }, [passo]);
 
   const Componente = as as ElementType;
@@ -131,12 +157,12 @@ export function RevelarLista({
 }
 
 /** Item de uma `RevelarLista`. O escalonamento vem do pai, via CSS. */
-export function RevelarItem({ children, className, as = 'div' }: Props) {
+export function RevelarItem({ children, className, as = 'div', modo = 'desloca' }: Props) {
   const ref = useRevelar<HTMLElement>(0);
   const Componente = as as ElementType;
 
   return (
-    <Componente ref={ref} data-revelar="" className={className}>
+    <Componente ref={ref} data-revelar="" data-modo={modo} className={className}>
       {children}
     </Componente>
   );

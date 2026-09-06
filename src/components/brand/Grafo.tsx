@@ -148,6 +148,7 @@ export function FaixaDeGrafo({
 }) {
   return (
     <div
+      data-fundo={tom === 'escuro' ? 'escuro' : 'claro'}
       className={cn(
         'relative overflow-hidden',
         tom === 'escuro' ? 'bg-navy-900' : 'bg-ice-200',

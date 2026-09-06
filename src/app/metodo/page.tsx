@@ -40,7 +40,9 @@ export default function PaginaMetodo() {
           titulo="Cada camada é uma pergunta que a anterior não consegue responder."
         />
 
-        <Revelar className="mt-16">
+        {/* Por corte: a cortina desce camada a camada, na mesma direção em
+            que o diagrama deve ser lido. A forma repete o argumento. */}
+        <Revelar className="mt-16" modo="corte">
           <Camadas />
         </Revelar>
       </Secao>
@@ -71,7 +73,7 @@ export default function PaginaMetodo() {
           }
         />
 
-        <RevelarLista className="mt-16 grid gap-x-12 gap-y-11 sm:grid-cols-2 lg:grid-cols-3" passo={0.05}>
+        <RevelarLista className="mt-16 grid gap-x-12 gap-y-11 sm:grid-cols-2 lg:grid-cols-3" passo={0.04}>
           {DIMENSOES.map((grupo) => (
             <RevelarItem key={grupo.grupo} className="border-t border-navy-700/15 pt-6">
               <h3 className="text-[1.08rem] font-medium leading-snug text-navy-700">
@@ -106,7 +108,7 @@ export default function PaginaMetodo() {
           }
         />
 
-        <RevelarLista className="mt-14 grid gap-x-14 gap-y-10 sm:grid-cols-2" passo={0.08}>
+        <RevelarLista className="mt-14 grid gap-x-14 gap-y-10 sm:grid-cols-2" passo={0.05}>
           {PROTOCOLO_DE_PROVA.map((regra, i) => (
             <RevelarItem key={regra.titulo} className="border-t border-navy-700/15 pt-6">
               <p className="nums font-mono text-[0.72rem] text-gold-700">

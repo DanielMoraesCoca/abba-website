@@ -12,7 +12,7 @@ import { HEADLINE } from '@/content/identidade';
  */
 export function Capa() {
   return (
-    <section className="relative isolate overflow-hidden bg-navy-900 pb-24 pt-[calc(var(--header-h)+5rem)] sm:pb-32 sm:pt-[calc(var(--header-h)+7rem)]">
+    <section data-fundo="escuro" className="relative isolate overflow-hidden bg-navy-900 pb-24 pt-[calc(var(--header-h)+5rem)] sm:pb-32 sm:pt-[calc(var(--header-h)+7rem)]">
       <Constelacao className="pointer-events-none absolute inset-0 -z-10 h-full w-full" />
 
       {/* Vinheta: escurece as bordas para o texto ganhar a página sem caixa. */}
@@ -47,7 +47,7 @@ export function Capa() {
         <RevelarLista
           as="ul"
           className="mt-20 grid gap-px overflow-hidden border-y border-ice-200/12 sm:mt-28 sm:grid-cols-3"
-          passo={0.11}
+          passo={0.07}
         >
           {[
             { chave: '6 semanas', valor: 'até a primeira prova medida, com métrica combinada na semana 1' },

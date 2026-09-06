@@ -33,7 +33,7 @@ export default function PaginaOQueFazemos() {
       />
 
       <Secao tom="claro" espaco="amplo">
-        <RevelarLista className="space-y-px" passo={0.1}>
+        <RevelarLista className="space-y-px" passo={0.07}>
           {CAMINHOS.map((caminho) => (
             <RevelarItem
               as="article"
@@ -92,7 +92,7 @@ export default function PaginaOQueFazemos() {
           }
         />
 
-        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.11}>
+        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.07}>
           {FASES.map((fase) => (
             <RevelarItem
               as="article"
@@ -146,7 +146,7 @@ export default function PaginaOQueFazemos() {
           }
         />
 
-        <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.08}>
+        <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.05}>
           {REGRAS_DE_INVESTIMENTO.map((regra) => (
             <RevelarItem key={regra.titulo} className="border-t border-navy-700/15 pt-5">
               <h3 className="text-[1.08rem] font-medium leading-snug text-navy-700">
@@ -174,7 +174,7 @@ export default function PaginaOQueFazemos() {
           titulo="Inclusive a difícil, respondida do mesmo jeito que respondemos na sala."
         />
 
-        <RevelarLista as="ul" className="mt-14 space-y-px" passo={0.05}>
+        <RevelarLista as="ul" className="mt-14 space-y-px" passo={0.04}>
           {PERGUNTAS.map((item) => (
             <RevelarItem
               as="li"

@@ -49,7 +49,7 @@ export default function PaginaPrograma() {
       </Secao>
 
       <Secao tom="gelo" espaco="amplo">
-        <RevelarLista className="space-y-px" passo={0.09}>
+        <RevelarLista className="space-y-px" passo={0.06}>
           {FASES.map((fase) => (
             <RevelarItem
               as="article"
@@ -106,7 +106,7 @@ export default function PaginaPrograma() {
           }
         />
 
-        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.11}>
+        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.07}>
           {(['rand-causa-1', 'metr-19', 'wharton-medicao'] as const).map((id) => (
             <RevelarItem key={id}>
               <NumeroComFonte evidencia={evidencia(id)} tom="escuro" />
@@ -166,7 +166,7 @@ export default function PaginaPrograma() {
             )
           }
         />
-        <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.08}>
+        <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.05}>
           {REGRAS_DE_INVESTIMENTO.map((regra) => (
             <RevelarItem key={regra.titulo} className="border-t border-navy-700/15 pt-5">
               <h3 className="text-[1.08rem] font-medium leading-snug text-navy-700">

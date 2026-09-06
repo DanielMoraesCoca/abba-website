@@ -127,6 +127,7 @@
   --duration-fade: 560ms; /* opacity  — vem atrás */
   --atraso-fade: 160ms;
   --duration-micro: 240ms;
+  --duration-corte: 1100ms;
   --distancia-revelar: 18px;
 
   --shadow-card: 0 1px 2px rgb(27 42 74 / 0.04), 0 8px 24px -12px rgb(27 42 74 / 0.16);
@@ -311,6 +312,30 @@
   will-change: auto;
 }
 
+/* Revelação por corte — o segundo modo.
+   --------------------------------------------------------------------------
+   Uma cortina que abre de cima para baixo. Lido no CSS de produção da Vero
+   (37 usos de `clip-path`) e da PX Push (15); a ABBA usava zero.
+
+   O ganho não é estético, é de leitura: aqui o conteúdo NUNCA passa por um
+   estado semitransparente. Cada pixel ou está em contraste pleno ou não
+   está desenhado. Numa revelação por opacidade, o texto atravessa uma faixa
+   de meio segundo em que o contraste está abaixo do mínimo — invisível para
+   quem enxerga bem, um problema real para quem não enxerga.
+
+   É uma forma forte, e forma forte usada em toda seção vira maneirismo. Por
+   isso é variante e não substituição: mora em três lugares.              */
+[data-revelar][data-modo='corte'] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--duration-corte) var(--ease-abba) var(--atraso, 0ms);
+}
+
+[data-revelar='visivel'][data-modo='corte'] {
+  clip-path: inset(0 0 0% 0);
+}
+
 /* Escalonamento: o atraso de cada item sai da sua posição na lista, no CSS.
    Passo de 60ms, não 90: com doze itens, 90ms empilha mais de um segundo de
    espera até o último — o escalonamento deixa de ser ritmo e vira fila.
@@ -340,6 +365,12 @@
     transform: none;
     transition: none;
     will-change: auto;
+  }
+  /* Estado substituto, não estado congelado: sem esta regra a cortina
+     ficaria fechada para sempre e o conteúdo sumiria. É a lição que a Vero
+     aplica na seta do scroll cue.                                        */
+  [data-revelar][data-modo='corte'] {
+    clip-path: none;
   }
 }
 

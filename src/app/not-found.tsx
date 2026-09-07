@@ -4,7 +4,10 @@ import { Sobretitulo } from '@/components/ui/Sobretitulo';
 
 export default function NaoEncontrada() {
   return (
-    <section className="flex min-h-[70vh] items-center bg-navy-900 pt-[var(--header-h)]">
+    <section
+      data-fundo="escuro"
+      className="flex min-h-[70vh] items-center bg-navy-900 pt-[var(--header-h)]"
+    >
       <Container largura="estreita">
         <Sobretitulo invertido>Erro 404</Sobretitulo>
         <h1 className="mt-7 text-[2.2rem] leading-[1.12] text-ice-100 sm:text-[2.9rem]">

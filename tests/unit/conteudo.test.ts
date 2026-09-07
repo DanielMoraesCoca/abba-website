@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { EVIDENCIAS, evidencia } from '@/content/evidencias';
@@ -133,5 +134,52 @@ describe('perguntas frequentes', () => {
     for (const p of PERGUNTAS) {
       expect(p.resposta).not.toMatch(/somos (a|uma) auditoria/i);
     }
+  });
+});
+
+/**
+ * As cores escritas à mão no `global-error`.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * O `global-error.tsx` substitui o documento inteiro quando o layout raiz
+ * falha, então não pode importar o `globals.css` nem componente nenhum: um
+ * arquivo que só roda quando tudo quebrou não pode depender do que quebrou.
+ * As cores da marca vão em linha, copiadas à mão.
+ *
+ * Copiadas à mão significa que elas DERIVAM. Na primeira escrita, três dos
+ * quatro hex estavam errados — um navy quase certo, um gelo azulado demais
+ * e um dourado trocado. Ninguém veria: é a página que quase nunca aparece.
+ *
+ * Este teste é a única coisa que liga aquele arquivo ao sistema de cores.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('global-error usa as cores canônicas da marca', () => {
+  const fonte = readFileSync(
+    new URL('../../src/app/global-error.tsx', import.meta.url),
+    'utf8',
+  );
+  const css = readFileSync(new URL('../../src/app/globals.css', import.meta.url), 'utf8');
+
+  const token = (nome: string) => {
+    const achado = new RegExp(`--color-${nome}:\\s*(#[0-9A-Fa-f]{6})`).exec(css);
+    if (!achado) throw new Error(`token --color-${nome} não existe no globals.css`);
+    return achado[1];
+  };
+
+  it.each([
+    ['navy-900', 'o fundo'],
+    ['ice-100', 'o texto'],
+    ['gold-500', 'o botão'],
+    ['gold-400', 'o link'],
+  ])('%s (%s) bate com o token', (nome) => {
+    expect(fonte).toContain(token(nome));
+  });
+
+  it('não usa nenhum hex fora da paleta', () => {
+    const usados = new Set(fonte.match(/#[0-9A-Fa-f]{6}/g) ?? []);
+    const paleta = new Set(
+      (css.match(/--color-[a-z0-9-]+:\s*#[0-9A-Fa-f]{6}/g) ?? []).map((l) => l.split(/:\s*/)[1]),
+    );
+    const intrusos = [...usados].filter((c) => !paleta.has(c));
+    expect(intrusos, `hex fora da paleta em global-error.tsx: ${intrusos.join(', ')}`).toEqual([]);
   });
 });

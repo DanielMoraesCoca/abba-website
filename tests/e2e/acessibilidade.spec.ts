@@ -26,6 +26,9 @@ const ROTAS = [
   '/analise',
   '/contato',
   '/privacidade',
+  // A 404 é uma página como as outras, e é a única que ninguém revisa por
+  // vontade própria — só se chega nela errando. Auditada junto.
+  '/rota-que-nao-existe',
 ];
 
 const REGRAS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];

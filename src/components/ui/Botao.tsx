@@ -72,3 +72,34 @@ export function Botao({ href, children, variante = 'primario', className, comSet
     </Link>
   );
 }
+
+/**
+ * O mesmo botão, quando a ação acontece na página em vez de levar a outra.
+ *
+ * Existe separado de propósito. Um `Botao` com `href` opcional aceitaria
+ * nenhum dos dois ou os dois ao mesmo tempo, e o tipo pararia de dizer a
+ * verdade sobre o elemento que sai no HTML. Aqui é `<button>`, sempre — que
+ * é o que um leitor de tela precisa ouvir quando a coisa não navega.
+ */
+export function BotaoAcao({
+  onClick,
+  children,
+  variante = 'primario',
+  className,
+  comSeta = false,
+  type = 'button',
+}: Omit<Props, 'href'> & {
+  readonly onClick?: () => void;
+  readonly type?: 'button' | 'submit';
+}) {
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={cn(BASE, VARIANTES[variante], className)}
+    >
+      {children}
+      {comSeta && <Seta />}
+    </button>
+  );
+}

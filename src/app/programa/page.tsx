@@ -1,4 +1,5 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { Declaracao } from '@/components/marketing/Declaracao';
 import { LinhaDoPrograma } from '@/components/marketing/LinhaDoPrograma';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
@@ -144,14 +145,7 @@ export default function PaginaPrograma() {
         </div>
       </Secao>
 
-      <Secao tom="gelo" largura="estreita">
-        <Revelar>
-          <h2 className="text-[1.8rem] leading-snug text-navy-700 sm:text-[2.2rem]">
-            {ALINHAMENTO.titulo}
-          </h2>
-          <p className="mt-6 text-[1.06rem] leading-[1.7] text-slate-700">{ALINHAMENTO.texto}</p>
-        </Revelar>
-      </Secao>
+      <Declaracao titulo={ALINHAMENTO.titulo} texto={ALINHAMENTO.texto} />
 
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao

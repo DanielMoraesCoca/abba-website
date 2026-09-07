@@ -191,6 +191,28 @@ Duas curvas com papéis definidos, não vinte à disposição.
 | 7 | Revelação por corte (`clip-path`), em três lugares | `globals.css`, `Revelar.tsx` |
 | 8 | Cabeçalho ciente do que passa por baixo | `Cabecalho.tsx`, `Secao.tsx` |
 | 9 | Escalonamento corrigido de verdade: 40–80 ms | 8 páginas |
+| 10 | Afirmação e explicação lado a lado | `Declaracao.tsx` |
+| 11 | Artigo curto não fica pendurado no fim da linha | `lib/tipografia.ts` |
+
+A 10 saiu de uma tentativa **reprovada**, e isso vale registrar. O plano era
+espalhar o `alinhamento="deslocada"` da home para as sete páginas internas —
+o movimento 1 da proposta, "sete seções, uma forma só". Fotografei antes e
+depois com o Chromium e olhei: numa coluna de 46rem centralizada, empurrar
+7rem para a direita não quebra eixo nenhum, só faz o bloco parecer mal
+centralizado. O deslocamento funciona na home porque lá o contêiner é largo
+e existe um vizinho de borda a borda para contrastar.
+
+Revertido. O que funciona é usar a largura — afirmação à esquerda em escala
+maior, explicação à direita em escala menor —, e esse padrão já existia na
+seção da Assinatura, no `programa`. `Declaracao` não inventa forma: alinha
+duas páginas com a linguagem que a casa já tinha.
+
+E o diagnóstico da proposta não se sustentou depois de olhar o conteúdo.
+Das sete seções estreitas, duas eram o mesmo bloco copiado (viraram
+`Declaracao`), três são fechamentos centralizados com botão — e
+centralizado é a forma certa para um fecho — e duas são argumento longo,
+onde coluna estreita é a medida certa para leitura. Cinco das sete já
+estavam certas.
 
 A 9 corrigiu um erro **meu**, da decisão 5. Eu baixei o escalonamento de
 90 ms para 60 ms no `globals.css` e declarei a mudança feita. Ela não teve

@@ -6,6 +6,7 @@ import { EMPRESA } from '@/content/identidade';
 import { DIMENSOES, TOTAL_DIMENSOES } from '@/content/metodo';
 import { NAV_PRINCIPAL, NAV_RODAPE } from '@/content/navegacao';
 import { PERGUNTAS } from '@/content/perguntas';
+import { colar } from '@/lib/tipografia';
 import { PRECO_PUBLICO } from '@/content/precos';
 
 describe('cânone de evidências', () => {
@@ -181,5 +182,31 @@ describe('global-error usa as cores canônicas da marca', () => {
     );
     const intrusos = [...usados].filter((c) => !paleta.has(c));
     expect(intrusos, `hex fora da paleta em global-error.tsx: ${intrusos.join(', ')}`).toEqual([]);
+  });
+});
+
+describe('colar — artigos e preposições curtos não ficam pendurados', () => {
+  const NBSP = ' ';
+
+  it('cola a palavra de uma letra à seguinte', () => {
+    expect(colar('O alinhamento com a diretoria')).toBe(
+      `O${NBSP}alinhamento com a${NBSP}diretoria`,
+    );
+  });
+
+  it('cola palavra de duas letras, e acentuada', () => {
+    expect(colar('é uma fase')).toBe(`é${NBSP}uma fase`);
+    expect(colar('em três fases')).toBe(`em${NBSP}três fases`);
+  });
+
+  it('não toca em palavra de três letras ou mais', () => {
+    expect(colar('com convicção sempre')).toBe('com convicção sempre');
+  });
+
+  it('não inventa nem remove caracteres além da troca de espaço', () => {
+    const original = 'O teste de qualquer material novo, e o resto.';
+    const colado = colar(original);
+    expect(colado.length).toBe(original.length);
+    expect(colado.replaceAll(NBSP, ' ')).toBe(original);
   });
 });

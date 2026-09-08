@@ -286,6 +286,69 @@
 }
 
 /* ==========================================================================
+   O progresso da página
+   --------------------------------------------------------------------------
+   MEDIDO ANTES DE CONSTRUIR. A home tem 15 telas no celular, /o-que-fazemos
+   13, /evidencias quase 13. Numa página dessas o leitor perde a noção de
+   quanto falta, e sem essa noção ele para de rolar cedo demais.
+
+   O movimento 3 da proposta era "rolagem como linha do tempo". A leitura
+   fácil disso é prender uma seção e avançá-la degrau a degrau, como a
+   fatoanalytics.com faz com o F-Score usando GSAP, ScrollTrigger e Lenis.
+   Não foi o caminho, por dois motivos.
+
+   Primeiro: os dois candidatos naturais aqui — a régua do Programa e as
+   sete camadas — fazem o argumento POR SEREM VISTOS INTEIROS. A frase "a
+   primeira saída acontece muito cedo" depende de ver os três portões de uma
+   vez; "da quarta camada para baixo é outro lugar" depende de ver o claro e
+   o escuro juntos. Revelar degrau a degrau enfraqueceria as duas.
+
+   Segundo: prender a rolagem tira do leitor o controle de passar rápido.
+   Num site que se lê, isso é custo, não recurso.
+
+   O que a medição pedia era outra coisa: dizer ONDE a pessoa está. Um fio
+   dourado que enche conforme a página anda — o mesmo fio que separa as
+   seções, agora como régua.
+
+   E isso o CSS faz sozinho. `animation-timeline: scroll()` liga a animação
+   à barra de rolagem, sem um único ouvinte de evento: nada de JavaScript,
+   nada de recalcular a cada quadro, nada de biblioteca. Onde o navegador
+   não suporta, o `@supports` simplesmente não aplica e a régua não existe —
+   ninguém recebe uma versão quebrada.
+   ========================================================================== */
+
+@keyframes progresso-de-rolagem {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  [data-progresso]::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--color-gold-500);
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: progresso-de-rolagem linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  /* A régua fica, mesmo para quem pediu menos movimento. Ela não é
+     animação de deleite: é a mesma informação que uma barra de rolagem dá,
+     e barra de rolagem ninguém desliga por enjoo. O que o movimento
+     reduzido evita é deslocamento inesperado no campo de visão — e este
+     fio tem dois pixels, fica preso na borda e nunca se move sozinho: só
+     acompanha o que a própria pessoa está fazendo. */
+}
+
+/* ==========================================================================
    A transição de entrada
    --------------------------------------------------------------------------
    O componente `Revelar` só troca um atributo; toda a animação vive aqui.

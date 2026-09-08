@@ -117,6 +117,9 @@ export function Cabecalho() {
   return (
     <header
       ref={refCabecalho}
+      /* A régua de progresso mora no `::after` deste elemento, em CSS puro.
+         Ver o bloco "O progresso da página" no globals.css. */
+      data-progresso
       className={cn(
         'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-micro)]',
         superficie === 'clara' && 'border-b border-navy-700/10 bg-paper/92 backdrop-blur-md',

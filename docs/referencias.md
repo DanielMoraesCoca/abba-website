@@ -238,6 +238,33 @@ Duas curvas com papéis definidos, não vinte à disposição.
 | 11 | Artigo curto não fica pendurado no fim da linha | `lib/tipografia.ts` |
 | 12 | A primeira pergunta da Análise na porta da home | `PrimeiraPergunta.tsx` |
 | 13 | A contagem de perguntas derivada do esquema | `analise/schema.ts` |
+| 14 | Régua de progresso, em CSS puro | `globals.css` |
+
+A 14 é a resposta ao movimento 3, e ela saiu de uma medição, não de uma
+vontade. As páginas foram medidas: a home tem 15 telas no celular,
+`/o-que-fazemos` 13, `/evidencias` quase 13. O problema real numa página
+dessas não é falta de espetáculo — é o leitor não saber quanto falta.
+
+A leitura fácil de "rolagem como linha do tempo" seria prender uma seção e
+avançá-la degrau a degrau, como a fatoanalytics.com faz com o F-Score
+usando GSAP + ScrollTrigger + Lenis. Não foi o caminho, e os dois motivos
+importam:
+
+1. Os candidatos naturais — a régua do Programa e as sete camadas — fazem
+   o argumento **por serem vistos inteiros**. "A primeira saída acontece
+   muito cedo" depende de ver os três portões de uma vez; "da quarta camada
+   para baixo é outro lugar" depende de ver o claro e o escuro juntos.
+   Revelar degrau a degrau enfraqueceria as duas.
+2. Prender a rolagem tira do leitor o controle de passar rápido. Num site
+   que se lê, isso é custo.
+
+O que a medição pedia era dizer ONDE a pessoa está. Um fio dourado — o
+mesmo que separa as seções — enchendo conforme a página anda.
+
+E isso o CSS faz sozinho: `animation-timeline: scroll()` liga a animação à
+barra de rolagem sem um único ouvinte de evento. **Zero JavaScript** contra
+as três bibliotecas da Fato, e o orçamento de rede não mexeu um byte. Onde
+o navegador não suporta, o `@supports` não aplica e a régua não existe.
 
 A 10 saiu de uma tentativa **reprovada**, e isso vale registrar. O plano era
 espalhar o `alinhamento="deslocada"` da home para as sete páginas internas —

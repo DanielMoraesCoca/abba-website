@@ -60,3 +60,46 @@ test('a página inexistente devolve 404 com caminho de volta', async ({ page }) 
   expect(resposta?.status()).toBe(404);
   await expect(page.getByRole('link', { name: /Voltar ao início/i })).toBeVisible();
 });
+
+/**
+ * A régua de progresso.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * Construída depois de medir: a home tem 15 telas no celular,
+ * /o-que-fazemos 13, /evidencias quase 13. Numa página dessas o leitor
+ * perde a noção de quanto falta.
+ *
+ * É CSS puro — `animation-timeline: scroll()`, sem um ouvinte de evento.
+ * Justamente por não ter JavaScript, nada aqui falharia em voz alta se a
+ * regra sumisse do `globals.css` numa refatoração: a página continuaria
+ * perfeita e a régua simplesmente não existiria mais. Daí este teste.
+ * ──────────────────────────────────────────────────────────────────────── */
+test('a régua de progresso acompanha a rolagem', async ({ page }) => {
+  await page.goto('/');
+
+  const suportado = await page.evaluate(() => CSS.supports('animation-timeline: scroll()'));
+  test.skip(!suportado, 'navegador sem animation-timeline: a régua não deve existir mesmo');
+
+  const escala = () =>
+    page.evaluate(() => {
+      const cabecalho = document.querySelector('header[data-progresso]');
+      if (!cabecalho) return Number.NaN;
+      const matriz = new DOMMatrixReadOnly(getComputedStyle(cabecalho, '::after').transform);
+      return matriz.a; // o fator de escala horizontal
+    });
+
+  await expect.poll(escala).toBeLessThan(0.02);
+
+  const irPara = (fracao: number) =>
+    page.evaluate((f) => {
+      const alcance = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: alcance * f, behavior: 'instant' });
+    }, fracao);
+
+  await irPara(0.5);
+  await expect.poll(escala).toBeGreaterThan(0.45);
+  await expect.poll(escala).toBeLessThan(0.55);
+
+  await irPara(1);
+  await expect.poll(escala).toBeGreaterThan(0.98);
+});

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { contemNumeroProibido, narrativaDeterministica } from '@/lib/analise/narrativa';
 import { estimar, type RespostasAnalise } from '@/lib/analise/modelo';
 
@@ -69,5 +69,63 @@ describe('narrativa determinística', () => {
 
   it('declara o limite: o que não dá para ver de fora', () => {
     expect(narrativaDeterministica(contexto).oQueFaltaOlhar).toMatch(/de fora/i);
+  });
+});
+
+/**
+ * O fusível global, medido pelo que importa: a rede.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * Uma revisão de segurança mostrou que a trava por IP é contornável — ela
+ * conta baldes por `X-Forwarded-For`, um cabeçalho que o cliente escreve.
+ * Como a trava era a única coisa entre um laço e uma fatura de modelo de
+ * linguagem, entrou um contador de chave fixa, sem nada a forjar.
+ *
+ * Este teste não pergunta se a resposta é a mesma — ela seria a mesma de
+ * qualquer jeito, porque toda falha cai no texto determinístico. Ele
+ * pergunta se a chamada PAGA aconteceu. Nenhuma ida à rede: essa é a
+ * afirmação, e é a única que custa dinheiro se for falsa.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('o fusível global impede a chamada paga', () => {
+  it('não toca a rede quando o teto da janela já foi gasto', async () => {
+    vi.resetModules();
+    vi.stubEnv('ANTHROPIC_API_KEY', 'sk-ant-chave-falsa-para-teste');
+    vi.stubEnv('ABBA_LIMITE_GLOBAL_LLM', '2');
+
+    const { gerarNarrativa } = await import('@/lib/analise/narrativa');
+    const contexto = {
+      empresa: 'Exemplo',
+      setor: 'serviços',
+      respostas: RESPOSTAS,
+      estimativa: estimar(RESPOSTAS),
+    };
+
+    const idas: string[] = [];
+    const espiao = vi
+      .spyOn(globalThis, 'fetch')
+      .mockImplementation(async (entrada: RequestInfo | URL) => {
+        idas.push(String(entrada));
+        throw new Error('rede indisponível no teste');
+      });
+
+    try {
+      // As duas primeiras gastam o teto e TENTAM a rede (é o esperado).
+      await gerarNarrativa(contexto);
+      await gerarNarrativa(contexto);
+      const tentativasAntes = idas.length;
+      expect(tentativasAntes).toBeGreaterThan(0);
+
+      // Da terceira em diante o fusível está aberto: nada de rede.
+      await gerarNarrativa(contexto);
+      await gerarNarrativa(contexto);
+      expect(
+        idas.length,
+        `o fusível deixou passar ${idas.length - tentativasAntes} chamada(s) paga(s)`,
+      ).toBe(tentativasAntes);
+    } finally {
+      espiao.mockRestore();
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    }
   });
 });

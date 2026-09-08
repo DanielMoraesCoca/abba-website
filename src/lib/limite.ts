@@ -17,6 +17,17 @@ interface Janela {
 
 const JANELAS = new Map<string, Janela>();
 const LIMPEZA_A_CADA = 500;
+
+/**
+ * Teto de chaves vivas.
+ *
+ * Sem ele, quem forja `X-Forwarded-For` a cada requisição cria uma entrada
+ * nova por chamada e o mapa cresce sem fim — a mesma falha vira consumo de
+ * memória além do desvio da trava. Ao encostar no teto, as entradas
+ * vencidas saem primeiro; se ainda assim estiver cheio, a mais antiga sai.
+ * Perder uma janela antiga é aceitável; crescer sem limite não é.
+ */
+const MAXIMO_DE_CHAVES = 10_000;
 let operacoes = 0;
 
 export interface ResultadoLimite {
@@ -33,9 +44,20 @@ export function verificarLimite(
   const agora = Date.now();
 
   operacoes += 1;
-  if (operacoes % LIMPEZA_A_CADA === 0) {
+  if (operacoes % LIMPEZA_A_CADA === 0 || JANELAS.size >= MAXIMO_DE_CHAVES) {
     for (const [k, v] of JANELAS) {
       if (v.reinicioEm <= agora) JANELAS.delete(k);
+    }
+    // Ainda cheio depois de varrer os vencidos: descarta os mais antigos.
+    // `Map` itera na ordem de inserção, então os primeiros são os mais
+    // velhos.
+    if (JANELAS.size >= MAXIMO_DE_CHAVES) {
+      const excedente = JANELAS.size - MAXIMO_DE_CHAVES + 1;
+      let removidas = 0;
+      for (const k of JANELAS.keys()) {
+        JANELAS.delete(k);
+        if (++removidas >= excedente) break;
+      }
     }
   }
 
@@ -74,12 +96,40 @@ export function limiteDoAmbiente(variavel: string, padrao: number): number {
   return Number.isFinite(valor) && valor > 0 ? valor : padrao;
 }
 
-/** Identifica o cliente pelo cabeçalho do proxy, com queda para um balde comum. */
+/**
+ * Identifica o cliente pelo cabeçalho do proxy.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * LEIA ISTO ANTES DE CONFIAR NESTA FUNÇÃO.
+ *
+ * `X-Forwarded-For` é escrito pelo cliente e reescrito pelo proxy. Se a
+ * hospedagem não sobrescrever o cabeçalho recebido, qualquer pessoa manda
+ * um valor diferente a cada requisição e ganha um balde novo por chamada —
+ * a trava por IP deixa de existir.
+ *
+ * Isso NÃO é hipótese: era o comportamento aqui, e a trava é a única coisa
+ * entre um laço e uma fatura de modelo de linguagem. A correção tem duas
+ * partes, e esta é a menor delas:
+ *
+ * 1. Aqui: `ABBA_PROXY_CONFIAVEL=1` declara que a hospedagem sobrescreve o
+ *    cabeçalho. Sem essa declaração, o cabeçalho continua sendo usado
+ *    (senão o site inteiro cairia num balde só), mas ninguém deve tratar a
+ *    trava por IP como defesa contra abuso deliberado.
+ * 2. Em `narrativa.ts`: um fusível GLOBAL, que não depende de identificar
+ *    ninguém e por isso não tem como ser forjado. É ele que protege a
+ *    fatura de verdade.
+ *
+ * Ao apontar o domínio (pendência 9), confirme como a hospedagem trata
+ * `X-Forwarded-For` e ligue a variável.
+ * ──────────────────────────────────────────────────────────────────────── */
 export function identificar(headers: Headers): string {
   const encaminhado = headers.get('x-forwarded-for');
   if (encaminhado) {
     const primeiro = encaminhado.split(',')[0]?.trim();
-    if (primeiro) return primeiro;
+    // Um valor absurdamente longo é tentativa de encher o mapa de chaves,
+    // não um endereço. Endereço IPv6 mais longo tem 45 caracteres.
+    if (primeiro && primeiro.length <= 45) return primeiro;
   }
-  return headers.get('x-real-ip')?.trim() ?? 'desconhecido';
+  const real = headers.get('x-real-ip')?.trim();
+  return real && real.length <= 45 ? real : 'desconhecido';
 }

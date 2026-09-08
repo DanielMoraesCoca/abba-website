@@ -90,6 +90,17 @@ aparece na prosa. Se aparecer, a trava funciona — mas é melhor saber antes.
 
 ## 9. Domínio, hospedagem e e-mail · **chapéu Tecnologia**
 
+> **Acrescentado em 08/09, pela revisão de segurança:** ao escolher a
+> hospedagem, confirme se ela SOBRESCREVE o cabeçalho `X-Forwarded-For`
+> recebido do cliente (Vercel, Cloudflare e a maioria dos provedores
+> sérios sobrescrevem; um proxy caseiro mal configurado não). Confirmado,
+> ligue `ABBA_PROXY_CONFIAVEL=1`. Sem isso a trava por IP é decorativa —
+> quem quiser varia o cabeçalho e ganha um balde novo por requisição.
+> O fusível global (`ABBA_LIMITE_GLOBAL_LLM`, padrão 120 por 10 min) já
+> protege a fatura de qualquer jeito, mas é a última linha, não a única
+> que deveria existir.
+
+
 Apontar `abbaservices.com.br` para o site e confirmar que
 `contato@abbaservices.com.br` chega em alguém. Enquanto o domínio não estiver
 apontado, a regra da marca proíbe mandar qualquer URL de pré-visualização para
@@ -263,3 +274,47 @@ higiene, não estratégia.
 **O que isto NÃO é:** motivo para copiar o F-Score. Um índice de cinco
 níveis é mais fácil de vender que 25 dimensões, e é justamente por isso que
 não é nosso. A profundidade é o produto.
+
+## 13. Revisão de segurança de 08/09 · **RESOLVIDA no mesmo dia**
+
+Feita antes do lançamento, na superfície que importa: as duas rotas de API,
+a fronteira do modelo de linguagem, a trava de taxa, o webhook de lead e os
+cabeçalhos.
+
+**O que estava certo e continua:** a CSP não permite recurso de terceiro
+nenhum; as duas rotas validam tudo com zod antes de encostar em qualquer
+lógica; o texto livre chega ao modelo delimitado e declarado como dado, e a
+saída é verificada antes de publicar; a Análise não persiste nada; a
+armadilha do formulário de contato responde 200 sem ensinar o que falhou; e
+toda falha do modelo cai no texto determinístico, então o site não quebra
+por causa da API.
+
+**A falha encontrada.** `identificar()` confiava em `X-Forwarded-For` sem
+ressalva. É um cabeçalho que o cliente escreve: variando o valor a cada
+requisição, ganha-se um balde novo por chamada e a trava por IP deixa de
+existir. E a trava era a única coisa entre um laço e uma fatura de modelo
+de linguagem — o próprio comentário do arquivo dizia isso: *"cada análise
+pode disparar uma chamada paga. Sem trava, um laço distraído vira
+fatura."*
+
+Consequência secundária: cada valor forjado criava uma entrada nova no mapa
+de janelas, que crescia sem teto.
+
+**A correção, em três partes.**
+
+1. **Um fusível global** (`narrativa.ts`), de chave fixa — não pergunta
+   quem está chamando, então não há o que forjar. Ao estourar, cai no texto
+   determinístico: o visitante recebe a análise inteira, inclusive o número,
+   porque o número sempre foi aritmética. Degradação, não interrupção.
+   Padrão de 120 por 10 minutos, ajustável por `ABBA_LIMITE_GLOBAL_LLM`.
+2. **Teto de chaves** no mapa de janelas, com descarte das vencidas
+   primeiro e das mais antigas depois.
+3. **Recusa de valor longo demais** para ser endereço (o IPv6 mais longo
+   tem 45 caracteres), e a suposição sobre o proxy escrita no arquivo, com
+   `ABBA_PROXY_CONFIAVEL` e uma nota na pendência 9.
+
+Travado por testes, todos verificados removendo a defesa. O do fusível não
+pergunta se a resposta é a mesma — seria a mesma de qualquer jeito, já que
+toda falha cai no determinístico. Ele espia a rede e afirma que **nenhuma
+chamada paga aconteceu**, que é a única coisa que custa dinheiro se for
+falsa.

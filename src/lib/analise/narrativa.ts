@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 import { EXPLICACAO_DO_VETOR, ROTULO_DO_VETOR, type Estimativa, type RespostasAnalise } from './modelo';
 
 /**
@@ -169,8 +170,42 @@ function validar(bruta: RespostaBruta): Omit<Narrativa, 'origem'> | null {
  * qualquer falha — sem chave, erro de rede, JSON inválido, ou número
  * vazado na saída. O site nunca quebra por causa da API.
  */
+/**
+ * O fusível.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A trava por IP em `limite.ts` conta baldes por `X-Forwarded-For` — um
+ * cabeçalho que o cliente escreve. Se a hospedagem não o sobrescrever,
+ * basta variá-lo a cada requisição para ganhar um balde novo por chamada, e
+ * a única coisa entre um laço e uma fatura de modelo de linguagem deixa de
+ * existir.
+ *
+ * Este contador não pergunta quem está chamando. A chave é fixa, então não
+ * há o que forjar: é um teto de chamadas pagas por janela, e ponto.
+ *
+ * O que acontece ao estourar não é erro. É queda para o texto
+ * determinístico — que já existe, já é bom o bastante para publicar, e não
+ * mexe no NÚMERO, porque o número sempre foi aritmética. O visitante
+ * recebe a análise inteira; o que ele não recebe é a prosa escrita pelo
+ * modelo. Degradação, não interrupção.
+ *
+ * O padrão é conservador de propósito. Cento e vinte análises em dez
+ * minutos seria tráfego extraordinário para uma casa nova — e, se um dia
+ * for real, o site continua respondendo e a variável sobe.
+ * ──────────────────────────────────────────────────────────────────────── */
+const TETO_GLOBAL = limiteDoAmbiente('ABBA_LIMITE_GLOBAL_LLM', 120);
+const JANELA_DO_FUSIVEL_MS = 10 * 60 * 1000;
+
 export async function gerarNarrativa(c: ContextoNarrativa): Promise<Narrativa> {
   if (!process.env.ANTHROPIC_API_KEY) {
+    return narrativaDeterministica(c);
+  }
+
+  // O fusível fica aqui, e não na rota, de propósito: ele protege o recurso
+  // PAGO. Qualquer chamador futuro de `gerarNarrativa` fica protegido sem
+  // precisar lembrar de nada.
+  if (!verificarLimite('llm:global', TETO_GLOBAL, JANELA_DO_FUSIVEL_MS).permitido) {
+    console.warn('[abba:llm] fusível global aberto — servindo texto determinístico');
     return narrativaDeterministica(c);
   }
 

@@ -17,7 +17,8 @@ como → Arquivo web) e subiu os `.webarchive` aqui. Um webarchive é um plist
 binário da Apple que embrulha o HTML, o CSS, as fontes e o JS da página
 inteira. Deu para abrir e ler o código de produção de:
 
-Sete das oito lidas. Falta uma: paulkalkbrenner.net.
+Oito lidas — sete de inspiração e uma que é outra coisa (ver abaixo).
+Falta uma da lista original: paulkalkbrenner.net.
 
 | Site | Feito | CSS | `clip-path` | `sticky` | `blend` | reduced-motion |
 |---|---|---:|---:|---:|---:|---:|
@@ -54,6 +55,48 @@ suave" e ter os quatro números da curva.
 
 Reproduzir o método: salvar como Arquivo web, subir aqui, e eu extraio com
 `plistlib`. O script está em `scripts/ler-webarchive.py`.
+
+## fatoanalytics.com não é referência. É concorrente.
+
+> Lida em 08/09, a pedido. O que veio dela não é lição de desenho —
+> é informação comercial, e por isso abre o documento.
+
+**A Fato Analytics é uma consultoria brasileira de dados e IA.** A frase da
+home é *"Profissionalizamos pessoas e negócios com Dados & IA"*. O gancho do
+site é o **F-Score**, um índice de maturidade de gestão por dados em cinco
+níveis, apresentado como uma caminhada presa à rolagem — o visitante desce e
+os níveis avançam.
+
+Ou seja: mesma praça, mesma promessa, e um índice de maturidade como porta
+de entrada. A ABBA tem 25 dimensões e um Mapa de Vazamento; a Fato tem cinco
+níveis e um F-Score. **A forma comercial é a mesma.**
+
+E a coincidência estética é desconfortável:
+
+| | Fato Analytics | ABBA |
+|---|---|---|
+| Corpo | Inter | Inter |
+| Número e referência | JetBrains Mono | JetBrains Mono |
+| Título | Aktiv Grotesk (sem serifa) | **Source Serif 4 (serifada)** |
+| Curva-assinatura | `cubic-bezier(0.16, 1, 0.3, 1)` | `cubic-bezier(0.16, 1, 0.3, 1)` |
+
+A curva é a mesma, dígito por dígito. Não houve cópia de lado nenhum — é
+uma curva conhecida, a *expo out*, que qualquer um encontra nos mesmos
+lugares. Mas duas casas do mesmo ramo, na mesma praça, com a mesma fonte de
+corpo, a mesma fonte de número e a mesma curva de entrada, se parecem.
+
+**O que hoje separa as duas é a serifa.** O título serifado da ABBA é o
+único elemento tipográfico que a Fato não tem, e ele carrega o argumento
+inteiro da casa: documento, laudo, coisa que se assina. Isso deixou de ser
+uma escolha de gosto e passou a ser o diferencial visível.
+
+Não mexi em nada por causa disso. Virou a pendência 12, com as opções.
+
+**O que ela ensina de desenho:** o F-Score é o movimento 3 da proposta —
+rolagem como linha do tempo — feito com GSAP + ScrollTrigger + Lenis. Vale
+ver a ideia; a implementação não, pelo mesmo motivo já registrado: o Lenis
+sequestra o scroll nativo. E é a terceira das oito a respeitar
+`prefers-reduced-motion`.
 
 ## O vocabulário de movimento (medido)
 

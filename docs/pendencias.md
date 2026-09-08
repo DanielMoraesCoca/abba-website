@@ -217,3 +217,49 @@ Quem pediu menos movimento recebe `clip-path: none`, não a cortina
 congelada — sem essa regra o conteúdo sumiria para sempre. É a distinção
 que a Vero aplica na seta do scroll cue: estado substituto, não estado
 congelado.
+
+## 12. A colisão com a Fato Analytics · **chapéu Marca + Comercial**
+
+Descoberto em 08/09 ao ler o código de `fatoanalytics.com`, trazida como
+referência de desenho. Não é referência: é concorrente direto.
+
+Consultoria brasileira de dados e IA, com um índice de maturidade em cinco
+níveis (**F-Score**) como porta de entrada. Mesma praça, mesma promessa,
+mesma forma comercial que o nosso Mapa de Vazamento.
+
+E, sem que ninguém tenha copiado ninguém:
+
+| | Fato | ABBA |
+|---|---|---|
+| Corpo | Inter | Inter |
+| Número | JetBrains Mono | JetBrains Mono |
+| Título | Aktiv Grotesk | **Source Serif 4** |
+| Curva de entrada | `cubic-bezier(0.16, 1, 0.3, 1)` | a mesma |
+
+A curva é a *expo out*, conhecida — a coincidência é honesta. Mas o efeito
+sobre quem olha os dois sites no mesmo dia não depende de ter havido cópia.
+
+**O que já nos separa:** o título serifado. É o único elemento tipográfico
+que eles não têm, e é o que carrega o argumento da casa — documento, laudo,
+coisa que se assina. Deixou de ser gosto e virou o diferencial.
+
+Três saídas, para os sócios:
+
+1. **Reforçar a serifa.** Não mudar nada de fonte; usar Source Serif em
+   mais lugares onde hoje há Inter — sobretítulos de seção, primeira linha
+   de bloco, os rótulos das faixas. Barato, reversível, e aprofunda o que
+   já é nosso.
+2. **Trocar a curva.** Uma curva própria em vez da expo out. Custa uma
+   linha e três referências visuais. Ganho pequeno: ninguém compara curvas
+   entre abas. Faria pelo princípio, não pelo efeito.
+3. **Trocar a fonte de corpo.** A Inter é a fonte-padrão de todo site de
+   tecnologia da década — a Fato usa, e mais uns dez mil. Sair dela é a
+   mudança mais funda e a mais cara: reescala tudo e regrava as vinte
+   referências visuais.
+
+Recomendo a 1 agora e a 3 na conversa de identidade, se houver. A 2 é
+higiene, não estratégia.
+
+**O que isto NÃO é:** motivo para copiar o F-Score. Um índice de cinco
+níveis é mais fácil de vender que 25 dimensões, e é justamente por isso que
+não é nosso. A profundidade é o produto.

@@ -172,3 +172,75 @@ test('a cor da superfície mora no grupo, não nos retratos', async ({ page }) =
   expect(regra, 'nenhuma regra para ::view-transition-group(capa)').toBeTruthy();
   expect(regra, 'o grupo precisa carregar o navy da superfície').toMatch(/background-color/);
 });
+
+/**
+ * Toda página da sitemap é compartilhável.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A imagem social só aparece quando alguém manda o link no WhatsApp ou no
+ * LinkedIn — que é exatamente como um sócio divulga. Se ela quebrar, nada
+ * no site parece errado: a página abre normal, os testes passam, e só o
+ * destinatário vê o card vazio. Ninguém volta para contar.
+ *
+ * Foi o que aconteceu: a /privacidade estava na sitemap declarando
+ * `twitter:card = summary_large_image` — prometendo um card grande — sem
+ * imagem nenhuma. Um retângulo vazio no lugar da marca. Descoberto
+ * conferindo as dez imagens contra as onze rotas, à mão.
+ *
+ * A lista sai da SITEMAP e não de um array aqui. Assim, uma página nova
+ * que entre na sitemap entra neste teste no mesmo commit, sem ninguém
+ * precisar lembrar.
+ * ──────────────────────────────────────────────────────────────────────── */
+test('toda rota da sitemap tem imagem social que funciona', async ({ page, request }) => {
+  const xml = await (await request.get('/sitemap.xml')).text();
+  const rotas = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+    .map((m) => new URL(m[1]!).pathname)
+    .map((p) => (p === '' ? '/' : p));
+
+  expect(rotas.length, 'a sitemap voltou vazia').toBeGreaterThan(5);
+
+  const falhas: string[] = [];
+
+  for (const rota of rotas) {
+    await page.goto(rota, { waitUntil: 'domcontentloaded' });
+
+    const meta = await page.evaluate(() => {
+      const ler = (prop: string) =>
+        document.querySelector(`meta[property="${prop}"]`)?.getAttribute('content') ?? null;
+      return {
+        imagem: ler('og:image'),
+        largura: ler('og:image:width'),
+        altura: ler('og:image:height'),
+        alt: ler('og:image:alt'),
+        cardTwitter:
+          document.querySelector('meta[name="twitter:card"]')?.getAttribute('content') ?? null,
+      };
+    });
+
+    if (!meta.imagem) {
+      // Declarar card grande sem imagem é o pior dos dois mundos: o leitor
+      // recebe um retângulo vazio onde deveria estar a marca.
+      falhas.push(
+        `${rota}: sem og:image` +
+          (meta.cardTwitter === 'summary_large_image'
+            ? ' — e ainda promete twitter:card=summary_large_image'
+            : ''),
+      );
+      continue;
+    }
+
+    if (meta.largura !== '1200' || meta.altura !== '630') {
+      falhas.push(`${rota}: dimensões ${meta.largura}x${meta.altura}, esperado 1200x630`);
+    }
+    if (!meta.alt) falhas.push(`${rota}: og:image sem texto alternativo`);
+
+    const resposta = await request.get(new URL(meta.imagem).pathname + new URL(meta.imagem).search);
+    if (!resposta.ok()) {
+      falhas.push(`${rota}: a imagem respondeu ${resposta.status()}`);
+    } else if (!resposta.headers()['content-type']?.startsWith('image/')) {
+      falhas.push(`${rota}: a imagem veio como ${resposta.headers()['content-type']}`);
+    }
+  }
+
+  expect(falhas, `\n  ${falhas.join('\n  ')}\n`).toEqual([]);
+});

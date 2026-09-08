@@ -73,3 +73,61 @@ test('dá para voltar e corrigir uma resposta', async ({ page }) => {
   await page.getByRole('button', { name: '← Voltar' }).click();
   await expect(page.locator('#empresa')).toHaveValue('Exemplo');
 });
+
+/**
+ * A primeira pergunta na porta da home.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A Análise é a única porta gratuita da ABBA e aparecia na home uma vez
+ * só, num botão perto do rodapé. Agora a primeira pergunta é feita ali
+ * mesmo, e a resposta viaja em `?porte=`.
+ *
+ * Duas coisas precisam continuar verdadeiras, e elas puxam em direções
+ * opostas: a resposta tem que atravessar a navegação, e a URL não pode
+ * virar um jeito de escrever no formulário o que se quiser.
+ * ──────────────────────────────────────────────────────────────────────── */
+test('a resposta dada na home chega preenchida na Análise', async ({ page }) => {
+  await page.goto('/');
+
+  const escolha = page.getByRole('link', { name: 'De 201 a 500' });
+  await escolha.scrollIntoViewIfNeeded();
+  await escolha.click();
+
+  await expect(page).toHaveURL(/\/analise\?porte=201-500/);
+  await expect(page.locator('input[name="colaboradores"][value="201-500"]')).toBeChecked();
+
+  // O resto do passo continua em branco: a home responde uma pergunta, não
+  // finge ter respondido as outras.
+  await expect(page.locator('#empresa')).toHaveValue('');
+  await expect(page.locator('input[name="faturamento"]:checked')).toHaveCount(0);
+});
+
+test('um porte forjado na URL não deixa o passo avançar', async ({ page }) => {
+  /**
+   * A primeira versão deste teste checava que nenhuma faixa aparecia
+   * marcada — e passava mesmo com a validação removida, porque o grupo de
+   * opções só renderiza rádios das faixas conhecidas: um valor forjado
+   * nunca teria como aparecer marcado, com ou sem defesa. Era um teste que
+   * afirmava uma coisa já verdadeira.
+   *
+   * O que de fato muda sem a validação é que o rascunho passa a carregar
+   * um valor que o servidor vai recusar, e o passo se dá por completo sem
+   * que ninguém tenha escolhido faixa nenhuma. A pessoa preencheria tudo
+   * para só então tomar um erro. É isso que se mede aqui.
+   */
+  await page.goto('/analise?porte=' + encodeURIComponent('acima-9000'));
+
+  await page.fill('#empresa', 'Exemplo');
+  await page.fill('#setor', 'serviços');
+  await page
+    .locator('input[name="faturamento"][value="50-200m"]')
+    .first()
+    .check({ force: true });
+
+  await expect(page.locator('input[name="colaboradores"]:checked')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Continuar' })).toBeDisabled();
+
+  // E com uma faixa de verdade escolhida, o passo anda normalmente.
+  await page.locator('input[name="colaboradores"][value="201-500"]').first().check({ force: true });
+  await expect(page.getByRole('button', { name: 'Continuar' })).toBeEnabled();
+});

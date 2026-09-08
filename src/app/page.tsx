@@ -2,11 +2,14 @@ import Link from 'next/link';
 import { FaixaDeGrafo } from '@/components/brand/Grafo';
 import { Capa } from '@/components/marketing/Capa';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
+import { PrimeiraPergunta } from '@/components/marketing/PrimeiraPergunta';
 import { Tese } from '@/components/marketing/Tese';
 import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
+import { TOTAL_DE_PERGUNTAS } from '@/lib/analise/schema';
+import { porExtenso } from '@/lib/tipografia';
 import { cn } from '@/lib/utils';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { evidencia } from '@/content/evidencias';
@@ -52,6 +55,11 @@ export default function PaginaInicial() {
 
       {/* ── A tese, em escala ──────────────────────────────────────────── */}
       <Tese />
+
+      {/* A pergunta vem logo depois da tese de propósito: quem acabou de ler
+          que a maior parte do valor vive em pessoas e processos já tem a
+          pergunta seguinte na cabeça, e é esta. */}
+      <PrimeiraPergunta />
 
       {/* ── Os três caminhos ───────────────────────────────────────────── */}
       {/* ── Os três caminhos ───────────────────────────────────────────
@@ -258,7 +266,8 @@ export default function PaginaInicial() {
             A análise chega feita, não oferecida.
           </h2>
           <p className="mx-auto mt-7 max-w-xl text-[1.06rem] leading-[1.65] text-ice-200/75">
-            Responda dez perguntas sobre a operação e a gente devolve, na hora, uma leitura
+            Responda {porExtenso(TOTAL_DE_PERGUNTAS)} perguntas sobre a operação e a gente devolve, na
+            hora, uma leitura
             preliminar do que estimamos estar vazando — com as premissas na mesa e o limite
             declarado na primeira linha.
           </p>

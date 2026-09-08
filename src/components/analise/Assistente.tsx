@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { CampoTexto, GrupoDeOpcoes } from './Campos';
 import { Resultado, type RespostaAnalise } from './Resultado';
@@ -62,9 +63,30 @@ const PASSOS: readonly Passo[] = [
   },
 ];
 
+/**
+ * Portes que a URL pode semear. Derivado das próprias faixas — acrescentar
+ * uma opção em `perguntas.ts` a torna aceitável aqui automaticamente.
+ */
+const PORTES_VALIDOS = new Set<string>(FAIXAS_COLABORADORES.map((f) => f.valor));
+
 export function Assistente() {
+  /**
+   * A home faz a primeira pergunta na própria porta e manda a resposta em
+   * `?porte=`. A URL é entrada de fora como qualquer outra: só um valor que
+   * já existe entre as faixas é aceito, e qualquer outra coisa é ignorada
+   * em silêncio — quem chegar com `?porte=<script>` começa do zero, sem
+   * mensagem de erro que ensine o que tentar em seguida.
+   *
+   * Semeado no inicializador do estado, não num efeito: ler a URL depois da
+   * primeira renderização causaria um piscar de campo vazio para preenchido.
+   */
+  const parametros = useSearchParams();
+  const porteDaUrl = parametros.get('porte');
+
   const [passo, setPasso] = useState(0);
-  const [rascunho, setRascunho] = useState<Rascunho>({});
+  const [rascunho, setRascunho] = useState<Rascunho>(() =>
+    porteDaUrl && PORTES_VALIDOS.has(porteDaUrl) ? { colaboradores: porteDaUrl } : {},
+  );
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState('');
   const [resultado, setResultado] = useState<RespostaAnalise | null>(null);

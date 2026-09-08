@@ -193,6 +193,8 @@ Duas curvas com papéis definidos, não vinte à disposição.
 | 9 | Escalonamento corrigido de verdade: 40–80 ms | 8 páginas |
 | 10 | Afirmação e explicação lado a lado | `Declaracao.tsx` |
 | 11 | Artigo curto não fica pendurado no fim da linha | `lib/tipografia.ts` |
+| 12 | A primeira pergunta da Análise na porta da home | `PrimeiraPergunta.tsx` |
+| 13 | A contagem de perguntas derivada do esquema | `analise/schema.ts` |
 
 A 10 saiu de uma tentativa **reprovada**, e isso vale registrar. O plano era
 espalhar o `alinhamento="deslocada"` da home para as sete páginas internas —

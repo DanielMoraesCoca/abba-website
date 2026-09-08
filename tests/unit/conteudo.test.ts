@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { globSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { EVIDENCIAS, evidencia } from '@/content/evidencias';
@@ -6,6 +6,7 @@ import { EMPRESA } from '@/content/identidade';
 import { DIMENSOES, TOTAL_DIMENSOES } from '@/content/metodo';
 import { NAV_PRINCIPAL, NAV_RODAPE } from '@/content/navegacao';
 import { PERGUNTAS } from '@/content/perguntas';
+import { TOTAL_DE_PERGUNTAS, esquemaRespostas } from '@/lib/analise/schema';
 import { colar } from '@/lib/tipografia';
 import { PRECO_PUBLICO } from '@/content/precos';
 
@@ -208,5 +209,37 @@ describe('colar — artigos e preposições curtos não ficam pendurados', () =>
     const colado = colar(original);
     expect(colado.length).toBe(original.length);
     expect(colado.replaceAll(NBSP, ' ')).toBe(original);
+  });
+});
+
+/**
+ * O número de perguntas é derivado, nunca digitado.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A home dizia "dez perguntas" enquanto /analise e /mapa-de-vazamento
+ * diziam "onze". Onze era o certo. Num site cuja tese é honestidade sobre
+ * número, um número errado sobre o próprio produto é o pior lugar para
+ * errar — e ninguém percebeu porque cada página estava certa sozinha.
+ *
+ * Interpolar `TOTAL_DE_PERGUNTAS` torna a divergência impossível. Este
+ * teste impede a reintrodução: se alguém voltar a digitar o extenso, ele
+ * reprova e diz onde.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('a contagem de perguntas vem do esquema', () => {
+  it('é o número de campos que o esquema valida', () => {
+    expect(TOTAL_DE_PERGUNTAS).toBe(Object.keys(esquemaRespostas.shape).length);
+  });
+
+  it('nenhuma página digita a contagem por extenso', () => {
+    const paginas = globSync('src/app/**/page.tsx');
+    expect(paginas.length).toBeGreaterThan(5);
+
+    const digitado = /\b(nove|dez|onze|doze|treze)\s+perguntas/i;
+    const culpadas = paginas.filter((f) => digitado.test(readFileSync(f, 'utf8')));
+
+    expect(
+      culpadas,
+      `contagem digitada à mão (use porExtenso(TOTAL_DE_PERGUNTAS)): ${culpadas.join(', ')}`,
+    ).toEqual([]);
   });
 });

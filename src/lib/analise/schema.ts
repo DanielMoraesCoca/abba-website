@@ -48,6 +48,21 @@ export const esquemaRespostas = z.object({
 });
 
 /**
+ * Quantas perguntas fechadas o visitante responde.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * Derivado do esquema, não digitado. A home dizia "dez perguntas" enquanto
+ * outras três páginas diziam "onze" — e onze era o certo. Num site cuja
+ * tese é honestidade sobre número, um número errado sobre o próprio
+ * produto é o pior lugar possível para errar.
+ *
+ * Enquanto o texto for interpolado deste valor, acrescentar ou remover uma
+ * pergunta corrige as quatro páginas de uma vez, e a divergência deixa de
+ * ser possível por construção.
+ * ──────────────────────────────────────────────────────────────────────── */
+export const TOTAL_DE_PERGUNTAS = Object.keys(esquemaRespostas.shape).length;
+
+/**
  * Nome de empresa e de setor são os ÚNICOS campos de texto livre que
  * chegam ao modelo de linguagem. Isso os torna a superfície de injeção de
  * prompt do site: alguém pode digitar quebras de linha e instruções no

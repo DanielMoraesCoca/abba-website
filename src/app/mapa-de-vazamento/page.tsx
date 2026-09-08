@@ -3,6 +3,8 @@ import { TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
+import { TOTAL_DE_PERGUNTAS } from '@/lib/analise/schema';
+import { maiuscula, porExtenso } from '@/lib/tipografia';
 import { metadadosDaPagina } from '@/lib/seo';
 
 export const metadata = metadadosDaPagina({
@@ -150,7 +152,8 @@ export default function PaginaMapaDeVazamento() {
             A versão web responde na hora.
           </h2>
           <p className="mx-auto mt-7 max-w-xl text-[1.05rem] leading-[1.7] text-slate-700">
-            Onze perguntas fechadas em lugar das cinco abertas, uma faixa calculada por aritmética
+            {maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas fechadas em lugar das cinco abertas, uma faixa
+            calculada por aritmética
             que você consegue refazer, e as mesmas cinco regras de honestidade valendo. O Mapa
             completo continua vindo depois da conversa — e continua gratuito.
           </p>

@@ -103,3 +103,72 @@ test('a régua de progresso acompanha a rolagem', async ({ page }) => {
   await irPara(1);
   await expect.poll(escala).toBeGreaterThan(0.98);
 });
+
+/**
+ * A capa contínua entre páginas.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * Onze páginas começam com o mesmo bloco navy. Um `view-transition-name`
+ * compartilhado tira esse bloco do esvanecimento geral: em vez de sumir e
+ * voltar a cada navegação, ele muda de altura e troca o texto de dentro.
+ *
+ * O que este teste protege é a parte silenciosa. Um `view-transition-name`
+ * precisa ser ÚNICO na página — dois elementos com o mesmo nome fazem o
+ * navegador abortar a transição inteira, sem erro no console e sem nada
+ * quebrado na tela. O site continuaria perfeito e a continuidade
+ * simplesmente deixaria de existir, e ninguém descobriria.
+ * ──────────────────────────────────────────────────────────────────────── */
+const ROTAS_COM_CAPA = [
+  '/',
+  '/o-que-fazemos',
+  '/programa',
+  '/conselheiro',
+  '/metodo',
+  '/evidencias',
+  '/manifesto',
+  '/mapa-de-vazamento',
+  '/analise',
+  '/contato',
+  '/rota-que-nao-existe',
+];
+
+for (const rota of ROTAS_COM_CAPA) {
+  test(`${rota} tem exatamente uma capa contínua`, async ({ page }) => {
+    await page.goto(rota, { waitUntil: 'domcontentloaded' });
+
+    const nomes = await page.evaluate(() =>
+      [...document.querySelectorAll('*')]
+        .map((el) => getComputedStyle(el).viewTransitionName)
+        .filter((n) => n === 'capa'),
+    );
+
+    expect(nomes, `esperado exatamente um elemento com view-transition-name: capa`).toHaveLength(1);
+  });
+}
+
+test('a cor da superfície mora no grupo, não nos retratos', async ({ page }) => {
+  /**
+   * Sem fundo no grupo existe um instante em que o retrato antigo já
+   * esvaneceu e o novo ainda não entrou — e o branco do corpo aparece por
+   * baixo. A superfície pisca para cinza, que é justamente o que este
+   * trabalho existe para eliminar. Só apareceu ao fotografar o meio da
+   * transição com a animação dez vezes mais lenta.
+   */
+  await page.goto('/');
+
+  const regra = await page.evaluate(() =>
+    [...document.styleSheets]
+      .flatMap((folha) => {
+        try {
+          return [...folha.cssRules];
+        } catch {
+          return [];
+        }
+      })
+      .map((r) => r.cssText)
+      .find((t) => t.includes('view-transition-group(capa)')),
+  );
+
+  expect(regra, 'nenhuma regra para ::view-transition-group(capa)').toBeTruthy();
+  expect(regra, 'o grupo precisa carregar o navy da superfície').toMatch(/background-color/);
+});

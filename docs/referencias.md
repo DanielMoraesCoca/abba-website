@@ -239,6 +239,29 @@ Duas curvas com papéis definidos, não vinte à disposição.
 | 12 | A primeira pergunta da Análise na porta da home | `PrimeiraPergunta.tsx` |
 | 13 | A contagem de perguntas derivada do esquema | `analise/schema.ts` |
 | 14 | Régua de progresso, em CSS puro | `globals.css` |
+| 15 | A capa navy é contínua entre páginas | `globals.css`, 5 arquivos |
+
+A 15 é o movimento 6, e ela só ficou certa porque fotografei o MEIO da
+transição — com a animação dez vezes mais lenta, que é a única forma de
+ver o que acontece em 400 ms.
+
+Duas correções saíram dessas fotos:
+
+1. **Dupla exposição.** Saída e entrada com a mesma duração deixavam os
+   dois títulos legíveis um sobre o outro. É o mesmo erro que o CSS da
+   Otsuka ensinou a evitar na entrada em cena: saída e entrada não podem
+   compartilhar o tempo.
+2. **A piscada cinza.** Ao separar os tempos eu criei um intervalo em que
+   nem o retrato antigo nem o novo estavam opacos — e o branco do corpo
+   aparecia por baixo. A superfície piscava para cinza, exatamente o que o
+   movimento existe para eliminar. A correção põe o navy no GRUPO e não nos
+   retratos, o que também é a afirmação certa: a superfície é contínua, os
+   textos é que trocam.
+
+Vale registrar que a primeira medição **mentiu**: eu forçava uma duração
+única para desacelerar, e isso anulava o atraso que cria o revezamento. O
+instrumento precisava escalar duração e atraso juntos. Um microscópio mal
+ajustado mostra defeito onde não tem — e esconde o que tem.
 
 A 14 é a resposta ao movimento 3, e ela saiu de uma medição, não de uma
 vontade. As páginas foram medidas: a home tem 15 telas no celular,

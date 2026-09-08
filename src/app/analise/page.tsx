@@ -18,7 +18,7 @@ export const metadata = metadadosDaPagina({
 export default function PaginaAnalise() {
   return (
     <>
-      <section data-fundo="escuro" className="bg-navy-900 pb-16 pt-[calc(var(--header-h)+4.5rem)] sm:pb-20">
+      <section data-fundo="escuro" className="capa-continua bg-navy-900 pb-16 pt-[calc(var(--header-h)+4.5rem)] sm:pb-20">
         <Container largura="estreita">
           <Revelar>
             <Sobretitulo invertido>Gratuito · cerca de três minutos</Sobretitulo>

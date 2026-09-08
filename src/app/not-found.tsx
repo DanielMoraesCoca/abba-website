@@ -6,7 +6,7 @@ export default function NaoEncontrada() {
   return (
     <section
       data-fundo="escuro"
-      className="flex min-h-[70vh] items-center bg-navy-900 pt-[var(--header-h)]"
+      className="capa-continua flex min-h-[70vh] items-center bg-navy-900 pt-[var(--header-h)]"
     >
       <Container largura="estreita">
         <Sobretitulo invertido>Erro 404</Sobretitulo>

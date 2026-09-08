@@ -278,9 +278,74 @@
 
 /* Quem pediu menos movimento não recebe uma versão rápida da animação —
    recebe navegação sem animação nenhuma. */
+/* A capa que não pisca.
+   --------------------------------------------------------------------------
+   Toda página do site começa com o mesmo bloco: navy fechado, encostado no
+   cabeçalho, com sobretítulo e título dentro. É a mesma SUPERFÍCIE em onze
+   páginas — e até aqui ela desaparecia e reaparecia a cada navegação, junto
+   com o resto do conteúdo, porque o `<main>` inteiro era um grupo só.
+
+   Dar um nome próprio a ela tira o bloco do esvanecimento geral e o entrega
+   ao navegador como elemento contínuo: em vez de sumir e voltar, ele muda
+   de altura e troca o texto de dentro. O navy nunca pisca.
+
+   É o que "superfície contínua entre páginas" quer dizer, e a API do
+   navegador faz sozinha — o custo é um nome.
+
+   A altura muda de verdade entre a home e as internas, e é isso que se
+   quer ver: a superfície encolhendo, não cortando. */
+@supports (view-transition-name: none) {
+  .capa-continua {
+    view-transition-name: capa;
+  }
+}
+
+::view-transition-group(capa) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-abba);
+  /* O navy pertence ao GRUPO, não aos dois retratos que ele cruza.
+  
+     Sem esta linha existe um instante em que o retrato antigo já esvaneceu
+     e o novo ainda não entrou, e o branco do corpo aparece por baixo: a
+     superfície pisca para cinza — exatamente o que este trabalho existe
+     para eliminar. Só apareceu porque fotografei o meio da transição com a
+     animação dez vezes mais lenta.
+  
+     Com a cor no grupo, qualquer intervalo entre os dois retratos é navy.
+     E é a afirmação certa: a superfície é contínua, os textos é que
+     trocam. */
+  background-color: var(--color-navy-900);
+}
+
+/* O texto de dentro atravessa mais rápido que a moldura — e o antigo sai
+   ANTES de o novo entrar.
+   
+   Fotografei o meio da transição com a animação oito vezes mais lenta e o
+   primeiro desenho estava errado: os dois títulos com a mesma duração
+   produziam uma dupla exposição, dois textos legíveis um sobre o outro. É
+   o mesmo erro que o CSS da Otsuka me ensinou a evitar na entrada em cena —
+   saída e entrada não podem compartilhar o tempo.
+   
+   Agora o antigo sai em 140ms com a curva de saída, e o novo entra depois
+   disso, com a curva de entrada. Em nenhum quadro existem dois títulos. */
+::view-transition-old(capa) {
+  animation-duration: 140ms;
+  animation-timing-function: var(--ease-abba-reverso);
+}
+
+::view-transition-new(capa) {
+  animation-duration: 220ms;
+  animation-delay: 140ms;
+  animation-timing-function: var(--ease-abba);
+  animation-fill-mode: both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(conteudo),
-  ::view-transition-new(conteudo) {
+  ::view-transition-new(conteudo),
+  ::view-transition-group(capa),
+  ::view-transition-old(capa),
+  ::view-transition-new(capa) {
     animation: none;
   }
 }

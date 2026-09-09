@@ -427,3 +427,65 @@ real. A ABBA não tem nenhuma, e banco de imagem está fora de questão —
 executivo genérico apontando para gráfico contradiz o manifesto inteiro.
 Duas fotos boas dos sócios, luz natural, um fotógrafo, uma tarde. É a
 pendência 7.
+
+
+## Persuasão que sobrevive a escrutínio
+
+> Pesquisa de 09/09, a pedido: "os melhores sites institucionais, as
+> melhores técnicas, psicologia para gerar atenção e fome". Feita por busca
+> (a leitura direta de página está bloqueada). O que segue é o que a
+> literatura sustenta, o que foi aplicado, e o que foi recusado com motivo.
+
+### O que a pesquisa diz, e de onde
+
+| Achado | Fonte | O que a ABBA faz com isso |
+|---|---|---|
+| Problema de conversão em B2B é quase sempre problema de **mensagem**, não de desenho | WANDR, Thunderclap (2026) | O trabalho deste ciclo foi texto e prova, não efeito |
+| **Perda pesa ~2× mais que ganho**; enquadrar pela perda rende mais em B2B | NN/G, *Prospect Theory* | O site inteiro já é "vazamento". Confirmado, não mudado |
+| Concretude tem **ótimo**: vago perde, concreto demais também | *Sci. Reports* 2025, meta-análise de 8.977 títulos | Proposta de subtítulo mais curto (pendência 14) |
+| "Diga o que, para quem, com que resultado"; rótulo de botão **específico** rende mais que "saiba mais" | Fishtank, Made By Factory (2026) | "Ver como funciona" → "Ver como o Programa funciona" |
+| Deixar **experimentar antes de cadastrar** aumenta conversão (efeito dotação) | NN/G, *Decision Frames* | Já era assim: resultado antes do formulário. Confirmado |
+| **Credibilidade** (Stanford, 4.500 pessoas): fácil de verificar, gente real, fácil de contatar, sem erro | Fogg, *Stanford Web Credibility Guidelines* | Fontes viraram **links**; data de conferência visível; prazo de resposta no fecho da home; dois erros do cânone corrigidos |
+| **Ligação com o resto da web**: site que não linka para fora parece ter algo a esconder | NN/G, *Trustworthy Design* | Idem — as 11 fontes com página oficial agora linkam |
+| Gente **escaneia**, não lê: as primeiras palavras carregam o título | NN/G, *F-Pattern* (revisto ago/2026) | Auditados os títulos; a maioria já começa pela mensagem |
+| **Pico-fim**: a lembrança é o ponto mais forte e o final | Kahneman, via NN/G | O fim da Análise é o resultado + convite, não um "obrigado" vazio. Mantido |
+| **Rosto e olhar** puxam atenção; olhar voltado ao título leva o leitor ao título | rastreabilidade ocular, várias | Depende de fotografia (pendência 7) |
+| **Serifa** eleva autoridade percebida | várias | Confirma o diferencial contra a Fato (pendência 12) |
+| Velocidade: 1 s converte ~3× mais que 5 s | pesquisas de 2026 | LCP ~1,2 s. Já estava |
+
+### O que foi recusado, e por quê
+
+**Urgência e escassez fabricadas.** Contador regressivo, "últimas vagas",
+"oferta acaba hoje". A pesquisa é unânime: funciona por semanas e destrói
+confiança para sempre quando a pessoa percebe (FTC/ICPEN 2024: 75,7% dos
+sites usam ao menos um padrão escuro; CMA do Reino Unido já autuou por
+contador falso). Numa consultoria que vende prova auditável, o primeiro
+cliente que notar leva a tese inteira junto.
+
+O que a ABBA tem é escassez **real e declarada**: "3 a 4 Programas por ano.
+Não é tática de escassez: é quantas empresas dois sócios atendem sem baixar
+o padrão." A literatura diz que escassez verdadeira, dita com o motivo, não
+sofre o efeito reverso. Mantida como está.
+
+**Depoimento e logotipo de cliente.** A pesquisa pede prova social com
+número específico. A ABBA é nova e não tem. Inventar é o pior erro
+possível; omitir é honesto. O que existe no lugar — e a pesquisa também
+valida — é prova social de **autoridade**: RAND, METR, DORA, BCG, com link.
+
+**Gap de curiosidade como isca.** Título que esconde o assunto para forçar
+o clique. A meta-análise mostra que só funciona quando o resto é vago
+demais — e no site da ABBA nada é vago. Aqui o gap é legítimo: a pergunta
+na porta da home ("Quantas pessoas trabalham na sua empresa?") abre um
+gap que a Análise fecha em três minutos.
+
+### O que a pesquisa mudou de fato
+
+Menos do que o pedido esperava — e isso é o resultado, não a falta dele.
+O site já aplicava a maior parte do que a literatura recomenda, porque a
+doutrina da casa (número com fonte, resultado antes de cadastro, perda
+como enquadramento, escassez declarada) é a mesma coisa que a pesquisa
+descreve. O que faltava era **fechar a promessa**: o site dizia "com
+fonte" e não deixava conferir. Agora deixa. E, ao conferir, dois números
+estavam desatualizados ou mal atribuídos — o que é exatamente o tipo de
+coisa que a pesquisa diz que derruba credibilidade quando um leitor
+competente percebe primeiro.

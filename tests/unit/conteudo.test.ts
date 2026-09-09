@@ -2,6 +2,7 @@ import { globSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { EVIDENCIAS, evidencia } from '@/content/evidencias';
+import type { Evidencia } from '@/content/tipos';
 import { EMPRESA } from '@/content/identidade';
 import { DIMENSOES, TOTAL_DIMENSOES } from '@/content/metodo';
 import { NAV_PRINCIPAL, NAV_RODAPE } from '@/content/navegacao';
@@ -11,6 +12,35 @@ import { colar } from '@/lib/tipografia';
 import { PRECO_PUBLICO } from '@/content/precos';
 
 describe('cânone de evidências', () => {
+  // `EVIDENCIAS` é tupla literal (para derivar os ids). Ler um campo opcional
+  // que nem todo membro tem é erro de tipo na união; no tipo nominal, não.
+  const CANONE: readonly Evidencia[] = EVIDENCIAS;
+
+  it('confiança alta exige página oficial para conferir', () => {
+    // "Alta" quer dizer: qualquer pessoa confere em um clique. Sem URL, o
+    // máximo honesto é média-alta — por mais sólida que a fonte seja.
+    for (const item of CANONE) {
+      if (item.confianca === 'alta') {
+        expect(item.url, `evidência ${item.id} é "alta" sem url`).toMatch(/^https:\/\//);
+      }
+    }
+  });
+
+  it('toda url é https e sem espaço', () => {
+    for (const item of CANONE) {
+      if (item.url) expect(item.url, item.id).toMatch(/^https:\/\/\S+$/);
+    }
+  });
+
+  it('data de conferência é ISO e não está no futuro', () => {
+    const hoje = new Date().toISOString().slice(0, 10);
+    for (const item of CANONE) {
+      if (!item.conferidaEm) continue;
+      expect(item.conferidaEm, item.id).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(item.conferidaEm <= hoje, `${item.id} conferida no futuro`).toBe(true);
+    }
+  });
+
   it('todo número tem fonte nomeada, ano e nível de confiança', () => {
     for (const item of EVIDENCIAS) {
       expect(item.fonte.length, `evidência ${item.id} sem fonte`).toBeGreaterThan(10);

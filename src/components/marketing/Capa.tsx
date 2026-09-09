@@ -37,8 +37,12 @@ export function Capa() {
             <Botao href="/analise" variante="primario-invertido">
               Começar a análise gratuita
             </Botao>
+            {/* "Ver como funciona" era o rótulo. A pesquisa sobre chamada de
+                ação é consistente: rótulo vago ("saiba mais", "como funciona")
+                rende menos que rótulo com objeto — o leitor decide melhor
+                quando sabe O QUE vai ver. O objeto aqui é o Programa. */}
             <Botao href="/o-que-fazemos" variante="fantasma">
-              Ver como funciona
+              Ver como o Programa funciona
             </Botao>
           </div>
         </Revelar>

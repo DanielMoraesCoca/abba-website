@@ -18,6 +18,8 @@ export const EVIDENCIAS = [
     afirmacao: 'dos projetos de IA falham — o dobro da taxa de projetos de TI comuns.',
     fonte: 'RAND, “The Root Causes of Failure for AI Projects” — 65 entrevistas com engenheiros de ML sêniores',
     ano: 2024,
+    url: 'https://www.rand.org/pubs/research_reports/RRA2680-1.html',
+    conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
       'É a pesquisa mais rigorosa que existe sobre o assunto. O problema não é exceção: é o comportamento padrão do mercado.',
@@ -29,6 +31,8 @@ export const EVIDENCIAS = [
       'de fracasso não é técnica: é começar sem combinar, antes, qual seria o critério de sucesso.',
     fonte: 'RAND, mesma pesquisa — causas 1 e 2 do ranking',
     ano: 2024,
+    url: 'https://www.rand.org/pubs/research_reports/RRA2680-1.html',
+    conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
       'É a nossa tese, dita por terceiro. Por isso toda decisão aqui nasce com o número que ela precisa mover, combinado por escrito antes de qualquer linha de código.',
@@ -40,9 +44,15 @@ export const EVIDENCIAS = [
       'foi o que aconteceu com desenvolvedores experientes usando IA — e eles saíram convencidos de que tinham ficado 20% mais rápidos.',
     fonte: 'METR — experimento randomizado, 16 desenvolvedores experientes, 246 tarefas reais',
     ano: 2025,
-    confianca: 'alta',
+    url: 'https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/',
+    conferidaEm: '2026-09-09',
+    confianca: 'media-alta',
     ressalva:
-      'Medição forte, generalização limitada: amostra pequena, em código que os participantes já dominavam.',
+      'Medição forte, generalização limitada: amostra pequena, em código que os participantes já dominavam. ' +
+      'Atualização de fevereiro de 2026: a própria METR reestimou o efeito — cerca de −18% para os mesmos ' +
+      'desenvolvedores e −4% para recrutados novos, os dois com intervalo cruzando o zero — e declarou efeitos ' +
+      'de seleção fortes o bastante para redesenhar o experimento. O que sobrevive intacto é o erro de ' +
+      'percepção: eles se achavam mais rápidos.',
     leitura:
       'Um erro de percepção de cerca de 40 pontos. Ninguém sabe se a IA ajudou sem medir de fora. É exatamente por isso que a ABBA existe.',
   },
@@ -54,6 +64,8 @@ export const EVIDENCIAS = [
     fonte:
       'Cui et al., Management Science (revisado por pares) — 3 experimentos randomizados, 4.867 desenvolvedores',
     ano: 2025,
+    url: 'https://pubsonline.informs.org/doi/10.1287/mnsc.2025.00535',
+    conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
       'O ganho de construção está indo para todo mundo. Saber construir com IA deixou de ser diferencial — achar o problema certo e medir o resultado, não.',
@@ -65,6 +77,8 @@ export const EVIDENCIAS = [
       'é o verbo do relatório DORA: a IA não conserta um time, ela amplifica o que já está lá. A adoção correlaciona positivamente com velocidade e negativamente com estabilidade.',
     fonte: 'DORA 2025 (Google) — cerca de 5.000 respondentes',
     ano: 2025,
+    url: 'https://dora.dev/dora-report-2025/',
+    conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
       'Time com a base arrumada acelera; time com processo bagunçado piora mais rápido. Arrumar a base não é atraso — é a condição do ganho.',
@@ -75,6 +89,8 @@ export const EVIDENCIAS = [
     afirmacao: 'das organizações extraem ganho financeiro substancial de IA. 60% são retardatárias.',
     fonte: 'BCG, “The Widening AI Value Gap”',
     ano: 2025,
+    url: 'https://media-publications.bcg.com/The-Widening-AI-Value-Gap-Sept-2025.pdf',
+    conferidaEm: '2026-09-09',
     confianca: 'media-alta',
     leitura: 'Uma em vinte empresas transformou IA em resultado financeiro de verdade.',
   },
@@ -83,10 +99,17 @@ export const EVIDENCIAS = [
     numero: 'mais de 40%',
     afirmacao:
       'dos projetos de IA agêntica serão cancelados até o fim de 2027 — e dos milhares de fornecedores “de agentes”, cerca de 130 são reais.',
-    fonte: 'Gartner (enquete com 3.412 participantes de webinar)',
+    fonte:
+      'Gartner — previsão de analistas, comunicado de 25/06/2025. A enquete com 3.412 participantes de ' +
+      'webinar citada no mesmo comunicado mediu nível de investimento, não cancelamento.',
     ano: 2025,
+    url: 'https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027',
+    conferidaEm: '2026-09-09',
     confianca: 'media',
-    ressalva: 'É enquete, não estudo controlado — e a Gartner declara isso.',
+    ressalva:
+      'É previsão de analista, não medição — e a Gartner declara isso. A versão anterior desta linha ' +
+      'atribuía o número à enquete; estava errada. Os “cerca de 130 fornecedores reais” também são ' +
+      'estimativa da própria Gartner.',
     leitura:
       'O mercado chama de “agente” quase tudo. A diferença entre os dois grupos aparece na medição, não no material de venda.',
   },
@@ -97,6 +120,8 @@ export const EVIDENCIAS = [
       'o retorno de IA generativa — mas metade usa “qualidade de dados” como métrica, e 53% reportam retorno de apenas 1% a 5%.',
     fonte: 'Wharton Human-AI Research (GBK), ano 3',
     ano: 2025,
+    url: 'https://knowledge.wharton.upenn.edu/special-report/2025-ai-adoption-report/',
+    conferidaEm: '2026-09-09',
     confianca: 'media-alta',
     leitura:
       'Quase todo mundo diz que mede. Medição de verdade — combinada antes, ligada ao resultado financeiro — quase não existe.',
@@ -107,6 +132,7 @@ export const EVIDENCIAS = [
     afirmacao: 'já oferecem treinamento de IA — acima dos EUA (28%), do Reino Unido (27%) e da Alemanha (20%).',
     fonte: 'KPMG / Universidade de Melbourne, “Trust, attitudes and use of AI”',
     ano: 2025,
+    url: 'https://kpmg.com/xx/en/our-insights/ai-and-technology/trust-attitudes-and-use-of-ai.html',
     confianca: 'media-alta',
     leitura:
       'O Brasil não tem falta de treinamento de IA. Tem falta de treinamento que aparece no trabalho 90 dias depois.',
@@ -116,8 +142,11 @@ export const EVIDENCIAS = [
     numero: 'cerca de 25% da receita',
     afirmacao:
       'global da McKinsey em 2025 veio de contratos baseados em resultado.',
-    fonte: 'Declaração pública da própria McKinsey',
+    fonte:
+      'Michael Birshan, sócio-gestor da McKinsey no Reino Unido, em briefing reportado pela Business ' +
+      'Insider em novembro de 2025',
     ano: 2025,
+    conferidaEm: '2026-09-09',
     confianca: 'media',
     ressalva:
       'É a firma falando da própria receita, sem auditoria de terceiro — vale como ordem de grandeza do topo do mercado, não como dado conferível.',
@@ -130,6 +159,8 @@ export const EVIDENCIAS = [
     afirmacao: 'é o tempo médio que um auditor fica com o mesmo cliente no S&P 500.',
     fonte: 'Audit Analytics, a partir de arquivamentos na SEC',
     ano: 2024,
+    url: 'https://blog.auditanalytics.com/auditor-tenure-by-revenue/',
+    conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
       'É o oposto do churn de serviços profissionais, que corre de 16% a 27% ao ano. Relação que se sustenta em prova recorrente não se renova por argumento de venda.',

@@ -59,6 +59,40 @@ pesquisa, e que os PDFs originais precisam ser conferidos dígito a dígito
 antes de uso em material impresso. **O site é material externo.** A conferência
 vale para ele também.
 
+> **Acrescentado em 09/09.** Conferi 11 das 12 fontes contra a página
+> oficial, por busca (a leitura direta de página está bloqueada no
+> ambiente). O site agora linka cada uma, e mostra a data de conferência.
+>
+> **Duas correções de exatidão feitas:**
+>
+> - **`metr-19`** estava como confiança *alta*. A própria METR reestimou em
+>   fevereiro de 2026: cerca de −18% para os mesmos desenvolvedores e −4%
+>   para recrutados novos, ambos com intervalo cruzando o zero, e declarou
+>   efeitos de seleção fortes o bastante para redesenhar o experimento.
+>   Baixei para *média-alta* e a ressalva conta a atualização. A `leitura`
+>   ficou — o erro de percepção (achavam-se mais rápidos) é o que sobrevive,
+>   e é o argumento da ABBA.
+> - **`gartner-40`** atribuía o "mais de 40%" à enquete de 3.412 pessoas.
+>   Errado: o 40% é previsão de analista; a enquete mediu nível de
+>   investimento. A fonte e a ressalva agora dizem isso, e dizem que a
+>   versão anterior estava errada.
+>
+> **Ficaram para vocês, com o PDF na mão:** `kpmg-brasil-47` (o 47% é
+> recorte Brasil do relatório — não confirmei o número), `talento-98`
+> (imprensa, sem página primária — sem link de propósito) e o ano de
+> publicação de `cui-26` (Management Science; a busca sugere 2026, o site
+> diz 2025 — o DOI está linkado).
+>
+> **E uma oportunidade que não é minha decisão:** a BCG publica o
+> "10-20-70" — 10% algoritmo, 20% dados e tecnologia, **70% pessoas e
+> processos**. É o número da tese da casa, vindo de uma fonte que o mercado
+> respeita. Hoje o site diz "os 70% são a nossa tese, não um estudo", e
+> isso continua verdadeiro (o da BCG também é heurística, não medição).
+> Mas dizer "a BCG chega ao mesmo número" é prova social de autoridade, e é
+> honesto. Toca em `HEADLINE.notaDaTese` e no § "estatuto do 70/30" do
+> abba-ops — por isso é de vocês. Páginas: bcg.com/news/26january2026-what-is-driving-ai-value
+> e bcg.com/publications/2025/to-unlock-the-full-value-of-ai-invest-in-your-people.
+
 ## 6. Registrar a régua web no abba-ops · **sócios**
 
 **Onde:** [`docs/identidade-visual-web.md`](identidade-visual-web.md)
@@ -318,3 +352,35 @@ pergunta se a resposta é a mesma — seria a mesma de qualquer jeito, já que
 toda falha cai no determinístico. Ele espia a rede e afirma que **nenhuma
 chamada paga aconteceu**, que é a única coisa que custa dinheiro se for
 falsa.
+
+
+## 14. A headline, à luz da pesquisa · **sócios (abba-ops)**
+
+Pesquisa de 09/09 sobre persuasão e credibilidade (ver `referencias.md`,
+§ "Persuasão que sobrevive a escrutínio"). O achado que toca a headline é
+uma meta-análise de 8.977 experimentos com títulos (*Scientific Reports*,
+2025): concretude tem um ótimo. Vago demais perde; **concreto demais também
+perde**. Título que "diz o que faz, para quem, com que resultado" ganha de
+slogan — mas título que tenta dizer tudo cansa antes de convencer.
+
+A headline canônica está no meio da faixa: diz o que (instala capacidade,
+prova o que mudou) e como (de fora). Não diz para quem. **O subtítulo é o
+problema** — quatro verbos e uma oração de 40 palavras, lido por quem
+escaneia e não lê.
+
+Não mexi: `identidade.ts` é tradução literal do abba-ops, e a headline
+"vale para site, deck e conversa". Mudar só no site cria três versões.
+
+Proposta, para decidirem lá:
+
+- Título: manter.
+- Subtítulo, de 40 palavras para 22: *"Avaliamos a fundo, construímos as
+  soluções certas, treinamos todos os níveis — e provamos o resultado como
+  terceiro: número combinado antes, medido depois, assinado por gente."*
+  Mesma promessa, uma oração a menos, o "como terceiro" mais perto do fim,
+  onde o olho do escaneador cai.
+- "Para quem" não entra no título: entra no sobretítulo, que hoje diz
+  "Transformação em IA · Brasil". *"Transformação em IA · médio porte
+  brasileiro"* diz quem, sem gastar o título.
+
+Custo: três linhas no abba-ops, uma no site, duas referências visuais.

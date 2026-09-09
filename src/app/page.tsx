@@ -13,7 +13,7 @@ import { porExtenso } from '@/lib/tipografia';
 import { cn } from '@/lib/utils';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { evidencia } from '@/content/evidencias';
-import { PRATELEIRA } from '@/content/identidade';
+import { CONTATO, PRATELEIRA } from '@/content/identidade';
 import { RECUSAS } from '@/content/manifesto';
 
 /** Os três números da home. O resto do cânone vive em /evidencias. */
@@ -279,8 +279,13 @@ export default function PaginaInicial() {
               Falar com um sócio
             </Botao>
           </div>
+          {/* O que reduz o risco percebido de clicar em "Falar com um sócio"
+              não é adjetivo: é saber quando a resposta vem. A promessa já
+              existia na página de contato; quem decide na home não chegava
+              lá. */}
           <p className="mt-8 font-mono text-[0.74rem] tracking-wide text-ice-300/60">
-            Sem cadastro em lista. Sem cobrança depois. Leva cerca de três minutos.
+            Sem cadastro em lista. Sem cobrança depois. Leva cerca de três minutos.{' '}
+            {CONTATO.prazoResposta}
           </p>
         </Revelar>
       </Secao>

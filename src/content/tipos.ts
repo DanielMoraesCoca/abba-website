@@ -22,6 +22,17 @@ export interface Evidencia {
   readonly fonte: string;
   /** Ano da publicação da fonte. */
   readonly ano: number;
+  /**
+   * A página oficial da fonte, quando existe uma. Sem isto o número é uma
+   * afirmação; com isto é uma afirmação que qualquer um confere em um
+   * clique. Obrigatória para confiança alta (teste em conteudo.test.ts).
+   */
+  readonly url?: string;
+  /**
+   * Quando a fonte foi conferida por último contra a página oficial
+   * (ISO, AAAA-MM-DD). Aparece na tela. Ausente = ninguém conferiu ainda.
+   */
+  readonly conferidaEm?: string;
   readonly confianca: Confianca;
   /** Ressalva obrigatória quando a confiança não é alta. */
   readonly ressalva?: string;

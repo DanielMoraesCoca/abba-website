@@ -1,6 +1,12 @@
 import type { Evidencia } from '@/content/tipos';
 import { cn } from '@/lib/utils';
 
+/** "2026-09-09" → "09/2026". Mês e ano bastam; o dia é ruído aqui. */
+function formatarConferencia(iso: string): string {
+  const [ano, mes] = iso.split('-');
+  return `${mes}/${ano}`;
+}
+
 const ROTULO_CONFIANCA: Record<Evidencia['confianca'], string> = {
   alta: 'Confiança alta',
   'media-alta': 'Confiança média-alta',
@@ -59,7 +65,31 @@ export function NumeroComFonte({
         )}
       >
         <span className={escuro ? 'text-gold-400' : 'text-gold-700'}>Fonte · </span>
-        {evidencia.fonte} ({evidencia.ano}) · {ROTULO_CONFIANCA[evidencia.confianca]}
+        {/* Quando há página oficial, a fonte É o link. Não é rodapé nem
+            ícone: é o próprio nome, clicável, no mesmo bloco. O leitor que
+            quiser conferir confere em um gesto — e é isso que separa "com
+            fonte" de "com fonte que dá para ver". */}
+        {evidencia.url ? (
+          <a
+            href={evidencia.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className={cn(
+              'underline decoration-[1px] underline-offset-[0.22em] transition-colors duration-[var(--duration-micro)]',
+              escuro
+                ? 'decoration-gold-400/40 hover:text-ice-100 hover:decoration-gold-400'
+                : 'decoration-gold-700/40 hover:text-navy-700 hover:decoration-gold-700',
+            )}
+          >
+            {evidencia.fonte}
+          </a>
+        ) : (
+          evidencia.fonte
+        )}{' '}
+        ({evidencia.ano}) · {ROTULO_CONFIANCA[evidencia.confianca]}
+        {evidencia.conferidaEm && (
+          <> · conferida em {formatarConferencia(evidencia.conferidaEm)}</>
+        )}
         {evidencia.ressalva && (
           <span className="mt-2 block italic">Ressalva: {evidencia.ressalva}</span>
         )}

@@ -384,3 +384,57 @@ Proposta, para decidirem lá:
   brasileiro"* diz quem, sem gastar o título.
 
 Custo: três linhas no abba-ops, uma no site, duas referências visuais.
+
+## 15. Auditoria de 09/09: o piso fabricado · **RESOLVIDA no mesmo dia**
+
+Auditoria do que existe, a pedido. O achado mais grave estava no núcleo do
+produto — a aritmética da Análise.
+
+**O furo.** Quando o teto de sanidade cortava o topo da faixa E o piso
+também passava do teto, o piso virava `teto × 0,35`:
+
+```js
+if (max > teto) { max = teto; }
+if (min > max)  { min = max * 0.35; }   // ← de onde saiu esse 0,35?
+```
+
+Não saía de lugar nenhum. Não estava nas premissas declaradas, não estava
+na tela, e o visitante não tinha como refazer a conta — que é exatamente o
+que o site promete que ele consegue fazer.
+
+**A incidência, medida sobre o espaço inteiro de respostas** (12.000
+combinações que produzem faixa): 4.017 batem no teto, e **1.849 (15,4%)
+recebiam o piso inventado**. Uma em cada seis.
+
+**O agravante estava na tela.** A explicação dizia só que "a ponta de cima
+foi cortada". Quem lesse concluiria, com razão, que a de baixo continuava
+sendo a aritmética. Não continuava.
+
+**A correção não inventa nada.** Quando o teto corta o topo, o piso desce
+pelo MESMO fator — a razão entre as pontas, que é a aritmética, fica
+intacta. O piso só é tocado quando ele próprio estourou o teto; se já
+cabia embaixo, fica como está.
+
+**Efeito colateral que vale registrar:** o `0,35` fazia os casos com teto
+parecerem *mais precisos* que os casos honestos. Medido: sem teto, a faixa
+tem mediana de 4,6× e chega a 13,6×; com teto, o piso fabricado prendia a
+razão em 2,86×. Agora os casos com teto têm mediana de 4,2× e máximo de
+13,0× — coerentes com o resto. As faixas largas sempre existiram; elas são
+o que as premissas declaradas produzem.
+
+**Três constantes passaram a ser declaradas**, porque "premissas na mesa"
+tem que ser literal: o teto de 2,5% do faturamento (premissa 4), a fração
+de meio dia no piso do atraso de fechamento (premissa 3), e a regra de
+reescala, na explicação do teto. O número na tela sai da constante, nunca
+digitado.
+
+**Travas.** Uma varredura exaustiva das 12.000 combinações verifica que o
+piso publicado é sempre um dos dois valores deriváveis das premissas — a
+soma das parcelas, ou a mesma soma reduzida pelo fator do teto. Verificada
+reintroduzindo o `0,35`: acusa 1.849, o mesmo número medido por fora.
+
+**O que continua sendo de vocês:** a calibragem em si (pendência 1). A
+correção torna a faixa honesta; não a torna certa. Se a aritmética produz
+um piso acima de 2,5% do faturamento, isso é o modelo discordando da
+trava — e a pergunta de fundo, que é de vocês, é se nesses casos vale
+publicar faixa nenhuma, como já fazemos quando falta volume.

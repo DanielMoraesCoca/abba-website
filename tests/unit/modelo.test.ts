@@ -7,7 +7,19 @@ import {
   qualificar,
   type RespostasAnalise,
 } from '@/lib/analise/modelo';
-import { TETO_SOBRE_FATURAMENTO, FATURAMENTO_MEDIO } from '@/lib/analise/premissas';
+import {
+  FATURAMENTO_MEDIO,
+  PREMISSAS_DECLARADAS,
+  TETO_SOBRE_FATURAMENTO,
+} from '@/lib/analise/premissas';
+import {
+  FAIXAS_COLABORADORES,
+  FAIXAS_FATURAMENTO,
+  P_FECHAMENTO,
+  P_LATENCIA,
+  P_TOQUES,
+  P_VOLUME,
+} from '@/lib/analise/perguntas';
 
 /**
  * As cinco regras de honestidade do Mapa de Vazamento, travadas em teste.
@@ -191,5 +203,94 @@ describe('apresentação dos números', () => {
     expect(formatarReais(340_000)).toBe('R$ 340 mil');
     expect(formatarReais(1_300_000)).toBe('R$ 1,3 milhões');
     expect(formatarFaixa({ min: 340_000, max: 890_000 })).toBe('R$ 340 mil a R$ 890 mil');
+  });
+});
+
+/**
+ * Nenhum número entra na faixa sem estar declarado.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * Auditoria de 09/09. O modelo tinha um furo que ia direto na promessa do
+ * produto: quando o teto de sanidade cortava o topo E o piso também
+ * passava do teto, o piso virava `teto * 0.35`. Aquele 0,35 não estava nas
+ * premissas, não estava na tela, e não havia como o visitante refazer a
+ * conta — que é exatamente o que o site promete.
+ *
+ * Medido sobre o espaço inteiro de respostas: 1.849 das 12.000 combinações
+ * que produzem faixa (15,4%) recebiam esse mínimo inventado. Uma em seis.
+ *
+ * A varredura abaixo é exaustiva de propósito. Um caso isolado não teria
+ * achado isto: o furo só aparece na interseção de teto aplicado com piso
+ * alto, e nenhum teste escrito à mão escolheria essa combinação.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('a faixa é sempre refazível a partir das premissas', () => {
+  function todasAsCombinacoes() {
+    const fixo = {
+      numeroMedido: 'nao',
+      patrocinador: 'financeiro',
+      tentativa: 'ferramentas-soltas',
+      dono: 'area',
+      prazo: 'sim-12m',
+    } as const;
+    const casos: RespostasAnalise[] = [];
+    for (const c of FAIXAS_COLABORADORES)
+      for (const f of FAIXAS_FATURAMENTO)
+        for (const v of P_VOLUME.opcoes)
+          for (const t of P_TOQUES.opcoes)
+            for (const fe of P_FECHAMENTO.opcoes)
+              for (const l of P_LATENCIA.opcoes)
+                casos.push({
+                  ...fixo,
+                  colaboradores: c.valor,
+                  faturamento: f.valor,
+                  volume: v.valor,
+                  toques: t.valor,
+                  fechamento: fe.valor,
+                  latencia: l.valor,
+                } as RespostasAnalise);
+    return casos;
+  }
+
+  it('o piso publicado é sempre derivável — nunca um fator inventado', () => {
+    const suspeitos: string[] = [];
+
+    for (const r of todasAsCombinacoes()) {
+      const e = estimar(r);
+      if (!e.faixa || !e.decomposicao?.tetoAplicado) continue;
+
+      const d = e.decomposicao;
+      const somaMin = d.retrabalhoDocumental.min + d.atrasoDeFechamento.min + d.contingencia.min;
+      const somaMax = d.retrabalhoDocumental.max + d.atrasoDeFechamento.max + d.contingencia.max;
+      const teto = FATURAMENTO_MEDIO[r.faturamento] * TETO_SOBRE_FATURAMENTO;
+
+      // Só existem dois pisos legítimos, e os dois saem das premissas:
+      //   1. a própria soma das parcelas, quando ela já cabe sob o teto;
+      //   2. a mesma soma reduzida pelo fator que encolheu o topo.
+      // Qualquer outro valor é número inventado.
+      const derivaveis = [
+        arredondarOrdemDeGrandeza(somaMin),
+        arredondarOrdemDeGrandeza(somaMin * (teto / somaMax)),
+      ];
+
+      if (!derivaveis.includes(e.faixa.min)) {
+        suspeitos.push(
+          `${r.faturamento}/${r.volume}/${r.toques}/${r.fechamento}: ` +
+            `piso ${e.faixa.min}, derivá­veis ${derivaveis.join(' ou ')}`,
+        );
+      }
+    }
+
+    expect(
+      suspeitos.slice(0, 5),
+      `${suspeitos.length} faixas com piso que não sai das premissas`,
+    ).toEqual([]);
+  });
+
+  it('toda constante que entra na conta está declarada ao visitante', () => {
+    // O teto tem que aparecer nas premissas com o número, não como
+    // "uma fração pequena" — que era como a tela dizia.
+    const declaradas = PREMISSAS_DECLARADAS.map((p) => `${p.texto} ${p.base}`).join(' ');
+    expect(declaradas, 'o teto sobre o faturamento não está declarado').toMatch(/2,5\s*%/);
+    expect(declaradas, 'a fração de dia perdido não está declarada').toMatch(/metade/i);
   });
 });

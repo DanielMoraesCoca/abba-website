@@ -96,6 +96,8 @@ export interface Qualificacao {
 }
 
 const MINUTOS_POR_HORA = 60;
+/** Quanto de um dia extra de fechamento conta como dia perdido, no piso. */
+const FRACAO_DE_DIA_PERDIDO = 0.5;
 const MESES = 12;
 
 function faixa(min: number, max: number): Faixa {
@@ -183,8 +185,12 @@ export function estimar(r: RespostasAnalise): Estimativa {
   const diasExtras = DIAS_DE_FECHAMENTO[r.fechamento];
   const pessoas = PESSOAS_NO_FECHAMENTO[r.colaboradores];
   const horasFechamentoMes = diasExtras * pessoas * 8;
+  // O `0.5` no piso é assunção declarada (premissa p3 em premissas.ts): nem
+  // todo dia extra de fechamento é dia inteiro perdido. Estava só neste
+  // comentário; agora está na tela, porque premissa que o visitante não lê
+  // não é premissa declarada.
   const atraso = faixa(
-    horasFechamentoMes * custoHoraMin * MESES * 0.5, // metade: nem todo dia extra é dia perdido
+    horasFechamentoMes * custoHoraMin * MESES * FRACAO_DE_DIA_PERDIDO,
     horasFechamentoMes * custoHoraMax * MESES,
   );
 
@@ -197,16 +203,47 @@ export function estimar(r: RespostasAnalise): Estimativa {
   let min = subtotalMin + contingencia.min;
   let max = subtotalMax + contingencia.max;
 
-  // Teto de sanidade contra o faturamento declarado.
+  /* Teto de sanidade contra o faturamento declarado.
+     ────────────────────────────────────────────────────────────────────
+     A versão anterior tinha um furo que ia direto na promessa do produto.
+     Ela fazia:
+
+         if (max > teto) { max = teto; }
+         if (min > max)  { min = max * 0.35; }
+
+     Aquele `0.35` não vinha de lugar nenhum. Não estava nas premissas
+     declaradas, não estava na tela, e o visitante não tinha como refazer
+     a conta — que é exatamente o que o site promete que ele consegue
+     fazer. Medido sobre o espaço inteiro de respostas: das 12.000
+     combinações que produzem faixa, 4.017 batem no teto e **1.849 (15,4%)
+     recebiam esse mínimo inventado**. Uma em cada seis.
+
+     Pior: a explicação na tela dizia só que "a ponta de cima foi cortada",
+     então quem lesse concluiria, com razão, que a ponta de baixo continuava
+     sendo a aritmética. Não continuava.
+
+     A correção não inventa nada. Quando o teto corta o topo, o piso desce
+     pelo MESMO fator — a faixa inteira é reescalada, e a razão entre as
+     pontas, que é a aritmética, fica intacta. É uma operação só, e ela cabe
+     numa frase que o visitante confere: "o topo foi cortado em 2,5% do
+     faturamento declarado, e a faixa inteira foi reduzida na mesma
+     proporção".
+
+     O piso só é tocado quando precisa: se a aritmética já cabia embaixo do
+     teto, ela fica como está. Reduzir um mínimo honesto seria inventar para
+     baixo, o oposto do problema, mas invenção do mesmo jeito.          */
   const faturamento = FATURAMENTO_MEDIO[r.faturamento];
   let tetoAplicado = false;
   if (faturamento > 0) {
     const teto = faturamento * TETO_SOBRE_FATURAMENTO;
     if (max > teto) {
+      const fator = teto / max;
       max = teto;
       tetoAplicado = true;
+      // Só reescala o piso se ele também estourou o teto. `fator` é o mesmo
+      // que encolheu o topo, então a razão entre as pontas não muda.
+      if (min > max) min *= fator;
     }
-    if (min > max) min = max * 0.35;
   }
 
   return {

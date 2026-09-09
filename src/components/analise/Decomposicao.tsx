@@ -1,4 +1,14 @@
 import { formatarReais, type Estimativa } from '@/lib/analise/modelo';
+import { TETO_SOBRE_FATURAMENTO } from '@/lib/analise/premissas';
+
+/**
+ * 0.025 → "2,5%". Sai da constante, nunca digitado — se o teto mudar, a
+ * frase na tela muda junto, e não existe a possibilidade de a explicação
+ * dizer um número e a conta usar outro.
+ */
+function formatarPorcentagem(fracao: number): string {
+  return `${(fracao * 100).toLocaleString('pt-BR', { maximumFractionDigits: 2 })}%`;
+}
 
 /**
  * A conta, desenhada.
@@ -217,10 +227,12 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
       {decomposicao.tetoAplicado && (
         <p className="mt-6 border-l-2 border-gold-500 pl-5 text-[0.92rem] leading-relaxed text-slate-700">
           <span className="font-medium text-navy-700">O teto foi aplicado. </span>
-          A soma das parcelas passou de uma fração pequena do faturamento que você declarou, então a
-          ponta de cima foi cortada nesse limite — é o fio dourado na barra acima. A trava existe
-          para impedir que uma combinação improvável de respostas produza um número absurdo. Quando
-          ela dispara, é sinal de que a conversa vale muito mais que a conta.
+          A soma das parcelas passou de {formatarPorcentagem(TETO_SOBRE_FATURAMENTO)} do faturamento
+          que você declarou, então a ponta de cima foi cortada nesse limite — é o fio dourado na
+          barra acima. Quando o piso também passava do teto, ele desceu na mesma proporção, para a
+          razão entre as duas pontas continuar sendo a aritmética. A trava existe para impedir que
+          uma combinação improvável de respostas produza um número absurdo. Quando ela dispara, é
+          sinal de que a conversa vale muito mais que a conta.
         </p>
       )}
     </figure>

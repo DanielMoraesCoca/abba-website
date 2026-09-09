@@ -148,6 +148,28 @@ export const PREMISSAS_DECLARADAS: readonly Premissa[] = [
   },
   {
     id: 'p3',
+    tipo: 'premissa',
+    texto:
+      'Um dia a mais de fechamento contábil não é um dia inteiro de trabalho perdido. No piso da faixa, ' +
+      'contamos metade de cada dia extra; no topo, o dia inteiro.',
+    base:
+      'Assunção da ABBA. Ela existe para o piso não herdar o pior caso de todas as parcelas ao mesmo tempo — ' +
+      'uma faixa em que as duas pontas são cenários extremos não informa nada.',
+  },
+  {
+    id: 'p4',
+    tipo: 'premissa',
+    texto:
+      'A estimativa nunca é publicada acima de 2,5% do faturamento que você declarou. Se a soma das parcelas ' +
+      'passar disso, o topo é cortado nesse limite e a faixa inteira desce na mesma proporção — a razão entre ' +
+      'as duas pontas, que é a aritmética, fica intacta.',
+    base:
+      'Trava de sanidade da ABBA. Uma combinação improvável de respostas pode somar um número absurdo, e publicar ' +
+      'absurdo com aparência de conta é pior do que não publicar. Quando a trava dispara, a barra mostra onde ela ' +
+      'cortou — e é sinal de que a conversa vale muito mais que a conta.',
+  },
+  {
+    id: 'p5',
     tipo: 'evidencia',
     texto:
       'A causa nº 1 de fracasso em projetos de IA não é técnica: é começar sem combinar, antes, qual seria o critério de sucesso. ' +

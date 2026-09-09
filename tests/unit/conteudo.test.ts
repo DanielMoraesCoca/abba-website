@@ -1,10 +1,11 @@
 import { globSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { CAMINHOS, FASES } from '@/content/caminhos';
+import { CRENCAS, RECUSAS } from '@/content/manifesto';
 import { EVIDENCIAS, evidencia } from '@/content/evidencias';
 import type { Evidencia } from '@/content/tipos';
 import { EMPRESA } from '@/content/identidade';
-import { DIMENSOES, TOTAL_DIMENSOES } from '@/content/metodo';
+import { CAMADAS, DIMENSOES, TOTAL_DIMENSOES } from '@/content/metodo';
 import { NAV_PRINCIPAL, NAV_RODAPE } from '@/content/navegacao';
 import { PERGUNTAS } from '@/content/perguntas';
 import { TOTAL_DE_PERGUNTAS, esquemaRespostas } from '@/lib/analise/schema';
@@ -273,3 +274,71 @@ describe('a contagem de perguntas vem do esquema', () => {
     ).toEqual([]);
   });
 });
+
+/**
+ * Números escritos à mão na prosa têm que bater com os dados.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A home dizia "dez perguntas" enquanto o esquema validava onze. Aquele
+ * caso foi resolvido interpolando a contagem, mas a mesma armadilha está
+ * armada em quinze arquivos: "sete camadas", "25 dimensões", "9 grupos",
+ * "três caminhos", "três fases". Hoje todos corretos — e nenhum deles
+ * sabe que existe uma fonte da verdade.
+ *
+ * Interpolar tudo deixaria a prosa ilegível. A trava é outra: varrer o
+ * texto e conferir cada contagem contra os dados. Se alguém acrescentar
+ * uma camada ou uma dimensão, quinze arquivos passam a mentir de uma vez —
+ * e este teste diz quais.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('contagens na prosa batem com os dados', () => {
+  /**
+   * Compostos vêm primeiro: a alternância do regex casa a primeira opção
+   * que serve, e sem isto "vinte e cinco dimensões" casaria como "cinco".
+   * Foi o que aconteceu na primeira versão — o teste acusou erro no texto
+   * quando o errado era ele.
+   */
+  const EXTENSO: Record<string, number> = {
+    'vinte e cinco': 25, 'vinte e quatro': 24, 'vinte e três': 23,
+    doze: 12, onze: 11, dez: 10, nove: 9, oito: 8, sete: 7, seis: 6,
+    cinco: 5, quatro: 4, três: 3, duas: 2, dois: 2, uma: 1, um: 1,
+  };
+
+  /**
+   * Só substantivos que têm UM sentido neste código.
+   *
+   * "grupos" ficou de fora depois da varredura: aparece como os nove
+   * grupos de dimensões, mas também como "três grupos de pesquisa"
+   * (RAND, METR, DORA) e "os dois grupos" de fornecedores de agente. Um
+   * gatilho que grita em texto correto ensina todo mundo a ignorá-lo, e
+   * aí ele deixa de proteger o caso real.
+   */
+  const ESPERADO: Record<string, number> = {
+    camadas: CAMADAS.length,
+    dimensões: TOTAL_DIMENSOES,
+    caminhos: CAMINHOS.length,
+    fases: FASES.length,
+    crenças: CRENCAS.length,
+    recusas: RECUSAS.length,
+  };
+
+  const arquivos = globSync('src/**/*.{ts,tsx}').filter((f) => !f.includes('/tipos.ts'));
+  const numeros = Object.keys(EXTENSO).join('|');
+
+  it.each(Object.keys(ESPERADO))('"N %s" nunca contradiz os dados', (substantivo) => {
+    const esperado = ESPERADO[substantivo]!;
+    const padrao = new RegExp(`\\b(\\d{1,2}|${numeros})\\s+${substantivo}\\b`, 'gi');
+
+    const erros: string[] = [];
+    for (const arquivo of arquivos) {
+      for (const achado of readFileSync(arquivo, 'utf8').matchAll(padrao)) {
+        const valor = EXTENSO[achado[1]!.toLowerCase()] ?? Number(achado[1]);
+        if (valor !== esperado) {
+          erros.push(`${arquivo}: "${achado[0]}" — os dados dizem ${esperado}`);
+        }
+      }
+    }
+
+    expect(erros, `\n  ${erros.join('\n  ')}\n`).toEqual([]);
+  });
+});
+

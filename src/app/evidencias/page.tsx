@@ -49,8 +49,8 @@ export default function PaginaEvidencias() {
           {EVIDENCIAS.map((item) => (
             <RevelarItem key={item.id} className="flex flex-col">
               <NumeroComFonte evidencia={item} />
-              <p className="mt-5 text-[0.94rem] leading-relaxed text-slate-600">
-                <span className="font-mono text-[0.68rem] uppercase tracking-[0.12em] text-gold-700">
+              <p className="mt-5 text-sm leading-relaxed text-slate-600">
+                <span className="font-mono text-mono uppercase tracking-[0.12em] text-gold-700">
                   Leitura ·{' '}
                 </span>
                 {item.leitura}
@@ -82,13 +82,13 @@ export default function PaginaEvidencias() {
 
       <Secao tom="gelo" largura="estreita">
         <Revelar>
-          <h2 className="text-[1.6rem] leading-snug text-navy-700 sm:text-[2rem]">
+          <h2 className="text-2xl leading-snug text-navy-700">
             E a tese dos 70%? Essa não é estatística.
           </h2>
-          <p className="mt-6 text-[1.04rem] leading-[1.7] text-slate-700">
+          <p className="mt-6 text-base leading-[1.7] text-slate-700">
             {HEADLINE.corpo}
           </p>
-          <p className="mt-6 text-[1.04rem] leading-[1.7] text-slate-700">
+          <p className="mt-6 text-base leading-[1.7] text-slate-700">
             Frases desse tipo circulam no mercado sem medição rigorosa. Fingir que a nossa é número
             medido nos colocaria no mesmo balaio que combatemos. Então dizemos o que ela é:{' '}
             <strong className="font-medium text-navy-700">convicção e leitura de mercado</strong>. O
@@ -117,13 +117,13 @@ export default function PaginaEvidencias() {
               key={item.rotulo}
               className="grid gap-6 border-t border-ice-200/15 py-8 md:grid-cols-[1fr_1.4fr] md:gap-12"
             >
-              <h3 className="text-[1.08rem] leading-snug text-ice-100 line-through decoration-gold-500/70 decoration-1">
+              <h3 className="text-base leading-snug text-ice-100 line-through decoration-gold-500/70 decoration-1">
                 {item.rotulo}
               </h3>
               <div className="space-y-3">
-                <p className="text-[0.96rem] leading-relaxed text-ice-200/70">{item.porque}</p>
-                <p className="text-[0.94rem] leading-relaxed text-gold-400/90">
-                  <span className="font-mono text-[0.68rem] uppercase tracking-[0.12em]">
+                <p className="text-sm leading-relaxed text-ice-200/70">{item.porque}</p>
+                <p className="text-sm leading-relaxed text-gold-400/90">
+                  <span className="font-mono text-mono uppercase tracking-[0.12em]">
                     No lugar ·{' '}
                   </span>
                   {item.substituto}
@@ -134,7 +134,7 @@ export default function PaginaEvidencias() {
         </RevelarLista>
 
         <Revelar className="mt-14 max-w-2xl border-l-2 border-gold-500 pl-6">
-          <p className="text-[1rem] leading-[1.7] text-ice-200/80">
+          <p className="text-base leading-[1.7] text-ice-200/80">
             Regra geral: todo número de terceiro sai com a fonte na frase — “a RAND mediu”, “a
             Gartner projeta” — e vira alvo de auditoria do cliente. Número sem dono é boato com
             dígitos.

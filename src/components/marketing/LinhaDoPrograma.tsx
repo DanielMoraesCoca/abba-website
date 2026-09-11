@@ -143,7 +143,7 @@ export function LinhaDoPrograma() {
         })}
       </svg>
 
-      <figcaption className="mt-8 max-w-2xl text-[0.98rem] leading-[1.7] text-slate-700">
+      <figcaption className="mt-8 max-w-2xl text-sm leading-[1.7] text-slate-700">
         As fases estão desenhadas na proporção real do calendário — a fase 1 são seis semanas de
         doze meses, e é assim que ela aparece. O que a régua mostra e uma lista esconde:{' '}
         <strong className="font-medium text-navy-700">

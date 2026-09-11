@@ -173,7 +173,7 @@ export function Assistente() {
                 disabled={i > passo}
                 aria-current={atual ? 'step' : undefined}
                 className={cn(
-                  'nums flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.14em] transition-colors duration-300',
+                  'nums flex items-center gap-2 font-mono text-mono uppercase tracking-[0.14em] transition-colors duration-300',
                   atual && 'text-navy-700',
                   feito && 'text-gold-700 hover:text-navy-700',
                   !atual && !feito && 'text-slate-400',
@@ -198,7 +198,7 @@ export function Assistente() {
           com muito mais código enviado — e aqui não há saída para animar:
           o passo antigo sai da tela junto com a remontagem. */}
       <div key={passo} data-passo className="mt-10">
-          <p className="text-[0.95rem] leading-relaxed text-slate-600">{passoAtual?.resumo}</p>
+          <p className="text-sm leading-relaxed text-slate-600">{passoAtual?.resumo}</p>
 
           <div className="mt-10 space-y-14">
             {passo === 0 && (
@@ -315,7 +315,7 @@ export function Assistente() {
       </div>
 
       {erro && (
-        <p role="alert" className="mt-8 border-l-2 border-alerta-700 pl-4 text-[0.95rem] text-alerta-700">
+        <p role="alert" className="mt-8 border-l-2 border-alerta-700 pl-4 text-sm text-alerta-700">
           {erro}
         </p>
       )}
@@ -325,7 +325,7 @@ export function Assistente() {
           type="button"
           onClick={() => irPara(Math.max(passo - 1, 0))}
           disabled={passo === 0}
-          className="self-start font-mono text-[0.78rem] uppercase tracking-[0.12em] text-slate-500 transition-colors hover:text-navy-700 disabled:invisible"
+          className="self-start font-mono text-mono uppercase tracking-[0.12em] text-slate-500 transition-colors hover:text-navy-700 disabled:invisible"
         >
           ← Voltar
         </button>
@@ -345,7 +345,7 @@ export function Assistente() {
       </div>
 
       {!completo && (
-        <p className="mt-4 text-right font-mono text-[0.72rem] text-slate-500">
+        <p className="mt-4 text-right font-mono text-mono text-slate-500">
           Responda tudo deste passo para continuar.
         </p>
       )}

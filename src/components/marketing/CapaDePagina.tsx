@@ -22,11 +22,11 @@ export function CapaDePagina({
       <Container largura={largura}>
         <Revelar className="max-w-3xl">
           <Sobretitulo invertido>{sobretitulo}</Sobretitulo>
-          <h1 className="mt-7 text-[2.2rem] leading-[1.1] text-ice-100 sm:text-[3.1rem]">
+          <h1 className="mt-7 text-4xl leading-[1.1] text-ice-100">
             {titulo}
           </h1>
           {apoio && (
-            <div className="mt-8 text-[1.06rem] leading-[1.65] text-ice-200/75">{apoio}</div>
+            <div className="mt-8 text-base leading-[1.65] text-ice-200/75">{apoio}</div>
           )}
         </Revelar>
       </Container>

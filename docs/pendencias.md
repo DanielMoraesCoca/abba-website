@@ -438,3 +438,40 @@ correção torna a faixa honesta; não a torna certa. Se a aritmética produz
 um piso acima de 2,5% do faturamento, isso é o modelo discordando da
 trava — e a pergunta de fundo, que é de vocês, é se nesses casos vale
 publicar faixa nenhuma, como já fazemos quando falta volume.
+
+## 16. A família tipográfica de display · **chapéu Marca**
+
+A escala foi reconstruída em 11/09 (ver `identidade-visual-web.md`) e isso
+resolveu o problema estrutural. Resta um problema de **família**, e ele é
+decisão de vocês porque mexe na marca.
+
+**O diagnóstico.** Source Serif 4 é uma excelente fonte de TEXTO. Ela foi
+desenhada para parágrafo longo em corpo pequeno, e é por isso que funciona
+bem no site. Em 4rem, porém, ela não tem o contraste de traço nem o
+ajuste fino de uma fonte de DISPLAY — as referências usam Louize Display
+(Vero), Beausite Classic (Alethia, State of AI), Archivo (Sharplink),
+Kamerik (Hobro). Nenhuma delas é do Google Fonts: são fontes de fundição,
+licenciadas.
+
+**Parte da diferença entre "bom" e "extraordinário" em tipografia é
+dinheiro de licença.** Vale dizer isso em voz alta antes de qualquer
+promessa.
+
+Três saídas:
+
+1. **Ficar como está.** A escala nova já resolveu o que mais pesava. Source
+   Serif em display é correta, só não é memorável. Custo zero.
+2. **Uma display de código aberto no título, mantendo a Source Serif no
+   texto.** Candidatas com caráter real e licença livre: *Fraunces*
+   (variável, com eixo ótico e um eixo "wonk" que dá personalidade),
+   *Instrument Serif* (alto contraste, elegante), *Newsreader* (variável,
+   com eixo ótico). Custo: uma fonte a mais no orçamento de rede (temos
+   82 KB de folga) e regravar as 24 referências visuais.
+3. **Licenciar uma fundição.** É o que as referências fizeram. Custo real
+   em dinheiro, e a decisão certa se a marca for viver muitos anos.
+
+Recomendo a **2**, com a *Fraunces* — ela tem o eixo ótico que a Source
+Serif não carrega aqui, e o caráter dela combina com "documento que se
+assina" sem cair no clichê de serifada de revista. Mas é gosto, e gosto de
+marca é de vocês. Posso montar as três em imagem lado a lado para vocês
+escolherem vendo.

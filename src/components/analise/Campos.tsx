@@ -25,11 +25,11 @@ export function GrupoDeOpcoes<T extends string>({
 }) {
   return (
     <fieldset className="border-0 p-0">
-      <legend className="text-[1.22rem] leading-snug text-navy-700 sm:text-[1.4rem]">
+      <legend className="text-xl leading-snug text-navy-700">
         {pergunta.titulo}
       </legend>
       {pergunta.ajuda && (
-        <p className="mt-3 max-w-2xl text-[0.94rem] leading-relaxed text-slate-600">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
           {pergunta.ajuda}
         </p>
       )}
@@ -64,9 +64,9 @@ export function GrupoDeOpcoes<T extends string>({
                 )}
               />
               <span className="min-w-0">
-                <span className="block text-[1rem] leading-snug text-navy-700">{opcao.rotulo}</span>
+                <span className="block text-base leading-snug text-navy-700">{opcao.rotulo}</span>
                 {opcao.nota && (
-                  <span className="mt-1 block text-[0.86rem] leading-relaxed text-slate-500">
+                  <span className="mt-1 block text-xs leading-relaxed text-slate-500">
                     {opcao.nota}
                   </span>
                 )}
@@ -118,19 +118,19 @@ export function CampoTexto({
       <label
         htmlFor={id}
         className={cn(
-          'block text-[0.95rem] font-medium',
+          'block text-sm font-medium',
           escuro ? 'text-ice-100' : 'text-navy-700',
         )}
       >
         {rotulo}
         {!obrigatorio && (
-          <span className={cn('ml-2 text-[0.82rem]', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
+          <span className={cn('ml-2 text-xs', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
             (opcional)
           </span>
         )}
       </label>
       {ajuda && (
-        <p className={cn('mt-1.5 text-[0.86rem]', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
+        <p className={cn('mt-1.5 text-xs', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
           {ajuda}
         </p>
       )}
@@ -144,7 +144,7 @@ export function CampoTexto({
         aria-invalid={erro ? true : undefined}
         aria-describedby={erro ? `${id}-erro` : undefined}
         className={cn(
-          'mt-3 w-full rounded-[3px] border px-4 py-3 text-[1rem] transition-colors duration-300',
+          'mt-3 w-full rounded-[3px] border px-4 py-3 text-base transition-colors duration-300',
           'focus:outline-none focus:ring-2 focus:ring-teal-500/40',
           escuro
             ? 'border-ice-200/30 bg-navy-800 text-ice-100 placeholder:text-ice-300/50'
@@ -157,7 +157,7 @@ export function CampoTexto({
         <p
           id={`${id}-erro`}
           role="alert"
-          className={cn('mt-2 text-[0.86rem]', escuro ? 'text-gold-300' : 'text-alerta-700')}
+          className={cn('mt-2 text-xs', escuro ? 'text-gold-300' : 'text-alerta-700')}
         >
           {erro}
         </p>

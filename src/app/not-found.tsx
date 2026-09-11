@@ -10,10 +10,10 @@ export default function NaoEncontrada() {
     >
       <Container largura="estreita">
         <Sobretitulo invertido>Erro 404</Sobretitulo>
-        <h1 className="mt-7 text-[2.2rem] leading-[1.12] text-ice-100 sm:text-[2.9rem]">
+        <h1 className="mt-7 text-4xl leading-[1.12] text-ice-100">
           Esta página não existe.
         </h1>
-        <p className="mt-6 max-w-lg text-[1.05rem] leading-[1.65] text-ice-200/70">
+        <p className="mt-6 max-w-lg text-base leading-[1.65] text-ice-200/70">
           Ou existiu e mudou de lugar. Nos dois casos, o caminho de volta é curto.
         </p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

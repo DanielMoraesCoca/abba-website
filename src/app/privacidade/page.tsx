@@ -75,10 +75,10 @@ export default function PaginaPrivacidade() {
         <div className="space-y-14">
           {BLOCOS.map((bloco) => (
             <Revelar as="section" key={bloco.titulo}>
-              <h2 className="text-[1.4rem] leading-snug text-navy-700">{bloco.titulo}</h2>
+              <h2 className="text-xl leading-snug text-navy-700">{bloco.titulo}</h2>
               <div className="mt-5 space-y-4">
                 {bloco.paragrafos.map((p) => (
-                  <p key={p} className="text-[1.02rem] leading-[1.75] text-slate-700">
+                  <p key={p} className="text-base leading-[1.75] text-slate-700">
                     {p}
                   </p>
                 ))}
@@ -87,8 +87,8 @@ export default function PaginaPrivacidade() {
           ))}
 
           <Revelar as="section" className="border-t border-navy-700/15 pt-10">
-            <h2 className="text-[1.4rem] leading-snug text-navy-700">Como falar com a gente</h2>
-            <p className="mt-5 text-[1.02rem] leading-[1.75] text-slate-700">
+            <h2 className="text-xl leading-snug text-navy-700">Como falar com a gente</h2>
+            <p className="mt-5 text-base leading-[1.75] text-slate-700">
               Qualquer pedido sobre os seus dados vai para{' '}
               <a
                 href={`mailto:${EMPRESA.email}`}

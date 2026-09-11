@@ -49,8 +49,8 @@ export function FormularioContato() {
   if (estado === 'ok') {
     return (
       <div className="border-l-2 border-gold-500 pl-7">
-        <h2 className="font-display text-[1.6rem] text-navy-700">Recebido.</h2>
-        <p className="mt-4 max-w-xl text-[1.02rem] leading-[1.7] text-slate-700">
+        <h2 className="font-display text-2xl text-navy-700">Recebido.</h2>
+        <p className="mt-4 max-w-xl text-base leading-[1.7] text-slate-700">
           Um sócio responde em 24 horas úteis. Se for para a conversa de descoberta, ela leva 30
           minutos e a gente chega com pergunta, não com apresentação.
         </p>
@@ -88,10 +88,10 @@ export function FormularioContato() {
       </div>
 
       <div className="sm:col-span-2">
-        <label htmlFor="mensagem" className="block text-[0.95rem] font-medium text-navy-700">
+        <label htmlFor="mensagem" className="block text-sm font-medium text-navy-700">
           O que está acontecendo aí <span className="text-slate-500">(opcional)</span>
         </label>
-        <p className="mt-1.5 text-[0.86rem] text-slate-500">
+        <p className="mt-1.5 text-xs text-slate-500">
           Se já houver um número em reais que dói, esse é o melhor jeito de começar.
         </p>
         <textarea
@@ -99,7 +99,7 @@ export function FormularioContato() {
           rows={5}
           value={campos.mensagem}
           onChange={(e) => definir('mensagem')(e.target.value)}
-          className="mt-3 w-full rounded-[3px] border border-navy-700/20 bg-paper px-4 py-3 text-[1rem] leading-relaxed text-navy-700 transition-colors duration-300 placeholder:text-slate-400 focus:border-navy-700/50 focus:outline-none focus:ring-2 focus:ring-teal-500/40"
+          className="mt-3 w-full rounded-[3px] border border-navy-700/20 bg-paper px-4 py-3 text-base leading-relaxed text-navy-700 transition-colors duration-300 placeholder:text-slate-400 focus:border-navy-700/50 focus:outline-none focus:ring-2 focus:ring-teal-500/40"
         />
       </div>
 
@@ -126,13 +126,13 @@ export function FormularioContato() {
         >
           {estado === 'enviando' ? 'Enviando…' : 'Enviar'}
         </button>
-        <p className="font-mono text-[0.72rem] leading-relaxed text-slate-500">
+        <p className="font-mono text-mono leading-relaxed text-slate-500">
           Respondemos em 24 horas úteis. Sem lista, sem sequência automática.
         </p>
       </div>
 
       {estado === 'erro' && (
-        <p role="alert" className="sm:col-span-2 text-[0.94rem] text-alerta-700">
+        <p role="alert" className="sm:col-span-2 text-sm text-alerta-700">
           {mensagemErro} Você também pode escrever direto para {EMPRESA.email}.
         </p>
       )}

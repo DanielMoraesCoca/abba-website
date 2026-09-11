@@ -44,16 +44,16 @@ export default function Erro({
     >
       <Container largura="estreita">
         <Sobretitulo invertido>Falha</Sobretitulo>
-        <h1 className="mt-7 text-[2.2rem] leading-[1.12] text-ice-100 sm:text-[2.9rem]">
+        <h1 className="mt-7 text-4xl leading-[1.12] text-ice-100">
           Alguma coisa quebrou aqui.
         </h1>
-        <p className="mt-6 max-w-lg text-[1.05rem] leading-[1.65] text-ice-200/70">
+        <p className="mt-6 max-w-lg text-base leading-[1.65] text-ice-200/70">
           O erro é nosso, não seu. Tentar de novo costuma resolver — o que
           falhou pode ter sido uma resposta que demorou demais.
         </p>
 
         {error.digest && (
-          <p className="mt-6 font-mono text-[0.85rem] text-ice-200/45">
+          <p className="mt-6 font-mono text-xs text-ice-200/45">
             Código: {error.digest}
           </p>
         )}
@@ -67,7 +67,7 @@ export default function Erro({
           </Botao>
         </div>
 
-        <p className="mt-12 text-[0.95rem] leading-[1.6] text-ice-200/55">
+        <p className="mt-12 text-sm leading-[1.6] text-ice-200/55">
           Se insistir, escreva para{' '}
           <a
             href="mailto:contato@abbaservices.com.br"

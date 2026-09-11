@@ -25,11 +25,11 @@ export function Capa() {
         <Revelar className="max-w-4xl">
           <Sobretitulo invertido>Transformação em IA · Brasil</Sobretitulo>
 
-          <h1 className="mt-8 text-[2.4rem] leading-[1.08] text-ice-100 sm:text-[3.4rem] lg:text-[4rem]">
+          <h1 className="mt-8 text-5xl leading-[1.08] text-ice-100">
             {HEADLINE.titulo}
           </h1>
 
-          <p className="mt-8 max-w-2xl text-[1.1rem] leading-[1.6] text-ice-200/80 sm:text-[1.2rem]">
+          <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-ice-200/80">
             {HEADLINE.sub}
           </p>
 
@@ -63,8 +63,8 @@ export function Capa() {
               key={item.chave}
               className="border-t border-ice-200/12 py-7 first:border-t-0 sm:border-t-0"
             >
-              <p className="nums font-display text-[1.7rem] text-gold-400">{item.chave}</p>
-              <p className="mt-2 max-w-xs text-[0.94rem] leading-relaxed text-ice-300/65">
+              <p className="nums font-display text-2xl text-gold-400">{item.chave}</p>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ice-300/65">
                 {item.valor}
               </p>
             </RevelarItem>

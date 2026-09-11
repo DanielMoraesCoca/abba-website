@@ -50,7 +50,7 @@ export function Camadas() {
               {camada.num === ONDE_A_MAIORIA_PARA + 1 && (
                 <div className="my-5 flex items-center gap-4">
                   <span aria-hidden className="h-px flex-1 bg-gold-500/70" />
-                  <span className="text-center font-mono text-[0.68rem] uppercase tracking-[0.16em] text-gold-700">
+                  <span className="text-center font-mono text-mono uppercase tracking-[0.16em] text-gold-700">
                     A maioria das avaliações para aqui
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-gold-500/70" />
@@ -68,7 +68,7 @@ export function Camadas() {
               >
                 <span
                   className={cn(
-                    'nums font-mono text-[0.78rem]',
+                    'nums font-mono text-mono',
                     profunda ? 'text-gold-400' : 'text-gold-700',
                   )}
                 >
@@ -76,7 +76,7 @@ export function Camadas() {
                 </span>
                 <span
                   className={cn(
-                    'text-[1.06rem] leading-snug',
+                    'text-base leading-snug',
                     profunda ? 'text-ice-100' : 'text-navy-700',
                   )}
                 >
@@ -84,7 +84,7 @@ export function Camadas() {
                 </span>
                 <span
                   className={cn(
-                    'text-[0.98rem] leading-relaxed',
+                    'text-sm leading-relaxed',
                     profunda ? 'text-ice-200/80' : 'text-slate-600',
                   )}
                 >
@@ -96,7 +96,7 @@ export function Camadas() {
         })}
       </ol>
 
-      <figcaption className="mt-8 max-w-2xl text-[0.98rem] leading-[1.7] text-slate-700">
+      <figcaption className="mt-8 max-w-2xl text-sm leading-[1.7] text-slate-700">
         Da quarta camada para baixo, quase nada se enxerga de fora: onde o trabalho quebra, o que a
         empresa sabe e não usa, o que ela não sabe que deveria saber.{' '}
         <strong className="font-medium text-navy-700">

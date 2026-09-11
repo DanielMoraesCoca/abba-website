@@ -104,11 +104,11 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
 
   return (
     <figure className="m-0">
-      <figcaption className="font-mono text-[0.72rem] uppercase tracking-[0.2em] text-gold-700">
+      <figcaption className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
         De que a faixa é feita
       </figcaption>
 
-      <p className="mt-5 max-w-2xl text-[0.98rem] leading-[1.7] text-slate-700">
+      <p className="mt-5 max-w-2xl text-sm leading-[1.7] text-slate-700">
         Três parcelas somadas, nas duas pontas da faixa. Quanto mais claro o tom, menos sólida a
         parcela: o retrabalho sai de aritmética direta; a contingência é a mais assumida das três.
       </p>
@@ -122,13 +122,13 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
         ).map(({ chave, rotulo, total }) => (
           <div key={chave}>
             <div className="flex items-baseline justify-between gap-4">
-              <span className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-slate-500">
+              <span className="font-mono text-mono uppercase tracking-[0.14em] text-slate-500">
                 {rotulo}
               </span>
               {/* O rótulo é a SOMA DESENHADA, não a faixa publicada — senão a
                   barra e o número ao lado dela contariam histórias diferentes
                   sempre que o teto cortasse. */}
-              <span className="nums font-mono text-[0.82rem] text-navy-700">
+              <span className="nums font-mono text-xs text-navy-700">
                 {formatarReais(total)}
                 {chave === 'max' && posicaoDoTeto !== null && (
                   <span className="text-gold-700"> → cortada em {formatarReais(faixa.max)}</span>
@@ -181,7 +181,7 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
 
             {chave === 'max' && posicaoDoTeto !== null && (
               <p
-                className="mt-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-gold-700"
+                className="mt-2 font-mono text-mono uppercase tracking-[0.12em] text-gold-700"
                 style={{ marginLeft: `min(${posicaoDoTeto}%, calc(100% - 9rem))` }}
               >
                 ↑ teto
@@ -204,28 +204,28 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
               style={{ background: parcela.cor }}
             />
             <span>
-              <span className="block text-[0.96rem] leading-snug text-navy-700">
+              <span className="block text-sm leading-snug text-navy-700">
                 {parcela.rotulo}
               </span>
-              <span className="mt-0.5 block text-[0.86rem] leading-relaxed text-slate-600">
+              <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">
                 {parcela.explicacao}
               </span>
             </span>
-            <span className="nums self-start whitespace-nowrap font-mono text-[0.8rem] text-slate-600 sm:text-right">
+            <span className="nums self-start whitespace-nowrap font-mono text-xs text-slate-600 sm:text-right">
               {formatarReais(parcela.min)} – {formatarReais(parcela.max)}
             </span>
           </li>
         ))}
       </ul>
 
-      <p className="mt-7 text-[0.86rem] leading-relaxed text-slate-500">
+      <p className="mt-7 text-xs leading-relaxed text-slate-500">
         Os valores acima são a conta cheia. A faixa publicada no topo da página é essa mesma conta
         arredondada para dois algarismos significativos — porque precisão de real, numa estimativa
         feita de fora, seria precisão inventada.
       </p>
 
       {decomposicao.tetoAplicado && (
-        <p className="mt-6 border-l-2 border-gold-500 pl-5 text-[0.92rem] leading-relaxed text-slate-700">
+        <p className="mt-6 border-l-2 border-gold-500 pl-5 text-sm leading-relaxed text-slate-700">
           <span className="font-medium text-navy-700">O teto foi aplicado. </span>
           A soma das parcelas passou de {formatarPorcentagem(TETO_SOBRE_FATURAMENTO)} do faturamento
           que você declarou, então a ponta de cima foi cortada nesse limite — é o fio dourado na

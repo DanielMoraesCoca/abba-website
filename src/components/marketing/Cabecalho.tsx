@@ -156,7 +156,7 @@ export function Cabecalho() {
                 prefetch={false}
                 aria-current={ativo ? 'page' : undefined}
                 className={cn(
-                  'relative py-1 text-[0.92rem] transition-colors duration-300',
+                  'relative py-1 text-sm transition-colors duration-300',
                   textoClaro
                     ? 'text-ice-200/80 hover:text-ice-100'
                     : 'text-slate-600 hover:text-navy-700',
@@ -177,7 +177,7 @@ export function Cabecalho() {
           <Link
             href="/analise"
             className={cn(
-              'hidden rounded-[3px] px-5 py-2.5 text-[0.9rem] font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)] sm:inline-flex',
+              'hidden rounded-[3px] px-5 py-2.5 text-sm font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)] sm:inline-flex',
               // Sólido navy sobre fundo claro. Sobre escuro, o mesmo sólido
               // desapareceria no fundo — ali ele vira contorno, o mesmo
               // tratamento que já tinha sobre a capa.

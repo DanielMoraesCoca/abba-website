@@ -75,7 +75,7 @@ export default function PaginaConselheiro() {
           titulo="Se a entrega de um trimestre não estiver a caminho disto, o produto está sendo mal executado."
         />
         <Revelar className="mt-12 max-w-3xl border-l-2 border-gold-500 pl-8">
-          <blockquote className="font-display text-[1.35rem] leading-[1.55] text-navy-700 sm:text-[1.6rem]">
+          <blockquote className="font-display text-xl leading-[1.55] text-navy-700">
             “Antes, cada fornecedor de IA que batia na porta virava uma reunião perdida e uma
             dúvida. Hoje temos um conselheiro que já conhece nossa operação, senta no nosso conselho
             a cada trimestre, corta o ruído dos vendedores e nos diz com convicção o que fazer — e o
@@ -93,11 +93,11 @@ export default function PaginaConselheiro() {
               key={entrega.titulo}
               className="grid gap-5 border-t border-ice-200/15 py-8 md:grid-cols-[3rem_1fr_1.5fr] md:gap-10"
             >
-              <span className="nums font-mono text-[0.8rem] text-gold-500">
+              <span className="nums font-mono text-xs text-gold-500">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="text-[1.1rem] leading-snug text-ice-100">{entrega.titulo}</h3>
-              <p className="text-[0.96rem] leading-relaxed text-ice-200/70">{entrega.texto}</p>
+              <h3 className="text-lg leading-snug text-ice-100">{entrega.titulo}</h3>
+              <p className="text-sm leading-relaxed text-ice-200/70">{entrega.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -111,8 +111,8 @@ export default function PaginaConselheiro() {
         <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.05}>
           {NAO_E.map((item) => (
             <RevelarItem key={item.rotulo} className="border-t border-navy-700/15 pt-5">
-              <h3 className="text-[1.06rem] font-medium leading-snug text-navy-700">{item.rotulo}</h3>
-              <p className="mt-2.5 text-[0.94rem] leading-relaxed text-slate-600">{item.texto}</p>
+              <h3 className="text-base font-medium leading-snug text-navy-700">{item.rotulo}</h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-slate-600">{item.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -135,10 +135,10 @@ export default function PaginaConselheiro() {
 
       <Secao tom="navy-profundo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
-          <h2 className="text-[1.9rem] leading-[1.2] text-ice-100 sm:text-[2.4rem]">
+          <h2 className="text-3xl leading-[1.2] text-ice-100">
             Uma regra que nos custa dinheiro, e fica escrita mesmo assim.
           </h2>
-          <p className="mx-auto mt-7 max-w-xl text-[1.05rem] leading-[1.7] text-ice-200/75">
+          <p className="mx-auto mt-7 max-w-xl text-base leading-[1.7] text-ice-200/75">
             O Conselheiro nunca é vendido a quem poderia comprar o Programa. São compradores
             diferentes, e empurrar o produto errado para o cliente certo é o jeito mais rápido de
             perder os dois.

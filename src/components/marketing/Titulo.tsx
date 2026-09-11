@@ -33,7 +33,7 @@ export function TituloDeSecao({
       )}
       <h2
         className={cn(
-          'mt-5 text-[2rem] leading-[1.12] sm:text-[2.6rem]',
+          'mt-5 text-3xl leading-[1.12]',
           invertido ? 'text-ice-100' : 'text-navy-700',
         )}
       >
@@ -42,7 +42,7 @@ export function TituloDeSecao({
       {apoio && (
         <div
           className={cn(
-            'mt-6 text-[1.06rem] leading-[1.65]',
+            'mt-6 text-base leading-[1.65]',
             invertido ? 'text-ice-200/75' : 'text-slate-700',
           )}
         >

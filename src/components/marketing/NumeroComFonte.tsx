@@ -42,7 +42,7 @@ export function NumeroComFonte({
     >
       <p
         className={cn(
-          'nums font-display text-[2.6rem] leading-[1.05] tracking-[-0.02em] sm:text-[3rem]',
+          'nums font-display text-4xl leading-[1.05] tracking-[-0.02em]',
           escuro ? 'text-gold-400' : 'text-navy-700',
         )}
       >
@@ -51,7 +51,7 @@ export function NumeroComFonte({
 
       <p
         className={cn(
-          'mt-3 text-[1.02rem] leading-relaxed',
+          'mt-3 text-base leading-relaxed',
           escuro ? 'text-ice-200/85' : 'text-slate-700',
         )}
       >
@@ -60,7 +60,7 @@ export function NumeroComFonte({
 
       <figcaption
         className={cn(
-          'mt-auto pt-6 font-mono text-[0.68rem] leading-relaxed',
+          'mt-auto pt-6 font-mono text-mono leading-relaxed',
           escuro ? 'text-ice-300/65' : 'text-slate-500',
         )}
       >

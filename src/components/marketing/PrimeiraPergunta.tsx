@@ -35,10 +35,10 @@ export function PrimeiraPergunta() {
         <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <Revelar>
             <Sobretitulo invertido>A análise começa aqui</Sobretitulo>
-            <h2 className="mt-6 text-balance text-[1.9rem] leading-[1.18] text-ice-100 sm:text-[2.4rem]">
+            <h2 className="mt-6 text-balance text-3xl leading-[1.18] text-ice-100">
               Quantas pessoas trabalham na sua empresa?
             </h2>
-            <p className="mt-6 max-w-[46ch] text-[1.02rem] leading-[1.7] text-ice-200/70">
+            <p className="mt-6 max-w-[46ch] text-base leading-[1.7] text-ice-200/70">
               É a primeira de {porExtenso(TOTAL_DE_PERGUNTAS)}. No fim sai uma faixa anual em
               reais do que estimamos estar saindo sem precisar sair, com as premissas na mesa.
             </p>
@@ -53,7 +53,7 @@ export function PrimeiraPergunta() {
               <li key={faixa.valor}>
                 <Link
                   href={`/analise?porte=${faixa.valor}`}
-                  className="group flex items-center justify-between gap-4 border-t border-ice-100/15 py-5 text-[1.04rem] text-ice-200 no-underline transition-colors duration-[var(--duration-micro)] ease-[var(--ease-micro)] hover:border-gold-400/60 hover:text-ice-100"
+                  className="group flex items-center justify-between gap-4 border-t border-ice-100/15 py-5 text-base text-ice-200 no-underline transition-colors duration-[var(--duration-micro)] ease-[var(--ease-micro)] hover:border-gold-400/60 hover:text-ice-100"
                 >
                   {faixa.rotulo}
                   <svg
@@ -74,7 +74,7 @@ export function PrimeiraPergunta() {
           </Revelar>
         </div>
 
-        <p className="mt-12 font-mono text-[0.74rem] tracking-wide text-ice-300/55">
+        <p className="mt-12 font-mono text-mono tracking-wide text-ice-300/55">
           Gratuito. Sem cadastro em lista. Cerca de três minutos.
         </p>
       </Container>

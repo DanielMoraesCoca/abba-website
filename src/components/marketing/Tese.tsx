@@ -40,7 +40,7 @@ export function Tese() {
                 Revelado por corte, não por opacidade: num numeral desta
                 altura, meio segundo de meio-tom é meio segundo de borrão. */}
             <p
-              className="nums font-display text-[7rem] leading-[0.82] tracking-[-0.04em] text-navy-700 sm:text-[11rem] lg:text-[13rem]"
+              className="nums font-display text-display leading-[0.82] tracking-[-0.04em] text-navy-700"
               aria-hidden
             >
               70
@@ -49,10 +49,10 @@ export function Tese() {
           </Revelar>
 
           <Revelar atraso={0.12} className="lg:pt-4">
-            <p className="max-w-[34ch] font-display text-[1.6rem] leading-[1.3] text-navy-700 sm:text-[2.1rem]">
+            <p className="max-w-[34ch] font-display text-2xl leading-[1.3] text-navy-700">
               do valor de uma transformação em IA vive em pessoas, processos e cultura.
             </p>
-            <p className="mt-8 max-w-[52ch] text-[1.05rem] leading-[1.7] text-slate-700">
+            <p className="mt-8 max-w-[52ch] text-base leading-[1.7] text-slate-700">
               O seu fornecedor te vendeu os outros 30%. Nós instalamos o resto, com método próprio,
               plataforma própria e resultado verificado no final — num registro que a sua diretoria
               pode auditar.
@@ -60,7 +60,7 @@ export function Tese() {
 
             <div className="rule-gold mt-10 max-w-[52ch]" aria-hidden />
 
-            <p className="mt-6 max-w-[52ch] font-mono text-[0.82rem] leading-relaxed text-slate-600">
+            <p className="mt-6 max-w-[52ch] font-mono text-xs leading-relaxed text-slate-600">
               {HEADLINE.notaDaTese}
             </p>
           </Revelar>

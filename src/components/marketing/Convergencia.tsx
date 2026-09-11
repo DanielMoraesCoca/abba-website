@@ -35,14 +35,14 @@ export function Convergencia() {
           const e = evidencia(id);
           return (
             <div key={id} className="flex flex-col border-t border-gold-500/40 pt-7">
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-gold-400">
+              <p className="font-mono text-mono uppercase tracking-[0.16em] text-gold-400">
                 {O_QUE_MEDIU[id]}
               </p>
-              <p className="nums mt-4 font-display text-[1.9rem] leading-[1.1] text-ice-100">
+              <p className="nums mt-4 font-display text-3xl leading-[1.1] text-ice-100">
                 {e.numero}
               </p>
-              <p className="mt-3 text-[0.96rem] leading-relaxed text-ice-200/80">{e.afirmacao}</p>
-              <p className="mt-auto pt-6 font-mono text-[0.68rem] leading-relaxed text-ice-300/60">
+              <p className="mt-3 text-sm leading-relaxed text-ice-200/80">{e.afirmacao}</p>
+              <p className="mt-auto pt-6 font-mono text-mono leading-relaxed text-ice-300/60">
                 {e.fonte} ({e.ano})
               </p>
             </div>
@@ -70,13 +70,13 @@ export function Convergencia() {
       </svg>
 
       <figcaption className="mx-auto max-w-2xl text-center">
-        <p className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-gold-400">
+        <p className="font-mono text-mono uppercase tracking-[0.2em] text-gold-400">
           Onde as três chegam
         </p>
-        <p className="mt-5 font-display text-[1.35rem] leading-[1.5] text-ice-100 sm:text-[1.6rem]">
+        <p className="mt-5 font-display text-xl leading-[1.5] text-ice-100">
           Ninguém sabe se a IA ajudou sem combinar a métrica antes e medir de fora depois.
         </p>
-        <p className="mt-5 text-[0.98rem] leading-[1.7] text-ice-200/75">
+        <p className="mt-5 text-sm leading-[1.7] text-ice-200/75">
           Três grupos que não se conhecem, medindo coisas diferentes, com métodos diferentes. Não é
           a nossa opinião repetida três vezes — é o mesmo achado por três caminhos independentes. É
           por isso que a ABBA existe do jeito que existe.

@@ -5,7 +5,7 @@ type Variante = 'primario' | 'secundario' | 'fantasma' | 'primario-invertido';
 
 const BASE =
   'group relative inline-flex items-center justify-center gap-2.5 rounded-[3px] px-6 py-3.5 ' +
-  'font-sans text-[0.94rem] font-medium tracking-[0.01em] transition-[background-color,color,border-color,box-shadow,transform] ' +
+  'font-sans text-sm font-medium tracking-[0.01em] transition-[background-color,color,border-color,box-shadow,transform] ' +
   'duration-[var(--duration-micro)] ease-[var(--ease-micro)] will-change-transform active:translate-y-px';
 
 const VARIANTES: Record<Variante, string> = {

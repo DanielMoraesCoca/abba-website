@@ -112,3 +112,56 @@ A marca da ABBA é um grafo de nós dourados. A capa usa essa mesma ideia em
 movimento, num canvas único, com malha gerada por PRNG de semente fixa —
 **a mesma malha em toda visita**. Capa que muda a cada recarga não é
 identidade, é ruído.
+
+
+## A escala tipográfica (11/09)
+
+> Reconstruída depois de uma auditoria. O que existia não era escala.
+
+**O diagnóstico, com número.** O site tinha **53 tamanhos de fonte
+distintos** e **zero `clamp()`**. Medido contra o CSS de produção das
+referências que os sócios trouxeram:
+
+| Site | Tamanhos | `clamp()` |
+|---|---:|---:|
+| PX Push | 7 | 7 |
+| Hobro | 9 | 165 |
+| Vero | 12 | 9 |
+| Sharplink | 15 | 0 |
+| Fato Analytics | 18 | 12 |
+| Otsuka Air | 25 | 3 |
+| **ABBA (antes)** | **53** | **0** |
+
+O pior grupo era o corpo: `0.98`, `1`, `1.02`, `1.04`, `1.05`, `1.06` e
+`1.08rem` — sessenta e cinco usos para a mesma coisa. Ninguém enxerga a
+diferença entre 1,02 e 1,05; todo mundo sente que nada está em proporção.
+É isso que faz uma página parecer básica mesmo com cor, espaço e conteúdo
+certos.
+
+**Onze degraus, cada um fluido.** Interpolam entre 360px e 1440px de
+viewport. Isso eliminou os **25 saltos por breakpoint**: o tipo cresce
+continuamente em vez de pular no `sm:`, que é a diferença entre um desenho
+e três desenhos costurados.
+
+**Entrelinha e espacejamento vêm com o degrau**, e é aí que a escala deixa
+de ser uma lista de tamanhos e vira tipografia. Duas regras óticas:
+
+- Quanto maior o tipo, **menor a entrelinha** — de 1,68 no corpo a 0,82 no
+  numeral de display. Em 4rem, entrelinha de corpo abre buracos e a frase
+  deixa de ler como unidade.
+- Quanto maior o tipo, **mais apertado o espacejamento** — de 0 no corpo a
+  −0,042em no display. O olho julga o espaço em proporção à altura do
+  caractere, não em valor absoluto. Serifada grande com espacejamento de
+  texto corrido é a marca mais confiável de site feito sem tipógrafo, e era
+  o nosso caso.
+- O mono vai no sentido contrário: **+0,18em**. Versalete curto precisa de
+  ar para não virar borrão.
+
+**Ganho colateral de acessibilidade:** os dois menores tamanhos do site
+(`0.55rem` na assinatura da marca e `0.66rem` no rodapé) subiram para o
+piso de `0.7rem`. As quinze auditorias do axe continuam passando.
+
+**O que NÃO mudou, e é decisão dos sócios:** as famílias. Source Serif 4
+nos títulos, Inter no corpo, JetBrains Mono nos números. A escala é
+estrutura e não tem risco de marca; trocar a família é outra conversa —
+ver pendência 16.

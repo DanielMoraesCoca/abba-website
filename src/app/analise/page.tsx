@@ -22,10 +22,10 @@ export default function PaginaAnalise() {
         <Container largura="estreita">
           <Revelar>
             <Sobretitulo invertido>Gratuito · cerca de três minutos</Sobretitulo>
-            <h1 className="mt-7 text-[2.1rem] leading-[1.12] text-ice-100 sm:text-[2.9rem]">
+            <h1 className="mt-7 text-4xl leading-[1.12] text-ice-100">
               A análise chega feita, não oferecida.
             </h1>
-            <p className="mt-7 text-[1.05rem] leading-[1.65] text-ice-200/75">
+            <p className="mt-7 text-base leading-[1.65] text-ice-200/75">
               {maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas sobre como o dinheiro anda dentro da sua
               empresa. No fim, uma faixa
               anual em reais, o vetor por onde ele sai, as premissas que usamos e o que não deu para

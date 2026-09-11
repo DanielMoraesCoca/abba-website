@@ -77,7 +77,7 @@ export default function PaginaMapaDeVazamento() {
             titulo="O número também escolhe quem lê."
             className="max-w-none"
           />
-          <Revelar className="space-y-6 text-[1.05rem] leading-[1.7] text-slate-700">
+          <Revelar className="space-y-6 text-base leading-[1.7] text-slate-700">
             <p>
               Hipótese de IA circula na TI. Faixa de dinheiro vazando circula na diretoria e no
               financeiro — que é exatamente onde a decisão mora.
@@ -109,11 +109,11 @@ export default function PaginaMapaDeVazamento() {
               key={regra.titulo}
               className="grid gap-5 border-t border-ice-200/15 py-8 md:grid-cols-[3rem_1fr_1.4fr] md:gap-10"
             >
-              <span className="nums font-mono text-[0.8rem] text-gold-500">
+              <span className="nums font-mono text-xs text-gold-500">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="text-[1.08rem] leading-snug text-ice-100">{regra.titulo}</h3>
-              <p className="text-[0.96rem] leading-relaxed text-ice-200/70">{regra.texto}</p>
+              <h3 className="text-base leading-snug text-ice-100">{regra.titulo}</h3>
+              <p className="text-sm leading-relaxed text-ice-200/70">{regra.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -136,10 +136,10 @@ export default function PaginaMapaDeVazamento() {
           <RevelarLista as="ol" className="space-y-7" passo={0.05}>
             {CONVERSA.map((pergunta, i) => (
               <RevelarItem as="li" key={pergunta} className="flex gap-5">
-                <span className="nums mt-1 font-display text-[1.4rem] leading-none text-gold-500">
+                <span className="nums mt-1 font-display text-xl leading-none text-gold-500">
                   {i + 1}
                 </span>
-                <p className="text-[1.05rem] leading-[1.6] text-navy-700">{pergunta}</p>
+                <p className="text-base leading-[1.6] text-navy-700">{pergunta}</p>
               </RevelarItem>
             ))}
           </RevelarLista>
@@ -148,10 +148,10 @@ export default function PaginaMapaDeVazamento() {
 
       <Secao tom="gelo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
-          <h2 className="text-[1.9rem] leading-[1.2] text-navy-700 sm:text-[2.4rem]">
+          <h2 className="text-3xl leading-[1.2] text-navy-700">
             A versão web responde na hora.
           </h2>
-          <p className="mx-auto mt-7 max-w-xl text-[1.05rem] leading-[1.7] text-slate-700">
+          <p className="mx-auto mt-7 max-w-xl text-base leading-[1.7] text-slate-700">
             {maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas fechadas em lugar das cinco abertas, uma faixa
             calculada por aritmética
             que você consegue refazer, e as mesmas cinco regras de honestidade valendo. O Mapa

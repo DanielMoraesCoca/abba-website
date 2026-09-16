@@ -6,7 +6,7 @@
  *
  * A regra da casa (base-de-evidencias.md) é: número externo só sai com
  * fonte primária, e só depois de registrado no abba-ops. Uma estimativa
- * feita de fora, porém, precisa assumir coisas — e o Mapa de Vazamento
+ * feita de fora, porém, precisa assumir coisas — e a doutrina da casa
  * resolve isso do jeito certo: as premissas são NUMERADAS, DECLARADAS e
  * apresentadas junto do resultado, incluindo "o que assumimos e ainda não
  * sabemos".

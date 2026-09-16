@@ -40,7 +40,7 @@ export function Capa() {
 
           <div className="mt-11 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Botao href="/analise" variante="primario-invertido">
-              Começar a análise gratuita
+              Fazer a primeira leitura
             </Botao>
             {/* "Ver como funciona" era o rótulo. A pesquisa sobre chamada de
                 ação é consistente: rótulo vago ("saiba mais", "como funciona")

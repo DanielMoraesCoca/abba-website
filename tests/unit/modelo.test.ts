@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
+import { qualificar } from '@/lib/analise/modelo';
 import {
   arredondarOrdemDeGrandeza,
   estimar,
   formatarFaixa,
   formatarReais,
-  qualificar,
-  type RespostasAnalise,
-} from '@/lib/analise/modelo';
+  type RespostasComFaturamento,
+} from '@/lib/analise/faixa-suspensa';
 import {
   FATURAMENTO_MEDIO,
   PREMISSAS_DECLARADAS,
@@ -22,15 +22,26 @@ import {
 } from '@/lib/analise/perguntas';
 
 /**
- * As cinco regras de honestidade do Mapa de Vazamento, travadas em teste.
+ * As cinco regras de honestidade da faixa, travadas em teste.
  *
- * Se algum destes falhar e você não tiver mudado o modelo de propósito:
+ * ────────────────────────────────────────────────────────────────────────
+ * A faixa em reais está SUSPENSA: nenhuma página a renderiza, e o cabeçalho
+ * de `lib/analise/faixa-suspensa.ts` explica a decisão. Estes testes
+ * continuam rodando de propósito.
+ *
+ * O motivo é concreto e já aconteceu uma vez: o teto de sanidade contra o
+ * faturamento escondia um piso inventado que atingia uma em cada seis
+ * respostas, e foi um destes testes que o pegou. Aritmética suspensa e
+ * provada volta ao ar em uma linha. Aritmética suspensa e apodrecida volta
+ * depois de uma semana de depuração, ou volta errada.
+ *
+ * Se algum destes falhar e você não tiver mudado a aritmética de propósito:
  * pare. Cada um corresponde a uma regra que os sócios escreveram em
  * abba-ops/03-comercial/mapa-de-vazamento.md, e afrouxá-la em silêncio é
  * exatamente o tipo de erosão que a régua existe para impedir.
  */
 
-const BASE: RespostasAnalise = {
+const BASE: RespostasComFaturamento = {
   colaboradores: '201-500',
   faturamento: '50-200m',
   volume: '2k-10k',
@@ -44,7 +55,7 @@ const BASE: RespostasAnalise = {
   prazo: 'sim-12m',
 };
 
-function comAs(mudancas: Partial<RespostasAnalise>): RespostasAnalise {
+function comAs(mudancas: Partial<RespostasComFaturamento>): RespostasComFaturamento {
   return { ...BASE, ...mudancas };
 }
 
@@ -232,7 +243,7 @@ describe('a faixa é sempre refazível a partir das premissas', () => {
       dono: 'area',
       prazo: 'sim-12m',
     } as const;
-    const casos: RespostasAnalise[] = [];
+    const casos: RespostasComFaturamento[] = [];
     for (const c of FAIXAS_COLABORADORES)
       for (const f of FAIXAS_FATURAMENTO)
         for (const v of P_VOLUME.opcoes)
@@ -247,7 +258,7 @@ describe('a faixa é sempre refazível a partir das premissas', () => {
                   toques: t.valor,
                   fechamento: fe.valor,
                   latencia: l.valor,
-                } as RespostasAnalise);
+                } as RespostasComFaturamento);
     return casos;
   }
 

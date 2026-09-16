@@ -6,7 +6,6 @@ import { CampoTexto, GrupoDeOpcoes } from './Campos';
 import { Resultado, type RespostaAnalise } from './Resultado';
 import {
   FAIXAS_COLABORADORES,
-  FAIXAS_FATURAMENTO,
   P_DONO,
   P_FECHAMENTO,
   P_LATENCIA,
@@ -20,7 +19,7 @@ import {
 import { cn } from '@/lib/utils';
 
 /**
- * O assistente da Análise ABBA: quatro passos, onze respostas.
+ * O assistente da Primeira Leitura: quatro passos, onze respostas.
  *
  * Estado num objeto só, com chaves iguais às do esquema da API — o que o
  * formulário guarda é literalmente o que a rota valida. Menos tradução,
@@ -41,7 +40,7 @@ const PASSOS: readonly Passo[] = [
     id: 'empresa',
     titulo: 'A empresa',
     resumo: 'Para dimensionar a conta. Nada aqui é publicado nem guardado.',
-    campos: ['empresa', 'setor', 'colaboradores', 'faturamento'],
+    campos: ['empresa', 'setor', 'colaboradores'],
   },
   {
     id: 'caminho',
@@ -233,18 +232,11 @@ export function Assistente() {
                   colunas={2}
                 />
 
-                <GrupoDeOpcoes
-                  pergunta={{
-                    id: 'faturamento',
-                    titulo: 'Qual a faixa de faturamento anual?',
-                    ajuda:
-                      'Serve só para um teto de sanidade: a estimativa nunca passa de uma fração pequena do faturamento. Se preferir não dizer, o teto simplesmente não é aplicado.',
-                    opcoes: FAIXAS_FATURAMENTO,
-                  }}
-                  valor={rascunho.faturamento}
-                  aoMudar={(v) => definir('faturamento', v)}
-                  colunas={2}
-                />
+                {/* A pergunta de faturamento saiu daqui.
+                    Ela servia a uma coisa só: o teto de sanidade da faixa
+                    em reais. Com a faixa suspensa, ela virava uma pergunta
+                    sobre o dinheiro de um estranho que não alimentava nada
+                    do que ele ia ler na tela seguinte. */}
               </>
             )}
 

@@ -49,7 +49,7 @@ export const REGRAS_DE_INVESTIMENTO = [
       'No lugar dele, bônus de fechamento com contrapartidas escritas.',
   },
   {
-    titulo: 'O Mapa de Vazamento nunca se cobra',
+    titulo: 'O assessment de abertura nunca se cobra',
     texto: 'É a porta de entrada, e é de graça. Sem contrapartida, sem cadastro obrigatório em lista, sem cobrança depois.',
   },
 ] as const;

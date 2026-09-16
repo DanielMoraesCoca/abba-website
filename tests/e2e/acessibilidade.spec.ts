@@ -22,7 +22,7 @@ const ROTAS = [
   '/metodo',
   '/evidencias',
   '/manifesto',
-  '/mapa-de-vazamento',
+  '/assessment-gratuito',
   '/analise',
   '/contato',
   '/privacidade',
@@ -99,7 +99,6 @@ test('o assistente da Análise passa no axe também na tela de resultado', async
   await page.fill('#empresa', 'Exemplo');
   await page.fill('#setor', 'serviços');
   await escolher('colaboradores', '51-200');
-  await escolher('faturamento', '10-50m');
   await page.getByRole('button', { name: 'Continuar' }).click();
   await escolher('volume', '2k-10k');
   await escolher('toques', '3-4');
@@ -114,7 +113,7 @@ test('o assistente da Análise passa no axe também na tela de resultado', async
   await escolher('prazo', 'sim-12m');
   await page.getByRole('button', { name: 'Ver a leitura preliminar' }).click();
 
-  await expect(page.getByText(/calculado de fora/i)).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(/lido de fora/i)).toBeVisible({ timeout: 20_000 });
   await revelarTudo(page);
 
   const { violations } = await new AxeBuilder({ page }).withTags(REGRAS).analyze();

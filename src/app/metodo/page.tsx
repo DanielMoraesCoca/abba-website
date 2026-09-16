@@ -1,6 +1,6 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
 import { Camadas } from '@/components/marketing/Camadas';
-import { TituloDeSecao } from '@/components/marketing/Titulo';
+import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
@@ -25,7 +25,12 @@ export default function PaginaMetodo() {
     <>
       <CapaDePagina
         sobretitulo="O método"
-        titulo="A maioria das avaliações para na terceira camada. A transformação de verdade exige ler a empresa como um organismo."
+        titulo={
+          <>
+            A maioria das avaliações para na terceira camada. A transformação de verdade exige ler a
+            empresa como um <Enfase>organismo</Enfase>.
+          </>
+        }
         apoio={
           <p>
             Missão, economia, operação, rupturas, ativos ocultos, pontos cegos e visão. Sete

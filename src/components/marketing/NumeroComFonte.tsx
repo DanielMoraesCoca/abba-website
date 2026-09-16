@@ -60,7 +60,16 @@ export function NumeroComFonte({
 
       <figcaption
         className={cn(
-          'mt-auto pt-6 font-mono text-rotulo leading-relaxed',
+          /* `tracking-[0.02em]` cancela a entreletra de rótulo.
+             ────────────────────────────────────────────────────────────
+             O degrau de 13px do sistema carrega `letter-spacing: .24em`,
+             porque foi desenhado para RÓTULO: três palavras em caixa alta,
+             onde o ar entre as letras é o que dá a elas peso de etiqueta.
+             Esta legenda não é rótulo: é a linha da fonte, com nome de
+             pesquisa, ano e nível de confiança. Com .24em ela quebrava em
+             seis linhas e empurrava o número para longe da própria fonte.
+             Fotografei e reprovei. */
+          'mt-auto pt-6 font-mono text-rotulo leading-relaxed tracking-[0.02em]',
           escuro ? 'text-ardosia-clara' : 'text-ardosia',
         )}
       >
@@ -90,14 +99,43 @@ export function NumeroComFonte({
         {evidencia.conferidaEm && (
           <> · conferida em {formatarConferencia(evidencia.conferidaEm)}</>
         )}
-        {evidencia.ressalva && (
-          /* A ressalva era itálica dentro de uma legenda em mono, e a Plex
-             Mono não tem itálica carregada: o navegador inclinava a romana
-             na marra. O rótulo "Ressalva" já separa a frase do resto; o que
-             ela precisava era de ar, não de inclinação falsa. */
-          <span className="mt-2 block">Ressalva: {evidencia.ressalva}</span>
-        )}
       </figcaption>
+
+      {/* A RESSALVA SAI DA MONO. É regra, não gosto.
+          ──────────────────────────────────────────────────────────────
+          A régua da casa diz que IBM Plex Mono vale para rótulo, número,
+          e-mail e dado, e NUNCA para texto corrido. A ressalva da METR tem
+          sessenta palavras: é texto corrido, por qualquer definição. Em
+          mono de 13px, numa coluna de um terço, ela virava um muro cinza
+          de quinze linhas que dominava a seção e fazia o leitor pular
+          justamente a parte mais honesta do bloco.
+
+          Em Source Serif de 16px ela lê como o que é: a frase em que a
+          casa conta o limite da própria evidência. A ressalva continua
+          visível sem clique e sem hover, que é a única coisa que a trava
+          exige dela.
+
+          O itálico também saiu: a Plex Mono não tinha itálica carregada e
+          o navegador inclinava a romana na marra. O rótulo "Ressalva" já
+          separa a frase do resto. */}
+      {evidencia.ressalva && (
+        <p
+          className={cn(
+            'mt-4 text-legenda leading-[1.6]',
+            escuro ? 'text-ardosia-clara' : 'text-ardosia',
+          )}
+        >
+          <span
+            className={cn(
+              'mr-1.5 font-mono text-rotulo uppercase tracking-[0.12em]',
+              escuro ? 'text-ouro-claro' : 'text-ardosia',
+            )}
+          >
+            Ressalva
+          </span>
+          {evidencia.ressalva}
+        </p>
+      )}
     </figure>
   );
 }

@@ -4,32 +4,38 @@ import type { Caminho, Fase } from './tipos';
  * Os 3 caminhos e as 3 fases.
  * Origem: abba-ops/00-identidade/modelo-de-servico.md (canônico · V5).
  *
- * Vocabulário travado (marca-e-nomenclatura.md): "Mapa de Vazamento",
+ * Vocabulário travado (marca-e-nomenclatura.md): "Assessment gratuito",
  * "AI Native · Ano 1", "Assinatura da Capacidade", "Exame Anual de IA",
  * "Portão da Prova", "Conselheiro de IA". Nunca "curso", nunca "módulo",
  * nunca "auditamos".
+ *
+ * O caminho 1 chamava-se "Mapa de Vazamento" até aqui. O nome foi aposentado
+ * no abba-ops: o documento que ele descrevia, duas páginas abrindo com uma
+ * cifra em reais, nunca chegou a ser produzido pela ferramenta. O nome
+ * externo fixado em marca-e-nomenclatura.md é "Assessment gratuito", e o que
+ * a ferramenta entrega de verdade está em 03-comercial/assessment-gratuito.md.
  */
 
 export const CAMINHOS = [
   {
-    id: 'mapa-de-vazamento',
+    id: 'assessment-gratuito',
     ordem: 1,
-    nome: 'Mapa de Vazamento',
+    nome: 'Assessment gratuito',
     chamada: 'Gratuito. A porta única de entrada.',
     descricao:
-      'Uma análise da sua empresa feita só com informação pública, com a primeira página em reais: ' +
-      'a faixa que estimamos estar saindo sem precisar sair, o vetor por onde ela sai e as premissas com fonte. ' +
-      'Foi calculado de fora, e a gente diz isso na primeira linha.',
+      'Um assessment de IA da sua empresa montado só com informação pública, com nota de maturidade em seis ' +
+      'eixos, oportunidades priorizadas, um piloto nomeado para começar, e o registro de todas as fontes ' +
+      'usadas. Foi montado de fora, e o documento diz isso em cada achado.',
     paraQuem: 'Para qualquer empresa que queira ver o método antes de pagar por ele.',
     itens: [
-      'Uma faixa em reais, nunca um número exato',
-      'O vetor principal: por onde o dinheiro sai',
-      'Três premissas numeradas, cada uma com a fonte citada',
-      'As perguntas que só você pode responder, e que mudariam a estimativa',
-      'O limite honesto declarado: o que não foi olhado',
+      'Nota de maturidade de zero a cinco em seis eixos',
+      'Cada achado rotulado: fato declarado ou hipótese, e a confiança de cada um',
+      'Oportunidades priorizadas, e um piloto nomeado para começar',
+      'O registro das fontes: id, citação literal e endereço de cada uma',
+      'A seção de desconhecidos: o que não deu para descobrir de fora vira a pauta da conversa',
     ],
-    href: '/mapa-de-vazamento',
-    cta: { texto: 'Começar a análise gratuita', href: '/analise' },
+    href: '/assessment-gratuito',
+    cta: { texto: 'Ver o que vem no assessment', href: '/assessment-gratuito' },
   },
   {
     id: 'programa',
@@ -49,7 +55,7 @@ export const CAMINHOS = [
       'Saída limpa em cada portão: quem sai leva tudo',
     ],
     href: '/programa',
-    cta: { texto: 'Ver como o Programa funciona', href: '/programa' },
+    cta: { texto: 'Ver o Programa por dentro', href: '/programa' },
   },
   {
     id: 'conselheiro',

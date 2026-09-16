@@ -24,7 +24,7 @@ const BLOCOS = [
     titulo: 'O que este site coleta',
     paragrafos: [
       'Se você preencher o formulário de contato ou pedir a conversa ao final da análise, coletamos o que você digitar: nome, cargo, e-mail, empresa, telefone e a mensagem. Só isso, e só porque você escreveu.',
-      'As respostas da Análise ABBA são processadas para calcular o resultado e descartadas em seguida. Elas não são gravadas em banco de dados, não são associadas a você e não voltam em nenhuma conversa futura, a não ser que você mesmo as repita.',
+      'As respostas da Primeira Leitura são processadas para calcular o resultado e descartadas em seguida. Elas não são gravadas em banco de dados, não são associadas a você e não voltam em nenhuma conversa futura, a não ser que você mesmo as repita.',
     ],
   },
   {
@@ -37,8 +37,8 @@ const BLOCOS = [
   {
     titulo: 'Processamento por modelo de linguagem',
     paragrafos: [
-      'A Análise ABBA usa um modelo de linguagem para escrever o texto de apoio ao redor do número. O que é enviado ao provedor do modelo são as suas respostas de múltipla escolha, o nome da empresa e o setor que você declarou: nada de contato, nada de dado pessoal.',
-      'O número em si nunca passa pelo modelo: ele sai de uma conta aritmética no nosso servidor. Se a chamada ao modelo falhar, o site usa um texto preparado e o resultado sai igual.',
+      'A Primeira Leitura usa um modelo de linguagem para escrever o texto de apoio em volta da leitura. O que é enviado ao provedor do modelo são as suas respostas de múltipla escolha, o nome da empresa e o setor que você declarou: nada de contato, nada de dado pessoal.',
+      'A leitura em si nunca passa pelo modelo: ela sai de uma regra escrita no nosso servidor. Se a chamada ao modelo falhar, o site usa um texto preparado e o resultado sai igual. E a página não publica número nenhum sobre a sua empresa.',
     ],
   },
   {

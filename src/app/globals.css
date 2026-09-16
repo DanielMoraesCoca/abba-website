@@ -595,12 +595,12 @@
     transition: none !important;
   }
 
-  /* `data-tinta` marca o que É dado, não decoração: as barras do gráfico
-     de decomposição e os quadradinhos da legenda dele. Sem isto, o
-     navegador descarta os fundos na impressão (é o padrão) e o gráfico
-     desaparece do papel, levando junto o argumento de que a conta é
-     conferível. `print-color-adjust: exact` é a instrução que manda
-     imprimir mesmo assim. */
+  /* `data-tinta` marca o que É dado, não decoração. Hoje nada na página
+     carrega o atributo: quem carregava eram as barras do gráfico de
+     decomposição da faixa em reais, que saiu junto com a faixa. A regra
+     fica porque a necessidade não era do gráfico, era da categoria: o
+     navegador descarta fundos na impressão por padrão, e qualquer elemento
+     futuro cujo FUNDO seja o dado desaparece do papel sem isto. */
   [data-tinta] {
     print-color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;

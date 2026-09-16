@@ -4,7 +4,6 @@ import { limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 
 const RESPOSTAS_VALIDAS = {
   colaboradores: '51-200',
-  faturamento: '10-50m',
   volume: '500-2k',
   toques: '3-4',
   fechamento: '4-7',
@@ -129,8 +128,7 @@ describe('limite configurável por ambiente', () => {
 describe('superfície de injeção de prompt', () => {
   const RESPOSTAS = {
     colaboradores: '51-200',
-    faturamento: '10-50m',
-    volume: '500-2k',
+      volume: '500-2k',
     toques: '3-4',
     fechamento: '4-7',
     numeroMedido: 'sim',

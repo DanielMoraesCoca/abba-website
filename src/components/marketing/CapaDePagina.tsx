@@ -13,7 +13,7 @@ export function CapaDePagina({
   largura = 'padrao',
 }: {
   readonly sobretitulo: string;
-  readonly titulo: string;
+  readonly titulo: React.ReactNode;
   readonly apoio?: React.ReactNode;
   readonly largura?: 'estreita' | 'padrao' | 'larga';
 }) {

@@ -1,16 +1,20 @@
 import { NextResponse } from 'next/server';
 import { esquemaPedidoAnalise } from '@/lib/analise/schema';
-import { estimar, qualificar, type RespostasAnalise } from '@/lib/analise/modelo';
+import { qualificar, vetorDe, type RespostasAnalise } from '@/lib/analise/modelo';
 import { gerarNarrativa } from '@/lib/analise/narrativa';
 import { identificar, limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 
 /**
- * A Análise ABBA.
+ * A Primeira Leitura.
+ *
+ * Não produz cifra em reais, e isso é decisão de produto, não limitação:
+ * ver o cabeçalho de `lib/analise/faixa-suspensa.ts`. O que sai daqui é uma
+ * leitura nomeada, um vetor e um próximo passo.
  *
  * Não persiste nada. As respostas entram, o resultado sai, e a requisição
  * acaba — não há banco, não há cookie de perfil, não há identificador de
  * visitante. O contato, se a pessoa quiser deixar, vai por outra rota e por
- * decisão dela. É a regra 5 do Mapa de Vazamento ("sem dado de cliente no
+ * decisão dela. É a regra que os sócios escreveram ("sem dado de cliente no
  * documento enquanto não houver contrato") aplicada à infraestrutura, e não
  * só ao PDF.
  *
@@ -66,12 +70,12 @@ export async function POST(requisicao: Request) {
   // literais do modelo.
   const respostas = validado.data.respostas as RespostasAnalise;
 
-  const estimativa = estimar(respostas);
+  const vetor = vetorDe(respostas);
   const qualificacao = qualificar(respostas);
-  const narrativa = await gerarNarrativa({ empresa, setor, respostas, estimativa });
+  const narrativa = await gerarNarrativa({ empresa, setor, respostas, vetor });
 
   return NextResponse.json(
-    { empresa, setor, estimativa, qualificacao, narrativa },
+    { empresa, setor, vetor, qualificacao, narrativa },
     { headers: { 'Cache-Control': 'no-store' } },
   );
 }

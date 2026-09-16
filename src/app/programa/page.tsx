@@ -2,7 +2,7 @@ import { CapaDePagina } from '@/components/marketing/CapaDePagina';
 import { Declaracao } from '@/components/marketing/Declaracao';
 import { LinhaDoPrograma } from '@/components/marketing/LinhaDoPrograma';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
-import { TituloDeSecao } from '@/components/marketing/Titulo';
+import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
@@ -32,7 +32,12 @@ export default function PaginaPrograma() {
     <>
       <CapaDePagina
         sobretitulo="Caminho 02 · AI Native · Ano 1"
-        titulo="Um documento, dois tempos: a fase 1 é firme e pequena; o ano inteiro é opção."
+        titulo={
+          <>
+            Um documento, dois tempos: a fase 1 é firme e pequena; o ano inteiro é{' '}
+            <Enfase>opção</Enfase>.
+          </>
+        }
         apoio={
           <p>
             O comitê decide o ano uma vez. O investimento maior só anda com o caso medido na mesa. E
@@ -177,7 +182,7 @@ export default function PaginaPrograma() {
             Três a quatro Programas novos por ano é a capacidade real de dois sócios. Não é tática: é aritmética de agenda, e a gente prefere dizer antes.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Botao href="/analise">Começar pelo Mapa de Vazamento</Botao>
+            <Botao href="/assessment-gratuito">Começar pelo assessment gratuito</Botao>
             <Botao href="/contato" variante="secundario">
               Falar com um sócio
             </Botao>

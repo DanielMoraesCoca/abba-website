@@ -17,10 +17,10 @@ export const NAV_RODAPE = {
     { rotulo: 'Evidências', href: '/evidencias' },
   ],
   caminhos: [
-    { rotulo: 'Mapa de Vazamento', href: '/mapa-de-vazamento' },
+    { rotulo: 'Assessment gratuito', href: '/assessment-gratuito' },
     { rotulo: 'O Programa', href: '/programa' },
     { rotulo: 'Conselheiro de IA', href: '/conselheiro' },
-    { rotulo: 'Análise gratuita', href: '/analise' },
+    { rotulo: 'A primeira leitura', href: '/analise' },
   ],
   legal: [
     { rotulo: 'Privacidade', href: '/privacidade' },

@@ -1,5 +1,5 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
-import { TituloDeSecao } from '@/components/marketing/Titulo';
+import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
@@ -20,7 +20,12 @@ export default function PaginaManifesto() {
     <>
       <CapaDePagina
         sobretitulo="Manifesto"
-        titulo="Marca não é logo nem headline. É o conjunto de coisas que uma empresa faz de um jeito e não do outro."
+        titulo={
+          <>
+            Marca não é logo nem headline. É o conjunto de coisas que uma empresa faz de um jeito e{' '}
+            <Enfase>não</Enfase> do outro.
+          </>
+        }
         apoio={
           <p>
             De forma tão consistente que o cliente consegue prever. Esta é a lista, e ela muda com

@@ -1,4 +1,5 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
+import { Enfase } from '@/components/marketing/Titulo';
 import { FormularioContato } from '@/components/marketing/FormularioContato';
 import { Revelar } from '@/components/motion/Revelar';
 import { Secao } from '@/components/ui/Secao';
@@ -18,7 +19,12 @@ export default function PaginaContato() {
     <>
       <CapaDePagina
         sobretitulo="Contato"
-        titulo="A primeira conversa é de descoberta. A gente chega com pergunta, não com apresentação."
+        titulo={
+          <>
+            A primeira conversa é de descoberta. A gente chega com <Enfase>pergunta</Enfase>, não com
+            apresentação.
+          </>
+        }
         apoio={<p>{CONTATO.prazoResposta}</p>}
       />
 
@@ -51,8 +57,8 @@ export default function PaginaContato() {
                 Antes de escrever
               </h2>
               <p className="mt-4 text-legenda leading-[1.7] text-ardosia">
-                Se você quiser chegar na conversa com material, comece pela análise gratuita: ela
-                leva três minutos e devolve uma faixa em reais com as premissas na mesa. A conversa
+                Se você quiser chegar na conversa com material, comece pela primeira leitura: ela
+                leva três minutos e devolve onde vocês estão e qual é o passo seguinte. A conversa
                 fica melhor com ela do que sem.
               </p>
             </div>

@@ -24,9 +24,10 @@ import { porExtenso } from '@/lib/tipografia';
  * como navegação por leitor de tela — que é o que de fato acontece. Um
  * botão que navega mente sobre o que faz.
  *
- * O lugar também é escolhido: vem logo depois da tese dos 70%. Quem acabou
- * de ler que a maior parte do valor vive em pessoas e processos tem uma
- * pergunta seguinte natural, e é esta.
+ * O lugar também é escolhido: abre o passo 5 da home, logo depois das
+ * recusas escritas. Quem chegou até ali já leu por que a maioria erra, como
+ * a casa faz diferente e por que dá para confiar. A pergunta seguinte
+ * natural é sobre a própria empresa, e é esta.
  * ──────────────────────────────────────────────────────────────────────── */
 export function PrimeiraPergunta() {
   return (
@@ -34,13 +35,14 @@ export function PrimeiraPergunta() {
       <Container largura="larga">
         <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <Revelar>
-            <Sobretitulo invertido>A análise começa aqui</Sobretitulo>
+            <Sobretitulo invertido>A primeira leitura começa aqui</Sobretitulo>
             <h2 className="mt-6 text-balance text-secao leading-[1.18] text-branco">
               Quantas pessoas trabalham na sua empresa?
             </h2>
             <p className="mt-6 max-w-[46ch] text-corpo leading-[1.7] text-ardosia-clara">
-              É a primeira de {porExtenso(TOTAL_DE_PERGUNTAS)}. No fim sai uma faixa anual em
-              reais do que estimamos estar saindo sem precisar sair, com as premissas na mesa.
+              É a primeira de {porExtenso(TOTAL_DE_PERGUNTAS)}. No fim sai onde vocês estão hoje, por onde
+              o dinheiro sai, e qual é o passo seguinte. Sem cifra sobre a sua empresa: a gente não
+              tem como saber isso de fora, e não finge que tem.
             </p>
           </Revelar>
 

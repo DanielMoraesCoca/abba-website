@@ -4,7 +4,7 @@ import { Capa } from '@/components/marketing/Capa';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
 import { PrimeiraPergunta } from '@/components/marketing/PrimeiraPergunta';
 import { Tese } from '@/components/marketing/Tese';
-import { TituloDeSecao } from '@/components/marketing/Titulo';
+import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
@@ -16,18 +16,172 @@ import { evidencia } from '@/content/evidencias';
 import { CONTATO, PRATELEIRA } from '@/content/identidade';
 import { RECUSAS } from '@/content/manifesto';
 
-/** Os três números da home. O resto do cânone vive em /evidencias. */
-const NUMEROS_DA_HOME = ['rand-80', 'metr-19', 'dora-amplifica'] as const;
+/**
+ * A HOME É UM ARGUMENTO EM CINCO PASSOS, NESTA ORDEM.
+ *
+ * ════════════════════════════════════════════════════════════════════════
+ * A ordem vem do briefing de marca §8 e não é negociável por gosto: é a
+ * ordem em que um desconhecido aceita ouvir. A regra que a governa cabe
+ * numa linha, e a versão anterior desta página a quebrava logo na segunda
+ * seção: NÃO ABRIR FALANDO DA EMPRESA.
+ *
+ *   1. o problema dele       o piloto que não virou operação
+ *   2. por que a maioria erra a prova, com fonte
+ *   3. como se faz diferente o número combinado antes
+ *   4. por que dá para confiar as recusas escritas, e quem assina
+ *   5. o convite             a primeira leitura, e um e-mail
+ *
+ * Cada passo tem UMA palavra em itálico no título. Uma, não duas: duas
+ * ênfases numa frase é o mesmo que nenhuma.
+ *
+ * Os números de cada passo saem da base de evidências, com a fonte dentro
+ * da própria frase, pelo `NumeroComFonte`. Não existe caminho de código
+ * nesta página que mostre um número sem mostrar de onde ele veio.
+ * ════════════════════════════════════════════════════════════════════════
+ */
+
+/** Passo 1: o problema, com o número que anda ao lado dele. */
+const NUMEROS_DO_PROBLEMA = ['rand-80', 'kpmg-brasil-47'] as const;
+
+/** Passo 2: por que a maioria erra. */
+const NUMEROS_DO_ERRO = ['rand-causa-1', 'wharton-medicao'] as const;
+
+/** Passo 3: como se faz diferente. */
+const NUMEROS_DO_METODO = ['metr-19', 'dora-amplifica', 'cui-26'] as const;
+
+/** Passo 4: por que dá para confiar. */
+const NUMEROS_DA_CONFIANCA = ['bcg-5', 'mckinsey-outcome'] as const;
 
 export default function PaginaInicial() {
   return (
     <>
       <Capa />
 
-      {/* ── A prateleira ─────────────────────────────────────────────────
-          Assimetria de 2:3: o título ocupa um terço e o argumento dois. A
-          proporção desigual é o ponto — colunas iguais leem como tabela. */}
+      {/* ── Passo 1 · O problema dele ───────────────────────────────── */}
       <Secao tom="claro" espaco="amplo">
+        <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
+          <TituloDeSecao
+            sobretitulo="Passo 01 · onde vocês estão"
+            titulo={
+              <>
+                Você já tentou IA. O piloto não virou <Enfase>operação</Enfase>.
+              </>
+            }
+            className="max-w-none"
+          />
+          <Revelar className="space-y-7 lg:pt-3">
+            <p className="max-w-[54ch] text-lede leading-[1.55] text-navy">
+              Três coisas chegaram juntas na sua mesa: a reforma tributária, que o seu financeiro já
+              trata como obrigação; o jurídico usando ferramenta de IA que ninguém aprovou; e um
+              piloto que funcionou na demonstração e não sobreviveu ao trimestre seguinte.
+            </p>
+            <div className="rule-gold max-w-[54ch]" aria-hidden />
+            <p className="max-w-[54ch] text-corpo leading-[1.7] text-ardosia">
+              Nenhuma das três é falta de tecnologia. As três são a mesma coisa: ninguém combinou,
+              antes de começar, o que seria dar certo.
+            </p>
+          </Revelar>
+        </div>
+
+        <RevelarLista className="mt-20 grid gap-10 lg:grid-cols-2" passo={0.08}>
+          {NUMEROS_DO_PROBLEMA.map((id) => (
+            <RevelarItem key={id}>
+              <NumeroComFonte evidencia={evidencia(id)} />
+            </RevelarItem>
+          ))}
+        </RevelarLista>
+      </Secao>
+
+      {/* A faixa de grafo é o respiro entre o passo 1 e o passo 2: o único
+          elemento da página que ignora a coluna, e por isso funciona como
+          marco. Revelada por corte: a malha abre de borda a borda. Uma vez
+          só na home, de propósito. Um recurso usado duas vezes na mesma
+          página deixa de ser marco e vira maneirismo. */}
+      <Revelar modo="corte">
+        <FaixaDeGrafo semente={20260101} />
+      </Revelar>
+
+      {/* ── Passo 2 · Por que a maioria erra ─────────────────────────────
+          Fundo navy: é o único passo do argumento em que a ABBA não aparece,
+          e a mudança de tom marca isso melhor do que qualquer rótulo. Aqui
+          só falam a RAND e a Wharton. */}
+      <Secao tom="navy" espaco="amplo">
+        <TituloDeSecao
+          invertido
+          sobretitulo="Passo 02 · por que a maioria erra"
+          titulo={
+            <>
+              A causa número um não é <Enfase>técnica</Enfase>.
+            </>
+          }
+          apoio={
+            <p>
+              A pesquisa mais séria que existe sobre isso, da RAND, mediu que mais de 80% dos
+              projetos de IA falham, o dobro dos projetos de TI comuns, e que a causa número um é
+              começar sem combinar o que seria dar certo.
+            </p>
+          }
+        />
+
+        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-2" passo={0.08}>
+          {NUMEROS_DO_ERRO.map((id) => (
+            <RevelarItem key={id}>
+              <NumeroComFonte evidencia={evidencia(id)} tom="escuro" />
+            </RevelarItem>
+          ))}
+        </RevelarLista>
+
+        <Revelar className="mt-14">
+          <Botao href="/evidencias" variante="fantasma">
+            Ver a base de evidências inteira, inclusive o que a gente proibiu de usar
+          </Botao>
+        </Revelar>
+      </Secao>
+
+      {/* ── Passo 3 · Como se faz diferente ───────────────────────────── */}
+      <Secao tom="claro" espaco="amplo">
+        <TituloDeSecao
+          sobretitulo="Passo 03 · como se faz diferente"
+          titulo={
+            <>
+              O número é combinado <Enfase>antes</Enfase>.
+            </>
+          }
+          apoio={
+            <p>
+              A METR mediu desenvolvedores experientes ficando 19% mais lentos com IA enquanto saíam
+              convencidos de que tinham ficado 20% mais rápidos: um erro de percepção de quarenta
+              pontos que só aparece quando alguém mede de fora.
+            </p>
+          }
+        />
+
+        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.08}>
+          {NUMEROS_DO_METODO.map((id) => (
+            <RevelarItem key={id}>
+              <NumeroComFonte evidencia={evidencia(id)} />
+            </RevelarItem>
+          ))}
+        </RevelarLista>
+      </Secao>
+
+      {/* A leitura dos 70/30, em prosa. Ela desceu da abertura para cá por
+          decisão do briefing (§10.8): é tese da casa, não estatística, e um
+          numeral de display na primeira tela seria lido como medição por
+          qualquer pessoa, por mais cuidadosa que fosse a frase ao redor. */}
+      <Tese />
+
+      {/* ── Ainda o passo 3: a prateleira, e os três caminhos ──────────
+          A grade é 1,35 : 1 : 1 de propósito. O assessment gratuito é a porta
+          única de entrada e é gratuito; dar a ele a mesma largura dos outros
+          dois seria desenhar um cardápio, que é exatamente o que a doutrina
+          proíbe. A hierarquia visual repete a hierarquia comercial.
+
+          Fundo branco, e não papel: o bloco da leitura da casa, logo acima,
+          já é papel. Duas seções claras adjacentes no mesmo tom viram um
+          bloco só, e o ritmo da página some justamente na emenda entre o
+          argumento e a oferta. */}
+      <Secao tom="claro" espaco="amplo" id="caminhos">
         <div className="grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
           <TituloDeSecao
             sobretitulo="A prateleira"
@@ -35,40 +189,16 @@ export default function PaginaInicial() {
             className="max-w-none"
           />
           <Revelar className="space-y-7 lg:pt-3">
-            <p className="max-w-[54ch] text-lede leading-[1.6] text-navy">
-              {PRATELEIRA.texto}
-            </p>
+            <p className="max-w-[54ch] text-lede leading-[1.6] text-navy">{PRATELEIRA.texto}</p>
             <div className="rule-gold max-w-[54ch]" aria-hidden />
             <p className="max-w-[54ch] text-corpo leading-[1.7] text-ardosia">
               {PRATELEIRA.analogia}
             </p>
           </Revelar>
         </div>
-      </Secao>
 
-      {/* A faixa de grafo é o respiro entre a abertura e a tese: o único
-          elemento que ignora a coluna, e por isso funciona como marco.
-          Revelada por corte — a malha abre de borda a borda. */}
-      <Revelar modo="corte">
-        <FaixaDeGrafo semente={20260101} />
-      </Revelar>
-
-      {/* ── A tese, em escala ──────────────────────────────────────────── */}
-      <Tese />
-
-      {/* A pergunta vem logo depois da tese de propósito: quem acabou de ler
-          que a maior parte do valor vive em pessoas e processos já tem a
-          pergunta seguinte na cabeça, e é esta. */}
-      <PrimeiraPergunta />
-
-      {/* ── Os três caminhos ───────────────────────────────────────────── */}
-      {/* ── Os três caminhos ───────────────────────────────────────────
-          A grade é 1,35 : 1 : 1 de propósito. O Mapa de Vazamento é a porta
-          única de entrada e é gratuito; dar a ele a mesma largura dos outros
-          dois seria desenhar um cardápio, que é exatamente o que a doutrina
-          proíbe. A hierarquia visual repete a hierarquia comercial. */}
-      <Secao tom="claro" espaco="amplo" id="caminhos">
         <TituloDeSecao
+          className="mt-24"
           sobretitulo="A vitrine inteira"
           titulo="Três caminhos. Nada mais é oferecido em primeiro contato."
           apoio={
@@ -141,44 +271,11 @@ export default function PaginaInicial() {
         </RevelarLista>
       </Secao>
 
-      {/* ── A evidência ────────────────────────────────────────────────
-          Sem faixa de grafo aqui. A primeira versão tinha uma, escura, e ela
-          não se justificava: navy sobre navy lê como acidente, e um recurso
-          usado duas vezes na mesma página deixa de ser marco e vira
-          maneirismo. Uma vez, no lugar certo. */}
-      <Secao tom="navy" espaco="amplo">
-        <TituloDeSecao
-          invertido
-          sobretitulo="Por que isso importa"
-          titulo="Três números que explicam por que a ABBA existe."
-          apoio={
-            <p>
-              Todo número que a gente usa sai com a fonte na frase, porque número de terceiro vira
-              alvo de auditoria do cliente. Estes três são os que mais mudam a conversa.
-            </p>
-          }
-        />
-
-        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.08}>
-          {NUMEROS_DA_HOME.map((id) => (
-            <RevelarItem key={id}>
-              <NumeroComFonte evidencia={evidencia(id)} tom="escuro" />
-            </RevelarItem>
-          ))}
-        </RevelarLista>
-
-        <Revelar className="mt-14">
-          <Botao href="/evidencias" variante="fantasma">
-            Ver a base de evidências inteira, inclusive o que a gente proibiu de usar
-          </Botao>
-        </Revelar>
-      </Secao>
-
-      {/* ── As três fases ──────────────────────────────────────────────
+      {/* ── Ainda o passo 3: as três fases ─────────────────────────────
           Deslocada: depois de cinco seções alinhadas à esquerda, o olho já
           decorou a linha vertical. Quebrá-la aqui é o que faz a próxima
           seção ser lida em vez de folheada. */}
-      <Secao tom="claro" espaco="amplo" alinhamento="deslocada">
+      <Secao tom="gelo" espaco="amplo" alinhamento="deslocada">
         <TituloDeSecao
           sobretitulo="AI Native · Ano 1"
           titulo="Doze meses, três fases, três portões de saída sem multa."
@@ -228,9 +325,39 @@ export default function PaginaInicial() {
         </RevelarLista>
       </Secao>
 
-      {/* ── O que recusamos ────────────────────────────────────────────── */}
-      <Secao tom="gelo" espaco="amplo">
+      {/* ── Passo 4 · Por que dá para confiar ───────────────────────────
+          O título deste passo foi escrito errado uma vez, e o erro vale a
+          nota: a primeira versão dizia "o que a gente recusa está escrito",
+          como se a credibilidade viesse da nossa assinatura. Vem do
+          contrário. Quem valida o veredito é uma pessoa NOMEADA DO CLIENTE,
+          e é isso que torna a prova independente de nós. */}
+      <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
+          sobretitulo="Passo 04 · por que dá para confiar"
+          titulo={
+            <>
+              Quem assina o resultado trabalha na <Enfase>sua</Enfase> empresa.
+            </>
+          }
+          apoio={
+            <p>
+              A métrica é combinada antes com uma pessoa nomeada do seu time, e o veredito volta
+              validado por ela: é isso que torna a prova independente, e é por isso que a ABBA não
+              assina sozinha.
+            </p>
+          }
+        />
+
+        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-2" passo={0.08}>
+          {NUMEROS_DA_CONFIANCA.map((id) => (
+            <RevelarItem key={id}>
+              <NumeroComFonte evidencia={evidencia(id)} />
+            </RevelarItem>
+          ))}
+        </RevelarLista>
+
+        <TituloDeSecao
+          className="mt-24"
           sobretitulo="O manifesto"
           titulo="A lista do que recusamos é o que torna a lista do que prometemos crível."
           apoio={
@@ -259,21 +386,25 @@ export default function PaginaInicial() {
         </Revelar>
       </Secao>
 
-      {/* ── Chamada final ──────────────────────────────────────────────── */}
+      {/* ── Passo 5 · O convite ─────────────────────────────────────────
+          A primeira pergunta é feita aqui mesmo, e a resposta viaja em
+          `?porte=`. Quem já leu os quatro passos anteriores não deveria
+          precisar de mais um clique para começar. */}
+      <PrimeiraPergunta />
+
       <Secao tom="navy-profundo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
           <h2 className="text-secao leading-[1.15] text-branco">
-            A análise chega feita, não oferecida.
+            A primeira <Enfase>leitura</Enfase>, sem cifra e sem cadastro.
           </h2>
           <p className="mx-auto mt-7 max-w-xl text-corpo leading-[1.65] text-ardosia-clara">
-            Responda {porExtenso(TOTAL_DE_PERGUNTAS)} perguntas sobre a operação e a gente devolve, na
-            hora, uma leitura
-            preliminar do que estimamos estar vazando, com as premissas na mesa e o limite
-            declarado na primeira linha.
+            Responda {porExtenso(TOTAL_DE_PERGUNTAS)} perguntas sobre a operação e a gente devolve, na hora,
+            onde vocês estão, por onde o dinheiro sai, e o passo seguinte. Com o limite do que dá
+            para ver de fora declarado na mesma tela.
           </p>
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Botao href="/analise" variante="primario-invertido">
-              Começar a análise gratuita
+              Fazer a primeira leitura
             </Botao>
             <Botao href="/contato" variante="fantasma">
               Falar com um sócio

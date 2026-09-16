@@ -136,3 +136,48 @@ describe('domínio único', () => {
     expect([...encontrados]).toEqual([EMPRESA.email]);
   });
 });
+
+/**
+ * A FAIXA EM REAIS CONTINUA DESLIGADA.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A aritmética da faixa não foi apagada: ela está em
+ * `lib/analise/faixa-suspensa.ts`, provada pelos testes de
+ * `modelo.test.ts`, esperando uma decisão dos sócios. O cabeçalho de lá
+ * explica a decisão inteira.
+ *
+ * O risco de guardar código bom e desligado é óbvio: alguém importa "só
+ * para ver", e a cifra volta ao ar sem que ninguém tenha decidido nada. É
+ * um acidente de uma linha, e uma cifra em reais sobre a empresa de quem lê
+ * é justamente o que a peça deixou de publicar.
+ *
+ * Então a porta fica trancada por teste. Se este falhar, a pergunta não é
+ * como fazer o teste passar: é quem decidiu religar a faixa, e se as três
+ * condições do briefing (a conta na mesma tela, a origem declarada, e nunca
+ * chamar aquilo de diagnóstico) estão cumpridas.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('a faixa em reais permanece suspensa', () => {
+  const SUPERFICIE = ARQUIVOS.filter(
+    ({ caminho }) => caminho.startsWith('src/app/') || caminho.startsWith('src/components/'),
+  );
+
+  it('nenhuma página nem componente importa a aritmética suspensa', () => {
+    const ofensores = SUPERFICIE.filter(({ texto }) => /faixa-suspensa/.test(texto)).map(
+      (a) => a.caminho,
+    );
+    expect(
+      ofensores,
+      'A faixa em reais está suspensa por decisão de produto (briefing de marca §10.1).',
+    ).toEqual([]);
+  });
+
+  it('nenhuma página nem componente formata reais', () => {
+    const ofensores = SUPERFICIE.filter(({ texto }) =>
+      /\bR\$\s*\{|formatarReais|formatarFaixa/.test(texto),
+    ).map((a) => a.caminho);
+    expect(
+      ofensores,
+      'Esta peça não publica cifra em reais sobre a empresa de quem lê.',
+    ).toEqual([]);
+  });
+});

@@ -3,59 +3,49 @@ import { Container } from '@/components/ui/Container';
 import { HEADLINE } from '@/content/identidade';
 
 /**
- * A tese dos 70%, em escala.
+ * A leitura da casa sobre onde o valor vive.
  *
- * ────────────────────────────────────────────────────────────────────────
- * POR QUE ESTE BLOCO É GRANDE.
+ * ════════════════════════════════════════════════════════════════════════
+ * O NUMERAL DE DISPLAY SAIU DAQUI, E ESTA É A PARTE IMPORTANTE DO ARQUIVO.
  *
- * A tese é a frase mais importante do site — é o que explica por que a ABBA
- * faz o que faz — e até agora ela era um parágrafo do mesmo tamanho de
- * todos os outros. O olho passava por ela sem parar.
+ * Até a versão anterior, este bloco abria com "70%" ocupando a tela. O
+ * argumento para isso era bom: contraste de escala é o instrumento mais
+ * barato de composição que existe, não custa um byte, não pede movimento, e
+ * diz ao leitor onde desacelerar.
  *
- * Contraste de escala é o instrumento mais barato de composição que existe:
- * não custa um byte, não pede movimento, e é o que diz ao leitor onde ele
- * deveria desacelerar. É a diferença entre um texto bem tratado e uma
- * página desenhada.
+ * O argumento contra é melhor, e venceu. Os 70/30 são TESE DA CASA, não
+ * estatística medida: nenhum estudo diz isso, e a base de evidências marca
+ * a linha como convicção. Um numeral em corpo de display é lido como número
+ * medido por qualquer pessoa, por mais cuidadosa que seja a frase ao redor.
+ * A ressalva ficava logo abaixo, e mesmo assim: quem dá a um número o
+ * tamanho de manchete já disse que ele é dado, e a letra miúda não desfaz.
  *
- * O NÚMERO É GRANDE E A RESSALVA VEM JUNTO, NO MESMO BLOCO. A base de
- * evidências é explícita: os 70% são tese da casa, não estatística medida.
- * Dar escala a um número e esconder a ressalva noutra tela seria
- * exatamente o truque que a régua do revisor existe para impedir. Aqui a
- * ênfase e o limite chegam ao olho no mesmo instante.
- * ────────────────────────────────────────────────────────────────────────
+ * Num site cuja tese inteira é honestidade sobre número, esse era o pior
+ * lugar possível para um número se disfarçar de medição.
+ *
+ * O que ficou é a mesma leitura, em corpo de texto, na redação aprovada
+ * (`HEADLINE.corpo`), e no passo 3 do argumento em vez da abertura. A
+ * ênfase agora vem da medida curta e do espaço em volta: os instrumentos
+ * que não mentem sobre a natureza do que está escrito.
+ *
+ * Se alguém quiser o numeral de volta: ele volta no dia em que existir
+ * medição com fonte primária, e aí ele para de ser tese.
+ * ════════════════════════════════════════════════════════════════════════
  */
 export function Tese() {
-  // Padding assimétrico de propósito: a faixa de grafo logo acima JÁ é a
-  // separação, então o topo é curto. Somar o respiro da faixa ao padding
-  // cheio criava trezentos pixels de nada — que foi o que a primeira
-  // revisão desta seção mostrou.
   return (
-    <section className="bg-papel pt-10 pb-20 sm:pt-14 sm:pb-28">
+    <section className="bg-papel py-20 sm:py-28">
       <Container largura="larga">
-        <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[auto_1fr] lg:items-start">
+        <div className="grid gap-x-16 gap-y-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
           <Revelar modo="corte">
-            {/* O número em escala de display. É o único lugar do site em que
-                um numeral ocupa a tela — e por isso ele funciona.
-
-                Revelado por corte, não por opacidade: num numeral desta
-                altura, meio segundo de meio-tom é meio segundo de borrão. */}
-            <p
-              className="nums font-display text-secao leading-[0.82] tracking-[-0.04em] text-navy"
-              aria-hidden
-            >
-              70
-              <span className="align-super text-[0.34em] text-ardosia">%</span>
+            <p className="font-mono text-rotulo uppercase leading-[1.7] tracking-[0.22em] text-ardosia">
+              A leitura da casa
             </p>
           </Revelar>
 
-          <Revelar atraso={0.12} className="lg:pt-4">
-            <p className="max-w-[34ch] font-display text-lede leading-[1.3] text-navy">
-              do valor de uma transformação em IA vive em pessoas, processos e cultura.
-            </p>
-            <p className="mt-8 max-w-[52ch] text-corpo leading-[1.7] text-ardosia">
-              O seu fornecedor te vendeu os outros 30%. Nós instalamos o resto, com método próprio,
-              plataforma própria e resultado verificado no final: num registro que a sua diretoria
-              pode auditar.
+          <Revelar atraso={0.12}>
+            <p className="max-w-[44ch] font-display text-lede leading-[1.35] text-navy">
+              {HEADLINE.corpo}
             </p>
 
             <div className="rule-gold mt-10 max-w-[52ch]" aria-hidden />

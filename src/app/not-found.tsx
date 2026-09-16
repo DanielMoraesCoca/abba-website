@@ -21,7 +21,7 @@ export default function NaoEncontrada() {
             Voltar ao início
           </Botao>
           <Botao href="/analise" variante="fantasma">
-            Ir para a análise gratuita
+            Ir para a primeira leitura
           </Botao>
         </div>
       </Container>

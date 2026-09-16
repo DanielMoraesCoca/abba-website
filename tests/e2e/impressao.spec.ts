@@ -16,7 +16,6 @@ async function chegarAoResultado(page: import('@playwright/test').Page) {
   await page.fill('#empresa', 'Exemplo Distribuidora');
   await page.fill('#setor', 'distribuição');
   await escolher('colaboradores', '201-500');
-  await escolher('faturamento', '50-200m');
   await page.getByRole('button', { name: 'Continuar' }).click();
   await escolher('volume', '2k-10k');
   await escolher('toques', '3-4');
@@ -30,7 +29,7 @@ async function chegarAoResultado(page: import('@playwright/test').Page) {
   await escolher('dono', 'nomeado');
   await escolher('prazo', 'sim-12m');
   await page.getByRole('button', { name: 'Ver a leitura preliminar' }).click();
-  await expect(page.getByText(/calculado de fora/i)).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(/lido de fora/i)).toBeVisible({ timeout: 20_000 });
 }
 
 // Um fluxo só para as duas asserções: percorrer o assistente inteiro custa
@@ -45,19 +44,19 @@ test('no papel, sai um documento — não uma captura do site', async ({ page })
   await expect(page.locator('footer')).toBeHidden();
   await expect(page.getByRole('button', { name: 'Salvar em PDF' })).toBeHidden();
 
-  // O argumento inteiro fica: a faixa, o aviso de limite e as premissas.
-  await expect(page.getByText(/calculado de fora/i)).toBeVisible();
-  await expect(page.getByText('Premissa da ABBA').first()).toBeVisible();
+  // O argumento inteiro fica: a leitura nomeada, o vetor e o limite.
+  await expect(page.getByText(/Teste do alvo/i)).toBeVisible();
+  await expect(page.getByText(/O vetor principal/i)).toBeVisible();
+  await expect(page.getByText(/lido de fora/i)).toBeVisible();
 
-  // Fundo de elemento não imprime por padrão. As barras SÃO o dado, então
-  // elas carregam print-color-adjust: exact — sem isso o gráfico some do
-  // papel e leva junto o argumento de que a conta é conferível.
-  const ajuste = await page
-    .locator('[data-tinta]')
+  /* Bloco escuro vira claro no papel: tinta de fundo é desperdício e deixa
+     o texto ilegível em impressora comum. É a regra que sobrou depois que o
+     gráfico de decomposição saiu da tela — ele era o único elemento que
+     precisava do caminho contrário, imprimir o fundo mesmo assim, porque a
+     barra ERA o dado. */
+  const fundo = await page
+    .locator('[class*="bg-papel"]')
     .first()
-    .evaluate((el) => {
-      const s = getComputedStyle(el);
-      return s.printColorAdjust || s.webkitPrintColorAdjust;
-    });
-  expect(ajuste).toBe('exact');
+    .evaluate((el) => getComputedStyle(el).color);
+  expect(fundo).not.toBe('rgb(255, 255, 255)');
 });

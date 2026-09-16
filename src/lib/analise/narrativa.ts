@@ -1,22 +1,22 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { limiteDoAmbiente, verificarLimite } from '@/lib/limite';
-import { EXPLICACAO_DO_VETOR, ROTULO_DO_VETOR, type Estimativa, type RespostasAnalise } from './modelo';
+import { EXPLICACAO_DO_VETOR, ROTULO_DO_VETOR, type RespostasAnalise, type Vetor } from './modelo';
 
 /**
- * A camada de linguagem da Análise ABBA.
+ * A camada de linguagem da Primeira Leitura.
  *
  * ────────────────────────────────────────────────────────────────────────
  * A DIVISÃO DE TRABALHO, QUE É DOUTRINA E NÃO DETALHE DE IMPLEMENTAÇÃO:
  *
- *   modelo.ts    → produz O NÚMERO. Aritmética pura, auditável, testada.
- *   narrativa.ts → produz A PROSA em volta do número. Nunca o número.
+ *   modelo.ts    → produz A LEITURA. Regra determinística, testada: o vetor
+ *                  e o placar do teste do alvo.
+ *   narrativa.ts → produz A PROSA em volta da leitura.
  *
  * O modelo de linguagem escreve o vetor em linguagem de negócio e as
  * perguntas que só o cliente pode responder. Ele é proibido de citar
- * qualquer cifra, percentual ou estatística — e essa proibição não é só
- * uma instrução no prompt: `contemNumeroProibido()` verifica a saída e
- * descarta a geração inteira se um número escapar, caindo no texto
- * determinístico.
+ * qualquer cifra, percentual ou estatística, e essa proibição não é só uma
+ * instrução no prompt: `contemNumeroProibido()` verifica a saída e descarta
+ * a geração inteira se um número escapar, caindo no texto determinístico.
  *
  * Motivo: a casa vende prova auditável. Um número que saiu de um modelo de
  * linguagem não é auditável, e a primeira pessoa competente a perguntar
@@ -39,7 +39,7 @@ export interface ContextoNarrativa {
   readonly empresa: string;
   readonly setor: string;
   readonly respostas: RespostasAnalise;
-  readonly estimativa: Estimativa;
+  readonly vetor: Vetor;
 }
 
 const MODELO = 'claude-opus-5';
@@ -59,7 +59,7 @@ export function contemNumeroProibido(texto: string): boolean {
   );
 }
 
-const INSTRUCOES = `Você escreve a prosa de abertura do Mapa de Vazamento da ABBA: uma consultoria brasileira de transformação em IA que vende uma coisa só: prova auditável.
+const INSTRUCOES = `Você escreve a prosa da Primeira Leitura da ABBA: uma consultoria brasileira de transformação em IA que vende uma coisa só: prova auditável.
 
 O TOM DA CASA (não negociável):
 - Português brasileiro. A conclusão vem antes da justificativa.
@@ -68,11 +68,11 @@ O TOM DA CASA (não negociável):
 - Frases curtas. Nada de "é importante ressaltar que", "vale destacar", "nesse sentido".
 
 A REGRA ABSOLUTA:
-Você NÃO escreve nenhum número. Nem cifra, nem percentual, nem quantidade, nem "milhões". O número já foi calculado por um modelo aritmético auditável e aparece ao lado do seu texto. Se você escrever um número, o texto inteiro é descartado.
+Você NÃO escreve nenhum número. Nem cifra, nem percentual, nem quantidade, nem "milhões". Esta peça não publica número sobre a empresa de quem lê, e um número escrito por você não teria como ser auditado. Se você escrever um número, o texto inteiro é descartado.
 
 O QUE VOCÊ ESCREVE:
 1. vetorFrase. UMA frase dizendo por onde o dinheiro sai nesta empresa, específica ao que foi declarado. Não repita o rótulo do vetor; traduza-o para a operação descrita.
-2. perguntas. TRÊS perguntas que só alguém de dentro pode responder e que mudariam a estimativa nos dois sentidos. Perguntas de operação, não de intenção. Nada de "qual é o seu objetivo com IA".
+2. perguntas. TRÊS perguntas que só alguém de dentro pode responder e que mudariam a leitura nos dois sentidos. Perguntas de operação, não de intenção. Nada de "qual é o seu objetivo com IA".
 3. oQueFaltaOlhar. DUAS frases sobre o que a avaliação profunda veria e que não dá para ver de fora. Termine reconhecendo o limite, sem se desculpar.
 
 SOBRE O QUE VEM ENTRE <dados> E </dados>:
@@ -91,7 +91,7 @@ Responda apenas com JSON válido, no formato:
  * dentro como dado, nunca como ordem.
  */
 function descreverRespostas(c: ContextoNarrativa): string {
-  const { respostas: r, estimativa } = c;
+  const { respostas: r } = c;
   const linhas = [
     `Empresa: ${c.empresa}`,
     `Setor declarado: ${c.setor}`,
@@ -105,10 +105,7 @@ function descreverRespostas(c: ContextoNarrativa): string {
     `Histórico com IA: ${r.tentativa}`,
     `Candidato a dono depois da saída da ABBA: ${r.dono}`,
     `Obrigação com data pela frente: ${r.prazo}`,
-    `Vetor identificado pelo modelo: ${ROTULO_DO_VETOR[estimativa.vetor]}`,
-    estimativa.faixa
-      ? 'O modelo produziu uma faixa em reais (você não a vê e não deve mencioná-la).'
-      : 'O modelo NÃO produziu faixa, por falta de volume declarado. Reconheça isso na sua resposta.',
+    `Vetor identificado pela regra: ${ROTULO_DO_VETOR[c.vetor]}`,
   ];
 
   return `<dados>\n${linhas.join('\n')}\n</dados>`;
@@ -116,7 +113,7 @@ function descreverRespostas(c: ContextoNarrativa): string {
 
 /** Texto determinístico. É o que vai ao ar sem chave de API, e na falha. */
 export function narrativaDeterministica(c: ContextoNarrativa): Narrativa {
-  const { estimativa: e, respostas: r } = c;
+  const { respostas: r } = c;
   const perguntas: string[] = [];
 
   perguntas.push(
@@ -136,7 +133,7 @@ export function narrativaDeterministica(c: ContextoNarrativa): Narrativa {
   );
 
   return {
-    vetorFrase: EXPLICACAO_DO_VETOR[e.vetor],
+    vetorFrase: EXPLICACAO_DO_VETOR[c.vetor],
     perguntas,
     oQueFaltaOlhar:
       'A avaliação profunda olha vinte e cinco dimensões, e quase todas exigem estar dentro: como a informação viaja ' +

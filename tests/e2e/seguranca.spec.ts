@@ -50,7 +50,6 @@ test('a análise não devolve resposta armazenável em cache', async ({ request 
       setor: 'serviços',
       respostas: {
         colaboradores: '51-200',
-        faturamento: '10-50m',
         volume: '500-2k',
         toques: '3-4',
         fechamento: '4-7',

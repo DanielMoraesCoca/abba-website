@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { Revelar } from '@/components/motion/Revelar';
 import { Sobretitulo } from '@/components/ui/Sobretitulo';
 import { CampoTexto } from './Campos';
-import { Decomposicao } from './Decomposicao';
-import { formatarFaixa, ROTULO_DO_VETOR, type Estimativa, type Qualificacao } from '@/lib/analise/modelo';
+import { ROTULO_DO_VETOR, type Qualificacao, type Vetor } from '@/lib/analise/modelo';
 import type { Narrativa } from '@/lib/analise/narrativa';
 import { EMPRESA } from '@/content/identidade';
 import { cn } from '@/lib/utils';
@@ -13,7 +12,7 @@ import { cn } from '@/lib/utils';
 export interface RespostaAnalise {
   readonly empresa: string;
   readonly setor: string;
-  readonly estimativa: Estimativa;
+  readonly vetor: Vetor;
   readonly qualificacao: Qualificacao;
   readonly narrativa: Narrativa;
 }
@@ -25,115 +24,68 @@ const CORES_DA_LEITURA: Record<Qualificacao['leitura'], string> = {
 };
 
 /**
- * A tela de resultado — a "primeira página" do Mapa de Vazamento, na web.
+ * A tela da Primeira Leitura.
  *
- * A ordem dos blocos não é estética, é doutrina (mapa-de-vazamento.md):
- *   1. a faixa em reais   — um número faz o leitor reagir
- *   1b. a conta desenhada — de que partes a faixa é feita
- *   2. o vetor            — por onde o dinheiro sai
- *   3. as premissas       — numeradas, com a base de cada uma
- *   4. o aviso de faixa   — foi calculado de fora
- *   5. as perguntas       — as que só ele pode responder
- *   6. a leitura do alvo  — inclusive quando ela é "hoje não somos a escolha"
+ * ────────────────────────────────────────────────────────────────────────
+ * A ordem dos blocos é doutrina, não estética:
+ *   1. a leitura nomeada  — inclusive quando ela é "hoje não somos a escolha"
+ *   2. o vetor            — por onde o dinheiro sai, sem dizer quanto
+ *   3. as perguntas       — as que só quem está dentro pode responder
+ *   4. o limite honesto   — isto foi lido de fora, e o que falta ver
+ *   5. o próximo passo    — um e-mail, sem cadastro obrigatório
  *
- * O aviso nunca fica atrás de um clique, e a leitura do alvo nunca é
- * suavizada. Recusa é nomeada, não disfarçada.
+ * A leitura do alvo vem PRIMEIRO e nunca é suavizada. Recusa é nomeada, não
+ * disfarçada: é melhor dizer "hoje não" na primeira tela do que descobrir
+ * no mês quatro.
+ *
+ * O que saiu daqui foi a faixa em reais, com a conta desenhada e as
+ * premissas que a sustentavam. Não foi corte de escopo: uma cifra sobre a
+ * empresa de quem lê, montada a partir do que ele mesmo declarou num
+ * formulário, é um número que a casa publica sem ter entrado lá. O
+ * cabeçalho de `lib/analise/faixa-suspensa.ts` tem a decisão inteira e o
+ * que precisa acontecer para ela voltar.
  */
 export function Resultado({ dados, aoRecomecar }: {
   readonly dados: RespostaAnalise;
   readonly aoRecomecar: () => void;
 }) {
-  const { estimativa, qualificacao, narrativa, empresa } = dados;
+  const { vetor, qualificacao, narrativa, empresa } = dados;
 
   return (
     <div className="space-y-16">
-      {/* 1 · A faixa */}
+      {/* 1 · A leitura nomeada */}
       <Revelar as="section">
-        <Sobretitulo>Leitura preliminar · {empresa}</Sobretitulo>
+        <Sobretitulo>Primeira leitura · {empresa}</Sobretitulo>
 
-        {estimativa.faixa ? (
-          <>
-            <p className="mt-7 text-corpo text-ardosia">
-              Com o que você declarou, estimamos que esteja saindo, por ano, sem precisar sair:
-            </p>
-            <p className="nums mt-4 font-display text-secao leading-[1.08] text-navy">
-              {formatarFaixa(estimativa.faixa)}
-            </p>
-            <p className="mt-4 font-mono text-rotulo uppercase tracking-[0.14em] text-ardosia">
-              Faixa anual, em ordem de grandeza, nunca um número exato
-            </p>
-          </>
-        ) : (
-          <>
-            <p className="mt-7 font-display text-lede leading-snug text-navy">
-              Não vamos publicar uma faixa aqui.
-            </p>
-            <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-ardosia">
-              {estimativa.motivoSemFaixa}
-            </p>
-          </>
-        )}
+        <h2
+          className={cn(
+            'mt-7 border-l-2 pl-7 text-secao leading-[1.12] text-navy',
+            CORES_DA_LEITURA[qualificacao.leitura],
+          )}
+        >
+          {qualificacao.titulo}
+        </h2>
+        <p className="mt-7 max-w-2xl text-corpo leading-[1.7] text-ardosia">
+          {qualificacao.texto}
+        </p>
+        <p className="nums mt-7 font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
+          Teste do alvo · {qualificacao.placar.toString().replace('.', ',')} de{' '}
+          {qualificacao.maximo} condições
+        </p>
       </Revelar>
-
-      {/* 1b · A conta desenhada — só quando houve conta. */}
-      {estimativa.decomposicao && (
-        <Revelar as="section" className="border-t border-navy/15 pt-10">
-          <Decomposicao estimativa={estimativa} />
-        </Revelar>
-      )}
 
       {/* 2 · O vetor */}
       <Revelar as="section" className="border-t border-navy/15 pt-10">
         <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
           O vetor principal
         </h2>
-        <p className="mt-5 text-lede leading-snug text-navy">
-          {ROTULO_DO_VETOR[estimativa.vetor]}
-        </p>
+        <p className="mt-5 text-lede leading-snug text-navy">{ROTULO_DO_VETOR[vetor]}</p>
         <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-ardosia">
           {narrativa.vetorFrase}
         </p>
       </Revelar>
 
-      {/* 3 · As premissas */}
-      <Revelar as="section" className="border-t border-navy/15 pt-10">
-        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
-          As premissas: numeradas, e cada uma com a sua base
-        </h2>
-        <ol className="mt-7 space-y-7">
-          {estimativa.premissas.map((premissa, i) => (
-            <li key={premissa.id} className="grid gap-4 sm:grid-cols-[2.5rem_1fr]">
-              <span className="nums font-display text-lede leading-none text-ardosia">
-                {i + 1}
-              </span>
-              <div>
-                <p className="text-corpo leading-[1.7] text-navy">{premissa.texto}</p>
-                <p className="mt-2.5 text-legenda leading-relaxed text-ardosia">
-                  <span
-                    className={cn(
-                      'mr-2 font-mono text-rotulo uppercase tracking-[0.12em]',
-                      premissa.tipo === 'evidencia' ? 'text-navy' : 'text-ardosia',
-                    )}
-                  >
-                    {premissa.tipo === 'evidencia' ? 'Evidência externa' : 'Premissa da ABBA'}
-                  </span>
-                  {premissa.base}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </Revelar>
-
-      {/* 4 · O aviso de faixa — texto fixo, nunca escondido */}
-      <Revelar as="section" className="bg-papel p-7 sm:p-9">
-        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
-          O limite honesto
-        </h2>
-        <p className="mt-5 text-corpo leading-[1.7] text-navy">{estimativa.aviso}</p>
-      </Revelar>
-
-      {/* 5 · As perguntas que só quem está dentro responde */}
+      {/* 3 · As perguntas que só quem está dentro responde */}
       <Revelar as="section" className="border-t border-navy/15 pt-10">
         <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
           O que a gente perguntaria à sua diretoria
@@ -151,19 +103,17 @@ export function Resultado({ dados, aoRecomecar }: {
         </p>
       </Revelar>
 
-      {/* 6 · A leitura do alvo */}
-      <Revelar
-        as="section"
-        className={cn('border-l-2 pl-7', CORES_DA_LEITURA[qualificacao.leitura])}
-      >
-        <p className="nums font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
-          Teste do alvo · {qualificacao.placar.toString().replace('.', ',')} de {qualificacao.maximo}
-        </p>
-        <h2 className="mt-4 font-display text-lede leading-snug text-navy">
-          {qualificacao.titulo}
+      {/* 4 · O limite honesto, e 5 · o próximo passo. Vêm juntos de
+           propósito: o convite só é honesto depois de o limite estar na
+           tela, e o limite só não é desculpa se vier com um passo. */}
+      <Revelar as="section" className="bg-papel p-7 sm:p-9">
+        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
+          O limite honesto
         </h2>
-        <p className="mt-4 max-w-2xl text-corpo leading-[1.7] text-ardosia">
-          {qualificacao.texto}
+        <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-navy">
+          Isto foi lido de fora, com o que você declarou em respostas fechadas, e nada mais.
+          Não é diagnóstico, não é avaliação de prontidão, e não põe número nenhum na sua operação:
+          é onde vocês estão e qual é o passo seguinte.
         </p>
         <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-navy">
           <span className="font-medium">Próximo passo. </span>
@@ -179,7 +129,7 @@ export function Resultado({ dados, aoRecomecar }: {
         data-sem-impressao
         className="flex flex-col gap-4 border-t border-navy/15 pt-8 sm:flex-row sm:items-center sm:justify-between"
       >
-        <p className="font-mono text-rotulo leading-relaxed text-ardosia">
+        <p className="font-mono text-rotulo leading-relaxed tracking-[0.02em] text-ardosia">
           Texto de apoio gerado{' '}
           {narrativa.origem === 'modelo'
             ? 'com apoio de modelo de linguagem, sobre número calculado por modelo aritmético'
@@ -266,12 +216,23 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
   return (
     <section className="bg-navy p-8 text-ardosia-clara sm:p-10">
       <h2 className="font-display text-lede leading-snug text-branco">
-        Quer o Mapa de Vazamento completo?
+        Quer o assessment gratuito da sua empresa?
       </h2>
       <p className="mt-4 max-w-2xl text-corpo leading-[1.7] text-ardosia-clara">
-        O que você viu acima foi calculado com onze respostas. O Mapa completo é feito depois de uma
-        conversa de 45 minutos e de uma pesquisa nossa sobre a sua empresa, e continua gratuito.
-        Deixe um contato só se quiser essa conversa.
+        O que você leu acima saiu das suas respostas e nada mais. O assessment é outra coisa: a gente monta um
+        documento sobre a sua empresa com informação pública, com nota de maturidade, oportunidades
+        priorizadas e o registro de cada fonte, e apresenta ao vivo numa conversa de 45 minutos. É
+        gratuito também.
+      </p>
+      <p className="mt-4 max-w-2xl text-corpo leading-[1.7] text-ardosia-clara">
+        Escrever para{' '}
+        <a
+          href={`mailto:${EMPRESA.email}`}
+          className="text-ouro-claro underline underline-offset-4"
+        >
+          {EMPRESA.email}
+        </a>{' '}
+        resolve igual. O formulário abaixo é atalho, nunca cadastro.
       </p>
 
       <form onSubmit={enviar} className="mt-8 grid items-end gap-5 sm:grid-cols-2" noValidate>
@@ -323,7 +284,7 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
           >
             {estado === 'enviando' ? 'Enviando…' : 'Quero a conversa de 45 minutos'}
           </button>
-          <p className="font-mono text-rotulo leading-relaxed text-ardosia-clara">
+          <p className="font-mono text-rotulo leading-relaxed tracking-[0.02em] text-ardosia-clara">
             Só usamos para responder. Nada de lista, nada de sequência automática.
           </p>
         </div>

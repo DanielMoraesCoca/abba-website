@@ -152,7 +152,7 @@ export function Cabecalho() {
                    toda rota aqui é estática, o clique busca uma carga só, na
                    hora, e a navegação continua rápida. O prefetch fica
                    reservado para o link que a gente REALMENTE quer que seja
-                   instantâneo: a análise gratuita, logo abaixo. */
+                   instantâneo: a primeira leitura, logo abaixo. */
                 prefetch={false}
                 aria-current={ativo ? 'page' : undefined}
                 className={cn(
@@ -186,7 +186,7 @@ export function Cabecalho() {
                 : 'bg-navy text-branco hover:bg-navy',
             )}
           >
-            Análise gratuita
+            Primeira leitura
           </Link>
 
           <button
@@ -233,7 +233,7 @@ export function Cabecalho() {
               href="/analise"
               className="mt-4 rounded-[3px] bg-navy px-5 py-3.5 text-center text-branco"
             >
-              Análise gratuita
+              Primeira leitura
             </Link>
           </Container>
         </div>

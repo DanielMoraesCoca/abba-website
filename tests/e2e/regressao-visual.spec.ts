@@ -42,7 +42,7 @@ const PAGINAS = [
   { nome: 'metodo', rota: '/metodo' },
   { nome: 'evidencias', rota: '/evidencias' },
   { nome: 'manifesto', rota: '/manifesto' },
-  { nome: 'mapa-de-vazamento', rota: '/mapa-de-vazamento' },
+  { nome: 'assessment-gratuito', rota: '/assessment-gratuito' },
   { nome: 'analise', rota: '/analise' },
   { nome: 'contato', rota: '/contato' },
   { nome: 'privacidade', rota: '/privacidade' },
@@ -103,7 +103,6 @@ test('a leitura da Análise não mudou sem querer', async ({ page }) => {
   await page.fill('#empresa', 'Exemplo Distribuidora');
   await page.fill('#setor', 'distribuicao');
   await escolher('colaboradores', '201-500');
-  await escolher('faturamento', '50-200m');
   await page.getByRole('button', { name: 'Continuar' }).click();
   await escolher('volume', '2k-10k');
   await escolher('toques', '3-4');
@@ -117,7 +116,7 @@ test('a leitura da Análise não mudou sem querer', async ({ page }) => {
   await escolher('dono', 'nomeado');
   await escolher('prazo', 'sim-12m');
   await page.getByRole('button', { name: 'Ver a leitura preliminar' }).click();
-  await expect(page.getByText(/calculado de fora/i)).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(/lido de fora/i)).toBeVisible({ timeout: 20_000 });
 
   await page.addStyleTag({ content: ESTABILIZAR });
   await page.evaluate(() => {

@@ -16,7 +16,6 @@ async function responderTudo(page: import('@playwright/test').Page) {
   await page.fill('#empresa', 'Exemplo Distribuidora');
   await page.fill('#setor', 'distribuição');
   await escolher('colaboradores', '201-500');
-  await escolher('faturamento', '50-200m');
   await page.getByRole('button', { name: 'Continuar' }).click();
 
   await escolher('volume', '10k-50k');
@@ -39,18 +38,21 @@ test('entrega o resultado sem exigir cadastro', async ({ page }) => {
   await page.goto('/analise');
   await responderTudo(page);
 
-  // Uma faixa, nunca um ponto.
-  await expect(page.getByText(/R\$ .+ a R\$ /)).toBeVisible({ timeout: 20_000 });
+  // A leitura é nomeada, e aparece antes de qualquer outra coisa.
+  await expect(page.getByText(/Teste do alvo/i)).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(/O vetor principal/i)).toBeVisible();
 
-  // O aviso de faixa aparece na tela, sem clique e sem hover.
-  await expect(page.getByText(/calculado de fora/i)).toBeVisible();
-  await expect(page.getByText(/não captura a faixa inteira/i)).toBeVisible();
+  /* NENHUMA cifra em reais na tela. A faixa está suspensa (briefing §10.1),
+     e este é o teste que percebe se ela voltou sem decisão. */
+  await expect(page.getByText(/R\$/)).toHaveCount(0);
 
-  // As premissas se declaram como assunção ou como evidência externa.
-  await expect(page.getByText('Premissa da ABBA').first()).toBeVisible();
+  // O limite aparece sem clique e sem hover.
+  await expect(page.getByText(/lido de fora/i)).toBeVisible();
 
-  // O formulário de contato vem DEPOIS do resultado, não antes.
-  await expect(page.getByRole('heading', { name: /Mapa de Vazamento completo/i })).toBeVisible();
+  // O formulário de contato vem DEPOIS da leitura, não antes.
+  await expect(
+    page.getByRole('heading', { name: /assessment gratuito da sua empresa/i }),
+  ).toBeVisible();
 });
 
 test('não avança com o passo incompleto', async ({ page }) => {
@@ -67,7 +69,6 @@ test('dá para voltar e corrigir uma resposta', async ({ page }) => {
   await page.fill('#empresa', 'Exemplo');
   await page.fill('#setor', 'serviços');
   await page.locator('label:has(input[name="colaboradores"][value="51-200"])').first().click();
-  await page.locator('label:has(input[name="faturamento"][value="10-50m"])').first().click();
   await page.getByRole('button', { name: 'Continuar' }).click();
 
   await page.getByRole('button', { name: '← Voltar' }).click();
@@ -86,7 +87,7 @@ test('dá para voltar e corrigir uma resposta', async ({ page }) => {
  * opostas: a resposta tem que atravessar a navegação, e a URL não pode
  * virar um jeito de escrever no formulário o que se quiser.
  * ──────────────────────────────────────────────────────────────────────── */
-test('a resposta dada na home chega preenchida na Análise', async ({ page }) => {
+test('a resposta dada na home chega preenchida na primeira leitura', async ({ page }) => {
   await page.goto('/');
 
   const escolha = page.getByRole('link', { name: 'De 201 a 500' });
@@ -99,7 +100,7 @@ test('a resposta dada na home chega preenchida na Análise', async ({ page }) =>
   // O resto do passo continua em branco: a home responde uma pergunta, não
   // finge ter respondido as outras.
   await expect(page.locator('#empresa')).toHaveValue('');
-  await expect(page.locator('input[name="faturamento"]:checked')).toHaveCount(0);
+  await expect(page.locator('#setor')).toHaveValue('');
 });
 
 test('um porte forjado na URL não deixa o passo avançar', async ({ page }) => {
@@ -119,7 +120,6 @@ test('um porte forjado na URL não deixa o passo avançar', async ({ page }) => 
 
   await page.fill('#empresa', 'Exemplo');
   await page.fill('#setor', 'serviços');
-  await page.locator('label:has(input[name="faturamento"][value="50-200m"])').first().click();
 
   await expect(page.locator('input[name="colaboradores"]:checked')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Continuar' })).toBeDisabled();

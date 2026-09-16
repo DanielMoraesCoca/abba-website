@@ -57,6 +57,24 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },
+
+  /**
+   * O caminho 01 mudou de nome.
+   *
+   * "Mapa de Vazamento" foi aposentado no abba-ops: descrevia um documento
+   * de duas páginas abrindo com uma cifra em reais, e a ferramenta nunca
+   * produziu aquilo. O nome externo fixado é "Assessment gratuito".
+   *
+   * O redirecionamento é permanente de propósito. O site ainda não está
+   * público, então quase nada aponta para a URL antiga hoje; o que existe
+   * são os links dentro dos nossos próprios materiais, e um 308 conserta
+   * todos eles de uma vez em vez de esperar que alguém encontre um 404.
+   */
+  async redirects() {
+    return [
+      { source: '/mapa-de-vazamento', destination: '/assessment-gratuito', permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,19 +1,21 @@
 import { describe, expect, it, vi } from 'vitest';
 import { contemNumeroProibido, narrativaDeterministica } from '@/lib/analise/narrativa';
-import { estimar, type RespostasAnalise } from '@/lib/analise/modelo';
+import { vetorDe, type RespostasAnalise } from '@/lib/analise/modelo';
 
 /**
  * A trava que separa o que é auditável do que não é.
  *
- * O modelo de linguagem escreve a prosa; o número sai de aritmética. Se um
- * número escapar para o texto gerado, a geração inteira é descartada. Estes
- * testes travam a verificação — afrouxá-la é abrir a porta para o site
- * publicar uma cifra que ninguém consegue refazer.
+ * O modelo de linguagem escreve a prosa, e a leitura sai de regra
+ * determinística. Se um número escapar para o texto gerado, a geração
+ * inteira é descartada. Estes testes travam a verificação, e afrouxá-la é
+ * abrir a porta para o site publicar uma cifra que ninguém consegue
+ * refazer. A trava ficou mais importante, não menos, depois que a faixa em
+ * reais foi suspensa: hoje o texto do modelo é o único lugar por onde um
+ * número poderia entrar nessa tela.
  */
 
 const RESPOSTAS: RespostasAnalise = {
   colaboradores: '51-200',
-  faturamento: '10-50m',
   volume: '500-2k',
   toques: '5-plus',
   fechamento: '8-15',
@@ -50,7 +52,7 @@ describe('narrativa determinística', () => {
     empresa: 'Exemplo Ltda',
     setor: 'distribuição',
     respostas: RESPOSTAS,
-    estimativa: estimar(RESPOSTAS),
+    vetor: vetorDe(RESPOSTAS),
   };
 
   it('é o que o site publica sem chave de API, e se declara como tal', () => {
@@ -97,7 +99,7 @@ describe('o fusível global impede a chamada paga', () => {
       empresa: 'Exemplo',
       setor: 'serviços',
       respostas: RESPOSTAS,
-      estimativa: estimar(RESPOSTAS),
+      vetor: vetorDe(RESPOSTAS),
     };
 
     const idas: string[] = [];

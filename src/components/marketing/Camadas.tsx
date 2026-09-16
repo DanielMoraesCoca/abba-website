@@ -101,8 +101,8 @@ export function Camadas() {
         empresa sabe e não usa, o que ela não sabe que deveria saber.{' '}
         <strong className="font-medium text-navy">
           É exatamente aí que a Avaliação em 25 dimensões trabalha
-        </strong>{' '}, e é por isso que o Mapa de Vazamento, feito de fora, declara o próprio limite na primeira
-        linha.
+        </strong>{' '}, e é por isso que o assessment gratuito, montado de fora, declara o próprio limite achado por
+        achado.
       </figcaption>
     </figure>
   );

@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import {
   FAIXAS_COLABORADORES,
-  FAIXAS_FATURAMENTO,
   P_DONO,
   P_FECHAMENTO,
   P_LATENCIA,
@@ -14,7 +13,7 @@ import {
 } from './perguntas';
 
 /**
- * A fronteira de confiança da Análise ABBA.
+ * A fronteira de confiança da Primeira Leitura.
  *
  * Tudo que chega pela rede passa por aqui antes de encostar no modelo de
  * estimativa. Os enums são derivados das próprias perguntas — acrescentar
@@ -35,7 +34,6 @@ function enumDeFaixas<T extends readonly { readonly valor: string }[]>(faixas: T
 
 export const esquemaRespostas = z.object({
   colaboradores: enumDeFaixas(FAIXAS_COLABORADORES),
-  faturamento: enumDeFaixas(FAIXAS_FATURAMENTO),
   volume: enumDeOpcoes(P_VOLUME),
   toques: enumDeOpcoes(P_TOQUES),
   fechamento: enumDeOpcoes(P_FECHAMENTO),
@@ -98,7 +96,7 @@ export type PedidoAnalise = z.infer<typeof esquemaPedidoAnalise>;
 
 /**
  * Contato: opcional por desenho. O resultado da análise aparece ANTES e
- * INDEPENDENTE deste formulário — o Mapa de Vazamento nunca se cobra, e
+ * INDEPENDENTE deste formulário — a peça de abertura nunca se cobra, e
  * cadastro obrigatório é uma forma de cobrança.
  */
 const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;

@@ -105,7 +105,7 @@ export const RECUSAS = [
 /** As marcas visíveis: postura que não muda comportamento é decoração. */
 export const NA_PRATICA = [
   'Toda proposta nossa tem uma seção do que não vamos fazer. Escopo sem limite é escopo sem preço.',
-  'Todo documento nosso declara o próprio limite. O Mapa de Vazamento diz que foi calculado de fora.',
+  'Todo documento nosso declara o próprio limite. O assessment gratuito diz, em cada achado, se aquilo é fato ou hipótese.',
   'Todo número nosso tem premissa citada, ou não é publicado.',
   'O que deu errado entra no relatório, na mesma tipografia do que deu certo.',
   'Recusa é nomeada, não disfarçada. Quando não somos a escolha certa, dizemos qual condição falta.',

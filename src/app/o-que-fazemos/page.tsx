@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
 import { Declaracao } from '@/components/marketing/Declaracao';
 import { DadosEstruturados } from '@/components/marketing/DadosEstruturados';
-import { TituloDeSecao } from '@/components/marketing/Titulo';
+import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
@@ -14,7 +14,7 @@ import { jsonLdPerguntas, jsonLdServico, metadadosDaPagina } from '@/lib/seo';
 export const metadata = metadadosDaPagina({
   titulo: 'O que fazemos',
   descricao:
-    'Três caminhos e três fases: o Mapa de Vazamento gratuito, o Programa AI Native · Ano 1, e o Conselheiro de IA. ' +
+    'Três caminhos e três fases: o assessment gratuito, o Programa AI Native · Ano 1, e o Conselheiro de IA. ' +
     'Como a ABBA instala capacidade e prova o que mudou.',
   caminho: '/o-que-fazemos',
 });
@@ -24,7 +24,12 @@ export default function PaginaOQueFazemos() {
     <>
       <CapaDePagina
         sobretitulo="Modelo de serviço"
-        titulo="Não vendemos cardápio. Vendemos um programa que instala capacidade e prova o que ela mudou."
+        titulo={
+          <>
+            Não vendemos cardápio. Vendemos um programa que instala capacidade e{' '}
+            <Enfase>prova</Enfase> o que ela mudou.
+          </>
+        }
         apoio={
           <p>
             Não treinamento. Não ferramenta. Não piloto solto que morre em slide. Três caminhos, e
@@ -152,7 +157,7 @@ export default function PaginaOQueFazemos() {
         </RevelarLista>
 
         <Revelar className="mt-14 flex flex-col gap-3 sm:flex-row">
-          <Botao href="/analise">Começar pelo Mapa de Vazamento</Botao>
+          <Botao href="/assessment-gratuito">Começar pelo assessment gratuito</Botao>
           <Botao href="/contato" variante="secundario">
             Falar com um sócio
           </Botao>

@@ -42,9 +42,9 @@ export const PERGUNTAS = [
       'A contratação é em dois tempos, num documento só. A fase 1 é firme e pequena: alçada de um diretor, e entrega, em seis semanas, um caso construído com dados reais e medido contra métrica combinada por escrito. O ano inteiro entra no mesmo termo já precificado, mas como opção condicionada ao Portão da Prova. Os valores vão na proposta, depois da conversa: preço fora de contexto vira comparação com a coisa errada.',
   },
   {
-    pergunta: 'O Mapa de Vazamento é gratuito mesmo? Qual é a pegadinha?',
+    pergunta: 'O assessment é gratuito mesmo? Qual é a pegadinha?',
     resposta:
-      'É gratuito e não tem contrapartida. Na versão web, o resultado aparece antes de qualquer formulário: cadastro obrigatório é uma forma de cobrança. A versão completa é feita depois de uma conversa de 45 minutos e de uma pesquisa nossa, e continua sem custo. O que a gente ganha com isso é a chance de mostrar como trabalhamos antes de você pagar por qualquer coisa.',
+      'É gratuito e não tem contrapartida. A primeira leitura, aqui no site, devolve o resultado antes de qualquer formulário: cadastro obrigatório é uma forma de cobrança. O assessment completo é montado por nós e apresentado numa conversa de 45 minutos, e também não custa nada. O que a gente ganha com isso é a chance de mostrar como trabalhamos antes de você pagar por qualquer coisa.',
   },
   {
     pergunta: 'E se a gente quiser sair no meio?',

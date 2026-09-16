@@ -1,7 +1,7 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
 import { Convergencia } from '@/components/marketing/Convergencia';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
-import { TituloDeSecao } from '@/components/marketing/Titulo';
+import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Secao } from '@/components/ui/Secao';
 import { EVIDENCIAS, INDICE_PROIBIDO } from '@/content/evidencias';
@@ -21,7 +21,12 @@ export default function PaginaEvidencias() {
     <>
       <CapaDePagina
         sobretitulo="A base de evidências"
-        titulo="Todo número que usamos, com a fonte. E os que proibimos de usar, com o motivo."
+        titulo={
+          <>
+            Todo número que usamos, com a fonte. E os que <Enfase>proibimos</Enfase> de usar, com o
+            motivo.
+          </>
+        }
         apoio={
           <p>
             Metade do conteúdo que ranqueia sobre “IA corporativa” é marketing de fornecedor, com
@@ -83,7 +88,7 @@ export default function PaginaEvidencias() {
       <Secao tom="gelo" largura="estreita">
         <Revelar>
           <h2 className="text-lede leading-snug text-navy">
-            E a tese dos 70%? Essa não é estatística.
+            E a leitura sobre onde o valor vive? Essa não é estatística.
           </h2>
           <p className="mt-6 text-corpo leading-[1.7] text-ardosia">
             {HEADLINE.corpo}

@@ -30,12 +30,16 @@ export const HEADLINE = {
     'Nós instalamos o resto, com método próprio, plataforma própria e resultado verificado no final, ' +
     'num registro que a sua diretoria pode auditar.',
   /**
-   * A tese dos 70/30 é convicção da casa, não estatística medida — e o site
+   * A tese dos 70/30 é convicção da casa, não estatística medida, e o site
    * diz isso em voz alta. É exatamente o tipo de honestidade que a base de
    * evidências exige (§ "O estatuto do 70/30").
+   *
+   * A nota deixou de falar em "os 70%" quando o numeral saiu da tela: citar
+   * um número na ressalva de um parágrafo que não mostra número nenhum é
+   * reintroduzir pela porta dos fundos exatamente o que a decisão tirou.
    */
   notaDaTese:
-    'Os 70% são a nossa tese, não um estudo. O que citamos com fonte é outra coisa: RAND, METR, DORA, BCG.',
+    'A leitura acima é tese da casa, não estudo. O que a gente cita com fonte é outra coisa: RAND, METR, DORA, BCG.',
 } as const;
 
 /** A prateleira: a primeira frase de qualquer peça diz o que não dá para fazer de dentro. */

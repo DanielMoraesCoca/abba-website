@@ -1,7 +1,7 @@
 /**
- * As perguntas da Análise ABBA na web.
+ * As perguntas da Primeira Leitura na web.
  *
- * Origem: abba-ops/03-comercial/mapa-de-vazamento.md (as 5 perguntas da
+ * Origem: abba-ops/03-comercial/assessment-gratuito.md (as 5 perguntas da
  * conversa de 45 min) + abba-ops/00-identidade/alvo.md (o teste do alvo).
  *
  * Desenho: as perguntas do Mapa foram traduzidas de abertas para fechadas,
@@ -49,7 +49,7 @@ export const FAIXAS_FATURAMENTO = [
 export type FaixaFaturamento = (typeof FAIXAS_FATURAMENTO)[number]['valor'];
 
 // ---------------------------------------------------------------------------
-// Bloco 2 — as cinco perguntas do Mapa de Vazamento
+// Bloco 2 — as cinco perguntas da conversa de 45 minutos
 // ---------------------------------------------------------------------------
 
 /** P1. "Me conta o caminho de uma nota fiscal aí dentro, do pedido ao pagamento." */

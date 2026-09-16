@@ -8,10 +8,10 @@ import { maiuscula, porExtenso } from '@/lib/tipografia';
 import { metadadosDaPagina } from '@/lib/seo';
 
 export const metadata = metadadosDaPagina({
-  titulo: 'Análise ABBA: a leitura preliminar do seu vazamento',
+  titulo: 'A primeira leitura',
   descricao:
-    `${maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas sobre a sua operação e uma faixa em reais do que estimamos estar saindo sem precisar sair. ` +
-    'Gratuito, com as premissas na mesa e o limite declarado.',
+    `${maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas fechadas sobre a sua operação, e de volta onde vocês ` +
+    'estão e qual é o passo seguinte. Gratuito, sem cadastro, com o limite declarado na mesma tela.',
   caminho: '/analise',
 });
 
@@ -23,13 +23,13 @@ export default function PaginaAnalise() {
           <Revelar>
             <Sobretitulo invertido>Gratuito · cerca de três minutos</Sobretitulo>
             <h1 className="mt-7 text-secao leading-[1.12] text-branco">
-              A análise chega feita, não oferecida.
+              A leitura chega feita, não oferecida.
             </h1>
             <p className="mt-7 text-corpo leading-[1.65] text-ardosia-clara">
-              {maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas sobre como o dinheiro anda dentro da sua
-              empresa. No fim, uma faixa
-              anual em reais, o vetor por onde ele sai, as premissas que usamos e o que não deu para
-              ver de fora. Sem cadastro obrigatório: o resultado aparece antes de qualquer formulário.
+              {maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas fechadas sobre como o dinheiro anda dentro da
+              sua empresa. De volta, onde vocês estão hoje, por onde o dinheiro sai, as perguntas que
+              só quem está dentro responde, e o passo seguinte. Sem cadastro obrigatório: a leitura
+              aparece antes de qualquer formulário.
             </p>
           </Revelar>
         </Container>

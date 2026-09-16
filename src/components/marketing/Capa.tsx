@@ -1,4 +1,5 @@
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
+import { TituloQueSobe } from '@/components/motion/TituloQueSobe';
 import { Botao } from '@/components/ui/Botao';
 import { Container } from '@/components/ui/Container';
 import { Sobretitulo } from '@/components/ui/Sobretitulo';
@@ -30,9 +31,12 @@ export function Capa() {
         <Revelar className="max-w-4xl">
           <Sobretitulo invertido>Transformação em IA · Brasil</Sobretitulo>
 
-          <h1 className="mt-8 text-topo leading-[1.08] text-branco">
-            {HEADLINE.titulo}
-          </h1>
+          {/* A manchete sobe palavra por palavra, e é o único lugar do
+              site com esse tratamento. Ver `TituloQueSobe`. */}
+          <TituloQueSobe
+            texto={HEADLINE.titulo}
+            className="mt-8 text-topo leading-[1.08] text-branco"
+          />
 
           <p className="mt-8 max-w-2xl text-lede leading-[1.6] text-ardosia-clara">
             {HEADLINE.sub}

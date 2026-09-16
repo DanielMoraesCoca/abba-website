@@ -486,6 +486,59 @@
   clip-path: inset(0 0 0% 0);
 }
 
+/* ==========================================================================
+   A manchete que sobe
+   --------------------------------------------------------------------------
+   Toda a animação do `TituloQueSobe` vive aqui; o componente só quebra o
+   texto em palavras e numera cada uma em `--i`.
+
+   `overflow: hidden` no invólucro é o que faz a palavra nascer de trás de
+   uma borda. O respiro embaixo existe por causa dele: a caixa de conteúdo
+   de uma linha em Newsreader a 89px mede 96px, e com entrelinha 1,02 a
+   caixa da LINHA mede 91. A perna do "q" vive nesses cinco pixels de
+   diferença. O invólucro ganha 0.06em embaixo e desconta os mesmos 0.06em
+   na margem: a caixa cresce o bastante para o descendente caber, a linha de
+   base não se move um pixel, e o que transborda enquanto a palavra sobe
+   fica em cinco pixels em vez de dezesseis.
+
+   Medido, não estimado: a folga vinha de 0.18em, e dezesseis pixels de
+   palavra em movimento entravam no respiro acima do parágrafo de apoio. Não
+   chegava a encostar no texto, e mesmo assim era movimento onde ninguém
+   pediu movimento.
+
+   `vertical-align: bottom` é obrigatório e não é detalhe: sem ele, o
+   invólucro inline-block se alinha pela própria linha de base e cada
+   palavra assenta numa altura diferente conforme tenha ou não descendente.
+
+   O passo é 55ms. Testei 90 e 120: com nove palavras, 90ms empilha oitocentos
+   milissegundos até a última, e a manchete deixa de ser uma frase chegando e
+   vira uma fila de palavras. 55ms lê como um movimento só.
+   ========================================================================== */
+
+@keyframes palavra-sobe {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+[data-titulo-sobe] .palavra {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+[data-titulo-sobe] .palavra > span {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: palavra-sobe var(--duration-reveal) var(--ease-abba) both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+
 /* Escalonamento: o atraso de cada item sai da sua posição na lista, no CSS.
    Passo de 60ms, não 90: com doze itens, 90ms empilha mais de um segundo de
    espera até o último — o escalonamento deixa de ser ritmo e vira fila.
@@ -515,6 +568,12 @@
     transform: none;
     transition: none;
     will-change: auto;
+  }
+
+  /* A manchete chega pronta. Nenhuma animação, nem uma versão rápida dela. */
+  [data-titulo-sobe] .palavra > span {
+    transform: none;
+    animation: none;
   }
   /* Estado substituto, não estado congelado: sem esta regra a cortina
      ficaria fechada para sempre e o conteúdo sumiria. É a lição que a Vero

@@ -14,18 +14,18 @@ export function Rodape() {
   const ano = new Date().getFullYear();
 
   return (
-    <footer data-fundo="escuro" className="bg-navy-900 text-ice-300">
+    <footer data-fundo="escuro" className="bg-navy-escuro text-ardosia-clara">
       <Container largura="larga" className="py-16 sm:py-20">
         <div className="grid gap-12 md:grid-cols-[1.3fr_repeat(3,minmax(0,1fr))]">
           <div>
-            <Logotipo className="text-ice-100" />
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-ice-300/70">
+            <Logotipo className="text-branco" />
+            <p className="mt-6 max-w-xs text-legenda leading-relaxed text-ardosia-clara">
               Instalamos capacidade de IA e provamos o que ela mudou: com número combinado antes e
               medido depois, assinado por gente.
             </p>
             <a
               href={`mailto:${EMPRESA.email}`}
-              className="mt-6 inline-block font-mono text-xs text-gold-400 underline-offset-4 transition-colors hover:text-gold-300 hover:underline"
+              className="mt-6 inline-block font-mono text-legenda text-ouro-claro underline-offset-4 transition-colors hover:text-ouro-claro hover:underline"
             >
               {EMPRESA.email}
             </a>
@@ -33,7 +33,7 @@ export function Rodape() {
 
           {GRUPOS.map((grupo) => (
             <nav key={grupo.titulo} aria-label={grupo.titulo}>
-              <h2 className="font-mono text-mono uppercase tracking-[0.2em] text-gold-400">
+              <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ouro-claro">
                 {grupo.titulo}
               </h2>
               <ul className="mt-5 space-y-3">
@@ -45,7 +45,7 @@ export function Rodape() {
                          prefazer todos seria o maior gasto de rede do site,
                          para a área de menor intenção de clique. */
                       prefetch={false}
-                      className="text-sm text-ice-300/75 transition-colors duration-300 hover:text-ice-100"
+                      className="text-legenda text-ardosia-clara transition-colors duration-300 hover:text-branco"
                     >
                       {item.rotulo}
                     </Link>
@@ -58,7 +58,7 @@ export function Rodape() {
 
         <div className="rule-gold mt-16" aria-hidden />
 
-        <div className="mt-8 flex flex-col gap-3 font-mono text-mono tracking-wide text-ice-300/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-3 font-mono text-rotulo tracking-wide text-ardosia-clara sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {ano} {EMPRESA.assinatura} · {EMPRESA.dominio}
           </p>

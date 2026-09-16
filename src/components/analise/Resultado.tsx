@@ -19,9 +19,9 @@ export interface RespostaAnalise {
 }
 
 const CORES_DA_LEITURA: Record<Qualificacao['leitura'], string> = {
-  'alvo-cheio': 'border-gold-500',
-  'alvo-real': 'border-teal-500',
-  'ainda-nao': 'border-slate-400',
+  'alvo-cheio': 'border-ouro',
+  'alvo-real': 'border-ouro',
+  'ainda-nao': 'border-ardosia',
 };
 
 /**
@@ -53,22 +53,22 @@ export function Resultado({ dados, aoRecomecar }: {
 
         {estimativa.faixa ? (
           <>
-            <p className="mt-7 text-base text-slate-600">
+            <p className="mt-7 text-corpo text-ardosia">
               Com o que você declarou, estimamos que esteja saindo, por ano, sem precisar sair:
             </p>
-            <p className="nums mt-4 font-display text-4xl leading-[1.08] text-navy-700">
+            <p className="nums mt-4 font-display text-secao leading-[1.08] text-navy">
               {formatarFaixa(estimativa.faixa)}
             </p>
-            <p className="mt-4 font-mono text-mono uppercase tracking-[0.14em] text-gold-700">
-              Faixa anual, em ordem de grandeza — nunca um número exato
+            <p className="mt-4 font-mono text-rotulo uppercase tracking-[0.14em] text-ardosia">
+              Faixa anual, em ordem de grandeza, nunca um número exato
             </p>
           </>
         ) : (
           <>
-            <p className="mt-7 font-display text-2xl leading-snug text-navy-700">
+            <p className="mt-7 font-display text-lede leading-snug text-navy">
               Não vamos publicar uma faixa aqui.
             </p>
-            <p className="mt-5 max-w-2xl text-base leading-[1.7] text-slate-700">
+            <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-ardosia">
               {estimativa.motivoSemFaixa}
             </p>
           </>
@@ -77,42 +77,42 @@ export function Resultado({ dados, aoRecomecar }: {
 
       {/* 1b · A conta desenhada — só quando houve conta. */}
       {estimativa.decomposicao && (
-        <Revelar as="section" className="border-t border-navy-700/15 pt-10">
+        <Revelar as="section" className="border-t border-navy/15 pt-10">
           <Decomposicao estimativa={estimativa} />
         </Revelar>
       )}
 
       {/* 2 · O vetor */}
-      <Revelar as="section" className="border-t border-navy-700/15 pt-10">
-        <h2 className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
+      <Revelar as="section" className="border-t border-navy/15 pt-10">
+        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
           O vetor principal
         </h2>
-        <p className="mt-5 text-xl leading-snug text-navy-700">
+        <p className="mt-5 text-lede leading-snug text-navy">
           {ROTULO_DO_VETOR[estimativa.vetor]}
         </p>
-        <p className="mt-5 max-w-2xl text-base leading-[1.7] text-slate-700">
+        <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-ardosia">
           {narrativa.vetorFrase}
         </p>
       </Revelar>
 
       {/* 3 · As premissas */}
-      <Revelar as="section" className="border-t border-navy-700/15 pt-10">
-        <h2 className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
-          As premissas — numeradas, e cada uma com a sua base
+      <Revelar as="section" className="border-t border-navy/15 pt-10">
+        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
+          As premissas: numeradas, e cada uma com a sua base
         </h2>
         <ol className="mt-7 space-y-7">
           {estimativa.premissas.map((premissa, i) => (
             <li key={premissa.id} className="grid gap-4 sm:grid-cols-[2.5rem_1fr]">
-              <span className="nums font-display text-xl leading-none text-gold-600">
+              <span className="nums font-display text-lede leading-none text-ardosia">
                 {i + 1}
               </span>
               <div>
-                <p className="text-base leading-[1.7] text-navy-700">{premissa.texto}</p>
-                <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
+                <p className="text-corpo leading-[1.7] text-navy">{premissa.texto}</p>
+                <p className="mt-2.5 text-legenda leading-relaxed text-ardosia">
                   <span
                     className={cn(
-                      'mr-2 font-mono text-mono uppercase tracking-[0.12em]',
-                      premissa.tipo === 'evidencia' ? 'text-teal-600' : 'text-slate-500',
+                      'mr-2 font-mono text-rotulo uppercase tracking-[0.12em]',
+                      premissa.tipo === 'evidencia' ? 'text-navy' : 'text-ardosia',
                     )}
                   >
                     {premissa.tipo === 'evidencia' ? 'Evidência externa' : 'Premissa da ABBA'}
@@ -126,27 +126,27 @@ export function Resultado({ dados, aoRecomecar }: {
       </Revelar>
 
       {/* 4 · O aviso de faixa — texto fixo, nunca escondido */}
-      <Revelar as="section" className="bg-ice-200 p-7 sm:p-9">
-        <h2 className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
+      <Revelar as="section" className="bg-papel p-7 sm:p-9">
+        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
           O limite honesto
         </h2>
-        <p className="mt-5 text-base leading-[1.7] text-navy-700">{estimativa.aviso}</p>
+        <p className="mt-5 text-corpo leading-[1.7] text-navy">{estimativa.aviso}</p>
       </Revelar>
 
       {/* 5 · As perguntas que só quem está dentro responde */}
-      <Revelar as="section" className="border-t border-navy-700/15 pt-10">
-        <h2 className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
+      <Revelar as="section" className="border-t border-navy/15 pt-10">
+        <h2 className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
           O que a gente perguntaria à sua diretoria
         </h2>
         <ul className="mt-7 space-y-5">
           {narrativa.perguntas.map((pergunta) => (
             <li key={pergunta} className="flex gap-4">
-              <span aria-hidden className="mt-3 h-px w-5 shrink-0 bg-gold-500" />
-              <p className="text-base leading-[1.65] text-navy-700">{pergunta}</p>
+              <span aria-hidden className="mt-3 h-px w-5 shrink-0 bg-ouro" />
+              <p className="text-corpo leading-[1.65] text-navy">{pergunta}</p>
             </li>
           ))}
         </ul>
-        <p className="mt-8 max-w-2xl text-sm leading-[1.7] text-slate-600">
+        <p className="mt-8 max-w-2xl text-legenda leading-[1.7] text-ardosia">
           {narrativa.oQueFaltaOlhar}
         </p>
       </Revelar>
@@ -156,16 +156,16 @@ export function Resultado({ dados, aoRecomecar }: {
         as="section"
         className={cn('border-l-2 pl-7', CORES_DA_LEITURA[qualificacao.leitura])}
       >
-        <p className="nums font-mono text-mono uppercase tracking-[0.2em] text-slate-500">
+        <p className="nums font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
           Teste do alvo · {qualificacao.placar.toString().replace('.', ',')} de {qualificacao.maximo}
         </p>
-        <h2 className="mt-4 font-display text-xl leading-snug text-navy-700">
+        <h2 className="mt-4 font-display text-lede leading-snug text-navy">
           {qualificacao.titulo}
         </h2>
-        <p className="mt-4 max-w-2xl text-base leading-[1.7] text-slate-700">
+        <p className="mt-4 max-w-2xl text-corpo leading-[1.7] text-ardosia">
           {qualificacao.texto}
         </p>
-        <p className="mt-5 max-w-2xl text-base leading-[1.7] text-navy-700">
+        <p className="mt-5 max-w-2xl text-corpo leading-[1.7] text-navy">
           <span className="font-medium">Próximo passo. </span>
           {qualificacao.proximoPasso}
         </p>
@@ -177,9 +177,9 @@ export function Resultado({ dados, aoRecomecar }: {
 
       <div
         data-sem-impressao
-        className="flex flex-col gap-4 border-t border-navy-700/15 pt-8 sm:flex-row sm:items-center sm:justify-between"
+        className="flex flex-col gap-4 border-t border-navy/15 pt-8 sm:flex-row sm:items-center sm:justify-between"
       >
-        <p className="font-mono text-mono leading-relaxed text-slate-500">
+        <p className="font-mono text-rotulo leading-relaxed text-ardosia">
           Texto de apoio gerado{' '}
           {narrativa.origem === 'modelo'
             ? 'com apoio de modelo de linguagem, sobre número calculado por modelo aritmético'
@@ -193,14 +193,14 @@ export function Resultado({ dados, aoRecomecar }: {
           <button
             type="button"
             onClick={() => window.print()}
-            className="font-mono text-mono uppercase tracking-[0.12em] text-navy-700 underline-offset-4 hover:underline"
+            className="font-mono text-rotulo uppercase tracking-[0.12em] text-navy underline-offset-4 hover:underline"
           >
             Salvar em PDF
           </button>
           <button
             type="button"
             onClick={aoRecomecar}
-            className="font-mono text-mono uppercase tracking-[0.12em] text-slate-600 underline-offset-4 hover:underline"
+            className="font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia underline-offset-4 hover:underline"
           >
             Refazer com outras respostas
           </button>
@@ -252,11 +252,11 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
 
   if (estado === 'ok') {
     return (
-      <section className="bg-navy-700 p-8 text-ice-200 sm:p-10">
-        <h2 className="font-display text-xl text-ice-100">Recebido.</h2>
-        <p className="mt-4 max-w-xl text-base leading-[1.7] text-ice-200/80">
+      <section className="bg-navy p-8 text-ardosia-clara sm:p-10">
+        <h2 className="font-display text-lede text-branco">Recebido.</h2>
+        <p className="mt-4 max-w-xl text-corpo leading-[1.7] text-ardosia-clara">
           Um sócio responde em 24 horas úteis com uma proposta de horário. A conversa é de 45
-          minutos, são cinco perguntas, e a gente não apresenta nada nela — quem apresenta antes de
+          minutos, são cinco perguntas, e a gente não apresenta nada nela: quem apresenta antes de
           entender vende o produto errado.
         </p>
       </section>
@@ -264,13 +264,13 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
   }
 
   return (
-    <section className="bg-navy-700 p-8 text-ice-200 sm:p-10">
-      <h2 className="font-display text-2xl leading-snug text-ice-100">
+    <section className="bg-navy p-8 text-ardosia-clara sm:p-10">
+      <h2 className="font-display text-lede leading-snug text-branco">
         Quer o Mapa de Vazamento completo?
       </h2>
-      <p className="mt-4 max-w-2xl text-base leading-[1.7] text-ice-200/75">
+      <p className="mt-4 max-w-2xl text-corpo leading-[1.7] text-ardosia-clara">
         O que você viu acima foi calculado com onze respostas. O Mapa completo é feito depois de uma
-        conversa de 45 minutos e de uma pesquisa nossa sobre a sua empresa — e continua gratuito.
+        conversa de 45 minutos e de uma pesquisa nossa sobre a sua empresa, e continua gratuito.
         Deixe um contato só se quiser essa conversa.
       </p>
 
@@ -319,17 +319,17 @@ function FormularioDeContato({ empresaSugerida }: { readonly empresaSugerida: st
           <button
             type="submit"
             disabled={estado === 'enviando'}
-            className="inline-flex items-center justify-center rounded-[3px] bg-gold-500 px-7 py-3.5 font-medium text-navy-900 transition-colors duration-300 hover:bg-gold-400 disabled:opacity-60"
+            className="inline-flex items-center justify-center rounded-[3px] bg-ouro px-7 py-3.5 font-medium text-navy transition-colors duration-300 hover:bg-ouro-claro disabled:opacity-60"
           >
             {estado === 'enviando' ? 'Enviando…' : 'Quero a conversa de 45 minutos'}
           </button>
-          <p className="font-mono text-mono leading-relaxed text-ice-300/60">
+          <p className="font-mono text-rotulo leading-relaxed text-ardosia-clara">
             Só usamos para responder. Nada de lista, nada de sequência automática.
           </p>
         </div>
 
         {estado === 'erro' && (
-          <p role="alert" className="sm:col-span-2 text-sm text-gold-300">
+          <p role="alert" className="sm:col-span-2 text-legenda text-ouro-claro">
             {mensagemErro} Você também pode escrever direto para {EMPRESA.email}.
           </p>
         )}

@@ -32,20 +32,20 @@ export const REGRAS_DE_INVESTIMENTO = [
   {
     titulo: 'Contratação em dois tempos, num documento só',
     texto:
-      'A fase 1 é firme e pequena — alçada de um diretor. As fases 2 e 3 entram no mesmo Termo já precificadas, ' +
+      'A fase 1 é firme e pequena: alçada de um diretor. As fases 2 e 3 entram no mesmo Termo já precificadas, ' +
       'mas como opção condicionada ao Portão da Prova. O comitê decide o ano uma vez; o investimento maior só anda ' +
       'com o caso medido na mesa.',
   },
   {
     titulo: 'Nenhuma multa em portão de saída',
     texto:
-      'Saída na semana 6: você pagou a fase 1 e leva tudo — o caso rodando, o número medido e o portfólio priorizado completo. ' +
+      'Saída na semana 6: você pagou a fase 1 e leva tudo, o caso rodando, o número medido e o portfólio priorizado completo. ' +
       'Saída no mês 6: aviso, sem multa. O portão retém execução, nunca informação.',
   },
   {
     titulo: 'Desconto seco não existe',
     texto:
-      'Desconto ensina o cliente a esperar desconto e corrói a qualidade percebida — a literatura de varejo é consistente nisso. ' +
+      'Desconto ensina o cliente a esperar desconto e corrói a qualidade percebida: a literatura de varejo é consistente nisso. ' +
       'No lugar dele, bônus de fechamento com contrapartidas escritas.',
   },
   {

@@ -12,186 +12,92 @@
    ========================================================================== */
 
 @theme {
-  /* --- Azul-marinho profundo · primária ---------------------------------- */
-  --color-navy-950: #080D18;
-  --color-navy-900: #0E1729;
-  --color-navy-800: #142038;
-  --color-navy-700: #1B2A4A; /* CANÔNICA */
-  --color-navy-600: #243660;
-  --color-navy-500: #33497D;
-  --color-navy-400: #536896;
-  --color-navy-300: #8D9BB8;
+  /* --- A PALETA FECHADA ---------------------------------------------------
+     Os nove tokens do briefing de marca §2. Fechada quer dizer fechada: não
+     acrescentar matiz novo. As rampas antigas (navy-950 a 300, gold-800 a
+     100, slate, ice, teal) foram colapsadas nestes.
 
-  /* PISO DE OPACIDADE EM TEXTO SOBRE FUNDO ESCURO.
-     Escurecer texto com opacidade é confortável de escrever e é como o
-     contraste se perde sem ninguém notar. As contas, medidas sobre o navy:
-       ice-100/200/300  →  opacidade mínima 0,60
-       gold-400         →  mínima 0,75
-       gold-500         →  mínima 0,85 (prefira o gold-400 cheio)
-     Abaixo disso o texto reprova nos 4,5:1 da WCAG para corpo pequeno, que
-     é exatamente onde esses tons aparecem. A auditoria automática em
-     tests/e2e/acessibilidade.spec.ts derruba o build se voltar. */
+     Os contrastes abaixo vêm conferidos do briefing, não foram recalculados
+     aqui. Onde a régua reprova, está escrito.                             */
+  --color-navy: #1B2A4A; /* primária: título, fundo, a cor da casa */
+  --color-navy-escuro: #101B31; /* fundo profundo, onde o navy recua */
+  --color-ouro: #C2A35B; /* acento. COM PARCIMÔNIA: filete, numeral, marca */
+  --color-ouro-claro: #D8BE7C; /* acento sobre navy: itálico, link */
+  --color-ouro-escuro: #8A6E28; /* acento sobre claro. SÓ acima de 24px */
+  --color-papel: #F2F4F7; /* chão claro */
+  --color-bone: #EFEBE3; /* chão de fotografia clara */
+  --color-ardosia-clara: #C3CAD8; /* corpo sobre navy */
+  --color-ardosia: #5A6472; /* corpo sobre claro */
+  --color-branco: #FFFFFF; /* manchete e corpo sobre navy */
 
-  /* --- Dourado · acento (usar com parcimônia) ---------------------------- */
-  --color-gold-800: #6E5A2C;
-  /* 700 é o degrau do dourado para TEXTO sobre fundo claro, e por isso ele
-     é definido pelo contraste, não pela estética: 5,1:1 sobre branco e
-     4,8:1 sobre o cinza-gelo — acima do 4,5:1 que a WCAG exige para texto
-     pequeno, que é justamente onde este tom aparece (sobretítulos, rótulos
-     em mono). O #8C7439 anterior dava 4,32 e reprovava; a auditoria
-     automática pegou em todas as onze páginas. Nunca clarear este degrau
-     sem refazer a conta. */
-  --color-gold-700: #836B34;
-  --color-gold-600: #A88C46;
-  --color-gold-500: #C2A35B; /* CANÔNICA */
-  --color-gold-400: #D3B87F;
-  --color-gold-300: #E2CEA5;
-  --color-gold-200: #EFE4CC;
-  --color-gold-100: #F8F3E8;
+  /* Vermelho de erro. NÃO ESTÁ NA PALETA DO BRIEFING, e está aqui porque
+     mensagem de erro precisa se distinguir de texto comum por algo além da
+     posição. Usado só em `role="alert"`. Levantado como pergunta aos sócios:
+     se a resposta for que erro é navy com filete, isto sai numa linha.    */
+  --color-alerta: #9A2A2A;
 
-  /* --- Cinza-ardósia · neutro escuro ------------------------------------- */
-  --color-slate-800: #2F3641;
-  --color-slate-700: #414A57;
-  --color-slate-600: #5A6472; /* CANÔNICA · 6,0:1 sobre branco */
-  /* Como o dourado-700, este degrau é definido pelo contraste: 5,0:1 sobre
-     branco e 4,7:1 sobre o gelo. O #79828F anterior dava 3,89 e reprovava
-     em texto pequeno — legenda, nota, rótulo secundário —, que é onde ele
-     mais aparece. */
-  --color-slate-500: #66707D;
-  /* 400 fica abaixo de 4,5:1 de propósito e por isso é RESERVADO a
-     placeholder e a controle desabilitado, que a WCAG isenta. Não use em
-     texto que o leitor precise ler. */
-  --color-slate-400: #9BA3AE;
+  /* CONTRASTE, do briefing §2, já conferido:
+       branco sobre navy            14,22  AAA   manchete e corpo em escuro
+       navy sobre papel             12,91  AAA   manchete e corpo em claro
+       ardósia clara sobre navy      8,64  AAA   apoio em escuro
+       ouro claro sobre navy         7,84  AAA   itálico, link, gancho
+       ouro sobre navy               5,88  AA    filete, numeral, rótulo
+       ardósia sobre papel           5,44  AA    apoio em claro
+       ouro escuro sobre papel       4,39  AA grande   SÓ ACIMA DE 24px
+       ouro sobre papel              2,19  NUNCA. Trocar por ouro escuro   */
 
-  /* --- Cinza-gelo · neutro claro ----------------------------------------- */
-  --color-ice-500: #D5D7DA;
-  --color-ice-400: #E8E8E8; /* CANÔNICA */
-  --color-ice-300: #F1F2F4;
-  --color-ice-200: #F7F8F9;
-  --color-ice-100: #FBFBFC;
+  /* --- A escala tipográfica -----------------------------------------------
+     Os seis degraus do briefing de marca §10.6, ancorados no corpo de 21px.
+     Os números são Fibonacci: 13 · 21 · 34 · 55 · 89 · 144.
 
-  /* --- Azul-petróleo · apoio / interativo -------------------------------- */
-  --color-teal-700: #1F6673;
-  --color-teal-600: #266F7D;
-  --color-teal-500: #2E8B9A; /* CANÔNICA */
-  --color-teal-400: #55A6B3;
-  --color-teal-100: #E6F1F3;
+     O 16 da legenda não é Fibonacci e está no briefing mesmo assim, porque
+     entre 13 e 21 não existe degrau e legenda precisa de um.
 
-  --color-paper: #FFFFFF; /* CANÔNICA */
+     LEITURA DO "89 · 144" (manchete de topo). O briefing dá os dois valores
+     e diz que 144 é só em tela larga. Oitenta e nove pixels num aparelho de
+     412px daria quatro palavras por linha numa manchete de nove, então a
+     interpolação começa em 55 e passa por 89 no caminho até 144. Todos os
+     três são degraus da própria escala, e é a leitura mais fiel que
+     encontrei. Se a intenção era 89 fixo no celular, isto volta.
 
-  /* --- Alerta · estado de erro de formulário -----------------------------
-     Não está na paleta do abba-ops porque material impresso não tem campo
-     inválido. É o vermelho mínimo necessário para sinalizar erro com
-     contraste AA sobre branco, dessaturado para não brigar com o navy.
-     Registrar no abba-ops junto com a régua web (docs/identidade-visual-web.md). */
-  --color-alerta-700: #9A2A2A;
-  --color-alerta-100: #FBEDED;
+     O degrau de display saiu: o "70%" perdeu o numeral gigante e virou
+     frase em corpo de texto (briefing §10.8), porque número desse tamanho
+     é lido como estatística medida e os 70/30 são tese da casa.        */
+  --text-rotulo: 0.8125rem; /* 13px. O piso. Só IBM Plex Mono. */
+  --text-rotulo--line-height: 1.5;
+  --text-rotulo--letter-spacing: 0.24em;
 
-  /* --- Tipografia --------------------------------------------------------
-     Display serifado (Source Serif 4) para títulos: é a tradução para tela
-     do Aptos Display dos documentos. Inter no corpo, alinhado ao design
-     system da Plataforma. Mono para número, prazo e referência — o tom da
-     casa é "número, prazo, nome", e o mono deixa isso visível.            */
-  /* --- A escala tipográfica ----------------------------------------------
-     AUDITADA E RECONSTRUÍDA EM 11/09. O site tinha 53 tamanhos de fonte
-     distintos e zero `clamp()`. Não era escala: era cada componente
-     inventando o seu. Medido contra o CSS de produção das referências:
+  --text-legenda: 1rem; /* 16px */
+  --text-legenda--line-height: 1.55;
+  --text-legenda--letter-spacing: 0;
 
-       PX Push     7 tamanhos, 7 clamp()
-       Hobro       9 tamanhos, 165 clamp()
-       Vero       12 tamanhos, 9 clamp()
-       Sharplink  15 tamanhos, 0
-       Fato       18 tamanhos, 12 clamp()
-       Otsuka     25 tamanhos, 3 clamp()
-       ABBA       53 tamanhos, 0     ← nós
+  --text-corpo: clamp(1.1875rem, 1.13rem + 0.26vw, 1.3125rem); /* 19 a 21px */
+  --text-corpo--line-height: 1.6;
+  --text-corpo--letter-spacing: 0;
 
-     O pior grupo era o corpo de texto: 0.98, 1, 1.02, 1.04, 1.05, 1.06 e
-     1.08rem, sessenta e cinco usos, para a mesma coisa. Ninguém vê a
-     diferença entre 1,02 e 1,05 — mas todo mundo sente que nada está em
-     proporção com nada. É isso que faz uma página parecer básica mesmo
-     com cor, espaço e conteúdo certos.
+  --text-lede: clamp(1.3125rem, 0.94rem + 1.63vw, 2.125rem); /* 21 a 34px */
+  --text-lede--line-height: 1.4;
+  --text-lede--letter-spacing: -0.008em;
 
-     Onze degraus, e cada um FLUIDO: interpola entre 22,5rem (360px) e
-     90rem (1440px) de viewport. Some com os vinte e cinco saltos por
-     breakpoint que existiam — o tipo cresce continuamente em vez de pular
-     no `sm:`, que é o que dá a sensação de desenho contínuo em vez de três
-     desenhos costurados.
+  --text-secao: clamp(2.125rem, 1.52rem + 2.64vw, 3.4375rem); /* 34 a 55px */
+  --text-secao--line-height: 1.14;
+  --text-secao--letter-spacing: -0.018em;
 
-     A razão entre os degraus abre conforme sobe: ~1,12 no texto (onde
-     diferença grande cansa a leitura) e ~1,3 no display (onde diferença
-     pequena não lê como hierarquia).
+  /* 55 a 89px. O briefing dá "89 · 144, e 144 só em tela larga", e a
+     manchete da casa tem nove palavras: a 144px ela ocupa a tela inteira e
+     não sobra nada para o leitor ver. Fotografei e reprovei. O 144 continua
+     na escala e hoje não tem uso, porque nenhuma manchete do site é curta o
+     bastante para pedir esse degrau. Se aparecer uma, ele está aqui. */
+  --text-topo: clamp(3.4375rem, 2.46rem + 4.29vw, 5.5625rem); /* 55 a 89px */
+  --text-topo--line-height: 1.02;
+  --text-topo--letter-spacing: -0.028em;
 
-     A conta de cada clamp: min + (max-min) × (100vw - 22.5rem) / 67.5rem.  */
-  --text-mono: clamp(0.7rem, 0.67rem + 0.13vw, 0.76rem);
-  --text-mono--line-height: 1.5;
-  --text-mono--letter-spacing: 0.18em;
-
-  --text-xs: clamp(0.8rem, 0.77rem + 0.15vw, 0.87rem);
-  --text-xs--line-height: 1.6;
-  --text-xs--letter-spacing: 0.005em;
-
-  --text-sm: clamp(0.9rem, 0.87rem + 0.15vw, 0.97rem);
-  --text-sm--line-height: 1.65;
-  --text-sm--letter-spacing: 0;
-
-  --text-base: clamp(1rem, 0.96rem + 0.18vw, 1.08rem);
-  --text-base--line-height: 1.68;
-  --text-base--letter-spacing: -0.003em;
-
-  --text-lg: clamp(1.1rem, 1.02rem + 0.36vw, 1.26rem);
-  --text-lg--line-height: 1.58;
-  --text-lg--letter-spacing: -0.008em;
-
-  --text-xl: clamp(1.3rem, 1.15rem + 0.67vw, 1.6rem);
-  --text-xl--line-height: 1.4;
-  --text-xl--letter-spacing: -0.014em;
-
-  --text-2xl: clamp(1.55rem, 1.32rem + 1vw, 2rem);
-  --text-2xl--line-height: 1.28;
-  --text-2xl--letter-spacing: -0.018em;
-
-  --text-3xl: clamp(1.9rem, 1.53rem + 1.63vw, 2.63rem);
-  --text-3xl--line-height: 1.18;
-  --text-3xl--letter-spacing: -0.022em;
-
-  --text-4xl: clamp(2.2rem, 1.62rem + 2.59vw, 3.37rem);
-  --text-4xl--line-height: 1.1;
-  --text-4xl--letter-spacing: -0.026em;
-
-  --text-5xl: clamp(2.5rem, 1.59rem + 4.04vw, 4.32rem);
-  --text-5xl--line-height: 1.04;
-  --text-5xl--letter-spacing: -0.03em;
-
-  /* O 70% da tese. Único numeral que ocupa a tela, e por isso funciona. */
-  --text-display: clamp(6rem, 2.5rem + 15.56vw, 13rem);
-  --text-display--line-height: 0.82;
-  --text-display--letter-spacing: -0.042em;
-
-  /* ENTRELINHA E ESPACEJAMENTO VÊM COM O DEGRAU, e é aí que a escala deixa
-     de ser uma lista de tamanhos e vira tipografia.
-
-     Duas regras óticas, as mesmas que qualquer manual de tipografia ensina
-     e que o CSS de produção das referências aplica:
-
-     1. Quanto maior o tipo, MENOR a entrelinha. Em 4rem, entrelinha de
-        corpo abre buracos entre as linhas e a frase deixa de ler como uma
-        unidade. Vai de 1,68 no corpo a 0,82 no numeral de display.
-
-     2. Quanto maior o tipo, MAIS APERTADO o espacejamento. O espaço entre
-        letras que funciona em 1rem parece frouxo em 4rem, porque o olho
-        julga o espaço em proporção à altura do caractere, não em valor
-        absoluto. Vai de 0 no corpo a −0,042em no display. Uma serifada
-        grande com espacejamento de texto corrido é a marca mais confiável
-        de site feito sem tipógrafo — era o nosso caso.
-
-     O mono vai no sentido contrário: +0,18em. Texto curto em versalete
-     precisa de ar para não virar borrão.                                  */
-
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--font-source-serif), "Iowan Old Style", Georgia,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: var(--font-source-serif), "Iowan Old Style", Georgia,
-    "Times New Roman", serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", SFMono-Regular,
+  --font-display: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-display-italica: var(--font-newsreader-italica), "Iowan Old Style",
+    Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", SFMono-Regular,
     Menlo, Consolas, monospace;
 
   /* --- Ritmo e movimento -------------------------------------------------
@@ -249,19 +155,40 @@
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-navy-700);
+    background-color: var(--color-branco);
+    color: var(--color-navy);
     font-family: var(--font-sans);
     font-feature-settings: "cv05" 1, "ss01" 1;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  /* Título: Newsreader romana em 400, e não 600.
+     ────────────────────────────────────────────────────────────────────
+     O 600 vinha da fase Inter, onde título pesado era o único jeito de
+     separar hierarquia numa sem-serifa. Numa serifa de texto, peso alto
+     fecha o contraste entre haste e fina e a letra perde justamente o que
+     a torna uma serifa. A hierarquia aqui vem do corpo e do espaço.
+
+     E havia um problema mais simples: o arquivo de peso 600 da Newsreader
+     nunca foi carregado. O navegador vinha engordando a letra por conta
+     própria, que é o desenho de 400 esticado. Todo título do site estava
+     em negrito falso. */
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: -0.015em;
     text-wrap: balance;
+  }
+
+  /* A palavra de ênfase do título. Itálica 300 da mesma família: mais leve
+     que o texto ao redor, e não mais pesada. É o único destaque que o
+     briefing autoriza dentro de um título, e o motivo de ele funcionar é
+     ser uma mudança de VOZ, não de volume. */
+  .enfase {
+    font-family: var(--font-display-italica);
+    font-style: italic;
+    font-weight: 300;
   }
 
   p {
@@ -284,8 +211,8 @@
   }
 
   ::selection {
-    background-color: var(--color-gold-200);
-    color: var(--color-navy-800);
+    background-color: var(--color-ouro-claro);
+    color: var(--color-navy-escuro);
   }
 
   :focus-visible {
@@ -321,8 +248,8 @@
   background-image: linear-gradient(
     to right,
     transparent,
-    var(--color-gold-500) 12%,
-    var(--color-gold-500) 88%,
+    var(--color-ouro) 12%,
+    var(--color-ouro) 88%,
     transparent
   );
   opacity: 0.55;
@@ -409,7 +336,7 @@
      Com a cor no grupo, qualquer intervalo entre os dois retratos é navy.
      E é a afirmação certa: a superfície é contínua, os textos é que
      trocam. */
-  background-color: var(--color-navy-900);
+  background-color: var(--color-navy-escuro);
 }
 
 /* O texto de dentro atravessa mais rápido que a moldura — e o antigo sai
@@ -493,7 +420,7 @@
     inset-inline: 0;
     bottom: -1px;
     height: 2px;
-    background: var(--color-gold-500);
+    background: var(--color-ouro);
     transform-origin: left center;
     transform: scaleX(0);
     animation: progresso-de-rolagem linear both;

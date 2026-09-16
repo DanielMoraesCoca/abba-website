@@ -5,18 +5,29 @@ type Variante = 'primario' | 'secundario' | 'fantasma' | 'primario-invertido';
 
 const BASE =
   'group relative inline-flex items-center justify-center gap-2.5 rounded-[3px] px-6 py-3.5 ' +
-  'font-sans text-sm font-medium tracking-[0.01em] transition-[background-color,color,border-color,box-shadow,transform] ' +
+  'font-sans text-legenda font-medium tracking-[0.01em] transition-[background-color,color,border-color,box-shadow,transform] ' +
   'duration-[var(--duration-micro)] ease-[var(--ease-micro)] will-change-transform active:translate-y-px';
 
+/**
+ * Quatro variantes, duas por superfície. Briefing de marca §10.5.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * NENHUM BOTÃO DOURADO, EM FUNDO NENHUM. O site tinha dezessete usos de
+ * ouro como preenchimento, e o ouro é acento: filete, numeral, marca, no
+ * máximo uma palavra por bloco. Ouro em tudo vira Canva.
+ *
+ * E um primário por tela. Dois botões cheios competindo não dão duas
+ * chances de conversão: dão uma decisão a mais para quem já está decidindo.
+ * ──────────────────────────────────────────────────────────────────────── */
 const VARIANTES: Record<Variante, string> = {
-  primario:
-    'bg-navy-700 text-ice-100 shadow-[0_1px_2px_rgb(27_42_74/0.2)] hover:bg-navy-600 hover:shadow-[0_10px_28px_-12px_rgb(27_42_74/0.55)]',
-  'primario-invertido':
-    'bg-gold-500 text-navy-900 hover:bg-gold-400 hover:shadow-[0_10px_28px_-12px_rgb(194_163_91/0.6)]',
+  /* sobre papel */
+  primario: 'bg-navy text-branco hover:bg-navy-escuro',
   secundario:
-    'border border-navy-700/25 bg-transparent text-navy-700 hover:border-navy-700/60 hover:bg-navy-700/[0.04]',
-  fantasma:
-    'border border-ice-200/25 bg-transparent text-ice-200 hover:border-gold-400/70 hover:text-gold-300',
+    'border border-navy bg-transparent text-navy hover:bg-navy hover:text-branco',
+
+  /* sobre navy */
+  'primario-invertido': 'bg-papel text-navy hover:bg-branco',
+  fantasma: 'border border-branco bg-transparent text-branco hover:bg-branco hover:text-navy',
 };
 
 /** A seta que anda. Movimento pequeno, sempre para a direita, sempre igual. */

@@ -15,7 +15,7 @@ export const CRENCAS = [
     titulo: 'O problema da IA nas empresas não é técnico.',
     texto:
       'A tecnologia está pronta e é acessível. O que falha é a adoção: pessoas, processos, decisão, responsabilidade. ' +
-      'A maior parte do valor mora ali — e é ali que ninguém trabalha.',
+      'A maior parte do valor mora ali, e é ali que ninguém trabalha.',
   },
   {
     numero: 2,
@@ -36,7 +36,7 @@ export const CRENCAS = [
     titulo: 'Memória vale mais que talento isolado.',
     texto:
       'Um consultor bom responde bem à pergunta de hoje. Uma memória que acumula responde à pergunta de hoje com o que ' +
-      'aprendeu nos últimos dois anos naquela empresa — e não vai embora quando alguém troca de emprego.',
+      'aprendeu nos últimos dois anos naquela empresa, e não vai embora quando alguém troca de emprego.',
   },
   {
     numero: 5,
@@ -49,7 +49,7 @@ export const CRENCAS = [
     numero: 6,
     titulo: 'Nosso sucesso é o cliente precisar menos de nós no operacional.',
     texto:
-      'Instalamos capacidade. Se ao final do programa a empresa depende da ABBA para operar, nós falhamos — mesmo que o ' +
+      'Instalamos capacidade. Se ao final do programa a empresa depende da ABBA para operar, nós falhamos: mesmo que o ' +
       'contrato continue.',
   },
   {
@@ -83,7 +83,7 @@ export const RECUSAS = [
   {
     recusa: 'Cruzar dado entre clientes',
     porque:
-      'Um cérebro por cliente, segregado. Só o agregado anonimizado circula — e com piso de privacidade escrito no código.',
+      'Um cérebro por cliente, segregado. Só o agregado anonimizado circula, e com piso de privacidade escrito no código.',
   },
   {
     recusa: 'Apagar histórico',
@@ -106,7 +106,7 @@ export const RECUSAS = [
 export const NA_PRATICA = [
   'Toda proposta nossa tem uma seção do que não vamos fazer. Escopo sem limite é escopo sem preço.',
   'Todo documento nosso declara o próprio limite. O Mapa de Vazamento diz que foi calculado de fora.',
-  'Todo número nosso tem premissa citada — ou não é publicado.',
+  'Todo número nosso tem premissa citada, ou não é publicado.',
   'O que deu errado entra no relatório, na mesma tipografia do que deu certo.',
   'Recusa é nomeada, não disfarçada. Quando não somos a escolha certa, dizemos qual condição falta.',
   'Ninguém da ABBA fala “a IA decidiu”. A IA rascunhou; alguém assinou.',

@@ -18,15 +18,15 @@ export function CapaDePagina({
   readonly largura?: 'estreita' | 'padrao' | 'larga';
 }) {
   return (
-    <section data-fundo="escuro" className="capa-continua bg-navy-900 pb-16 pt-[calc(var(--header-h)+4.5rem)] sm:pb-24 sm:pt-[calc(var(--header-h)+6rem)]">
+    <section data-fundo="escuro" className="capa-continua bg-navy-escuro pb-16 pt-[calc(var(--header-h)+4.5rem)] sm:pb-24 sm:pt-[calc(var(--header-h)+6rem)]">
       <Container largura={largura}>
         <Revelar className="max-w-3xl">
           <Sobretitulo invertido>{sobretitulo}</Sobretitulo>
-          <h1 className="mt-7 text-4xl leading-[1.1] text-ice-100">
+          <h1 className="mt-7 text-secao leading-[1.1] text-branco">
             {titulo}
           </h1>
           {apoio && (
-            <div className="mt-8 text-base leading-[1.65] text-ice-200/75">{apoio}</div>
+            <div className="mt-8 text-corpo leading-[1.65] text-ardosia-clara">{apoio}</div>
           )}
         </Revelar>
       </Container>

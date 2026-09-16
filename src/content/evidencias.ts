@@ -15,8 +15,8 @@ export const EVIDENCIAS = [
   {
     id: 'rand-80',
     numero: 'mais de 80%',
-    afirmacao: 'dos projetos de IA falham — o dobro da taxa de projetos de TI comuns.',
-    fonte: 'RAND, “The Root Causes of Failure for AI Projects” — 65 entrevistas com engenheiros de ML sêniores',
+    afirmacao: 'dos projetos de IA falham: o dobro da taxa de projetos de TI comuns.',
+    fonte: 'RAND, “The Root Causes of Failure for AI Projects”: 65 entrevistas com engenheiros de ML sêniores',
     ano: 2024,
     url: 'https://www.rand.org/pubs/research_reports/RRA2680-1.html',
     conferidaEm: '2026-09-09',
@@ -29,7 +29,7 @@ export const EVIDENCIAS = [
     numero: 'causa nº 1',
     afirmacao:
       'de fracasso não é técnica: é começar sem combinar, antes, qual seria o critério de sucesso.',
-    fonte: 'RAND, mesma pesquisa — causas 1 e 2 do ranking',
+    fonte: 'RAND, mesma pesquisa: causas 1 e 2 do ranking',
     ano: 2024,
     url: 'https://www.rand.org/pubs/research_reports/RRA2680-1.html',
     conferidaEm: '2026-09-09',
@@ -41,16 +41,16 @@ export const EVIDENCIAS = [
     id: 'metr-19',
     numero: '19% mais lentos',
     afirmacao:
-      'foi o que aconteceu com desenvolvedores experientes usando IA — e eles saíram convencidos de que tinham ficado 20% mais rápidos.',
-    fonte: 'METR — experimento randomizado, 16 desenvolvedores experientes, 246 tarefas reais',
+      'foi o que aconteceu com desenvolvedores experientes usando IA, e eles saíram convencidos de que tinham ficado 20% mais rápidos.',
+    fonte: 'METR: experimento randomizado, 16 desenvolvedores experientes, 246 tarefas reais',
     ano: 2025,
     url: 'https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/',
     conferidaEm: '2026-09-09',
     confianca: 'media-alta',
     ressalva:
       'Medição forte, generalização limitada: amostra pequena, em código que os participantes já dominavam. ' +
-      'Atualização de fevereiro de 2026: a própria METR reestimou o efeito — cerca de −18% para os mesmos ' +
-      'desenvolvedores e −4% para recrutados novos, os dois com intervalo cruzando o zero — e declarou efeitos ' +
+      'Atualização de fevereiro de 2026: a própria METR reestimou o efeito em cerca de −18% para os mesmos ' +
+      'desenvolvedores e −4% para recrutados novos, os dois com intervalo cruzando o zero, e declarou efeitos ' +
       'de seleção fortes o bastante para redesenhar o experimento. O que sobrevive intacto é o erro de ' +
       'percepção: eles se achavam mais rápidos.',
     leitura:
@@ -60,28 +60,28 @@ export const EVIDENCIAS = [
     id: 'cui-26',
     numero: '+26% de tarefas concluídas',
     afirmacao:
-      'por desenvolvedores com IA — e os menos experientes são os que mais ganham.',
+      'por desenvolvedores com IA, e os menos experientes são os que mais ganham.',
     fonte:
-      'Cui et al., Management Science (revisado por pares) — 3 experimentos randomizados, 4.867 desenvolvedores',
+      'Cui et al., Management Science (revisado por pares): 3 experimentos randomizados, 4.867 desenvolvedores',
     ano: 2025,
     url: 'https://pubsonline.informs.org/doi/10.1287/mnsc.2025.00535',
     conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
-      'O ganho de construção está indo para todo mundo. Saber construir com IA deixou de ser diferencial — achar o problema certo e medir o resultado, não.',
+      'O ganho de construção está indo para todo mundo. Saber construir com IA deixou de ser diferencial: achar o problema certo e medir o resultado, não.',
   },
   {
     id: 'dora-amplifica',
     numero: 'amplifica',
     afirmacao:
       'é o verbo do relatório DORA: a IA não conserta um time, ela amplifica o que já está lá. A adoção correlaciona positivamente com velocidade e negativamente com estabilidade.',
-    fonte: 'DORA 2025 (Google) — cerca de 5.000 respondentes',
+    fonte: 'DORA 2025 (Google): cerca de 5.000 respondentes',
     ano: 2025,
     url: 'https://dora.dev/dora-report-2025/',
     conferidaEm: '2026-09-09',
     confianca: 'alta',
     leitura:
-      'Time com a base arrumada acelera; time com processo bagunçado piora mais rápido. Arrumar a base não é atraso — é a condição do ganho.',
+      'Time com a base arrumada acelera; time com processo bagunçado piora mais rápido. Arrumar a base não é atraso: é a condição do ganho.',
   },
   {
     id: 'bcg-5',
@@ -98,16 +98,16 @@ export const EVIDENCIAS = [
     id: 'gartner-40',
     numero: 'mais de 40%',
     afirmacao:
-      'dos projetos de IA agêntica serão cancelados até o fim de 2027 — e dos milhares de fornecedores “de agentes”, cerca de 130 são reais.',
+      'dos projetos de IA agêntica serão cancelados até o fim de 2027, e dos milhares de fornecedores “de agentes”, cerca de 130 são reais.',
     fonte:
-      'Gartner — previsão de analistas, comunicado de 25/06/2025. A enquete com 3.412 participantes de ' +
+      'Gartner: previsão de analistas, comunicado de 25/06/2025. A enquete com 3.412 participantes de ' +
       'webinar citada no mesmo comunicado mediu nível de investimento, não cancelamento.',
     ano: 2025,
     url: 'https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027',
     conferidaEm: '2026-09-09',
     confianca: 'media',
     ressalva:
-      'É previsão de analista, não medição — e a Gartner declara isso. A versão anterior desta linha ' +
+      'É previsão de analista, não medição, e a Gartner declara isso. A versão anterior desta linha ' +
       'atribuía o número à enquete; estava errada. Os “cerca de 130 fornecedores reais” também são ' +
       'estimativa da própria Gartner.',
     leitura:
@@ -117,19 +117,19 @@ export const EVIDENCIAS = [
     id: 'wharton-medicao',
     numero: '72% dizem medir',
     afirmacao:
-      'o retorno de IA generativa — mas metade usa “qualidade de dados” como métrica, e 53% reportam retorno de apenas 1% a 5%.',
+      'o retorno de IA generativa, mas metade usa “qualidade de dados” como métrica, e 53% reportam retorno de apenas 1% a 5%.',
     fonte: 'Wharton Human-AI Research (GBK), ano 3',
     ano: 2025,
     url: 'https://knowledge.wharton.upenn.edu/special-report/2025-ai-adoption-report/',
     conferidaEm: '2026-09-09',
     confianca: 'media-alta',
     leitura:
-      'Quase todo mundo diz que mede. Medição de verdade — combinada antes, ligada ao resultado financeiro — quase não existe.',
+      'Quase todo mundo diz que mede. Medição de verdade, combinada antes e ligada ao resultado financeiro, quase não existe.',
   },
   {
     id: 'kpmg-brasil-47',
     numero: '47% das empresas brasileiras',
-    afirmacao: 'já oferecem treinamento de IA — acima dos EUA (28%), do Reino Unido (27%) e da Alemanha (20%).',
+    afirmacao: 'já oferecem treinamento de IA: acima dos EUA (28%), do Reino Unido (27%) e da Alemanha (20%).',
     fonte: 'KPMG / Universidade de Melbourne, “Trust, attitudes and use of AI”',
     ano: 2025,
     url: 'https://kpmg.com/xx/en/our-insights/ai-and-technology/trust-attitudes-and-use-of-ai.html',
@@ -149,21 +149,9 @@ export const EVIDENCIAS = [
     conferidaEm: '2026-09-09',
     confianca: 'media',
     ressalva:
-      'É a firma falando da própria receita, sem auditoria de terceiro — vale como ordem de grandeza do topo do mercado, não como dado conferível.',
+      'É a firma falando da própria receita, sem auditoria de terceiro: vale como ordem de grandeza do topo do mercado, não como dado conferível.',
     leitura:
       'No topo do mercado, um quarto da receita já é atrelada a resultado. No médio porte brasileiro, quase ninguém oferece isso.',
-  },
-  {
-    id: 'auditor-tenure',
-    numero: '32,7 anos',
-    afirmacao: 'é o tempo médio que um auditor fica com o mesmo cliente no S&P 500.',
-    fonte: 'Audit Analytics, a partir de arquivamentos na SEC',
-    ano: 2024,
-    url: 'https://blog.auditanalytics.com/auditor-tenure-by-revenue/',
-    conferidaEm: '2026-09-09',
-    confianca: 'alta',
-    leitura:
-      'É o oposto do churn de serviços profissionais, que corre de 16% a 27% ao ano. Relação que se sustenta em prova recorrente não se renova por argumento de venda.',
   },
   {
     id: 'talento-98',
@@ -173,7 +161,7 @@ export const EVIDENCIAS = [
     fonte: 'Pesquisas de mercado noticiadas por CartaCapital e Money Times',
     ano: 2025,
     confianca: 'media',
-    ressalva: 'É imprensa citando pesquisa — falamos como “as pesquisas de mercado apontam”, nunca como dado próprio.',
+    ressalva: 'É imprensa citando pesquisa: falamos como “as pesquisas de mercado apontam”, nunca como dado próprio.',
     leitura:
       'Quem disputa esse talento contra banco e vaga em dólar, perde. É por isso que a cadeira de IA no médio porte nasce fracionária.',
   },
@@ -210,7 +198,7 @@ export const INDICE_PROIBIDO = [
     padrao: /67\s*%[^.]{0,60}(parceiro|externo)/i,
     rotulo: '“parceiro externo acerta 67% vs 22–33% interno”',
     porque: 'Vem do mesmo relatório MIT NANDA. Aposentado.',
-    substituto: 'A convergência RAND + METR + DORA — argumento por três fontes independentes.',
+    substituto: 'A convergência RAND + METR + DORA: argumento por três fontes independentes.',
   },
   {
     padrao: /roi\s*(de\s*)?3x?\s*(a|até)\s*8x/i,
@@ -234,6 +222,6 @@ export const INDICE_PROIBIDO = [
     padrao: /32\s*%[^.]{0,40}15\s*%[^.]{0,40}churn/i,
     rotulo: '“32% vs 15% de churn de firmas pequenas vs grandes”',
     porque: 'Sem fonte primária.',
-    substituto: 'CustomerGauge 16–27% + tenure de 32,7 anos do auditor no S&P 500.',
+    substituto: 'Nenhum. A linha sai do site e não é trocada por outro número.',
   },
 ] as const;

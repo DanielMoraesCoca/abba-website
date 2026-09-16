@@ -36,14 +36,14 @@ export function NumeroComFonte({
     <figure
       className={cn(
         'flex h-full flex-col border-t pt-6',
-        escuro ? 'border-gold-500/35' : 'border-navy-700/15',
+        escuro ? 'border-ouro/35' : 'border-navy/15',
         className,
       )}
     >
       <p
         className={cn(
-          'nums font-display text-4xl leading-[1.05] tracking-[-0.02em]',
-          escuro ? 'text-gold-400' : 'text-navy-700',
+          'nums font-display text-secao leading-[1.05] tracking-[-0.02em]',
+          escuro ? 'text-ouro-claro' : 'text-navy',
         )}
       >
         {evidencia.numero}
@@ -51,8 +51,8 @@ export function NumeroComFonte({
 
       <p
         className={cn(
-          'mt-3 text-base leading-relaxed',
-          escuro ? 'text-ice-200/85' : 'text-slate-700',
+          'mt-3 text-corpo leading-relaxed',
+          escuro ? 'text-ardosia-clara' : 'text-ardosia',
         )}
       >
         {evidencia.afirmacao}
@@ -60,11 +60,11 @@ export function NumeroComFonte({
 
       <figcaption
         className={cn(
-          'mt-auto pt-6 font-mono text-mono leading-relaxed',
-          escuro ? 'text-ice-300/65' : 'text-slate-500',
+          'mt-auto pt-6 font-mono text-rotulo leading-relaxed',
+          escuro ? 'text-ardosia-clara' : 'text-ardosia',
         )}
       >
-        <span className={escuro ? 'text-gold-400' : 'text-gold-700'}>Fonte · </span>
+        <span className={escuro ? 'text-ouro-claro' : 'text-ardosia'}>Fonte · </span>
         {/* Quando há página oficial, a fonte É o link. Não é rodapé nem
             ícone: é o próprio nome, clicável, no mesmo bloco. O leitor que
             quiser conferir confere em um gesto — e é isso que separa "com
@@ -77,8 +77,8 @@ export function NumeroComFonte({
             className={cn(
               'underline decoration-[1px] underline-offset-[0.22em] transition-colors duration-[var(--duration-micro)]',
               escuro
-                ? 'decoration-gold-400/40 hover:text-ice-100 hover:decoration-gold-400'
-                : 'decoration-gold-700/40 hover:text-navy-700 hover:decoration-gold-700',
+                ? 'decoration-ouro-claro/40 hover:text-branco hover:decoration-ouro-claro'
+                : 'decoration-ardosia/40 hover:text-navy hover:decoration-navy',
             )}
           >
             {evidencia.fonte}
@@ -91,7 +91,11 @@ export function NumeroComFonte({
           <> · conferida em {formatarConferencia(evidencia.conferidaEm)}</>
         )}
         {evidencia.ressalva && (
-          <span className="mt-2 block italic">Ressalva: {evidencia.ressalva}</span>
+          /* A ressalva era itálica dentro de uma legenda em mono, e a Plex
+             Mono não tem itálica carregada: o navegador inclinava a romana
+             na marra. O rótulo "Ressalva" já separa a frase do resto; o que
+             ela precisava era de ar, não de inclinação falsa. */
+          <span className="mt-2 block">Ressalva: {evidencia.ressalva}</span>
         )}
       </figcaption>
     </figure>

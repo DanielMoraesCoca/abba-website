@@ -69,8 +69,8 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
     {
       id: 'retrabalho',
       rotulo: 'Retrabalho no caminho do documento',
-      cor: 'var(--color-navy-700)',
-      corTexto: 'var(--color-ice-100)',
+      cor: 'var(--color-navy)',
+      corTexto: 'var(--color-branco)',
       explicacao: 'volume de documentos × minutos por passagem × custo da hora',
       min: decomposicao.retrabalhoDocumental.min,
       max: decomposicao.retrabalhoDocumental.max,
@@ -78,8 +78,8 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
     {
       id: 'fechamento',
       rotulo: 'Dias de fechamento acima da referência',
-      cor: 'var(--color-navy-500)',
-      corTexto: 'var(--color-ice-100)',
+      cor: 'var(--color-navy)',
+      corTexto: 'var(--color-branco)',
       explicacao: 'dias extras × pessoas envolvidas × jornada × custo da hora',
       min: decomposicao.atrasoDeFechamento.min,
       max: decomposicao.atrasoDeFechamento.max,
@@ -87,9 +87,9 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
     {
       id: 'contingencia',
       rotulo: 'Contingência pela latência da descoberta',
-      cor: 'var(--color-navy-300)',
-      corTexto: 'var(--color-navy-800)',
-      explicacao: 'percentual sobre as duas parcelas acima — a mais assumida das três',
+      cor: 'var(--color-ardosia-clara)',
+      corTexto: 'var(--color-navy-escuro)',
+      explicacao: 'percentual sobre as duas parcelas acima: a mais assumida das três',
       min: decomposicao.contingencia.min,
       max: decomposicao.contingencia.max,
     },
@@ -104,11 +104,11 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
 
   return (
     <figure className="m-0">
-      <figcaption className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
+      <figcaption className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
         De que a faixa é feita
       </figcaption>
 
-      <p className="mt-5 max-w-2xl text-sm leading-[1.7] text-slate-700">
+      <p className="mt-5 max-w-2xl text-legenda leading-[1.7] text-ardosia">
         Três parcelas somadas, nas duas pontas da faixa. Quanto mais claro o tom, menos sólida a
         parcela: o retrabalho sai de aritmética direta; a contingência é a mais assumida das três.
       </p>
@@ -122,16 +122,16 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
         ).map(({ chave, rotulo, total }) => (
           <div key={chave}>
             <div className="flex items-baseline justify-between gap-4">
-              <span className="font-mono text-mono uppercase tracking-[0.14em] text-slate-500">
+              <span className="font-mono text-rotulo uppercase tracking-[0.14em] text-ardosia">
                 {rotulo}
               </span>
               {/* O rótulo é a SOMA DESENHADA, não a faixa publicada — senão a
                   barra e o número ao lado dela contariam histórias diferentes
                   sempre que o teto cortasse. */}
-              <span className="nums font-mono text-xs text-navy-700">
+              <span className="nums font-mono text-legenda text-navy">
                 {formatarReais(total)}
                 {chave === 'max' && posicaoDoTeto !== null && (
-                  <span className="text-gold-700"> → cortada em {formatarReais(faixa.max)}</span>
+                  <span className="text-ardosia"> → cortada em {formatarReais(faixa.max)}</span>
                 )}
               </span>
             </div>
@@ -173,7 +173,7 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
               {chave === 'max' && posicaoDoTeto !== null && (
                 <span
                   aria-hidden
-                  className="absolute top-[-0.4rem] bottom-[-0.4rem] w-px bg-gold-500"
+                  className="absolute top-[-0.4rem] bottom-[-0.4rem] w-px bg-ouro"
                   style={{ left: `${posicaoDoTeto}%` }}
                 />
               )}
@@ -181,7 +181,7 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
 
             {chave === 'max' && posicaoDoTeto !== null && (
               <p
-                className="mt-2 font-mono text-mono uppercase tracking-[0.12em] text-gold-700"
+                className="mt-2 font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia"
                 style={{ marginLeft: `min(${posicaoDoTeto}%, calc(100% - 9rem))` }}
               >
                 ↑ teto
@@ -194,7 +194,7 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
       {/* Legenda: sempre presente, porque são três séries. Cada linha traz o
           valor nas duas pontas — o que a barra não consegue rotular por
           dentro sem cortar texto. */}
-      <ul className="mt-9 space-y-4 border-t border-navy-700/15 pt-7">
+      <ul className="mt-9 space-y-4 border-t border-navy/15 pt-7">
         {parcelas.map((parcela) => (
           <li key={parcela.id} className="grid gap-x-4 gap-y-1 sm:grid-cols-[0.75rem_1fr_auto]">
             <span
@@ -204,31 +204,31 @@ export function Decomposicao({ estimativa }: { readonly estimativa: Estimativa }
               style={{ background: parcela.cor }}
             />
             <span>
-              <span className="block text-sm leading-snug text-navy-700">
+              <span className="block text-legenda leading-snug text-navy">
                 {parcela.rotulo}
               </span>
-              <span className="mt-0.5 block text-xs leading-relaxed text-slate-600">
+              <span className="mt-0.5 block text-legenda leading-relaxed text-ardosia">
                 {parcela.explicacao}
               </span>
             </span>
-            <span className="nums self-start whitespace-nowrap font-mono text-xs text-slate-600 sm:text-right">
+            <span className="nums self-start whitespace-nowrap font-mono text-legenda text-ardosia sm:text-right">
               {formatarReais(parcela.min)} – {formatarReais(parcela.max)}
             </span>
           </li>
         ))}
       </ul>
 
-      <p className="mt-7 text-xs leading-relaxed text-slate-500">
+      <p className="mt-7 text-legenda leading-relaxed text-ardosia">
         Os valores acima são a conta cheia. A faixa publicada no topo da página é essa mesma conta
-        arredondada para dois algarismos significativos — porque precisão de real, numa estimativa
+        arredondada para dois algarismos significativos, porque precisão de real, numa estimativa
         feita de fora, seria precisão inventada.
       </p>
 
       {decomposicao.tetoAplicado && (
-        <p className="mt-6 border-l-2 border-gold-500 pl-5 text-sm leading-relaxed text-slate-700">
-          <span className="font-medium text-navy-700">O teto foi aplicado. </span>
+        <p className="mt-6 border-l-2 border-ouro pl-5 text-legenda leading-relaxed text-ardosia">
+          <span className="font-medium text-navy">O teto foi aplicado. </span>
           A soma das parcelas passou de {formatarPorcentagem(TETO_SOBRE_FATURAMENTO)} do faturamento
-          que você declarou, então a ponta de cima foi cortada nesse limite — é o fio dourado na
+          que você declarou, então a ponta de cima foi cortada nesse limite: é o fio dourado na
           barra acima. Quando o piso também passava do teto, ele desceu na mesma proporção, para a
           razão entre as duas pontas continuar sendo a aritmética. A trava existe para impedir que
           uma combinação improvável de respostas produza um número absurdo. Quando ela dispara, é

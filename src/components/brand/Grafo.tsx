@@ -106,7 +106,7 @@ export function Grafo({
       focusable="false"
     >
       <g
-        stroke={escuro ? 'var(--color-gold-500)' : 'var(--color-navy-700)'}
+        stroke={escuro ? 'var(--color-ouro)' : 'var(--color-navy)'}
         strokeWidth={0.8}
         strokeLinecap="round"
       >
@@ -123,7 +123,7 @@ export function Grafo({
           />
         ))}
       </g>
-      <g fill={escuro ? 'var(--color-gold-400)' : 'var(--color-navy-600)'}>
+      <g fill={escuro ? 'var(--color-ouro-claro)' : 'var(--color-navy)'}>
         {nos.map((n, i) => (
           <circle key={i} cx={n.x} cy={n.y} r={n.r} fillOpacity={escuro ? 0.55 : 0.3} />
         ))}
@@ -151,7 +151,7 @@ export function FaixaDeGrafo({
       data-fundo={tom === 'escuro' ? 'escuro' : 'claro'}
       className={cn(
         'relative overflow-hidden',
-        tom === 'escuro' ? 'bg-navy-900' : 'bg-ice-200',
+        tom === 'escuro' ? 'bg-navy-escuro' : 'bg-papel',
       )}
     >
       <Grafo semente={semente} tom={tom} altura={altura} />
@@ -161,8 +161,8 @@ export function FaixaDeGrafo({
         className={cn(
           'pointer-events-none absolute inset-0',
           tom === 'escuro'
-            ? 'bg-[linear-gradient(to_right,var(--color-navy-900),transparent_18%,transparent_82%,var(--color-navy-900))]'
-            : 'bg-[linear-gradient(to_right,var(--color-ice-200),transparent_18%,transparent_82%,var(--color-ice-200))]',
+            ? 'bg-[linear-gradient(to_right,var(--color-navy-escuro),transparent_18%,transparent_82%,var(--color-navy-escuro))]'
+            : 'bg-[linear-gradient(to_right,var(--color-papel),transparent_18%,transparent_82%,var(--color-papel))]',
         )}
       />
     </div>

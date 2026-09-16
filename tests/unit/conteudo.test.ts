@@ -199,10 +199,12 @@ describe('global-error usa as cores canônicas da marca', () => {
   };
 
   it.each([
-    ['navy-900', 'o fundo'],
-    ['ice-100', 'o texto'],
-    ['gold-500', 'o botão'],
-    ['gold-400', 'o link'],
+    ['navy-escuro', 'o fundo'],
+    ['branco', 'o texto'],
+    ['papel', 'o botão'],
+    ['navy', 'o texto do botão'],
+    ['ouro', 'a marca'],
+    ['ouro-claro', 'o link'],
   ])('%s (%s) bate com o token', (nome) => {
     expect(fonte).toContain(token(nome));
   });

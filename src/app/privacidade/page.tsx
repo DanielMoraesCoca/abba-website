@@ -24,20 +24,20 @@ const BLOCOS = [
     titulo: 'O que este site coleta',
     paragrafos: [
       'Se você preencher o formulário de contato ou pedir a conversa ao final da análise, coletamos o que você digitar: nome, cargo, e-mail, empresa, telefone e a mensagem. Só isso, e só porque você escreveu.',
-      'As respostas da Análise ABBA são processadas para calcular o resultado e descartadas em seguida. Elas não são gravadas em banco de dados, não são associadas a você e não voltam em nenhuma conversa futura — a não ser que você mesmo as repita.',
+      'As respostas da Análise ABBA são processadas para calcular o resultado e descartadas em seguida. Elas não são gravadas em banco de dados, não são associadas a você e não voltam em nenhuma conversa futura, a não ser que você mesmo as repita.',
     ],
   },
   {
     titulo: 'O que este site não faz',
     paragrafos: [
       'Não usamos cookie de rastreamento, pixel de rede publicitária, mapa de calor nem gravação de sessão. Não há script de terceiro carregando nesta página: a política de segurança de conteúdo do servidor bloqueia isso por configuração, não por promessa.',
-      'Não vendemos, alugamos nem compartilhamos o seu contato com ninguém. Não colocamos você em lista de e-mail automática. Se você escrever, um sócio responde — é esse o fluxo inteiro.',
+      'Não vendemos, alugamos nem compartilhamos o seu contato com ninguém. Não colocamos você em lista de e-mail automática. Se você escrever, um sócio responde: é esse o fluxo inteiro.',
     ],
   },
   {
     titulo: 'Processamento por modelo de linguagem',
     paragrafos: [
-      'A Análise ABBA usa um modelo de linguagem para escrever o texto de apoio ao redor do número. O que é enviado ao provedor do modelo são as suas respostas de múltipla escolha, o nome da empresa e o setor que você declarou — nada de contato, nada de dado pessoal.',
+      'A Análise ABBA usa um modelo de linguagem para escrever o texto de apoio ao redor do número. O que é enviado ao provedor do modelo são as suas respostas de múltipla escolha, o nome da empresa e o setor que você declarou: nada de contato, nada de dado pessoal.',
       'O número em si nunca passa pelo modelo: ele sai de uma conta aritmética no nosso servidor. Se a chamada ao modelo falhar, o site usa um texto preparado e o resultado sai igual.',
     ],
   },
@@ -65,7 +65,7 @@ export default function PaginaPrivacidade() {
         apoio={
           <p>
             Sem parágrafo de trinta linhas e sem “podemos compartilhar com parceiros selecionados”.
-            Se algo aqui não estiver claro, é falha nossa — escreva e a gente reescreve.
+            Se algo aqui não estiver claro, é falha nossa: escreva e a gente reescreve.
           </p>
         }
         largura="estreita"
@@ -75,10 +75,10 @@ export default function PaginaPrivacidade() {
         <div className="space-y-14">
           {BLOCOS.map((bloco) => (
             <Revelar as="section" key={bloco.titulo}>
-              <h2 className="text-xl leading-snug text-navy-700">{bloco.titulo}</h2>
+              <h2 className="text-lede leading-snug text-navy">{bloco.titulo}</h2>
               <div className="mt-5 space-y-4">
                 {bloco.paragrafos.map((p) => (
-                  <p key={p} className="text-base leading-[1.75] text-slate-700">
+                  <p key={p} className="text-corpo leading-[1.75] text-ardosia">
                     {p}
                   </p>
                 ))}
@@ -86,13 +86,13 @@ export default function PaginaPrivacidade() {
             </Revelar>
           ))}
 
-          <Revelar as="section" className="border-t border-navy-700/15 pt-10">
-            <h2 className="text-xl leading-snug text-navy-700">Como falar com a gente</h2>
-            <p className="mt-5 text-base leading-[1.75] text-slate-700">
+          <Revelar as="section" className="border-t border-navy/15 pt-10">
+            <h2 className="text-lede leading-snug text-navy">Como falar com a gente</h2>
+            <p className="mt-5 text-corpo leading-[1.75] text-ardosia">
               Qualquer pedido sobre os seus dados vai para{' '}
               <a
                 href={`mailto:${EMPRESA.email}`}
-                className="text-teal-600 underline-offset-4 hover:underline"
+                className="text-navy underline-offset-4 hover:underline"
               >
                 {EMPRESA.email}
               </a>

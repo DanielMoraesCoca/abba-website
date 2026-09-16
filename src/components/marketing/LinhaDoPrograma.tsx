@@ -29,7 +29,7 @@ const MESES = 12;
 /** Fim de cada fase, em meses. A fase 1 são 6 semanas ≈ 1,4 mês. */
 const FIM_DA_FASE = [1.4, 6, 12] as const;
 
-const TOM_DA_FASE = ['var(--color-navy-700)', 'var(--color-navy-500)', 'var(--color-navy-400)'];
+const TOM_DA_FASE = ['var(--color-navy)', 'var(--color-navy)', 'var(--color-navy)'];
 
 function x(mes: number): number {
   return MARGEM_X + (mes / MESES) * (LARGURA - MARGEM_X * 2);
@@ -67,7 +67,7 @@ export function LinhaDoPrograma() {
               y1={Y_RAIL + ALTURA_RAIL + 10}
               y2={Y_RAIL + ALTURA_RAIL + (mes % 3 === 0 ? 20 : 15)}
               stroke="currentColor"
-              className="text-navy-700/25"
+              className="text-navy/25"
               strokeWidth={1}
             />
           ))}
@@ -77,7 +77,7 @@ export function LinhaDoPrograma() {
               x={x(mes)}
               y={Y_RAIL + ALTURA_RAIL + 40}
               textAnchor={mes === 0 ? 'start' : mes === MESES ? 'end' : 'middle'}
-              className="fill-slate-500 font-mono text-[15px]"
+              className="fill-ardosia font-mono text-[15px]"
             >
               {mes === 0 ? 'início' : `mês ${mes}`}
             </text>
@@ -103,11 +103,11 @@ export function LinhaDoPrograma() {
               <text
                 x={de + 4}
                 y={Y_RAIL - 34}
-                className="fill-gold-700 font-mono text-[14px] uppercase tracking-[0.18em]"
+                className="fill-ardosia font-mono text-[14px] uppercase tracking-[0.18em]"
               >
                 {fase.rotulo}
               </text>
-              <text x={de + 4} y={Y_RAIL - 12} className="fill-navy-700 text-[21px]">
+              <text x={de + 4} y={Y_RAIL - 12} className="fill-navy text-[21px]">
                 {fase.nome}
               </text>
             </g>
@@ -126,15 +126,15 @@ export function LinhaDoPrograma() {
                 x2={posicao}
                 y1={Y_RAIL - 6}
                 y2={Y_RAIL + ALTURA_RAIL + 6}
-                stroke="var(--color-gold-500)"
+                stroke="var(--color-ouro)"
                 strokeWidth={2}
               />
-              <circle cx={posicao} cy={Y_RAIL - 6} r={4} fill="var(--color-gold-500)" />
+              <circle cx={posicao} cy={Y_RAIL - 6} r={4} fill="var(--color-ouro)" />
               <text
                 x={ultimo ? posicao - 6 : posicao}
                 y={Y_RAIL + ALTURA_RAIL + 62}
                 textAnchor={ultimo ? 'end' : i === 0 ? 'start' : 'middle'}
-                className="fill-navy-700 font-mono text-[15px] uppercase tracking-[0.1em]"
+                className="fill-navy font-mono text-[15px] uppercase tracking-[0.1em]"
               >
                 {fase.portao.nome}
               </text>
@@ -143,10 +143,10 @@ export function LinhaDoPrograma() {
         })}
       </svg>
 
-      <figcaption className="mt-8 max-w-2xl text-sm leading-[1.7] text-slate-700">
-        As fases estão desenhadas na proporção real do calendário — a fase 1 são seis semanas de
+      <figcaption className="mt-8 max-w-2xl text-legenda leading-[1.7] text-ardosia">
+        As fases estão desenhadas na proporção real do calendário: a fase 1 são seis semanas de
         doze meses, e é assim que ela aparece. O que a régua mostra e uma lista esconde:{' '}
-        <strong className="font-medium text-navy-700">
+        <strong className="font-medium text-navy">
           a primeira saída limpa acontece muito cedo
         </strong>
         , e nenhum dos três portões cobra multa.

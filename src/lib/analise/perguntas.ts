@@ -56,12 +56,12 @@ export type FaixaFaturamento = (typeof FAIXAS_FATURAMENTO)[number]['valor'];
 export const P_TOQUES = {
   id: 'toques',
   titulo: 'Do pedido ao pagamento, por quantos sistemas ou pessoas um documento passa?',
-  ajuda: 'Conte cada troca de mão e cada troca de sistema — inclusive planilha e e-mail.',
+  ajuda: 'Conte cada troca de mão e cada troca de sistema, inclusive planilha e e-mail.',
   opcoes: [
     { valor: 'ate-2', rotulo: 'Até 2', nota: 'Fluxo curto, geralmente dentro de um ERP só' },
     { valor: '3-4', rotulo: 'De 3 a 4', nota: 'O padrão do médio porte brasileiro' },
     { valor: '5-plus', rotulo: '5 ou mais', nota: 'Cada quebra entre sistemas é retrabalho' },
-    { valor: 'nao-sei', rotulo: 'Não sei dizer', nota: 'Resposta legítima — e já é um achado' },
+    { valor: 'nao-sei', rotulo: 'Não sei dizer', nota: 'Resposta legítima, e já é um achado' },
   ],
 } as const satisfies PerguntaFechada<string>;
 export type Toques = (typeof P_TOQUES)['opcoes'][number]['valor'];
@@ -70,7 +70,7 @@ export type Toques = (typeof P_TOQUES)['opcoes'][number]['valor'];
 export const P_FECHAMENTO = {
   id: 'fechamento',
   titulo: 'Quantos dias úteis leva o fechamento do mês?',
-  ajuda: 'O fechamento é o termômetro universal de fricção financeira — vale em qualquer setor.',
+  ajuda: 'O fechamento é o termômetro universal de fricção financeira: vale em qualquer setor.',
   opcoes: [
     { valor: 'ate-3', rotulo: 'Até 3 dias' },
     { valor: '4-7', rotulo: 'De 4 a 7 dias' },
@@ -84,9 +84,9 @@ export type Fechamento = (typeof P_FECHAMENTO)['opcoes'][number]['valor'];
 /** P3. "Tem algum número em reais que dói hoje e que vocês já medem?" */
 export const P_NUMERO_MEDIDO = {
   id: 'numeroMedido',
-  titulo: 'Existe hoje um número em reais que dói — e que vocês já medem?',
+  titulo: 'Existe hoje um número em reais que dói, e que vocês já medem?',
   ajuda:
-    'Esta é a pergunta mais importante das seis. Sem um número medido, não existe prova possível — só depoimento.',
+    'Esta é a pergunta mais importante das seis. Sem um número medido, não existe prova possível: só depoimento.',
   opcoes: [
     { valor: 'sim', rotulo: 'Sim, medimos e acompanhamos' },
     { valor: 'parcial', rotulo: 'Existe o número, mas a medição é frouxa' },
@@ -103,7 +103,7 @@ export const P_LATENCIA = {
   opcoes: [
     { valor: 'mes', rotulo: 'No mesmo mês' },
     { valor: 'trimestre', rotulo: 'No trimestre' },
-    { valor: 'ano', rotulo: 'No ano seguinte — geralmente na auditoria ou no fisco' },
+    { valor: 'ano', rotulo: 'No ano seguinte: geralmente na auditoria ou no fisco' },
     { valor: 'nao-sei', rotulo: 'Sinceramente, não sei' },
   ],
 } as const satisfies PerguntaFechada<string>;
@@ -113,7 +113,7 @@ export type Latencia = (typeof P_LATENCIA)['opcoes'][number]['valor'];
 export const P_PATROCINADOR = {
   id: 'patrocinador',
   titulo: 'Se esse número melhorasse 20%, quem na empresa comemoraria?',
-  ajuda: 'Identifica o patrocinador real — que quase nunca é quem marcou a reunião.',
+  ajuda: 'Identifica o patrocinador real: que quase nunca é quem marcou a reunião.',
   opcoes: [
     { valor: 'diretoria', rotulo: 'A diretoria ou o dono' },
     { valor: 'financeiro', rotulo: 'O financeiro ou o controller' },
@@ -130,7 +130,7 @@ export type Patrocinador = (typeof P_PATROCINADOR)['opcoes'][number]['valor'];
 
 export const P_TENTATIVA = {
   id: 'tentativa',
-  titulo: 'O que já tentaram com IA — e o que aconteceu depois do piloto?',
+  titulo: 'O que já tentaram com IA, e o que aconteceu depois do piloto?',
   opcoes: [
     { valor: 'producao', rotulo: 'Temos coisa em produção, rodando de verdade' },
     { valor: 'piloto-parou', rotulo: 'Fizemos piloto e ele não virou operação' },
@@ -143,7 +143,7 @@ export type Tentativa = (typeof P_TENTATIVA)['opcoes'][number]['valor'];
 export const P_DONO = {
   id: 'dono',
   titulo: 'Quem, aí dentro, ficaria dono disso depois que a gente saísse?',
-  ajuda: 'Sem candidato a dono, a capacidade não fica instalada — e a gente não aceita o trabalho.',
+  ajuda: 'Sem candidato a dono, a capacidade não fica instalada, e a gente não aceita o trabalho.',
   opcoes: [
     { valor: 'nomeado', rotulo: 'Tem pessoa com nome e cara' },
     { valor: 'area', rotulo: 'Uma área ficaria, sem pessoa definida' },
@@ -156,7 +156,7 @@ export const P_PRAZO = {
   id: 'prazo',
   titulo: 'Existe alguma obrigação com data pela frente?',
   ajuda:
-    'Reforma tributária, fiscalização, cláusula de cliente grande, certificação. Prazo externo não elimina ninguém — ordena a fila.',
+    'Reforma tributária, fiscalização, cláusula de cliente grande, certificação. Prazo externo não elimina ninguém: ordena a fila.',
   opcoes: [
     { valor: 'sim-12m', rotulo: 'Sim, nos próximos 12 meses' },
     { valor: 'sim-depois', rotulo: 'Sim, mas mais adiante' },

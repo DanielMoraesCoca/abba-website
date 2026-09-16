@@ -6,14 +6,14 @@ export default function NaoEncontrada() {
   return (
     <section
       data-fundo="escuro"
-      className="capa-continua flex min-h-[70vh] items-center bg-navy-900 pt-[var(--header-h)]"
+      className="capa-continua flex min-h-[70vh] items-center bg-navy-escuro pt-[var(--header-h)]"
     >
       <Container largura="estreita">
         <Sobretitulo invertido>Erro 404</Sobretitulo>
-        <h1 className="mt-7 text-4xl leading-[1.12] text-ice-100">
+        <h1 className="mt-7 text-secao leading-[1.12] text-branco">
           Esta página não existe.
         </h1>
-        <p className="mt-6 max-w-lg text-base leading-[1.65] text-ice-200/70">
+        <p className="mt-6 max-w-lg text-corpo leading-[1.65] text-ardosia-clara">
           Ou existiu e mudou de lugar. Nos dois casos, o caminho de volta é curto.
         </p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

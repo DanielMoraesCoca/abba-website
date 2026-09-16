@@ -35,11 +35,11 @@ export default function PaginaInicial() {
             className="max-w-none"
           />
           <Revelar className="space-y-7 lg:pt-3">
-            <p className="max-w-[54ch] text-lg leading-[1.6] text-navy-700">
+            <p className="max-w-[54ch] text-lede leading-[1.6] text-navy">
               {PRATELEIRA.texto}
             </p>
             <div className="rule-gold max-w-[54ch]" aria-hidden />
-            <p className="max-w-[54ch] text-base leading-[1.7] text-slate-600">
+            <p className="max-w-[54ch] text-corpo leading-[1.7] text-ardosia">
               {PRATELEIRA.analogia}
             </p>
           </Revelar>
@@ -74,7 +74,7 @@ export default function PaginaInicial() {
           apoio={
             <p>
               Um cardápio de serviços empurra a conversa para preço. Estes três caminhos existem
-              porque atendem a três situações diferentes — e a primeira é de graça.
+              porque atendem a três situações diferentes, e a primeira é de graça.
             </p>
           }
         />
@@ -88,27 +88,27 @@ export default function PaginaInicial() {
               as="article"
               key={caminho.id}
               className={cn(
-                'group flex flex-col border-t pt-8 transition-colors duration-500 hover:border-gold-500',
+                'group flex flex-col border-t pt-8 transition-colors duration-500 hover:border-ouro',
                 caminho.ordem === 1
-                  ? 'border-gold-500/70'
-                  : 'border-navy-700/15',
+                  ? 'border-ouro/70'
+                  : 'border-navy/15',
               )}
             >
-              <p className="nums font-mono text-mono tracking-[0.2em] text-gold-700">
+              <p className="nums font-mono text-rotulo tracking-[0.2em] text-ardosia">
                 {String(caminho.ordem).padStart(2, '0')}
               </p>
               <h3
                 className={cn(
-                  'mt-5 leading-tight text-navy-700',
-                  caminho.ordem === 1 ? 'text-3xl' : 'text-xl',
+                  'mt-5 leading-tight text-navy',
+                  caminho.ordem === 1 ? 'text-secao' : 'text-lede',
                 )}
               >
                 {caminho.nome}
               </h3>
-              <p className="mt-2 font-mono text-mono uppercase tracking-[0.12em] text-slate-500">
+              <p className="mt-2 font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia">
                 {caminho.chamada}
               </p>
-              <p className="mt-5 text-sm leading-[1.65] text-slate-700">
+              <p className="mt-5 text-legenda leading-[1.65] text-ardosia">
                 {caminho.descricao}
               </p>
 
@@ -116,9 +116,9 @@ export default function PaginaInicial() {
                 {caminho.itens.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 text-sm leading-relaxed text-slate-600"
+                    className="flex gap-3 text-legenda leading-relaxed text-ardosia"
                   >
-                    <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-gold-500" />
+                    <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro" />
                     {item}
                   </li>
                 ))}
@@ -126,7 +126,7 @@ export default function PaginaInicial() {
 
               <Link
                 href={caminho.href}
-                className="mt-8 inline-flex items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.12em] text-navy-700 transition-colors hover:text-gold-700"
+                className="mt-8 inline-flex items-center gap-2 self-start font-mono text-legenda uppercase tracking-[0.12em] text-navy transition-colors hover:text-ardosia"
               >
                 {caminho.cta.texto}
                 <span
@@ -153,7 +153,7 @@ export default function PaginaInicial() {
           titulo="Três números que explicam por que a ABBA existe."
           apoio={
             <p>
-              Todo número que a gente usa sai com a fonte na frase — porque número de terceiro vira
+              Todo número que a gente usa sai com a fonte na frase, porque número de terceiro vira
               alvo de auditoria do cliente. Estes três são os que mais mudam a conversa.
             </p>
           }
@@ -169,7 +169,7 @@ export default function PaginaInicial() {
 
         <Revelar className="mt-14">
           <Botao href="/evidencias" variante="fantasma">
-            Ver a base de evidências inteira — inclusive o que a gente proibiu de usar
+            Ver a base de evidências inteira, inclusive o que a gente proibiu de usar
           </Botao>
         </Revelar>
       </Secao>
@@ -184,7 +184,7 @@ export default function PaginaInicial() {
           titulo="Doze meses, três fases, três portões de saída sem multa."
           apoio={
             <p>
-              A fase 1 é firme e pequena — alçada de um diretor. O ano inteiro entra no mesmo
+              A fase 1 é firme e pequena: alçada de um diretor. O ano inteiro entra no mesmo
               documento como opção, condicionada ao que a fase 1 provar.
             </p>
           }
@@ -195,31 +195,31 @@ export default function PaginaInicial() {
             <RevelarItem
               as="article"
               key={fase.id}
-              className="grid gap-6 border-t border-navy-700/15 py-10 md:grid-cols-[13rem_1fr] md:gap-12"
+              className="grid gap-6 border-t border-navy/15 py-10 md:grid-cols-[13rem_1fr] md:gap-12"
             >
               <div>
-                <p className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
+                <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
                   {fase.rotulo}
                 </p>
-                <h3 className="mt-3 text-2xl leading-tight text-navy-700">{fase.nome}</h3>
-                <p className="nums mt-2 font-mono text-xs text-slate-500">{fase.janela}</p>
+                <h3 className="mt-3 text-lede leading-tight text-navy">{fase.nome}</h3>
+                <p className="nums mt-2 font-mono text-legenda text-ardosia">{fase.janela}</p>
               </div>
 
               <div>
-                <p className="text-base leading-[1.65] text-navy-700">{fase.promessa}</p>
+                <p className="text-corpo leading-[1.65] text-navy">{fase.promessa}</p>
                 <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
                   {fase.entregaveis.map((item) => (
                     <li
                       key={item}
-                      className="flex gap-3 text-sm leading-relaxed text-slate-600"
+                      className="flex gap-3 text-legenda leading-relaxed text-ardosia"
                     >
-                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-gold-500" />
+                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro" />
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="mt-7 border-l-2 border-gold-500 pl-5 text-sm leading-relaxed text-slate-700">
-                  <strong className="font-medium text-navy-700">{fase.portao.nome}.</strong>{' '}
+                <p className="mt-7 border-l-2 border-ouro pl-5 text-legenda leading-relaxed text-ardosia">
+                  <strong className="font-medium text-navy">{fase.portao.nome}.</strong>{' '}
                   {fase.portao.regra}
                 </p>
               </div>
@@ -243,11 +243,11 @@ export default function PaginaInicial() {
 
         <RevelarLista className="mt-14 grid gap-x-12 gap-y-8 sm:grid-cols-2" passo={0.05}>
           {RECUSAS.slice(0, 6).map((item) => (
-            <RevelarItem key={item.recusa} className="border-t border-navy-700/15 pt-5">
-              <h3 className="text-base font-medium leading-snug text-navy-700">
+            <RevelarItem key={item.recusa} className="border-t border-navy/15 pt-5">
+              <h3 className="text-corpo font-medium leading-snug text-navy">
                 {item.recusa}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.porque}</p>
+              <p className="mt-2 text-legenda leading-relaxed text-ardosia">{item.porque}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -262,13 +262,13 @@ export default function PaginaInicial() {
       {/* ── Chamada final ──────────────────────────────────────────────── */}
       <Secao tom="navy-profundo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
-          <h2 className="text-3xl leading-[1.15] text-ice-100">
+          <h2 className="text-secao leading-[1.15] text-branco">
             A análise chega feita, não oferecida.
           </h2>
-          <p className="mx-auto mt-7 max-w-xl text-base leading-[1.65] text-ice-200/75">
+          <p className="mx-auto mt-7 max-w-xl text-corpo leading-[1.65] text-ardosia-clara">
             Responda {porExtenso(TOTAL_DE_PERGUNTAS)} perguntas sobre a operação e a gente devolve, na
             hora, uma leitura
-            preliminar do que estimamos estar vazando — com as premissas na mesa e o limite
+            preliminar do que estimamos estar vazando, com as premissas na mesa e o limite
             declarado na primeira linha.
           </p>
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -283,7 +283,7 @@ export default function PaginaInicial() {
               não é adjetivo: é saber quando a resposta vem. A promessa já
               existia na página de contato; quem decide na home não chegava
               lá. */}
-          <p className="mt-8 font-mono text-mono tracking-wide text-ice-300/60">
+          <p className="mt-8 font-mono text-rotulo tracking-wide text-ardosia-clara">
             Sem cadastro em lista. Sem cobrança depois. Leva cerca de três minutos.{' '}
             {CONTATO.prazoResposta}
           </p>

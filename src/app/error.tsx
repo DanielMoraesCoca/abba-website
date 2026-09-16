@@ -40,20 +40,20 @@ export default function Erro({
   return (
     <section
       data-fundo="escuro"
-      className="capa-continua flex min-h-[70vh] items-center bg-navy-900 pt-[var(--header-h)]"
+      className="capa-continua flex min-h-[70vh] items-center bg-navy-escuro pt-[var(--header-h)]"
     >
       <Container largura="estreita">
         <Sobretitulo invertido>Falha</Sobretitulo>
-        <h1 className="mt-7 text-4xl leading-[1.12] text-ice-100">
+        <h1 className="mt-7 text-secao leading-[1.12] text-branco">
           Alguma coisa quebrou aqui.
         </h1>
-        <p className="mt-6 max-w-lg text-base leading-[1.65] text-ice-200/70">
-          O erro é nosso, não seu. Tentar de novo costuma resolver — o que
+        <p className="mt-6 max-w-lg text-corpo leading-[1.65] text-ardosia-clara">
+          O erro é nosso, não seu. Tentar de novo costuma resolver: o que
           falhou pode ter sido uma resposta que demorou demais.
         </p>
 
         {error.digest && (
-          <p className="mt-6 font-mono text-xs text-ice-200/45">
+          <p className="mt-6 font-mono text-legenda text-ardosia-clara">
             Código: {error.digest}
           </p>
         )}
@@ -67,11 +67,11 @@ export default function Erro({
           </Botao>
         </div>
 
-        <p className="mt-12 text-sm leading-[1.6] text-ice-200/55">
+        <p className="mt-12 text-legenda leading-[1.6] text-ardosia-clara">
           Se insistir, escreva para{' '}
           <a
             href="mailto:contato@abbaservices.com.br"
-            className="text-gold-400 underline decoration-gold-400/40 underline-offset-4 transition-colors duration-[var(--duration-micro)] hover:text-gold-300"
+            className="text-ouro-claro underline decoration-ouro-claro/40 underline-offset-4 transition-colors duration-[var(--duration-micro)] hover:text-ouro-claro"
           >
             contato@abbaservices.com.br
           </a>{' '}

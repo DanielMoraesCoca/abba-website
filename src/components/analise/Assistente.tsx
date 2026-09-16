@@ -46,7 +46,7 @@ const PASSOS: readonly Passo[] = [
   {
     id: 'caminho',
     titulo: 'O caminho do dinheiro',
-    resumo: 'É onde o vazamento deixa rastro — e onde a aritmética começa.',
+    resumo: 'É onde o vazamento deixa rastro, e onde a aritmética começa.',
     campos: ['volume', 'toques', 'fechamento'],
   },
   {
@@ -173,17 +173,17 @@ export function Assistente() {
                 disabled={i > passo}
                 aria-current={atual ? 'step' : undefined}
                 className={cn(
-                  'nums flex items-center gap-2 font-mono text-mono uppercase tracking-[0.14em] transition-colors duration-300',
-                  atual && 'text-navy-700',
-                  feito && 'text-gold-700 hover:text-navy-700',
-                  !atual && !feito && 'text-slate-400',
+                  'nums flex items-center gap-2 font-mono text-rotulo uppercase tracking-[0.14em] transition-colors duration-300',
+                  atual && 'text-navy',
+                  feito && 'text-ardosia hover:text-navy',
+                  !atual && !feito && 'text-ardosia',
                 )}
               >
                 <span
                   aria-hidden
                   className={cn(
                     'h-px transition-all duration-500 ease-[var(--ease-micro)]',
-                    atual ? 'w-8 bg-gold-500' : 'w-4 bg-current opacity-50',
+                    atual ? 'w-8 bg-ouro' : 'w-4 bg-current opacity-50',
                   )}
                 />
                 {String(i + 1).padStart(2, '0')} {p.titulo}
@@ -198,7 +198,7 @@ export function Assistente() {
           com muito mais código enviado — e aqui não há saída para animar:
           o passo antigo sai da tela junto com a remontagem. */}
       <div key={passo} data-passo className="mt-10">
-          <p className="text-sm leading-relaxed text-slate-600">{passoAtual?.resumo}</p>
+          <p className="text-legenda leading-relaxed text-ardosia">{passoAtual?.resumo}</p>
 
           <div className="mt-10 space-y-14">
             {passo === 0 && (
@@ -315,17 +315,17 @@ export function Assistente() {
       </div>
 
       {erro && (
-        <p role="alert" className="mt-8 border-l-2 border-alerta-700 pl-4 text-sm text-alerta-700">
+        <p role="alert" className="mt-8 border-l-2 border-alerta pl-4 text-legenda text-alerta">
           {erro}
         </p>
       )}
 
-      <div className="mt-14 flex flex-col-reverse gap-4 border-t border-navy-700/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-14 flex flex-col-reverse gap-4 border-t border-navy/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="button"
           onClick={() => irPara(Math.max(passo - 1, 0))}
           disabled={passo === 0}
-          className="self-start font-mono text-mono uppercase tracking-[0.12em] text-slate-500 transition-colors hover:text-navy-700 disabled:invisible"
+          className="self-start font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia transition-colors hover:text-navy disabled:invisible"
         >
           ← Voltar
         </button>
@@ -336,8 +336,8 @@ export function Assistente() {
           disabled={!completo || enviando}
           className={cn(
             'inline-flex items-center justify-center gap-2.5 rounded-[3px] px-7 py-3.5 font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)]',
-            'bg-navy-700 text-ice-100 hover:bg-navy-600',
-            'disabled:cursor-not-allowed disabled:bg-slate-400 disabled:text-ice-100/80',
+            'bg-navy text-branco hover:bg-navy',
+            'disabled:cursor-not-allowed disabled:bg-ardosia disabled:text-branco',
           )}
         >
           {enviando ? 'Calculando…' : ultimo ? 'Ver a leitura preliminar' : 'Continuar'}
@@ -345,7 +345,7 @@ export function Assistente() {
       </div>
 
       {!completo && (
-        <p className="mt-4 text-right font-mono text-mono text-slate-500">
+        <p className="mt-4 text-right font-mono text-rotulo text-ardosia">
           Responda tudo deste passo para continuar.
         </p>
       )}

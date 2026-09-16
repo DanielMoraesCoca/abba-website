@@ -126,9 +126,9 @@ function escolherVetor(r: RespostasAnalise): Vetor {
 
 export const ROTULO_DO_VETOR: Record<Vetor, string> = {
   'retrabalho-fiscal': 'Retrabalho no caminho do documento fiscal',
-  'latencia-da-descoberta': 'Latência da descoberta — o erro só aparece quando já custou caro',
-  'imposto-da-coordenacao': 'Imposto da coordenação — o fechamento paga a conta da fricção',
-  'ausencia-de-medicao': 'Ausência de medição — o vazamento existe e ninguém consegue vê-lo',
+  'latencia-da-descoberta': 'Latência da descoberta: o erro só aparece quando já custou caro',
+  'imposto-da-coordenacao': 'Imposto da coordenação: o fechamento paga a conta da fricção',
+  'ausencia-de-medicao': 'Ausência de medição: o vazamento existe e ninguém consegue vê-lo',
 };
 
 export const EXPLICACAO_DO_VETOR: Record<Vetor, string> = {
@@ -142,7 +142,7 @@ export const EXPLICACAO_DO_VETOR: Record<Vetor, string> = {
     'O fechamento longo não é causa, é sintoma: ele é o lugar onde toda a fricção do mês se acumula e cobra a conta ' +
     'em horas de gente cara. Eliminar coordenação costuma render mais que automatizar tarefa.',
   'ausencia-de-medicao':
-    'Sem um número medido não existe prova possível — só depoimento. Este é o vazamento que precisa ser resolvido ' +
+    'Sem um número medido não existe prova possível: só depoimento. Este é o vazamento que precisa ser resolvido ' +
     'primeiro, porque sem ele nenhum dos outros pode ser demonstrado.',
 };
 
@@ -289,7 +289,7 @@ export function qualificar(r: RespostasAnalise): Qualificacao {
         'Há patrocinador com poder, há um número medido e há alguém que fica dono depois que a gente sai. ' +
         'São as três condições que fazem a diferença entre capacidade instalada e mais um projeto.',
       proximoPasso:
-        'A conversa de 45 minutos, e o Mapa de Vazamento completo chega feito — não oferecido, entregue.',
+        'A conversa de 45 minutos, e o Mapa de Vazamento completo chega feito, não oferecido, entregue.',
     };
   }
 
@@ -298,10 +298,10 @@ export function qualificar(r: RespostasAnalise): Qualificacao {
       placar: arredondado,
       maximo: 6,
       leitura: 'alvo-real',
-      titulo: 'Vocês são alvo real — ainda não maduro, e isso não é crítica.',
+      titulo: 'Vocês são alvo real: ainda não maduro, e isso não é crítica.',
       texto:
         'Falta pelo menos uma das condições que sustentam a prova: patrocínio na diretoria, um número já medido, ' +
-        'ou um candidato a dono. Começar antes disso é começar sem critério de sucesso — a causa nº 1 de fracasso ' +
+        'ou um candidato a dono. Começar antes disso é começar sem critério de sucesso: a causa nº 1 de fracasso ' +
         'medida pela RAND.',
       proximoPasso:
         'O Mapa de Vazamento agora, e a conversa sobre qual dessas condições dá para destravar primeiro.',
@@ -315,7 +315,7 @@ export function qualificar(r: RespostasAnalise): Qualificacao {
     titulo: 'Hoje, provavelmente, não somos a escolha certa para vocês.',
     texto:
       'É melhor dizer isso agora do que descobrir no mês quatro. Sem patrocinador, sem número medido e sem candidato ' +
-      'a dono, o trabalho não instala capacidade — vira dependência, e é exatamente o que a gente recusa fazer.',
+      'a dono, o trabalho não instala capacidade: vira dependência, e é exatamente o que a gente recusa fazer.',
     proximoPasso:
       'Ainda assim, o Mapa de Vazamento é seu, de graça. E a condição que falta está nomeada acima: quando ela mudar, ' +
       'a conversa muda junto.',

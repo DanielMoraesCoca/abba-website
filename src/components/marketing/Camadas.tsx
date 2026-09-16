@@ -29,7 +29,7 @@ import { cn } from '@/lib/utils';
 const ONDE_A_MAIORIA_PARA = 3;
 
 /** Os quatro degraus de profundidade, do mais raso ao mais fundo. */
-const FUNDO_PROFUNDO = ['bg-navy-600', 'bg-navy-700', 'bg-navy-800', 'bg-navy-900'];
+const FUNDO_PROFUNDO = ['bg-navy', 'bg-navy', 'bg-navy-escuro', 'bg-navy-escuro'];
 
 export function Camadas() {
   return (
@@ -43,17 +43,17 @@ export function Camadas() {
           // numeral dourado para baixo dos 4,5:1 nos tons mais fechados.
           const fundo = profunda
             ? FUNDO_PROFUNDO[camada.num - ONDE_A_MAIORIA_PARA - 1]
-            : 'bg-ice-200';
+            : 'bg-papel';
 
           return (
             <li key={camada.num}>
               {camada.num === ONDE_A_MAIORIA_PARA + 1 && (
                 <div className="my-5 flex items-center gap-4">
-                  <span aria-hidden className="h-px flex-1 bg-gold-500/70" />
-                  <span className="text-center font-mono text-mono uppercase tracking-[0.16em] text-gold-700">
+                  <span aria-hidden className="h-px flex-1 bg-ouro/70" />
+                  <span className="text-center font-mono text-rotulo uppercase tracking-[0.16em] text-navy">
                     A maioria das avaliações para aqui
                   </span>
-                  <span aria-hidden className="h-px flex-1 bg-gold-500/70" />
+                  <span aria-hidden className="h-px flex-1 bg-ouro/70" />
                 </div>
               )}
 
@@ -62,30 +62,30 @@ export function Camadas() {
                   'grid items-baseline gap-x-5 gap-y-1 px-5 py-4 sm:grid-cols-[2.5rem_9rem_1fr]',
                   // Um fio branco separa as rasas entre si; no escuro o
                   // próprio degrau de navy já separa.
-                  !profunda && camada.num > 1 && 'border-t border-paper',
+                  !profunda && camada.num > 1 && 'border-t border-branco',
                   fundo,
                 )}
               >
                 <span
                   className={cn(
-                    'nums font-mono text-mono',
-                    profunda ? 'text-gold-400' : 'text-gold-700',
+                    'nums font-mono text-rotulo',
+                    profunda ? 'text-ouro-claro' : 'text-navy',
                   )}
                 >
                   {String(camada.num).padStart(2, '0')}
                 </span>
                 <span
                   className={cn(
-                    'text-base leading-snug',
-                    profunda ? 'text-ice-100' : 'text-navy-700',
+                    'text-corpo leading-snug',
+                    profunda ? 'text-branco' : 'text-navy',
                   )}
                 >
                   {camada.nome}
                 </span>
                 <span
                   className={cn(
-                    'text-sm leading-relaxed',
-                    profunda ? 'text-ice-200/80' : 'text-slate-600',
+                    'text-legenda leading-relaxed',
+                    profunda ? 'text-ardosia-clara' : 'text-ardosia',
                   )}
                 >
                   {camada.pergunta}
@@ -96,13 +96,12 @@ export function Camadas() {
         })}
       </ol>
 
-      <figcaption className="mt-8 max-w-2xl text-sm leading-[1.7] text-slate-700">
+      <figcaption className="mt-8 max-w-2xl text-legenda leading-[1.7] text-ardosia">
         Da quarta camada para baixo, quase nada se enxerga de fora: onde o trabalho quebra, o que a
         empresa sabe e não usa, o que ela não sabe que deveria saber.{' '}
-        <strong className="font-medium text-navy-700">
+        <strong className="font-medium text-navy">
           É exatamente aí que a Avaliação em 25 dimensões trabalha
-        </strong>{' '}
-        — e é por isso que o Mapa de Vazamento, feito de fora, declara o próprio limite na primeira
+        </strong>{' '}, e é por isso que o Mapa de Vazamento, feito de fora, declara o próprio limite na primeira
         linha.
       </figcaption>
     </figure>

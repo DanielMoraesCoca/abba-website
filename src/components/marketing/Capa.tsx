@@ -1,4 +1,3 @@
-import { Constelacao } from '@/components/brand/Constelacao';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Container } from '@/components/ui/Container';
@@ -12,24 +11,30 @@ import { HEADLINE } from '@/content/identidade';
  */
 export function Capa() {
   return (
-    <section data-fundo="escuro" className="capa-continua relative isolate overflow-hidden bg-navy-900 pb-24 pt-[calc(var(--header-h)+5rem)] sm:pb-32 sm:pt-[calc(var(--header-h)+7rem)]">
-      <Constelacao className="pointer-events-none absolute inset-0 -z-10 h-full w-full" />
+    <section data-fundo="escuro" className="capa-continua relative isolate overflow-hidden bg-navy-escuro pb-24 pt-[calc(var(--header-h)+5rem)] sm:pb-32 sm:pt-[calc(var(--header-h)+7rem)]">
+      {/* A capa é TIPOGRAFIA SOBRE NAVY, e nada mais.
 
-      {/* Vinheta: escurece as bordas para o texto ganhar a página sem caixa. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_20%_25%,transparent_0%,var(--color-navy-900)_78%)]"
-      />
+          O que estava aqui era uma constelação de nós e linhas desenhada em
+          canvas. Ela saiu porque é o logo de cérebro aposentado em outra
+          forma, e porque a régua de imagem reprova circuito. Onde esta
+          página pedir imagem no futuro, a resposta é captura de tela real
+          do software da casa: a régua bloqueando uma frase, o registro com
+          a métrica combinada antes. É a única imagem que ninguém consegue
+          falsificar, e num mercado onde o feed está cheio de natureza-morta
+          gerada por IA, isso é o ativo.
+
+          O véu radial foi junto: ele existia para o texto vencer a
+          constelação, e sem ela vira gradiente sem motivo. */}
 
       <Container largura="larga">
         <Revelar className="max-w-4xl">
           <Sobretitulo invertido>Transformação em IA · Brasil</Sobretitulo>
 
-          <h1 className="mt-8 text-5xl leading-[1.08] text-ice-100">
+          <h1 className="mt-8 text-topo leading-[1.08] text-branco">
             {HEADLINE.titulo}
           </h1>
 
-          <p className="mt-8 max-w-2xl text-lg leading-[1.6] text-ice-200/80">
+          <p className="mt-8 max-w-2xl text-lede leading-[1.6] text-ardosia-clara">
             {HEADLINE.sub}
           </p>
 
@@ -50,21 +55,21 @@ export function Capa() {
         {/* A régua de fatos: prazo, estrutura, garantia. Número, prazo, nome. */}
         <RevelarLista
           as="ul"
-          className="mt-20 grid gap-px overflow-hidden border-y border-ice-200/12 sm:mt-28 sm:grid-cols-3"
+          className="mt-20 grid gap-px overflow-hidden border-y border-ardosia-clara/12 sm:mt-28 sm:grid-cols-3"
           passo={0.07}
         >
           {[
             { chave: '6 semanas', valor: 'até a primeira prova medida, com métrica combinada na semana 1' },
-            { chave: '3 portões', valor: 'de saída limpa ao longo do ano — nenhum deles com multa' },
+            { chave: '3 portões', valor: 'de saída limpa ao longo do ano: nenhum deles com multa' },
             { chave: '25 dimensões', valor: 'na avaliação profunda, das quais quase todas exigem estar dentro' },
           ].map((item) => (
             <RevelarItem
               as="li"
               key={item.chave}
-              className="border-t border-ice-200/12 py-7 first:border-t-0 sm:border-t-0"
+              className="border-t border-ardosia-clara/12 py-7 first:border-t-0 sm:border-t-0"
             >
-              <p className="nums font-display text-2xl text-gold-400">{item.chave}</p>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ice-300/65">
+              <p className="nums font-display text-lede text-ouro-claro">{item.chave}</p>
+              <p className="mt-2 max-w-xs text-legenda leading-relaxed text-ardosia-clara">
                 {item.valor}
               </p>
             </RevelarItem>

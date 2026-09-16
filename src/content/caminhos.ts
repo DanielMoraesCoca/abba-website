@@ -19,13 +19,13 @@ export const CAMINHOS = [
     descricao:
       'Uma análise da sua empresa feita só com informação pública, com a primeira página em reais: ' +
       'a faixa que estimamos estar saindo sem precisar sair, o vetor por onde ela sai e as premissas com fonte. ' +
-      'Foi calculado de fora — e a gente diz isso na primeira linha.',
+      'Foi calculado de fora, e a gente diz isso na primeira linha.',
     paraQuem: 'Para qualquer empresa que queira ver o método antes de pagar por ele.',
     itens: [
       'Uma faixa em reais, nunca um número exato',
       'O vetor principal: por onde o dinheiro sai',
       'Três premissas numeradas, cada uma com a fonte citada',
-      'As perguntas que só você pode responder — e que mudariam a estimativa',
+      'As perguntas que só você pode responder, e que mudariam a estimativa',
       'O limite honesto declarado: o que não foi olhado',
     ],
     href: '/mapa-de-vazamento',
@@ -46,7 +46,7 @@ export const CAMINHOS = [
       'Métrica de sucesso combinada por escrito na semana 1',
       'Entregável nomeado em todos os meses',
       'Relatório mensal: projetado × realizado',
-      'Saída limpa em cada portão — quem sai leva tudo',
+      'Saída limpa em cada portão: quem sai leva tudo',
     ],
     href: '/programa',
     cta: { texto: 'Ver como o Programa funciona', href: '/programa' },
@@ -57,7 +57,7 @@ export const CAMINHOS = [
     nome: 'Conselheiro de IA',
     chamada: 'A cadeira de direção estratégica, fracionária, do seu lado da mesa.',
     descricao:
-      'Para a empresa que já tem IA rodando e precisa de direção e de prova independente — não de instalação. ' +
+      'Para a empresa que já tem IA rodando e precisa de direção e de prova independente, não de instalação. ' +
       'Uma cadeira fracionária com memória que melhora a cada ciclo: o que se acreditava, quando, com base em quê, ' +
       'e quem decidiu.',
     paraQuem: 'Para quem já construiu, já investiu, e precisa saber se aquilo está funcionando.',
@@ -79,7 +79,7 @@ export const FASES = [
     nome: 'A Prova',
     janela: 'Semanas 1 a 6',
     promessa:
-      'Sair da semana 6 com um caso rodando, um número medido e a fila inteira de oportunidades priorizada — ' +
+      'Sair da semana 6 com um caso rodando, um número medido e a fila inteira de oportunidades priorizada: ' +
       'independentemente de você seguir com a gente.',
     entregaveis: [
       'Diagnóstico focado nos processos onde o dinheiro vaza',
@@ -99,7 +99,7 @@ export const FASES = [
     nome: 'A Construção',
     janela: 'Meses 2 a 6',
     promessa:
-      'Os casos aprovados entram em produção e a organização aprende a operá-los — com fluência medida, não declarada.',
+      'Os casos aprovados entram em produção e a organização aprende a operá-los, com fluência medida, não declarada.',
     entregaveis: [
       'Protótipo validado → decisão GO/NO-GO da diretoria com números na mesa',
       'Agentes sob medida com aprovação humana, em nuvem ou no seu servidor',
@@ -121,7 +121,7 @@ export const FASES = [
       'A prova que janela curta não dá: a capacidade sobrevivendo sem a gente no operacional.',
     entregaveis: [
       'Operação sob acordo de nível de serviço',
-      'Ligação semanal de 20 minutos — a cadência, não o contrato, é o que prende',
+      'Ligação semanal de 20 minutos: a cadência, não o contrato, é o que prende',
       'Relatório mensal: projetado × realizado',
       'Diário decisão → resultado, auditável pela sua diretoria',
       'O primeiro Exame Anual de IA e a conversa de renovação 30 dias antes do fim',

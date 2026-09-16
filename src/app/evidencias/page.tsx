@@ -11,7 +11,7 @@ import { metadadosDaPagina } from '@/lib/seo';
 export const metadata = metadadosDaPagina({
   titulo: 'Base de evidências',
   descricao:
-    'Todo número que a ABBA usa, com fonte primária e nível de confiança — e a lista dos números que proibimos ' +
+    'Todo número que a ABBA usa, com fonte primária e nível de confiança, e a lista dos números que proibimos ' +
     'de usar, com o motivo de cada um.',
   caminho: '/evidencias',
 });
@@ -40,7 +40,7 @@ export default function PaginaEvidencias() {
           apoio={
             <p>
               Cada linha traz o número, a fonte primária, o ano e o nível de confiança. Quando a
-              confiança não é alta, a ressalva vem junto — não em outra página, não em letra miúda.
+              confiança não é alta, a ressalva vem junto, não em outra página, não em letra miúda.
             </p>
           }
         />
@@ -49,8 +49,8 @@ export default function PaginaEvidencias() {
           {EVIDENCIAS.map((item) => (
             <RevelarItem key={item.id} className="flex flex-col">
               <NumeroComFonte evidencia={item} />
-              <p className="mt-5 text-sm leading-relaxed text-slate-600">
-                <span className="font-mono text-mono uppercase tracking-[0.12em] text-gold-700">
+              <p className="mt-5 text-legenda leading-relaxed text-ardosia">
+                <span className="font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia">
                   Leitura ·{' '}
                 </span>
                 {item.leitura}
@@ -82,17 +82,17 @@ export default function PaginaEvidencias() {
 
       <Secao tom="gelo" largura="estreita">
         <Revelar>
-          <h2 className="text-2xl leading-snug text-navy-700">
+          <h2 className="text-lede leading-snug text-navy">
             E a tese dos 70%? Essa não é estatística.
           </h2>
-          <p className="mt-6 text-base leading-[1.7] text-slate-700">
+          <p className="mt-6 text-corpo leading-[1.7] text-ardosia">
             {HEADLINE.corpo}
           </p>
-          <p className="mt-6 text-base leading-[1.7] text-slate-700">
+          <p className="mt-6 text-corpo leading-[1.7] text-ardosia">
             Frases desse tipo circulam no mercado sem medição rigorosa. Fingir que a nossa é número
             medido nos colocaria no mesmo balaio que combatemos. Então dizemos o que ela é:{' '}
-            <strong className="font-medium text-navy-700">convicção e leitura de mercado</strong>. O
-            que citamos com fonte é outra coisa — RAND, METR, DORA, BCG. A honestidade sobre o que é
+            <strong className="font-medium text-navy">convicção e leitura de mercado</strong>. O
+            que citamos com fonte é outra coisa. RAND, METR, DORA, BCG. A honestidade sobre o que é
             tese e o que é medição é o posicionamento.
           </p>
         </Revelar>
@@ -105,7 +105,7 @@ export default function PaginaEvidencias() {
           titulo="Os números que a gente baniu do próprio material."
           apoio={
             <p>
-              Alguns destes já foram argumento comercial nosso. Doeu aposentar — e é exatamente por
+              Alguns destes já foram argumento comercial nosso. Doeu aposentar, e é exatamente por
               isso que a lista está publicada. Se um sócio usar um deles, o material volta.
             </p>
           }
@@ -115,15 +115,15 @@ export default function PaginaEvidencias() {
           {INDICE_PROIBIDO.map((item) => (
             <RevelarItem
               key={item.rotulo}
-              className="grid gap-6 border-t border-ice-200/15 py-8 md:grid-cols-[1fr_1.4fr] md:gap-12"
+              className="grid gap-6 border-t border-ardosia-clara/15 py-8 md:grid-cols-[1fr_1.4fr] md:gap-12"
             >
-              <h3 className="text-base leading-snug text-ice-100 line-through decoration-gold-500/70 decoration-1">
+              <h3 className="text-corpo leading-snug text-branco line-through decoration-ouro/70 decoration-1">
                 {item.rotulo}
               </h3>
               <div className="space-y-3">
-                <p className="text-sm leading-relaxed text-ice-200/70">{item.porque}</p>
-                <p className="text-sm leading-relaxed text-gold-400/90">
-                  <span className="font-mono text-mono uppercase tracking-[0.12em]">
+                <p className="text-legenda leading-relaxed text-ardosia-clara">{item.porque}</p>
+                <p className="text-legenda leading-relaxed text-ouro-claro/90">
+                  <span className="font-mono text-rotulo uppercase tracking-[0.12em]">
                     No lugar ·{' '}
                   </span>
                   {item.substituto}
@@ -133,10 +133,10 @@ export default function PaginaEvidencias() {
           ))}
         </RevelarLista>
 
-        <Revelar className="mt-14 max-w-2xl border-l-2 border-gold-500 pl-6">
-          <p className="text-base leading-[1.7] text-ice-200/80">
-            Regra geral: todo número de terceiro sai com a fonte na frase — “a RAND mediu”, “a
-            Gartner projeta” — e vira alvo de auditoria do cliente. Número sem dono é boato com
+        <Revelar className="mt-14 max-w-2xl border-l-2 border-ouro pl-6">
+          <p className="text-corpo leading-[1.7] text-ardosia-clara">
+            Regra geral: todo número de terceiro sai com a fonte na frase, como em “a RAND mediu” ou “a
+            Gartner projeta”, e vira alvo de auditoria do cliente. Número sem dono é boato com
             dígitos.
           </p>
         </Revelar>

@@ -37,10 +37,10 @@ export function Declaracao({
     <Secao tom={tom} espaco="amplo">
       <Revelar>
         <div className="grid gap-x-16 gap-y-6 lg:grid-cols-[1.1fr_1fr] lg:items-start">
-          <h2 className="text-balance text-3xl leading-[1.2] text-navy-700">
+          <h2 className="text-balance text-secao leading-[1.2] text-navy">
             {colar(titulo)}
           </h2>
-          <p className="max-w-[46ch] text-base leading-[1.7] text-slate-700 lg:pt-2">
+          <p className="max-w-[46ch] text-corpo leading-[1.7] text-ardosia lg:pt-2">
             {texto}
           </p>
         </div>

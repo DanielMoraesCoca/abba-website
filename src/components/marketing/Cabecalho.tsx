@@ -122,18 +122,18 @@ export function Cabecalho() {
       data-progresso
       className={cn(
         'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-micro)]',
-        superficie === 'clara' && 'border-b border-navy-700/10 bg-paper/92 backdrop-blur-md',
-        superficie === 'escura' && 'border-b border-ice-100/10 bg-navy-900/92 backdrop-blur-md',
+        superficie === 'clara' && 'border-b border-navy/10 bg-branco/92 backdrop-blur-md',
+        superficie === 'escura' && 'border-b border-branco/10 bg-navy-escuro/92 backdrop-blur-md',
         superficie === 'transparente' && 'border-b border-transparent bg-transparent',
       )}
     >
       <Container largura="larga" className="flex h-full items-center justify-between gap-8">
         <Link
           href="/"
-          aria-label="ABBA — página inicial"
+          aria-label="ABBA: página inicial"
           className={cn(
             'transition-colors duration-500',
-            textoClaro ? 'text-ice-100' : 'text-navy-700',
+            textoClaro ? 'text-branco' : 'text-navy',
           )}
         >
           <Logotipo />
@@ -156,14 +156,14 @@ export function Cabecalho() {
                 prefetch={false}
                 aria-current={ativo ? 'page' : undefined}
                 className={cn(
-                  'relative py-1 text-sm transition-colors duration-300',
+                  'relative py-1 text-legenda transition-colors duration-300',
                   textoClaro
-                    ? 'text-ice-200/80 hover:text-ice-100'
-                    : 'text-slate-600 hover:text-navy-700',
-                  ativo && (textoClaro ? 'text-ice-100' : 'text-navy-700'),
+                    ? 'text-ardosia-clara hover:text-branco'
+                    : 'text-ardosia hover:text-navy',
+                  ativo && (textoClaro ? 'text-branco' : 'text-navy'),
                   // O sublinhado dourado cresce da esquerda; é o mesmo gesto
                   // do fio dourado que separa as seções.
-                  'after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-gold-500 after:transition-[width] after:duration-[var(--duration-micro)] after:ease-[var(--ease-micro)]',
+                  'after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-ouro after:transition-[width] after:duration-[var(--duration-micro)] after:ease-[var(--ease-micro)]',
                   ativo ? 'after:w-full' : 'after:w-0 hover:after:w-full',
                 )}
               >
@@ -177,13 +177,13 @@ export function Cabecalho() {
           <Link
             href="/analise"
             className={cn(
-              'hidden rounded-[3px] px-5 py-2.5 text-sm font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)] sm:inline-flex',
+              'hidden rounded-[3px] px-5 py-2.5 text-legenda font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)] sm:inline-flex',
               // Sólido navy sobre fundo claro. Sobre escuro, o mesmo sólido
               // desapareceria no fundo — ali ele vira contorno, o mesmo
               // tratamento que já tinha sobre a capa.
               textoClaro
-                ? 'border border-ice-200/30 text-ice-100 hover:border-gold-400/80 hover:text-gold-300'
-                : 'bg-navy-700 text-ice-100 hover:bg-navy-600',
+                ? 'border border-ardosia-clara/30 text-branco hover:border-ouro-claro/80 hover:text-ouro-claro'
+                : 'bg-navy text-branco hover:bg-navy',
             )}
           >
             Análise gratuita
@@ -197,7 +197,7 @@ export function Cabecalho() {
             aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
             className={cn(
               'flex h-10 w-10 items-center justify-center lg:hidden',
-              textoClaro ? 'text-ice-100' : 'text-navy-700',
+              textoClaro ? 'text-branco' : 'text-navy',
             )}
           >
             <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.5}>
@@ -214,24 +214,24 @@ export function Cabecalho() {
       {aberto && (
         <div
           id="menu-movel"
-          className="border-t border-navy-700/10 bg-paper lg:hidden"
+          className="border-t border-navy/10 bg-branco lg:hidden"
         >
           <Container largura="larga" className="flex flex-col py-4">
             {NAV_PRINCIPAL.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="border-b border-ice-400/70 py-4 last:border-0"
+                className="border-b border-papel/70 py-4 last:border-0"
               >
-                <span className="block text-navy-700">{item.rotulo}</span>
+                <span className="block text-navy">{item.rotulo}</span>
                 {item.descricao && (
-                  <span className="mt-0.5 block text-sm text-slate-500">{item.descricao}</span>
+                  <span className="mt-0.5 block text-legenda text-ardosia">{item.descricao}</span>
                 )}
               </Link>
             ))}
             <Link
               href="/analise"
-              className="mt-4 rounded-[3px] bg-navy-700 px-5 py-3.5 text-center text-ice-100"
+              className="mt-4 rounded-[3px] bg-navy px-5 py-3.5 text-center text-branco"
             >
               Análise gratuita
             </Link>

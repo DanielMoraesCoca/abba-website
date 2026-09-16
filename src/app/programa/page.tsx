@@ -36,7 +36,7 @@ export default function PaginaPrograma() {
         apoio={
           <p>
             O comitê decide o ano uma vez. O investimento maior só anda com o caso medido na mesa. E
-            cada portão de saída é limpo — quem sai leva tudo que já foi construído e medido.
+            cada portão de saída é limpo: quem sai leva tudo que já foi construído e medido.
           </p>
         }
       />
@@ -55,36 +55,36 @@ export default function PaginaPrograma() {
             <RevelarItem
               as="article"
               key={fase.id}
-              className="grid gap-8 border-t border-navy-700/15 py-12 lg:grid-cols-[15rem_1fr] lg:gap-16"
+              className="grid gap-8 border-t border-navy/15 py-12 lg:grid-cols-[15rem_1fr] lg:gap-16"
             >
               <div>
-                <p className="font-mono text-mono uppercase tracking-[0.2em] text-gold-700">
+                <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
                   {fase.rotulo}
                 </p>
-                <h2 className="mt-4 text-2xl leading-tight text-navy-700">{fase.nome}</h2>
-                <p className="nums mt-2 font-mono text-xs text-slate-500">{fase.janela}</p>
+                <h2 className="mt-4 text-lede leading-tight text-navy">{fase.nome}</h2>
+                <p className="nums mt-2 font-mono text-legenda text-ardosia">{fase.janela}</p>
               </div>
 
               <div>
-                <p className="text-lg leading-[1.7] text-navy-700">{fase.promessa}</p>
+                <p className="text-lede leading-[1.7] text-navy">{fase.promessa}</p>
 
-                <h3 className="mt-9 font-mono text-mono uppercase tracking-[0.16em] text-slate-500">
+                <h3 className="mt-9 font-mono text-rotulo uppercase tracking-[0.16em] text-ardosia">
                   O que entra
                 </h3>
                 <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
                   {fase.entregaveis.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-600">
-                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-gold-500" />
+                    <li key={item} className="flex gap-3 text-legenda leading-relaxed text-ardosia">
+                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro" />
                       {item}
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-9 border-l-2 border-gold-500 pl-6">
-                  <p className="font-mono text-mono uppercase tracking-[0.16em] text-gold-700">
+                <div className="mt-9 border-l-2 border-ouro pl-6">
+                  <p className="font-mono text-rotulo uppercase tracking-[0.16em] text-ardosia">
                     {fase.portao.nome}
                   </p>
-                  <p className="mt-2.5 text-sm leading-[1.7] text-navy-700">
+                  <p className="mt-2.5 text-legenda leading-[1.7] text-navy">
                     {fase.portao.regra}
                   </p>
                 </div>
@@ -124,21 +124,21 @@ export default function PaginaPrograma() {
             className="max-w-none"
           />
           <Revelar>
-            <p className="text-base leading-[1.7] text-navy-700">
+            <p className="text-corpo leading-[1.7] text-navy">
               Você não renova um projeto: entra numa assinatura. Caso de uso novo vira mini-ciclo
-              dentro dela — expansão, não venda nova. E a renovação automática só existe a partir do
+              dentro dela: expansão, não venda nova. E a renovação automática só existe a partir do
               ano 2, nunca na entrada: ela funciona depois que o cliente já decidiu ficar.
             </p>
             <ul className="mt-8 space-y-3">
               {ASSINATURA.map((item) => (
-                <li key={item} className="flex gap-3.5 text-sm leading-relaxed text-slate-700">
-                  <span aria-hidden className="mt-3 h-px w-4 shrink-0 bg-gold-500" />
+                <li key={item} className="flex gap-3.5 text-legenda leading-relaxed text-ardosia">
+                  <span aria-hidden className="mt-3 h-px w-4 shrink-0 bg-ouro" />
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="mt-8 text-sm leading-relaxed text-slate-600">
-              A série histórica de maturidade é o artefato que se valoriza a cada ano — e que
+            <p className="mt-8 text-legenda leading-relaxed text-ardosia">
+              A série histórica de maturidade é o artefato que se valoriza a cada ano, e que
               ninguém corta sem ter que explicar ao conselho.
             </p>
           </Revelar>
@@ -162,20 +162,19 @@ export default function PaginaPrograma() {
         />
         <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.05}>
           {REGRAS_DE_INVESTIMENTO.map((regra) => (
-            <RevelarItem key={regra.titulo} className="border-t border-navy-700/15 pt-5">
-              <h3 className="text-base font-medium leading-snug text-navy-700">
+            <RevelarItem key={regra.titulo} className="border-t border-navy/15 pt-5">
+              <h3 className="text-corpo font-medium leading-snug text-navy">
                 {regra.titulo}
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-slate-600">{regra.texto}</p>
+              <p className="mt-2.5 text-legenda leading-relaxed text-ardosia">{regra.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
 
-        <Revelar className="mt-14 border-t border-navy-700/15 pt-10">
-          <p className="max-w-2xl text-base leading-[1.7] text-navy-700">
+        <Revelar className="mt-14 border-t border-navy/15 pt-10">
+          <p className="max-w-2xl text-corpo leading-[1.7] text-navy">
             <span className="font-medium">Escassez verdadeira, declarada como fato. </span>
-            Três a quatro Programas novos por ano é a capacidade real de dois sócios. Não é tática —
-            é aritmética de agenda, e a gente prefere dizer antes.
+            Três a quatro Programas novos por ano é a capacidade real de dois sócios. Não é tática: é aritmética de agenda, e a gente prefere dizer antes.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Botao href="/analise">Começar pelo Mapa de Vazamento</Botao>

@@ -32,8 +32,8 @@ export default function ErroGlobal({
           minHeight: '100dvh',
           display: 'flex',
           alignItems: 'center',
-          background: '#0E1729',
-          color: '#FBFBFC',
+          background: '#101B31',
+          color: '#FFFFFF',
           fontFamily:
             'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
           WebkitFontSmoothing: 'antialiased',
@@ -44,7 +44,8 @@ export default function ErroGlobal({
             style={{
               margin: 0,
               fontSize: '0.78rem',
-              letterSpacing: '0.14em',
+              letterSpacing: '0.26em',
+              textIndent: '0.26em',
               textTransform: 'uppercase',
               color: '#C2A35B',
             }}
@@ -68,7 +69,7 @@ export default function ErroGlobal({
               margin: '1.4rem 0 0',
               fontSize: '1.02rem',
               lineHeight: 1.65,
-              color: 'rgba(251,251,252,0.7)',
+              color: 'rgba(255,255,255,0.7)',
             }}
           >
             A falha é nossa. Recarregar resolve na maior parte das vezes.
@@ -80,7 +81,7 @@ export default function ErroGlobal({
                 margin: '1.4rem 0 0',
                 fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
                 fontSize: '0.85rem',
-                color: 'rgba(251,251,252,0.45)',
+                color: 'rgba(255,255,255,0.45)',
               }}
             >
               Código: {error.digest}
@@ -95,8 +96,8 @@ export default function ErroGlobal({
               padding: '0.85rem 1.5rem',
               border: 0,
               borderRadius: '3px',
-              background: '#C2A35B',
-              color: '#0E1729',
+              background: '#F2F4F7',
+              color: '#1B2A4A',
               font: 'inherit',
               fontWeight: 500,
               cursor: 'pointer',
@@ -110,11 +111,11 @@ export default function ErroGlobal({
               margin: '3rem 0 0',
               fontSize: '0.94rem',
               lineHeight: 1.6,
-              color: 'rgba(251,251,252,0.55)',
+              color: 'rgba(255,255,255,0.55)',
             }}
           >
             Se insistir:{' '}
-            <a href="mailto:contato@abbaservices.com.br" style={{ color: '#D3B87F' }}>
+            <a href="mailto:contato@abbaservices.com.br" style={{ color: '#D8BE7C' }}>
               contato@abbaservices.com.br
             </a>
           </p>

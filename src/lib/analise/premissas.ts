@@ -133,7 +133,7 @@ export const PREMISSAS_DECLARADAS: readonly Premissa[] = [
       'digitação repetida e correção. A faixa usada aqui vai de menos de um minuto, num fluxo arrumado, ' +
       'a pouco mais de doze, num fluxo com planilha no meio.',
     base:
-      'Assunção da ABBA, calibrada pela nossa leitura de operações de médio porte. Não é estatística medida — ' +
+      'Assunção da ABBA, calibrada pela nossa leitura de operações de médio porte. Não é estatística medida: ' +
       'é a primeira coisa que a conversa de 45 minutos corrige.',
   },
   {
@@ -153,7 +153,7 @@ export const PREMISSAS_DECLARADAS: readonly Premissa[] = [
       'Um dia a mais de fechamento contábil não é um dia inteiro de trabalho perdido. No piso da faixa, ' +
       'contamos metade de cada dia extra; no topo, o dia inteiro.',
     base:
-      'Assunção da ABBA. Ela existe para o piso não herdar o pior caso de todas as parcelas ao mesmo tempo — ' +
+      'Assunção da ABBA. Ela existe para o piso não herdar o pior caso de todas as parcelas ao mesmo tempo: ' +
       'uma faixa em que as duas pontas são cenários extremos não informa nada.',
   },
   {
@@ -161,12 +161,12 @@ export const PREMISSAS_DECLARADAS: readonly Premissa[] = [
     tipo: 'premissa',
     texto:
       'A estimativa nunca é publicada acima de 2,5% do faturamento que você declarou. Se a soma das parcelas ' +
-      'passar disso, o topo é cortado nesse limite e a faixa inteira desce na mesma proporção — a razão entre ' +
+      'passar disso, o topo é cortado nesse limite e a faixa inteira desce na mesma proporção: a razão entre ' +
       'as duas pontas, que é a aritmética, fica intacta.',
     base:
       'Trava de sanidade da ABBA. Uma combinação improvável de respostas pode somar um número absurdo, e publicar ' +
       'absurdo com aparência de conta é pior do que não publicar. Quando a trava dispara, a barra mostra onde ela ' +
-      'cortou — e é sinal de que a conversa vale muito mais que a conta.',
+      'cortou, e é sinal de que a conversa vale muito mais que a conta.',
   },
   {
     id: 'p5',
@@ -174,12 +174,12 @@ export const PREMISSAS_DECLARADAS: readonly Premissa[] = [
     texto:
       'A causa nº 1 de fracasso em projetos de IA não é técnica: é começar sem combinar, antes, qual seria o critério de sucesso. ' +
       'Por isso esta estimativa é o começo de uma conversa sobre a métrica, não uma promessa de captura.',
-    base: 'RAND, “The Root Causes of Failure for AI Projects” (2024) — 65 entrevistas com engenheiros de ML sêniores.',
+    base: 'RAND, “The Root Causes of Failure for AI Projects” (2024): 65 entrevistas com engenheiros de ML sêniores.',
   },
 ] as const;
 
 /** O aviso de faixa. Texto fixo — não editar sem passar pelo abba-ops. */
 export const AVISO_DE_FAIXA =
   'Isto foi calculado de fora, com o que você declarou nesta tela e nada mais. Uma única resposta sua na conversa ' +
-  'pode mover a faixa nos dois sentidos — para cima ou para baixo. E a ABBA não captura a faixa inteira: o que se ' +
+  'pode mover a faixa nos dois sentidos: para cima ou para baixo. E a ABBA não captura a faixa inteira: o que se ' +
   'captura é uma fração dela, e isso a gente diz em voz alta antes de qualquer proposta.';

@@ -19,7 +19,7 @@ const REGRAS = [
   {
     titulo: 'Faixa, nunca número exato',
     texto:
-      'Um número exato calculado de fora é uma mentira com aparência de precisão — e o primeiro CFO competente que ' +
+      'Um número exato calculado de fora é uma mentira com aparência de precisão, e o primeiro CFO competente que ' +
       'ele encontrar vai desmontá-la em trinta segundos.',
   },
   {
@@ -36,7 +36,7 @@ const REGRAS = [
   {
     titulo: 'Nunca prometemos capturar a faixa inteira',
     texto:
-      'O mapa estima o vazamento. A captura é uma fração dele — e isso a gente diz em voz alta na apresentação, ' +
+      'O mapa estima o vazamento. A captura é uma fração dele, e isso a gente diz em voz alta na apresentação, ' +
       'antes de qualquer proposta.',
   },
   {
@@ -64,7 +64,7 @@ export default function PaginaMapaDeVazamento() {
           <p>
             O Mapa de Vazamento é a primeira página da Análise ABBA: uma faixa em reais do dinheiro
             que estimamos estar saindo da sua empresa sem precisar sair. Concordar, discordar ou
-            corrigir — qualquer uma das três é uma conversa. A ausência de reação é um PDF
+            corrigir: qualquer uma das três é uma conversa. A ausência de reação é um PDF
             arquivado.
           </p>
         }
@@ -77,18 +77,18 @@ export default function PaginaMapaDeVazamento() {
             titulo="O número também escolhe quem lê."
             className="max-w-none"
           />
-          <Revelar className="space-y-6 text-base leading-[1.7] text-slate-700">
+          <Revelar className="space-y-6 text-corpo leading-[1.7] text-ardosia">
             <p>
               Hipótese de IA circula na TI. Faixa de dinheiro vazando circula na diretoria e no
-              financeiro — que é exatamente onde a decisão mora.
+              financeiro: que é exatamente onde a decisão mora.
             </p>
             <p>
-              E a estimativa é independente de setor por construção: ela se apoia no que a lei
-              brasileira padroniza — nota fiscal eletrônica, SPED, obrigações acessórias — e em
+              E a estimativa é independente de setor por construção. Ela se apoia no que a lei
+              brasileira padroniza, como nota fiscal eletrônica, SPED e obrigações acessórias, e em
               referências públicas, não em conhecimento de indústria que a gente ainda não tem sobre
               a sua.
             </p>
-            <p className="border-l-2 border-gold-500 pl-6 text-navy-700">
+            <p className="border-l-2 border-ouro pl-6 text-navy">
               O gancho é honesto e é sempre o mesmo: isto foi feito de fora. Imagine com os dados de
               dentro.
             </p>
@@ -107,13 +107,13 @@ export default function PaginaMapaDeVazamento() {
           {REGRAS.map((regra, i) => (
             <RevelarItem
               key={regra.titulo}
-              className="grid gap-5 border-t border-ice-200/15 py-8 md:grid-cols-[3rem_1fr_1.4fr] md:gap-10"
+              className="grid gap-5 border-t border-ardosia-clara/15 py-8 md:grid-cols-[3rem_1fr_1.4fr] md:gap-10"
             >
-              <span className="nums font-mono text-xs text-gold-500">
+              <span className="nums font-mono text-legenda text-ouro">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="text-base leading-snug text-ice-100">{regra.titulo}</h3>
-              <p className="text-sm leading-relaxed text-ice-200/70">{regra.texto}</p>
+              <h3 className="text-corpo leading-snug text-branco">{regra.titulo}</h3>
+              <p className="text-legenda leading-relaxed text-ardosia-clara">{regra.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -126,7 +126,7 @@ export default function PaginaMapaDeVazamento() {
             titulo="Cinco perguntas, nesta ordem. E nós não apresentamos nada nela."
             apoio={
               <p>
-                Quem apresenta antes de entender vende o produto errado. A conversa é coleta — é o
+                Quem apresenta antes de entender vende o produto errado. A conversa é coleta: é o
                 que torna a estimativa defensável.
               </p>
             }
@@ -136,10 +136,10 @@ export default function PaginaMapaDeVazamento() {
           <RevelarLista as="ol" className="space-y-7" passo={0.05}>
             {CONVERSA.map((pergunta, i) => (
               <RevelarItem as="li" key={pergunta} className="flex gap-5">
-                <span className="nums mt-1 font-display text-xl leading-none text-gold-500">
+                <span className="nums mt-1 font-display text-lede leading-none text-ouro">
                   {i + 1}
                 </span>
-                <p className="text-base leading-[1.6] text-navy-700">{pergunta}</p>
+                <p className="text-corpo leading-[1.6] text-navy">{pergunta}</p>
               </RevelarItem>
             ))}
           </RevelarLista>
@@ -148,14 +148,14 @@ export default function PaginaMapaDeVazamento() {
 
       <Secao tom="gelo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
-          <h2 className="text-3xl leading-[1.2] text-navy-700">
+          <h2 className="text-secao leading-[1.2] text-navy">
             A versão web responde na hora.
           </h2>
-          <p className="mx-auto mt-7 max-w-xl text-base leading-[1.7] text-slate-700">
+          <p className="mx-auto mt-7 max-w-xl text-corpo leading-[1.7] text-ardosia">
             {maiuscula(porExtenso(TOTAL_DE_PERGUNTAS))} perguntas fechadas em lugar das cinco abertas, uma faixa
             calculada por aritmética
             que você consegue refazer, e as mesmas cinco regras de honestidade valendo. O Mapa
-            completo continua vindo depois da conversa — e continua gratuito.
+            completo continua vindo depois da conversa, e continua gratuito.
           </p>
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Botao href="/analise">Começar a análise gratuita</Botao>

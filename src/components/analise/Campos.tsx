@@ -25,11 +25,11 @@ export function GrupoDeOpcoes<T extends string>({
 }) {
   return (
     <fieldset className="border-0 p-0">
-      <legend className="text-xl leading-snug text-navy-700">
+      <legend className="text-lede leading-snug text-navy">
         {pergunta.titulo}
       </legend>
       {pergunta.ajuda && (
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+        <p className="mt-3 max-w-2xl text-legenda leading-relaxed text-ardosia">
           {pergunta.ajuda}
         </p>
       )}
@@ -42,10 +42,10 @@ export function GrupoDeOpcoes<T extends string>({
               key={opcao.valor}
               className={cn(
                 'group flex cursor-pointer items-start gap-3.5 rounded-[3px] border px-5 py-4 transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)]',
-                'has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-teal-500',
+                'has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-navy',
                 selecionado
-                  ? 'border-navy-700 bg-navy-700/[0.04] shadow-[inset_2px_0_0_var(--color-gold-500)]'
-                  : 'border-navy-700/15 bg-paper hover:border-navy-700/40 hover:bg-ice-200/50',
+                  ? 'border-navy bg-navy/[0.04] shadow-[inset_2px_0_0_var(--color-ouro)]'
+                  : 'border-navy/15 bg-branco hover:border-navy/40 hover:bg-papel/50',
               )}
             >
               <input
@@ -60,13 +60,13 @@ export function GrupoDeOpcoes<T extends string>({
                 aria-hidden
                 className={cn(
                   'mt-[0.35rem] h-3 w-3 shrink-0 rounded-full border transition-colors duration-300',
-                  selecionado ? 'border-navy-700 bg-navy-700' : 'border-slate-400 bg-transparent',
+                  selecionado ? 'border-navy bg-navy' : 'border-ardosia bg-transparent',
                 )}
               />
               <span className="min-w-0">
-                <span className="block text-base leading-snug text-navy-700">{opcao.rotulo}</span>
+                <span className="block text-corpo leading-snug text-navy">{opcao.rotulo}</span>
                 {opcao.nota && (
-                  <span className="mt-1 block text-xs leading-relaxed text-slate-500">
+                  <span className="mt-1 block text-legenda leading-relaxed text-ardosia">
                     {opcao.nota}
                   </span>
                 )}
@@ -83,7 +83,7 @@ export function GrupoDeOpcoes<T extends string>({
  * `tom` existe porque este campo aparece nos dois fundos do site: branco no
  * formulário de contato, navy no bloco que fecha a Análise. A primeira
  * versão resolvia isso com sobrescritas de classe no elemento pai
- * (`[&_label]:text-ice-200`) — e elas alcançavam o rótulo mas esqueciam o
+ * (`[&_label]:text-ardosia-clara`) — e elas alcançavam o rótulo mas esqueciam o
  * "(opcional)" e a linha de ajuda, que ficavam em ardósia escura sobre
  * navy: 2,8:1, reprovado. A auditoria pegou. Uma prop explícita não tem
  * como esquecer um pedaço.
@@ -118,19 +118,19 @@ export function CampoTexto({
       <label
         htmlFor={id}
         className={cn(
-          'block text-sm font-medium',
-          escuro ? 'text-ice-100' : 'text-navy-700',
+          'block text-legenda font-medium',
+          escuro ? 'text-branco' : 'text-navy',
         )}
       >
         {rotulo}
         {!obrigatorio && (
-          <span className={cn('ml-2 text-xs', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
+          <span className={cn('ml-2 text-legenda', escuro ? 'text-ardosia-clara' : 'text-ardosia')}>
             (opcional)
           </span>
         )}
       </label>
       {ajuda && (
-        <p className={cn('mt-1.5 text-xs', escuro ? 'text-ice-300/75' : 'text-slate-500')}>
+        <p className={cn('mt-1.5 text-legenda', escuro ? 'text-ardosia-clara' : 'text-ardosia')}>
           {ajuda}
         </p>
       )}
@@ -144,20 +144,20 @@ export function CampoTexto({
         aria-invalid={erro ? true : undefined}
         aria-describedby={erro ? `${id}-erro` : undefined}
         className={cn(
-          'mt-3 w-full rounded-[3px] border px-4 py-3 text-base transition-colors duration-300',
-          'focus:outline-none focus:ring-2 focus:ring-teal-500/40',
+          'mt-3 w-full rounded-[3px] border px-4 py-3 text-corpo transition-colors duration-300',
+          'focus:outline-none focus:ring-2 focus:ring-navy/40',
           escuro
-            ? 'border-ice-200/30 bg-navy-800 text-ice-100 placeholder:text-ice-300/50'
-            : 'border-navy-700/20 bg-paper text-navy-700 placeholder:text-slate-400',
-          erro && (escuro ? 'border-gold-400' : 'border-alerta-700'),
-          !erro && (escuro ? 'focus:border-ice-200/60' : 'focus:border-navy-700/50'),
+            ? 'border-ardosia-clara/30 bg-navy-escuro text-branco placeholder:text-ardosia-clara'
+            : 'border-navy/20 bg-branco text-navy placeholder:text-ardosia',
+          erro && (escuro ? 'border-ouro-claro' : 'border-alerta'),
+          !erro && (escuro ? 'focus:border-ardosia-clara/60' : 'focus:border-navy/50'),
         )}
       />
       {erro && (
         <p
           id={`${id}-erro`}
           role="alert"
-          className={cn('mt-2 text-xs', escuro ? 'text-gold-300' : 'text-alerta-700')}
+          className={cn('mt-2 text-legenda', escuro ? 'text-ouro-claro' : 'text-alerta')}
         >
           {erro}
         </p>

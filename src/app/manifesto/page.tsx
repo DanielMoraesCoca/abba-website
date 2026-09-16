@@ -23,7 +23,7 @@ export default function PaginaManifesto() {
         titulo="Marca não é logo nem headline. É o conjunto de coisas que uma empresa faz de um jeito e não do outro."
         apoio={
           <p>
-            De forma tão consistente que o cliente consegue prever. Esta é a lista — e ela muda com
+            De forma tão consistente que o cliente consegue prever. Esta é a lista, e ela muda com
             decisão registrada, não com conveniência de proposta.
           </p>
         }
@@ -37,14 +37,14 @@ export default function PaginaManifesto() {
             <RevelarItem
               as="article"
               key={crenca.numero}
-              className="grid gap-5 border-t border-navy-700/15 py-9 md:grid-cols-[4rem_1fr] md:gap-10"
+              className="grid gap-5 border-t border-navy/15 py-9 md:grid-cols-[4rem_1fr] md:gap-10"
             >
-              <p className="nums font-display text-3xl leading-none text-gold-700">
+              <p className="nums font-display text-secao leading-none text-ardosia">
                 {String(crenca.numero).padStart(2, '0')}
               </p>
               <div>
-                <h2 className="text-xl leading-snug text-navy-700">{crenca.titulo}</h2>
-                <p className="mt-4 max-w-3xl text-base leading-[1.7] text-slate-700">
+                <h2 className="text-lede leading-snug text-navy">{crenca.titulo}</h2>
+                <p className="mt-4 max-w-3xl text-corpo leading-[1.7] text-ardosia">
                   {crenca.texto}
                 </p>
               </div>
@@ -62,9 +62,9 @@ export default function PaginaManifesto() {
 
         <RevelarLista className="mt-16 grid gap-x-14 gap-y-10 lg:grid-cols-2" passo={0.04}>
           {RECUSAS.map((item) => (
-            <RevelarItem key={item.recusa} className="border-t border-gold-500/35 pt-6">
-              <h3 className="text-lg leading-snug text-ice-100">{item.recusa}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ice-200/70">{item.porque}</p>
+            <RevelarItem key={item.recusa} className="border-t border-ouro/35 pt-6">
+              <h3 className="text-lede leading-snug text-branco">{item.recusa}</h3>
+              <p className="mt-3 text-legenda leading-relaxed text-ardosia-clara">{item.porque}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -79,8 +79,8 @@ export default function PaginaManifesto() {
         <RevelarLista as="ul" className="mt-14 space-y-6" passo={0.04}>
           {NA_PRATICA.map((item) => (
             <RevelarItem as="li" key={item} className="flex gap-5">
-              <span aria-hidden className="mt-3.5 h-px w-7 shrink-0 bg-gold-500" />
-              <p className="text-base leading-[1.6] text-navy-700">{item}</p>
+              <span aria-hidden className="mt-3.5 h-px w-7 shrink-0 bg-ouro" />
+              <p className="text-corpo leading-[1.6] text-navy">{item}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -93,7 +93,7 @@ export default function PaginaManifesto() {
           apoio={
             <p>
               Sem critérios de recusa escritos, uma firma aceita o cliente errado justamente quando
-              está mais precisando de receita — e é aí que o dano é maior. Então eles ficam
+              está mais precisando de receita, e é aí que o dano é maior. Então eles ficam
               publicados.
             </p>
           }
@@ -103,12 +103,12 @@ export default function PaginaManifesto() {
           {QUANDO_DIZEMOS_NAO.map((item) => (
             <RevelarItem
               key={item.recusa}
-              className="grid gap-4 border-t border-navy-700/15 py-7 md:grid-cols-[1fr_1.3fr] md:gap-10"
+              className="grid gap-4 border-t border-navy/15 py-7 md:grid-cols-[1fr_1.3fr] md:gap-10"
             >
-              <h3 className="text-base font-medium leading-snug text-navy-700">
+              <h3 className="text-corpo font-medium leading-snug text-navy">
                 {item.recusa}
               </h3>
-              <p className="text-sm leading-relaxed text-slate-600">{item.porque}</p>
+              <p className="text-legenda leading-relaxed text-ardosia">{item.porque}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -116,13 +116,13 @@ export default function PaginaManifesto() {
 
       <Secao tom="navy-profundo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
-          <p className="font-mono text-mono uppercase tracking-[0.2em] text-gold-500">
+          <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ouro">
             O teste de qualquer material novo
           </p>
-          <blockquote className="mt-8 font-display text-2xl leading-[1.45] text-ice-100">
+          <blockquote className="mt-8 font-display text-lede leading-[1.45] text-branco">
             “{PITCH.frameDaCasa}”
           </blockquote>
-          <p className="mt-8 text-base text-ice-200/65">
+          <p className="mt-8 text-corpo text-ardosia-clara">
             Se um material não cabe nessa frase, ele não é da ABBA.
           </p>
           <div className="mt-11 flex justify-center">

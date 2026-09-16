@@ -22,11 +22,11 @@ export const HEADLINE = {
   titulo: 'Instalamos capacidade de IA, e provamos, de fora, o que ela mudou.',
   sub:
     'A ABBA faz o que não dá para fazer de dentro: avalia a fundo, constrói as soluções certas, ' +
-    'treina todos os níveis da equipe, e prova o resultado como terceiro — número combinado antes, ' +
+    'treina todos os níveis da equipe, e prova o resultado como terceiro: número combinado antes, ' +
     'medido depois, assinado por gente.',
   corpo:
-    'A nossa leitura é que a maior parte do valor de uma transformação em IA — algo perto de 70% — ' +
-    'vive em pessoas, processos e cultura. O seu fornecedor te vendeu os outros 30%. ' +
+    'A nossa leitura é que a maior parte do valor de uma transformação de IA vive em pessoas, ' +
+    'processo e cultura, e o mercado vende o resto. ' +
     'Nós instalamos o resto, com método próprio, plataforma própria e resultado verificado no final, ' +
     'num registro que a sua diretoria pode auditar.',
   /**
@@ -43,22 +43,22 @@ export const PRATELEIRA = {
   titulo: 'A camada independente de prova, com músculo de execução',
   texto:
     'Estratégia de IA é do seu diretor. Duas coisas, por definição, não podem ser internas: ' +
-    'construção em escala e prova de terceiro. É nelas que a ABBA entra — ao lado de quem já está lá dentro, ' +
+    'construção em escala e prova de terceiro. É nelas que a ABBA entra: ao lado de quem já está lá dentro, ' +
     'nunca no lugar dele.',
   /**
    * A analogia com auditoria é permitida; a categoria é proibida
    * (marca-e-nomenclatura.md). Nunca escrever "somos a auditoria de IA".
    */
   analogia:
-    'Funciona como uma auditoria: ninguém dispensa o auditor por ter CFO. A diferença é que também construímos e treinamos — ' +
+    'Funciona como uma auditoria: ninguém dispensa o auditor por ter CFO. A diferença é que também construímos e treinamos: ' +
     'e por isso a certificação, quando o cliente a quiser, é sempre de um terceiro acreditado, nunca nossa.',
 } as const;
 
 export const PITCH = {
   quinzeSegundos:
-    'A gente faz duas coisas que não dá para fazer de dentro de uma empresa: constrói capacidade de IA em escala — ' +
-    'agentes, processos, time inteiro treinado — e prova, como terceiro, o que mudou: número combinado antes, ' +
-    'medido depois, assinado. Não é curso, não é ferramenta, não é piloto sem métrica.',
+    'A gente faz duas coisas que não dá para fazer de dentro de uma empresa. A primeira é construir ' +
+    'capacidade de IA em escala, com agentes, processos e o time inteiro treinado. A segunda é provar, ' +
+    'como terceiro, o que mudou: número combinado antes, medido depois, assinado. Não é curso, não é ferramenta, não é piloto sem métrica.',
   frameDaCasa:
     'Instalamos capacidade de IA e provamos o que ela mudou: com número combinado antes e medido depois, assinado por gente.',
 } as const;

@@ -31,7 +31,7 @@ export async function POST(requisicao: Request) {
       {
         erro: 'limite',
         mensagem:
-          'Você já fez algumas análises seguidas. Espere alguns minutos — ou fale com a gente direto, ' +
+          'Você já fez algumas análises seguidas. Espere alguns minutos, ou fale com a gente direto, ' +
           'que é mais rápido de qualquer jeito.',
       },
       { status: 429, headers: { 'Retry-After': String(limite.reinicioEmSegundos) } },

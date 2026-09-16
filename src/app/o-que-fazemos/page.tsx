@@ -28,7 +28,7 @@ export default function PaginaOQueFazemos() {
         apoio={
           <p>
             Não treinamento. Não ferramenta. Não piloto solto que morre em slide. Três caminhos, e
-            só três, porque atendem a três situações diferentes — e a primeira é de graça.
+            só três, porque atendem a três situações diferentes, e a primeira é de graça.
           </p>
         }
       />
@@ -39,29 +39,29 @@ export default function PaginaOQueFazemos() {
             <RevelarItem
               as="article"
               key={caminho.id}
-              className="grid gap-8 border-t border-navy-700/15 py-12 lg:grid-cols-[16rem_1fr] lg:gap-16"
+              className="grid gap-8 border-t border-navy/15 py-12 lg:grid-cols-[16rem_1fr] lg:gap-16"
             >
               <div>
-                <p className="nums font-mono text-mono tracking-[0.2em] text-gold-700">
+                <p className="nums font-mono text-rotulo tracking-[0.2em] text-ardosia">
                   Caminho {String(caminho.ordem).padStart(2, '0')}
                 </p>
-                <h2 className="mt-4 text-2xl leading-tight text-navy-700">{caminho.nome}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                <h2 className="mt-4 text-lede leading-tight text-navy">{caminho.nome}</h2>
+                <p className="mt-3 text-legenda leading-relaxed text-ardosia">
                   {caminho.chamada}
                 </p>
               </div>
 
               <div>
-                <p className="text-base leading-[1.7] text-navy-700">{caminho.descricao}</p>
-                <p className="mt-5 text-sm leading-relaxed text-slate-600">
-                  <span className="font-medium text-navy-700">Para quem. </span>
+                <p className="text-corpo leading-[1.7] text-navy">{caminho.descricao}</p>
+                <p className="mt-5 text-legenda leading-relaxed text-ardosia">
+                  <span className="font-medium text-navy">Para quem. </span>
                   {caminho.paraQuem}
                 </p>
 
                 <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
                   {caminho.itens.map((item) => (
-                    <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-600">
-                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-gold-500" />
+                    <li key={item} className="flex gap-3 text-legenda leading-relaxed text-ardosia">
+                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro" />
                       {item}
                     </li>
                   ))}
@@ -69,7 +69,7 @@ export default function PaginaOQueFazemos() {
 
                 <Link
                   href={caminho.href}
-                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-navy-700 underline-offset-4 transition-colors hover:text-gold-700 hover:underline"
+                  className="mt-8 inline-flex items-center gap-2 font-mono text-legenda uppercase tracking-[0.12em] text-navy underline-offset-4 transition-colors hover:text-ardosia hover:underline"
                 >
                   {caminho.cta.texto} →
                 </Link>
@@ -98,24 +98,24 @@ export default function PaginaOQueFazemos() {
             <RevelarItem
               as="article"
               key={fase.id}
-              className="flex flex-col border-t border-gold-500/40 pt-7"
+              className="flex flex-col border-t border-ouro/40 pt-7"
             >
-              <p className="font-mono text-mono uppercase tracking-[0.2em] text-gold-400">
+              <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ouro-claro">
                 {fase.rotulo} · {fase.janela}
               </p>
-              <h3 className="mt-4 text-xl leading-tight text-ice-100">{fase.nome}</h3>
-              <p className="mt-5 text-sm leading-[1.7] text-ice-200/80">{fase.promessa}</p>
+              <h3 className="mt-4 text-lede leading-tight text-branco">{fase.nome}</h3>
+              <p className="mt-5 text-legenda leading-[1.7] text-ardosia-clara">{fase.promessa}</p>
 
               <ul className="mt-6 space-y-2.5">
                 {fase.entregaveis.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-ice-300/70">
-                    <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-gold-500/70" />
+                  <li key={item} className="flex gap-3 text-legenda leading-relaxed text-ardosia-clara">
+                    <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro/70" />
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-auto pt-7 font-mono text-mono leading-relaxed text-gold-400/90">
+              <p className="mt-auto pt-7 font-mono text-rotulo leading-relaxed text-ouro-claro/90">
                 {fase.portao.nome}: {fase.portao.regra}
               </p>
             </RevelarItem>
@@ -128,7 +128,7 @@ export default function PaginaOQueFazemos() {
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
           sobretitulo="Investimento"
-          titulo="Como o dinheiro é combinado — e o que a gente nunca faz com ele."
+          titulo="Como o dinheiro é combinado, e o que a gente nunca faz com ele."
           apoio={
             PRECO_PUBLICO ? undefined : (
               <p>
@@ -142,11 +142,11 @@ export default function PaginaOQueFazemos() {
 
         <RevelarLista className="mt-14 grid gap-x-14 gap-y-9 sm:grid-cols-2" passo={0.05}>
           {REGRAS_DE_INVESTIMENTO.map((regra) => (
-            <RevelarItem key={regra.titulo} className="border-t border-navy-700/15 pt-5">
-              <h3 className="text-base font-medium leading-snug text-navy-700">
+            <RevelarItem key={regra.titulo} className="border-t border-navy/15 pt-5">
+              <h3 className="text-corpo font-medium leading-snug text-navy">
                 {regra.titulo}
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-slate-600">{regra.texto}</p>
+              <p className="mt-2.5 text-legenda leading-relaxed text-ardosia">{regra.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>
@@ -173,12 +173,12 @@ export default function PaginaOQueFazemos() {
             <RevelarItem
               as="li"
               key={item.pergunta}
-              className="grid gap-4 border-t border-navy-700/15 py-8 md:grid-cols-[1fr_1.4fr] md:gap-12"
+              className="grid gap-4 border-t border-navy/15 py-8 md:grid-cols-[1fr_1.4fr] md:gap-12"
             >
-              <h3 className="text-base font-medium leading-snug text-navy-700">
+              <h3 className="text-corpo font-medium leading-snug text-navy">
                 {item.pergunta}
               </h3>
-              <p className="text-sm leading-[1.7] text-slate-700">{item.resposta}</p>
+              <p className="text-legenda leading-[1.7] text-ardosia">{item.resposta}</p>
             </RevelarItem>
           ))}
         </RevelarLista>

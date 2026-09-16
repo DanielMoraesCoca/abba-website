@@ -34,15 +34,15 @@ export function Convergencia() {
         {FONTES.map((id) => {
           const e = evidencia(id);
           return (
-            <div key={id} className="flex flex-col border-t border-gold-500/40 pt-7">
-              <p className="font-mono text-mono uppercase tracking-[0.16em] text-gold-400">
+            <div key={id} className="flex flex-col border-t border-ouro/40 pt-7">
+              <p className="font-mono text-rotulo uppercase tracking-[0.16em] text-ouro-claro">
                 {O_QUE_MEDIU[id]}
               </p>
-              <p className="nums mt-4 font-display text-3xl leading-[1.1] text-ice-100">
+              <p className="nums mt-4 font-display text-secao leading-[1.1] text-branco">
                 {e.numero}
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-ice-200/80">{e.afirmacao}</p>
-              <p className="mt-auto pt-6 font-mono text-mono leading-relaxed text-ice-300/60">
+              <p className="mt-3 text-legenda leading-relaxed text-ardosia-clara">{e.afirmacao}</p>
+              <p className="mt-auto pt-6 font-mono text-rotulo leading-relaxed text-ardosia-clara">
                 {e.fonte} ({e.ano})
               </p>
             </div>
@@ -61,24 +61,24 @@ export function Convergencia() {
         <path
           d="M50 0 V18 Q50 30 62 30 H238 Q250 30 250 18 V0 M150 0 V30"
           fill="none"
-          stroke="var(--color-gold-500)"
+          stroke="var(--color-ouro)"
           strokeWidth={1.5}
           vectorEffect="non-scaling-stroke"
           opacity={0.85}
         />
-        <circle cx={150} cy={30} r={4} fill="var(--color-gold-500)" />
+        <circle cx={150} cy={30} r={4} fill="var(--color-ouro)" />
       </svg>
 
       <figcaption className="mx-auto max-w-2xl text-center">
-        <p className="font-mono text-mono uppercase tracking-[0.2em] text-gold-400">
+        <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ouro-claro">
           Onde as três chegam
         </p>
-        <p className="mt-5 font-display text-xl leading-[1.5] text-ice-100">
+        <p className="mt-5 font-display text-lede leading-[1.5] text-branco">
           Ninguém sabe se a IA ajudou sem combinar a métrica antes e medir de fora depois.
         </p>
-        <p className="mt-5 text-sm leading-[1.7] text-ice-200/75">
+        <p className="mt-5 text-legenda leading-[1.7] text-ardosia-clara">
           Três grupos que não se conhecem, medindo coisas diferentes, com métodos diferentes. Não é
-          a nossa opinião repetida três vezes — é o mesmo achado por três caminhos independentes. É
+          a nossa opinião repetida três vezes: é o mesmo achado por três caminhos independentes. É
           por isso que a ABBA existe do jeito que existe.
         </p>
       </figcaption>

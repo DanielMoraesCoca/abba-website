@@ -20,8 +20,8 @@ export function Sobretitulo({
         // `items-start` + o deslocamento no traço mantêm o fio alinhado à
         // PRIMEIRA linha quando o sobretítulo quebra no celular; com
         // `items-center` ele flutuaria no meio das duas linhas.
-        'flex items-start gap-3 font-mono text-mono uppercase leading-[1.7] tracking-[0.22em]',
-        invertido ? 'text-gold-400' : 'text-gold-700',
+        'flex items-start gap-3 font-mono text-rotulo uppercase leading-[1.7] tracking-[0.22em]',
+        invertido ? 'text-ouro-claro' : 'text-navy',
         className,
       )}
     >
@@ -29,7 +29,7 @@ export function Sobretitulo({
         aria-hidden
         className={cn(
           'mt-[0.8em] h-px w-6 shrink-0',
-          invertido ? 'bg-gold-400/70' : 'bg-gold-600/70',
+          invertido ? 'bg-ouro-claro/70' : 'bg-ouro/70',
         )}
       />
       {children}

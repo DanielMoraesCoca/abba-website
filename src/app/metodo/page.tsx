@@ -49,13 +49,13 @@ export default function PaginaMetodo() {
 
       <Secao tom="navy" largura="estreita" espaco="amplo">
         <Revelar>
-          <h2 className="text-3xl leading-[1.2] text-ice-100">
+          <h2 className="text-secao leading-[1.2] text-branco">
             {PRINCIPIO_DO_ORGANISMO.titulo}
           </h2>
-          <p className="mt-8 text-base leading-[1.7] text-ice-200/80">
+          <p className="mt-8 text-corpo leading-[1.7] text-ardosia-clara">
             {PRINCIPIO_DO_ORGANISMO.texto}
           </p>
-          <p className="mt-8 border-l-2 border-gold-500 pl-6 text-base leading-[1.7] text-gold-300">
+          <p className="mt-8 border-l-2 border-ouro pl-6 text-corpo leading-[1.7] text-ouro-claro">
             {PRINCIPIO_DO_ORGANISMO.corolario}
           </p>
         </Revelar>
@@ -67,25 +67,25 @@ export default function PaginaMetodo() {
           titulo="Nove grupos, e quase nenhum deles se enxerga de fora."
           apoio={
             <p>
-              Esta é a estrutura da Avaliação em 25 dimensões. As perguntas de cada dimensão — as
-              que realmente fazem o trabalho — ficam na sala com o cliente, não no site.
+              Esta é a estrutura da Avaliação em 25 dimensões. As perguntas de cada dimensão,
+              que são as que realmente fazem o trabalho, ficam na sala com o cliente, não no site.
             </p>
           }
         />
 
         <RevelarLista className="mt-16 grid gap-x-12 gap-y-11 sm:grid-cols-2 lg:grid-cols-3" passo={0.04}>
           {DIMENSOES.map((grupo) => (
-            <RevelarItem key={grupo.grupo} className="border-t border-navy-700/15 pt-6">
-              <h3 className="text-base font-medium leading-snug text-navy-700">
+            <RevelarItem key={grupo.grupo} className="border-t border-navy/15 pt-6">
+              <h3 className="text-corpo font-medium leading-snug text-navy">
                 {grupo.grupo}
               </h3>
               <ul className="mt-4 space-y-2">
                 {grupo.itens.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 text-sm leading-relaxed text-slate-600"
+                    className="flex gap-3 text-legenda leading-relaxed text-ardosia"
                   >
-                    <span aria-hidden className="mt-2.5 h-px w-2.5 shrink-0 bg-gold-500" />
+                    <span aria-hidden className="mt-2.5 h-px w-2.5 shrink-0 bg-ouro" />
                     {item}
                   </li>
                 ))}
@@ -102,7 +102,7 @@ export default function PaginaMetodo() {
           apoio={
             <p>
               A analogia com auditoria é honesta: ninguém dispensa o auditor por ter CFO. A
-              diferença é que a ABBA também constrói e treina — e é a separação de papéis abaixo que
+              diferença é que a ABBA também constrói e treina, e é a separação de papéis abaixo que
               permite fazer as três coisas sem conflito.
             </p>
           }
@@ -110,12 +110,12 @@ export default function PaginaMetodo() {
 
         <RevelarLista className="mt-14 grid gap-x-14 gap-y-10 sm:grid-cols-2" passo={0.05}>
           {PROTOCOLO_DE_PROVA.map((regra, i) => (
-            <RevelarItem key={regra.titulo} className="border-t border-navy-700/15 pt-6">
-              <p className="nums font-mono text-mono text-gold-700">
+            <RevelarItem key={regra.titulo} className="border-t border-navy/15 pt-6">
+              <p className="nums font-mono text-rotulo text-ardosia">
                 {String(i + 1).padStart(2, '0')}
               </p>
-              <h3 className="mt-3 text-lg leading-snug text-navy-700">{regra.titulo}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">{regra.texto}</p>
+              <h3 className="mt-3 text-lede leading-snug text-navy">{regra.titulo}</h3>
+              <p className="mt-3 text-legenda leading-relaxed text-ardosia">{regra.texto}</p>
             </RevelarItem>
           ))}
         </RevelarLista>

@@ -4,10 +4,10 @@ import { Container } from './Container';
 type Tom = 'claro' | 'gelo' | 'navy' | 'navy-profundo';
 
 const FUNDOS: Record<Tom, string> = {
-  claro: 'bg-paper text-navy-700',
-  gelo: 'bg-ice-200 text-navy-700',
-  navy: 'bg-navy-700 text-ice-200',
-  'navy-profundo': 'bg-navy-900 text-ice-200',
+  claro: 'bg-branco text-navy',
+  gelo: 'bg-papel text-navy',
+  navy: 'bg-navy text-ardosia-clara',
+  'navy-profundo': 'bg-navy-escuro text-ardosia-clara',
 };
 
 /**

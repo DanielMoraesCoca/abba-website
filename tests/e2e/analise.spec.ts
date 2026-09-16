@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 
 async function responderTudo(page: import('@playwright/test').Page) {
   const escolher = (nome: string, valor: string) =>
-    page.locator(`input[name="${nome}"][value="${valor}"]`).first().check({ force: true });
+    page.locator(`label:has(input[name="${nome}"][value="${valor}"])`).first().click();
 
   await page.fill('#empresa', 'Exemplo Distribuidora');
   await page.fill('#setor', 'distribuição');
@@ -66,8 +66,8 @@ test('dá para voltar e corrigir uma resposta', async ({ page }) => {
   await page.goto('/analise');
   await page.fill('#empresa', 'Exemplo');
   await page.fill('#setor', 'serviços');
-  await page.locator('input[name="colaboradores"][value="51-200"]').check({ force: true });
-  await page.locator('input[name="faturamento"][value="10-50m"]').check({ force: true });
+  await page.locator('label:has(input[name="colaboradores"][value="51-200"])').first().click();
+  await page.locator('label:has(input[name="faturamento"][value="10-50m"])').first().click();
   await page.getByRole('button', { name: 'Continuar' }).click();
 
   await page.getByRole('button', { name: '← Voltar' }).click();
@@ -119,15 +119,12 @@ test('um porte forjado na URL não deixa o passo avançar', async ({ page }) => 
 
   await page.fill('#empresa', 'Exemplo');
   await page.fill('#setor', 'serviços');
-  await page
-    .locator('input[name="faturamento"][value="50-200m"]')
-    .first()
-    .check({ force: true });
+  await page.locator('label:has(input[name="faturamento"][value="50-200m"])').first().click();
 
   await expect(page.locator('input[name="colaboradores"]:checked')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Continuar' })).toBeDisabled();
 
   // E com uma faixa de verdade escolhida, o passo anda normalmente.
-  await page.locator('input[name="colaboradores"][value="201-500"]').first().check({ force: true });
+  await page.locator('label:has(input[name="colaboradores"][value="201-500"])').first().click();
   await expect(page.getByRole('button', { name: 'Continuar' })).toBeEnabled();
 });

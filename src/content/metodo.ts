@@ -32,7 +32,7 @@ export const CAMADAS = [
 export const PRINCIPIO_DO_ORGANISMO = {
   titulo: 'Uma empresa não é uma máquina. É um organismo.',
   texto:
-    'Quando se introduz IA numa organização, não se está instalando software — está se fazendo cirurgia. O organismo reage: ' +
+    'Quando se introduz IA numa organização, não se está instalando software: está se fazendo cirurgia. O organismo reage: ' +
     'adapta ou rejeita, e compensa de formas inesperadas. Às vezes a ineficiência que você quer automatizar é o sistema ' +
     'imunológico: remova-a e a empresa fica mais rápida, mas perde a capacidade de detectar problemas.',
   corolario:
@@ -92,7 +92,7 @@ export const PROTOCOLO_DE_PROVA = [
   {
     titulo: 'A métrica é combinada antes',
     texto:
-      'Antes de construir qualquer coisa, a métrica de sucesso vai para o papel — com um humano nomeado do lado do cliente ' +
+      'Antes de construir qualquer coisa, a métrica de sucesso vai para o papel, com um humano nomeado do lado do cliente ' +
       'que responde por ela.',
   },
   {
@@ -109,7 +109,7 @@ export const PROTOCOLO_DE_PROVA = [
   {
     titulo: 'Certificação, quando houver, é de terceiro',
     texto:
-      'Se o cliente quiser certificação formal — ISO 42001, por exemplo — o certificador é um terceiro acreditado. Nunca nós. ' +
+      'Se o cliente quiser certificação formal. ISO 42001, por exemplo: o certificador é um terceiro acreditado. Nunca nós. ' +
       'É essa separação de papéis que nos permite construir, treinar e provar sem conflito.',
   },
 ] as const;

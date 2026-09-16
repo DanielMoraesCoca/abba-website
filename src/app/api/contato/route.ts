@@ -55,7 +55,7 @@ export async function POST(requisicao: Request) {
       {
         erro: 'entrega',
         mensagem:
-          'Não conseguimos registrar seu contato agora. Escreva direto para contato@abbaservices.com.br — ' +
+          'Não conseguimos registrar seu contato agora. Escreva direto para contato@abbaservices.com.br: ' +
           'a gente responde em 24 horas úteis.',
       },
       { status: 502 },

@@ -107,6 +107,20 @@ export default function PaginaConselheiro() {
         </Revelar>
       </Secao>
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 05
+          ║ A fila da manhã · proporção 16:10
+          ║
+          ║ As verdades que expiram, os gatilhos vencidos, as afirmações contestadas.
+          ║
+          ║ AQUI: abre as cinco entregas. É a cadeira trabalhando quando ninguém está olhando, que é o que o Conselheiro vende.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       <Secao tom="navy" espaco="amplo">
         <TituloDeSecao invertido sobretitulo="O que entra" titulo="Cinco entregas, todo ciclo." />
 
@@ -125,6 +139,20 @@ export default function PaginaConselheiro() {
           ))}
         </RevelarLista>
       </Secao>
+
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 06
+          ║ Uma afirmação contestada · proporção 16:10
+          ║
+          ║ Uma alegação de autoridade menor recusada contra verdade de autoridade maior. A memória se defendendo.
+          ║
+          ║ AQUI: antes do "o que não é". A tela mostra a recusa acontecendo sozinha, e a lista ao lado é a recusa por escrito.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
 
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao

@@ -202,6 +202,20 @@ export default function PaginaAssessmentGratuito() {
         </RevelarLista>
       </Secao>
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 04
+          ║ O ledger de evidências · proporção 16:10
+          ║
+          ║ A página do relatório em que toda fonte aparece com id, provedor, confiança e citação literal.
+          ║
+          ║ AQUI: abre as quatro provas. A primeira prova é "as fontes vêm inteiras, no fim": esta é a página em que elas vêm.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
           sobretitulo="As quatro provas"

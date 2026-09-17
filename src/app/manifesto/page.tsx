@@ -119,6 +119,20 @@ export default function PaginaManifesto() {
         </RevelarLista>
       </Secao>
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 06 + FOTO 10
+          ║ Uma afirmação contestada, e a escrita à mão · proporção 16:10 e 16:9
+          ║
+          ║ A memória recusando uma alegação de autoridade menor. E o detalhe fechado de uma página de anotação real.
+          ║
+          ║ AQUI: as duas fecham o manifesto, e são a mesma crença em duas tecnologias: o que a casa escreve à mão antes de ligar a máquina, e o que a máquina recusa sozinha depois.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       <Secao tom="navy-profundo" largura="estreita" espaco="amplo">
         <Revelar className="text-center">
           <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ouro">

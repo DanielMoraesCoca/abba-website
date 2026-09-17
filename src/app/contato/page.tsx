@@ -28,6 +28,20 @@ export default function PaginaContato() {
         apoio={<p>{CONTATO.prazoResposta}</p>}
       />
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 07
+          ║ Os dois sócios, meio corpo · proporção 4:5
+          ║
+          ║ Os dois, em conversa de trabalho, olhando um para o outro ou para a mesma tela. Não para a câmera.
+          ║
+          ║ AQUI: ao lado do formulário. A página diz "falar com um sócio": é aqui que o leitor vê com quem vai falar.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       <Secao tom="claro" espaco="amplo">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.3fr] lg:gap-24">
           <Revelar className="space-y-10">
@@ -69,6 +83,25 @@ export default function PaginaContato() {
           </Revelar>
         </div>
       </Secao>
+
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 11
+          ║ Brasília, sem cartão-postal · proporção 21:9
+          ║
+          ║ A cidade como contexto de trabalho, não como monumento. Sem
+          ║ Congresso, sem pôr do sol.
+          ║
+          ║ AQUI: sangria de borda a borda, fechando a página, depois do
+          ║ formulário. É a única imagem do site que diz de ONDE a casa
+          ║ fala, e o lugar dela é o fim de uma conversa, não o começo de
+          ║ uma. Em 21:9 ela é uma faixa, não um fundo: uma foto de cidade
+          ║ atrás de texto vira papel de parede de consultoria.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
     </>
   );
 }

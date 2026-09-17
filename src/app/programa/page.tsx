@@ -191,6 +191,20 @@ export default function PaginaPrograma() {
         </Revelar>
       </Secao>
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 03
+          ║ O mesmo registro, medido depois · proporção 16:10
+          ║
+          ║ A mesma decisão com resultado medido e assinatura.
+          ║
+          ║ AQUI: no fecho, depois dos portões. O Programa promete prova medida; esta é a tela em que ela aparece assinada.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       {/* O dado estruturado do Programa vive aqui, e não em /o-que-fazemos,
           porque é aqui que as três fases estão na tela. Marcação que
           descreve conteúdo ausente é conteúdo enganoso, com nome e tudo. */}

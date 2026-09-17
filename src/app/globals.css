@@ -215,8 +215,21 @@
     color: var(--color-navy-escuro);
   }
 
+  /* O anel de foco é `currentColor`, e isso é deliberado.
+     ────────────────────────────────────────────────────────────────────
+     Estava `var(--color-teal-500)`, um token que NÃO EXISTE: ele morreu
+     quando a paleta fechou e a rampa de verde-azulado inteira saiu. O
+     navegador não deixou a página sem foco visível por sorte, resolvendo a
+     cor para `currentColor`, e é por isso que ninguém viu: o defeito era
+     uma referência quebrada que acertava o resultado por acidente.
+
+     `currentColor` passa a ser a escolha escrita, e não o acidente. Num
+     site de dois fundos, nenhuma cor fixa serve os dois: ouro sobre branco
+     marca 2,2 contra 1, e navy sobre navy é invisível. A cor do texto do
+     próprio elemento é, por construção, a de maior contraste com a
+     superfície em que ele está. */
   :focus-visible {
-    outline: 2px solid var(--color-teal-500);
+    outline: 2px solid currentColor;
     outline-offset: 3px;
     border-radius: 2px;
   }

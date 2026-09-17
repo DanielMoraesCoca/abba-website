@@ -16,6 +16,7 @@ import {
   P_TOQUES,
   P_VOLUME,
 } from '@/lib/analise/perguntas';
+import { rolarAte } from '@/lib/rolagem';
 import { cn } from '@/lib/utils';
 
 /**
@@ -106,7 +107,7 @@ export function Assistente() {
 
   const irPara = useCallback((indice: number) => {
     setPasso(indice);
-    topo.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    rolarAte(topo.current);
   }, []);
 
   async function enviar() {
@@ -122,7 +123,7 @@ export function Assistente() {
        institucionais, sem nunca ver que alguma coisa começou.
 
        Fotografado no celular, que é onde a queda é maior. */
-    topo.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    rolarAte(topo.current);
 
     const { empresa, setor, ...respostas } = rascunho;
 
@@ -144,7 +145,7 @@ export function Assistente() {
       }
 
       setResultado(corpo);
-      topo.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      rolarAte(topo.current);
     } catch {
       setErro('Sem conexão com o servidor. Tente de novo em instantes.');
     } finally {

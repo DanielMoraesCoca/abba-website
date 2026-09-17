@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { INDICE_PROIBIDO } from '@/content/evidencias';
+import { VAGAS_DE_IMAGEM } from '@/content/fotografia';
 import { EMPRESA } from '@/content/identidade';
 
 /**
@@ -231,5 +232,102 @@ describe('o grafo aposentado', () => {
   it('o cartão social não desenha nada além de tipografia', () => {
     const og = readFileSync(join(RAIZ, 'lib/og.tsx'), 'utf8');
     expect(og, 'o cartão social voltou a desenhar um grafo').not.toMatch(/<circle|<line\b/);
+  });
+});
+
+/**
+ * A DOUTRINA DO MOVIMENTO REDUZIDO, TRANCADA.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * A regra da casa é que `prefers-reduced-motion` mora no CSS, num lugar só.
+ * `scrollIntoView({ behavior: 'smooth' })` é a única API que fura isso: o
+ * `behavior` do JavaScript vence o `scroll-behavior` do CSS, e a regra de
+ * mídia não alcança a chamada.
+ *
+ * O furo já aconteceu uma vez, em três chamadas do assistente da Primeira
+ * Leitura, e passou por trinta auditorias de acessibilidade: o defeito só
+ * existe em tempo de execução, sob uma preferência do sistema que nem o axe
+ * nem o Lighthouse simulam.
+ *
+ * Então a porta é uma só, `lib/rolagem.ts`, e este teste guarda a porta.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('movimento reduzido', () => {
+  it('ninguém pede rolagem suave direto, fora da porta única', () => {
+    const ofensores = ARQUIVOS.filter(
+      ({ caminho, texto }) =>
+        caminho !== 'src/lib/rolagem.ts' && /behavior:\s*['"]smooth['"]/.test(texto),
+    ).map((a) => a.caminho);
+
+    expect(
+      ofensores,
+      'Use `rolarAte()` de lib/rolagem.ts: ela respeita prefers-reduced-motion, que o CSS não alcança aqui.',
+    ).toEqual([]);
+  });
+
+  it('a porta única consulta a preferência antes de rolar', () => {
+    const porta = readFileSync(join(RAIZ, 'lib/rolagem.ts'), 'utf8');
+    expect(porta).toMatch(/prefers-reduced-motion/);
+  });
+});
+
+/**
+ * AS VAGAS DE IMAGEM NÃO PODEM SE PERDER DO PLANO.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * O site tem hoje uma imagem, e ela é a marca. As onze tomadas do plano de
+ * fotografia (abba-ops) já têm lugar marcado no código, e o comentário de
+ * cada vaga é o que o fotógrafo e o chapéu Tecnologia vão receber como
+ * briefing: o que precisa estar no quadro, em que proporção, e por que ali.
+ *
+ * Marcador é comentário, e comentário apodrece calado. Entre marcar a vaga
+ * e a foto existir vão semanas, e no meio delas alguém refatora uma página.
+ * Este teste é o que impede a vaga de sumir sem ninguém perceber, e impede o
+ * caminho contrário: um marcador citando uma tomada que saiu do plano.
+ *
+ * Ele lê o arquivo CRU, sem tirar comentário, porque aqui o comentário é o
+ * conteúdo. É a exceção da varredura, e é o motivo de ela existir à parte.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('as vagas de imagem', () => {
+  const PAGINAS = arquivos(RAIZ)
+    .filter((c) => relativo(c).startsWith('src/app/'))
+    .map((c) => ({ caminho: relativo(c), cru: readFileSync(c, 'utf8') }));
+
+  const comLugar = VAGAS_DE_IMAGEM.filter((v) => v.rotas.length > 0);
+
+  it.each(comLugar.map((v) => [v.id, v.tomada] as const))(
+    '%s (%s) está marcada em alguma página',
+    (id) => {
+      const onde = PAGINAS.filter((p) => p.cru.includes(id)).map((p) => p.caminho);
+      expect(
+        onde.length,
+        `Nenhuma página marca ${id}. O plano diz onde ela entra; se a página mudou, mova o marcador em vez de apagá-lo.`,
+      ).toBeGreaterThan(0);
+    },
+  );
+
+  it('nenhum marcador cita uma tomada que não está no plano', () => {
+    const conhecidos = new Set<string>(VAGAS_DE_IMAGEM.map((v) => v.id));
+    const orfaos: string[] = [];
+
+    for (const { caminho, cru } of PAGINAS) {
+      for (const achado of cru.matchAll(/║ (FOTO \d{2})(?: \+ (FOTO \d{2}))?/g)) {
+        for (const id of [achado[1], achado[2]]) {
+          if (id && !conhecidos.has(id)) orfaos.push(`${caminho}: ${id}`);
+        }
+      }
+    }
+
+    expect(orfaos, 'Marcador aponta para tomada fora do registro.').toEqual([]);
+  });
+
+  it('a tomada sem lugar no site declara isso, em vez de inventar um', () => {
+    /* FOTO 08 são os retratos individuais. O site não tem página de sócios,
+       e a outra destinação da tomada é perfil de rede social. Deixar `rotas`
+       vazio é a resposta honesta; inventar uma seção para a foto caber seria
+       a foto mandando no site. */
+    const semLugar = VAGAS_DE_IMAGEM.filter((v) => v.rotas.length === 0);
+    for (const vaga of semLugar) {
+      expect(PAGINAS.some((p) => p.cru.includes(vaga.id))).toBe(false);
+    }
   });
 });

@@ -152,11 +152,39 @@ export default function PaginaInicial() {
         </RevelarLista>
       </Secao>
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 01
+          ║ A régua bloqueando uma frase · proporção 16:10
+          ║
+          ║ O comando, a frase reprovada, o motivo e o código da doutrina.
+          ║
+          ║ AQUI: fecha o passo 3, logo antes da leitura da casa. O passo diz "o número é combinado antes"; a captura mostra a casa se impedindo de exagerar.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       {/* A leitura dos 70/30, em prosa. Ela desceu da abertura para cá por
           decisão do briefing (§10.8): é tese da casa, não estatística, e um
           numeral de display na primeira tela seria lido como medição por
           qualquer pessoa, por mais cuidadosa que fosse a frase ao redor. */}
       <Tese />
+
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 02 + FOTO 03
+          ║ A métrica combinada antes, e o mesmo registro medido depois · proporção 16:10 cada, lado a lado
+          ║
+          ║ O registro com o número-alvo e o humano nomeado, com veredito pendente. Ao lado, a mesma decisão medida e assinada.
+          ║
+          ║ AQUI: o par, e só o par. Separadas elas viram captura de tela; juntas são a prova inteira em duas telas, que é o argumento do passo 3.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
 
       {/* ── Ainda o passo 3: a prateleira, e os três caminhos ──────────
           A grade é 1,35 : 1 : 1 de propósito. O assessment gratuito é a porta

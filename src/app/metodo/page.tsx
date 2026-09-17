@@ -52,6 +52,20 @@ export default function PaginaMetodo() {
         </Revelar>
       </Secao>
 
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 01
+          ║ A régua bloqueando uma frase · proporção 16:10
+          ║
+          ║ O comando, a frase reprovada, o motivo e o código da doutrina.
+          ║
+          ║ AQUI: depois das sete camadas e antes do protocolo. A régua É o protocolo rodando.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
+
       <Secao tom="navy" largura="estreita" espaco="amplo">
         <Revelar>
           <h2 className="text-secao leading-[1.2] text-branco">
@@ -100,6 +114,20 @@ export default function PaginaMetodo() {
           ))}
         </RevelarLista>
       </Secao>
+
+      {/* ╔══ VAGA DE IMAGEM ═══════════════════════════════════════════
+          ║ FOTO 09
+          ║ A mesa em uso · proporção 3:2
+          ║
+          ║ Caderno aberto com anotação de verdade, caneta, a tela ao fundo desfocada. Mão pode aparecer.
+          ║
+          ║ AQUI: respiro entre a anatomia e o protocolo. É a única imagem do site que mostra o trabalho antes da máquina.
+          ║
+          ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
+          ║ 08-materiais/marca/plano-de-fotografia.md.
+          ║ Nenhuma captura sai com dado de cliente: gere com
+          ║ USE_MOCK_LLM=true, não borre.
+          ╚═════════════════════════════════════════════════════════════ */}
 
       <Secao tom="gelo" espaco="amplo">
         <TituloDeSecao

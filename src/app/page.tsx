@@ -12,7 +12,7 @@ import { porExtenso } from '@/lib/tipografia';
 import { cn } from '@/lib/utils';
 import { CAMINHOS, FASES } from '@/content/caminhos';
 import { evidencia } from '@/content/evidencias';
-import { CONTATO, PRATELEIRA } from '@/content/identidade';
+import { CONTATO, HEADLINE, PRATELEIRA } from '@/content/identidade';
 import { RECUSAS } from '@/content/manifesto';
 
 /**
@@ -39,11 +39,16 @@ import { RECUSAS } from '@/content/manifesto';
  * ════════════════════════════════════════════════════════════════════════
  */
 
-/** Passo 1: o problema, com o número que anda ao lado dele. */
-const NUMEROS_DO_PROBLEMA = ['rand-80', 'kpmg-brasil-47'] as const;
-
-/** Passo 2: por que a maioria erra. */
-const NUMEROS_DO_ERRO = ['rand-causa-1', 'wharton-medicao'] as const;
+/**
+ * Passo 2: por que a maioria erra.
+ *
+ * Quatro, e não dois. Os dois primeiros abriam uma seção própria de passo 1,
+ * logo abaixo da capa, e a seção inteira saiu quando o passo 1 virou a
+ * própria capa. Eles não foram descartados: o tamanho do fracasso e a
+ * quantidade de treinamento que não vira trabalho SÃO "por que a maioria
+ * erra". Estavam separados da própria conclusão por uma quebra de seção.
+ */
+const NUMEROS_DO_ERRO = ['rand-80', 'rand-causa-1', 'wharton-medicao', 'kpmg-brasil-47'] as const;
 
 /** Passo 3: como se faz diferente. */
 const NUMEROS_DO_METODO = ['metr-19', 'dora-amplifica', 'cui-26'] as const;
@@ -56,45 +61,10 @@ export default function PaginaInicial() {
     <>
       <Capa />
 
-      {/* ── Passo 1 · O problema dele ───────────────────────────────── */}
-      <Secao tom="claro" espaco="amplo">
-        <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
-          <TituloDeSecao
-            sobretitulo="Passo 01 · onde vocês estão"
-            titulo={
-              <>
-                Você já tentou IA. O piloto não virou <Enfase>operação</Enfase>.
-              </>
-            }
-            className="max-w-none"
-          />
-          <Revelar className="space-y-7 lg:pt-3">
-            <p className="max-w-[54ch] text-lede leading-[1.55] text-navy">
-              Três coisas chegaram juntas na sua mesa: a reforma tributária, que o seu financeiro já
-              trata como obrigação; o jurídico usando ferramenta de IA que ninguém aprovou; e um
-              piloto que funcionou na demonstração e não sobreviveu ao trimestre seguinte.
-            </p>
-            <div className="rule-gold max-w-[54ch]" aria-hidden />
-            <p className="max-w-[54ch] text-corpo leading-[1.7] text-ardosia">
-              Nenhuma das três é falta de tecnologia. As três são a mesma coisa: ninguém combinou,
-              antes de começar, o que seria dar certo.
-            </p>
-          </Revelar>
-        </div>
-
-        <RevelarLista className="mt-20 grid gap-10 lg:grid-cols-2" passo={0.08}>
-          {NUMEROS_DO_PROBLEMA.map((id) => (
-            <RevelarItem key={id}>
-              <NumeroComFonte evidencia={evidencia(id)} />
-            </RevelarItem>
-          ))}
-        </RevelarLista>
-      </Secao>
-
       {/* AQUI HAVIA UMA FAIXA DE GRAFO, E ELA SAIU.
           ──────────────────────────────────────────────────────────────
           Era uma malha de nós e linhas douradas atravessando a largura da
-          tela, como respiro entre o passo 1 e o passo 2. O componente
+          tela, como respiro entre a capa e o passo 2. O componente
           existia, era bem-feito, era determinístico e não custava uma
           requisição de rede.
 
@@ -338,6 +308,33 @@ export default function PaginaInicial() {
             </RevelarItem>
           ))}
         </RevelarLista>
+      </Secao>
+
+      {/* ── O fecho do passo 3: a definição, e só agora ────────────────
+          Esta é a frase que abria a home até aqui, e o lugar dela é este.
+
+          Ela é o teste de pertencimento da casa: a régua contra a qual todo
+          material novo é medido ("se um material não cabe nessa frase, ele
+          não é da ABBA"). Como abertura, ela respondia uma pergunta que o
+          leitor ainda não tinha feito, e fazia a home abrir falando da
+          empresa, que é o que a §8 proíbe.
+
+          Depois de três seções sobre o problema dele, sobre o que a medição
+          diz, e sobre como o trabalho é feito, a pergunta existe. É aqui que
+          "então o que vocês são?" tem resposta, e a resposta é uma
+          definição, não uma promessa. */}
+      <Secao tom="navy" largura="estreita" espaco="amplo">
+        <Revelar className="text-center">
+          <p className="font-mono text-rotulo uppercase leading-[1.7] tracking-[0.22em] text-ouro-claro">
+            Em uma frase
+          </p>
+          <p className="mt-8 font-display text-secao leading-[1.15] text-branco">
+            {HEADLINE.titulo}
+          </p>
+          <p className="mx-auto mt-8 max-w-2xl text-corpo leading-[1.7] text-ardosia-clara">
+            {HEADLINE.sub}
+          </p>
+        </Revelar>
       </Secao>
 
       {/* ── Passo 4 · Por que dá para confiar ───────────────────────────

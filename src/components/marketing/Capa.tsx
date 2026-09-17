@@ -3,12 +3,22 @@ import { TituloQueSobe } from '@/components/motion/TituloQueSobe';
 import { Botao } from '@/components/ui/Botao';
 import { Container } from '@/components/ui/Container';
 import { Sobretitulo } from '@/components/ui/Sobretitulo';
-import { HEADLINE } from '@/content/identidade';
+import { ABERTURA } from '@/content/identidade';
 
 /**
- * A capa. Navy profundo, a constelação da marca ao fundo, o dourado só nos
- * detalhes. A primeira frase diz o que não dá para fazer de dentro — é
- * regra de posicionamento, não escolha de copy.
+ * A capa: o passo 1 do argumento, e nada da ABBA.
+ *
+ * ════════════════════════════════════════════════════════════════════════
+ * A primeira frase da home é o problema de quem lê. Isso é a §8 do briefing,
+ * e a regra que a governa cabe numa linha: não abrir falando da empresa.
+ *
+ * Aqui estava a `HEADLINE.titulo`, que descreve o que a ABBA faz. Duas
+ * coisas erradas numa só: quebrava a ordem do argumento, e usava como
+ * manchete uma frase que nunca foi manchete. Aquela frase é o teste de
+ * pertencimento da casa, a régua contra a qual todo material novo é medido.
+ * Ela desceu para fechar o passo 3, onde o leitor já está perguntando
+ * "então o que vocês são?".
+ * ════════════════════════════════════════════════════════════════════════
  */
 export function Capa() {
   return (
@@ -34,12 +44,22 @@ export function Capa() {
           {/* A manchete sobe palavra por palavra, e é o único lugar do
               site com esse tratamento. Ver `TituloQueSobe`. */}
           <TituloQueSobe
-            texto={HEADLINE.titulo}
+            texto={ABERTURA.titulo}
+            enfase={ABERTURA.enfase}
             className="mt-8 text-topo leading-[1.08] text-branco"
           />
 
-          <p className="mt-8 max-w-2xl text-lede leading-[1.6] text-ardosia-clara">
-            {HEADLINE.sub}
+          {/* Medida: `3xl` e não `2xl`. O lede corre em 34px na tela larga,
+              e numa coluna de 2xl isso dá sete linhas de quarenta e poucos
+              caracteres. A régua da casa pede de 62 a 70 para texto de
+              leitura, e a medida curta demais cansa tanto quanto a longa:
+              o olho volta para a esquerda antes de pegar ritmo. */}
+          <p className="mt-8 max-w-3xl text-lede leading-[1.55] text-ardosia-clara">
+            {ABERTURA.lede}
+          </p>
+
+          <p className="mt-6 max-w-2xl text-corpo leading-[1.7] text-ardosia-clara">
+            {ABERTURA.diagnostico}
           </p>
 
           <div className="mt-11 flex flex-col gap-3 sm:flex-row sm:items-center">

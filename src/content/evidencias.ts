@@ -74,11 +74,16 @@ export const EVIDENCIAS = [
     id: 'dora-amplifica',
     numero: 'amplifica',
     afirmacao:
-      'é o verbo do relatório DORA: a IA não conserta um time, ela amplifica o que já está lá. A adoção correlaciona positivamente com velocidade e negativamente com estabilidade.',
-    fonte: 'DORA 2025 (Google): cerca de 5.000 respondentes',
+      'é o verbo do relatório DORA: a IA não conserta um time, ela amplifica o que já está lá. A adoção correlaciona positivamente com entrega e com resultado de produto, e negativamente com estabilidade.',
+    fonte: 'DORA 2025 (Google): quase 5.000 profissionais de tecnologia',
     ano: 2025,
     url: 'https://dora.dev/dora-report-2025/',
-    conferidaEm: '2026-09-09',
+    /* Conferida contra o anúncio do próprio publicador (Google Cloud), e não
+       contra fonte secundária: o verbo "amplifica", o tamanho da amostra, e
+       a direção das três correlações. A de resultado de produto entrou
+       agora: ela está no relatório de 2025 e faltava na nossa linha, que
+       citava só entrega. */
+    conferidaEm: '2026-09-17',
     confianca: 'alta',
     leitura:
       'Time com a base arrumada acelera; time com processo bagunçado piora mais rápido. Arrumar a base não é atraso: é a condição do ganho.',
@@ -185,6 +190,13 @@ export function evidencia(id: EvidenciaId): Evidencia {
  * Origem: base-de-evidencias.md §2. Usado pelo teste da régua do revisor.
  * Cada entrada explica por que caiu e o que usar no lugar; é isso que
  * impede o número de voltar por descuido daqui a seis meses.
+ *
+ * O MOTIVO É FACTUAL E SEM ADJETIVO, e isso é regra. "Não revisado por
+ * pares", "percepção autorrelatada", "os autores vendem o framework que o
+ * relatório recomenda", "fonte primária não localizada": cada um desses é
+ * verificável por quem discordar. A crítica se sustenta sozinha, e
+ * editorializar transformaria a prova mais rara do site numa briga com
+ * quem publicou o número.
  */
 export const INDICE_PROIBIDO = [
   {
@@ -196,20 +208,20 @@ export const INDICE_PROIBIDO = [
   },
   {
     padrao: /67\s*%[^.]{0,60}(parceiro|externo)/i,
-    rotulo: '“parceiro externo acerta 67% vs 22–33% interno”',
-    porque: 'Vem do mesmo relatório MIT NANDA. Aposentado.',
+    rotulo: '“parceiro externo acerta 67% vs 22 a 33% interno”',
+    porque: 'Vem do mesmo relatório MIT NANDA, então carrega os mesmos três problemas.',
     substituto: 'A convergência RAND + METR + DORA: argumento por três fontes independentes.',
   },
   {
     padrao: /roi\s*(de\s*)?3x?\s*(a|até)\s*8x/i,
     rotulo: '“ROI de 3x a 8x em 12 meses”',
-    porque: 'Frase idêntica copiada entre blogs de fornecedores, sem nenhuma fonte primária.',
+    porque: 'A mesma frase aparece em blogs de fornecedores; fonte primária não localizada.',
     substituto: 'Payback calculado caso a caso com número DO cliente.',
   },
   {
     padrao: /90\s*%[^.]{0,50}treinamento/i,
     rotulo: '“90% das organizações falham em treinamento de IA”',
-    porque: 'Manchete de fornecedor, sem metodologia.',
+    porque: 'Manchete de fornecedor; metodologia não publicada.',
     substituto: 'KPMG 47% + Wharton (medição frouxa).',
   },
   {

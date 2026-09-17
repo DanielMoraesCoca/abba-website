@@ -1,5 +1,6 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
 import { Declaracao } from '@/components/marketing/Declaracao';
+import { DadosEstruturados } from '@/components/marketing/DadosEstruturados';
 import { LinhaDoPrograma } from '@/components/marketing/LinhaDoPrograma';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
 import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
@@ -9,7 +10,7 @@ import { Secao } from '@/components/ui/Secao';
 import { ALINHAMENTO, FASES } from '@/content/caminhos';
 import { evidencia } from '@/content/evidencias';
 import { PRECO_PUBLICO, REGRAS_DE_INVESTIMENTO } from '@/content/precos';
-import { metadadosDaPagina } from '@/lib/seo';
+import { jsonLdServico, metadadosDaPagina } from '@/lib/seo';
 
 export const metadata = metadadosDaPagina({
   titulo: 'O Programa · AI Native · Ano 1',
@@ -189,6 +190,20 @@ export default function PaginaPrograma() {
           </div>
         </Revelar>
       </Secao>
+
+      {/* O dado estruturado do Programa vive aqui, e não em /o-que-fazemos,
+          porque é aqui que as três fases estão na tela. Marcação que
+          descreve conteúdo ausente é conteúdo enganoso, com nome e tudo. */}
+      <DadosEstruturados
+        dados={jsonLdServico({
+          nome: 'AI Native · Ano 1',
+          descricao:
+            'Programa de doze meses que instala capacidade de IA e prova o resultado como terceiro, ' +
+            'com três fases e três portões de saída sem multa.',
+          caminho: '/programa',
+          etapas: FASES.map((f) => ({ nome: f.nome, texto: f.promessa })),
+        })}
+      />
     </>
   );
 }

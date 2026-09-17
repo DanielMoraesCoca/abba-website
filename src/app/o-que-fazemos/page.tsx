@@ -6,10 +6,10 @@ import { Enfase, TituloDeSecao } from '@/components/marketing/Titulo';
 import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar';
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
-import { ALINHAMENTO, CAMINHOS, FASES } from '@/content/caminhos';
+import { ALINHAMENTO, CAMINHOS } from '@/content/caminhos';
 import { PERGUNTAS } from '@/content/perguntas';
 import { PRECO_PUBLICO, REGRAS_DE_INVESTIMENTO } from '@/content/precos';
-import { jsonLdPerguntas, jsonLdServico, metadadosDaPagina } from '@/lib/seo';
+import { jsonLdPerguntas, metadadosDaPagina } from '@/lib/seo';
 
 export const metadata = metadadosDaPagina({
   titulo: 'O que fazemos',
@@ -38,13 +38,46 @@ export default function PaginaOQueFazemos() {
         }
       />
 
+      {/* ESTA PÁGINA ESCOLHE. ELA NÃO RESUME.
+          ══════════════════════════════════════════════════════════════
+          O que estava aqui era a descrição completa dos três caminhos, com
+          a mesma `descricao` e os mesmos cinco `itens` que a home já
+          renderiza e que /assessment-gratuito, /programa e /conselheiro
+          renderizam com mais profundidade. Três lugares contando a mesma
+          coisa, e o terceiro sempre pior que o segundo.
+
+          O papel desta página é o outro: decidir QUAL dos três é o seu. O
+          que decide isso é a condição de entrada de cada um, que já existe
+          no conteúdo como `paraQuem`. Então é ela que aparece, primeiro e
+          em corpo de leitura, e a descrição some. Quem se reconhece numa
+          linha clica; quem não se reconhece em nenhuma tem a conversa, que
+          é o quarto caminho e sempre foi.
+
+          O que a página perdeu em palavras ela ganhou em função. */}
       <Secao tom="claro" espaco="amplo">
-        <RevelarLista className="space-y-px" passo={0.07}>
+        <TituloDeSecao
+          sobretitulo="Qual é o seu"
+          titulo={
+            <>
+              Três portas, e a condição de entrada de cada uma está{' '}
+              <Enfase>escrita</Enfase>.
+            </>
+          }
+          apoio={
+            <p>
+              Se você não se reconhecer em nenhuma das três, a conversa resolve em quarenta e cinco
+              minutos e não custa nada. Vender o caminho errado para o cliente certo é o jeito mais
+              rápido de perder os dois.
+            </p>
+          }
+        />
+
+        <RevelarLista className="mt-16 space-y-px" passo={0.07}>
           {CAMINHOS.map((caminho) => (
             <RevelarItem
               as="article"
               key={caminho.id}
-              className="grid gap-8 border-t border-navy/15 py-12 lg:grid-cols-[16rem_1fr] lg:gap-16"
+              className="grid gap-6 border-t border-navy/15 py-10 lg:grid-cols-[16rem_1fr] lg:gap-16"
             >
               <div>
                 <p className="nums font-mono text-rotulo tracking-[0.2em] text-ardosia">
@@ -57,24 +90,13 @@ export default function PaginaOQueFazemos() {
               </div>
 
               <div>
-                <p className="text-corpo leading-[1.7] text-navy">{caminho.descricao}</p>
-                <p className="mt-5 text-legenda leading-relaxed text-ardosia">
-                  <span className="font-medium text-navy">Para quem. </span>
+                <p className="max-w-[54ch] text-corpo leading-[1.7] text-navy">
                   {caminho.paraQuem}
                 </p>
 
-                <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
-                  {caminho.itens.map((item) => (
-                    <li key={item} className="flex gap-3 text-legenda leading-relaxed text-ardosia">
-                      <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
                 <Link
                   href={caminho.href}
-                  className="mt-8 inline-flex items-center gap-2 font-mono text-legenda uppercase tracking-[0.12em] text-navy underline-offset-4 transition-colors hover:text-ardosia hover:underline"
+                  className="mt-7 inline-flex items-center gap-2 font-mono text-legenda uppercase tracking-[0.12em] text-navy underline-offset-4 transition-colors hover:text-ardosia hover:underline"
                 >
                   {caminho.cta.texto} →
                 </Link>
@@ -84,49 +106,16 @@ export default function PaginaOQueFazemos() {
         </RevelarLista>
       </Secao>
 
-      <Secao tom="navy" espaco="amplo">
-        <TituloDeSecao
-          invertido
-          sobretitulo="O Programa por dentro"
-          titulo="Doze meses em três fases, cada uma com um portão de saída."
-          apoio={
-            <p>
-              A estrutura existe para tratar o seu risco por desenho, não por promessa: a entrada é
-              pequena e firme, o investimento maior só anda com o caso medido na mesa, e sair nunca
-              custa multa.
-            </p>
-          }
-        />
+      {/* AS TRÊS FASES SAÍRAM DAQUI, E ERAM A TERCEIRA CÓPIA.
+          ──────────────────────────────────────────────────────────────
+          A home conta as três fases com os entregáveis e o portão de cada
+          uma. A /programa conta com a linha do tempo, o preço da saída e o
+          que o cliente leva embora em cada portão. Esta página contava uma
+          terceira vez, mais curta que as duas, sem acrescentar nada.
 
-        <RevelarLista className="mt-16 grid gap-10 lg:grid-cols-3" passo={0.07}>
-          {FASES.map((fase) => (
-            <RevelarItem
-              as="article"
-              key={fase.id}
-              className="flex flex-col border-t border-ouro/40 pt-7"
-            >
-              <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ouro-claro">
-                {fase.rotulo} · {fase.janela}
-              </p>
-              <h3 className="mt-4 text-lede leading-tight text-branco">{fase.nome}</h3>
-              <p className="mt-5 text-legenda leading-[1.7] text-ardosia-clara">{fase.promessa}</p>
-
-              <ul className="mt-6 space-y-2.5">
-                {fase.entregaveis.map((item) => (
-                  <li key={item} className="flex gap-3 text-legenda leading-relaxed text-ardosia-clara">
-                    <span aria-hidden className="mt-2.5 h-px w-3 shrink-0 bg-ouro/70" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-auto pt-7 font-mono text-rotulo leading-relaxed text-ouro-claro/90">
-                {fase.portao.nome}: {fase.portao.regra}
-              </p>
-            </RevelarItem>
-          ))}
-        </RevelarLista>
-      </Secao>
+          Uma prateleira que reconta o catálogo inteiro deixa de ser
+          prateleira. O leitor que quiser as fases clica no Caminho 02, que
+          é o que a linha acima existe para fazer. */}
 
       <Declaracao titulo={ALINHAMENTO.titulo} texto={ALINHAMENTO.texto} />
 
@@ -190,16 +179,12 @@ export default function PaginaOQueFazemos() {
       </Secao>
 
       <DadosEstruturados dados={jsonLdPerguntas(PERGUNTAS)} />
-      <DadosEstruturados
-        dados={jsonLdServico({
-          nome: 'AI Native · Ano 1',
-          descricao:
-            'Programa de doze meses que instala capacidade de IA e prova o resultado como terceiro, ' +
-            'com três fases e três portões de saída sem multa.',
-          caminho: '/o-que-fazemos',
-          etapas: FASES.map((f) => ({ nome: f.nome, texto: f.promessa })),
-        })}
-      />
+      {/* O dado estruturado do Programa mudou de página junto com o
+          conteúdo. Ele descrevia as três fases, e as três fases não estão
+          mais aqui: marcação que descreve o que a página não mostra é
+          exatamente o que buscador chama de conteúdo enganoso, e é o tipo de
+          coisa que uma casa que vende prova não faz nem por descuido. Foi
+          para /programa, que é onde as fases moram. */}
     </>
   );
 }

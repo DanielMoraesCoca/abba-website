@@ -17,7 +17,39 @@ export const EMPRESA = {
   idioma: 'pt-BR',
 } as const;
 
-/** A headline canônica. Vale para site, deck e conversa. */
+/**
+ * A ABERTURA DA HOME: o problema de quem lê, antes de qualquer coisa nossa.
+ *
+ * ════════════════════════════════════════════════════════════════════════
+ * O que abria a home era a `HEADLINE.titulo` daqui de baixo, e isso era um
+ * uso que a régua da casa nunca autorizou. Aquela frase não é manchete: é o
+ * TESTE DE PERTENCIMENTO do briefing (§1), a régua contra a qual todo
+ * material novo é medido. "Se um material não cabe nessa frase, ele não é
+ * da ABBA." Teste, não título. Ela continua no /manifesto exatamente nesse
+ * papel, e agora fecha o passo 3 da home, onde responde a uma pergunta que
+ * o leitor já tem.
+ *
+ * No lugar dela entra o passo 1 do argumento: não abrir falando da empresa.
+ * ════════════════════════════════════════════════════════════════════════
+ */
+export const ABERTURA = {
+  titulo: 'Você já tentou IA. O piloto não virou operação.',
+  /** A palavra que vai na itálica de ênfase. Uma, e é a que carrega a frase. */
+  enfase: 'operação',
+  lede:
+    'Três coisas chegaram juntas na sua mesa: a reforma tributária, que o seu financeiro já trata ' +
+    'como obrigação; o jurídico usando ferramenta de IA que ninguém aprovou; e um piloto que ' +
+    'funcionou na demonstração e não sobreviveu ao trimestre seguinte.',
+  diagnostico:
+    'Nenhuma das três é falta de tecnologia. As três são a mesma coisa: ninguém combinou, antes de ' +
+    'começar, o que seria dar certo.',
+} as const;
+
+/**
+ * A headline canônica: o teste de pertencimento.
+ *
+ * Não é manchete de home. Ver o comentário de `ABERTURA`, acima.
+ */
 export const HEADLINE = {
   titulo: 'Instalamos capacidade de IA, e provamos, de fora, o que ela mudou.',
   sub:

@@ -4,19 +4,35 @@
 > mexer**. Nenhuma delas impede o site de rodar hoje; todas impedem que ele
 > seja considerado pronto para prospect.
 
-## 1. Calibrar as premissas do modelo de estimativa · **sócios**
+## 1. Calibrar as premissas ANTES de religar a faixa, se religarem · **sócios**
 
-**Onde:** [`src/lib/analise/premissas.ts`](../src/lib/analise/premissas.ts)
+**Onde:** [`src/lib/analise/premissas.ts`](../src/lib/analise/premissas.ts) e
+[`src/lib/analise/faixa-suspensa.ts`](../src/lib/analise/faixa-suspensa.ts)
 
-As faixas de minutos por documento e de custo/hora administrativa são a
+**Esta pendência mudou de tamanho, e o texto anterior exagerava o risco.** Ele
+dizia que as premissas "produzem o número que vai à mesa da diretoria de um
+prospect". Deixou de ser verdade quando a faixa em reais foi suspensa pelo
+briefing de marca §10.1: hoje `premissas.ts` só é importado por
+`faixa-suspensa.ts`, e `faixa-suspensa.ts` não é importado por nada. Os dois
+estão fora do grafo de imports do site, e há teste que garante isso. Nenhum
+número sai desses arquivos para tela nenhuma.
+
+Pendência que exagera o risco treina a casa a ignorar a lista inteira, então
+ela fica registrada pelo que virou: **uma condição para religar, não um risco
+em aberto.**
+
+Se os sócios decidirem que a faixa volta, as faixas de minutos por documento e
+de custo/hora administrativa precisam de um "ok" explícito antes: elas são a
 calibragem inicial, deliberadamente conservadora, e estão marcadas no código
-como `tipo: 'premissa'` — o site as apresenta como assunção da ABBA, nunca
-como estatística. Ainda assim, elas produzem o número que vai à mesa da
-diretoria de um prospect. **Precisam de um "ok" explícito dos sócios.**
+como `tipo: 'premissa'`. Um jeito rápido de calibrar: rodar a estimativa com os
+números de dois ou três clientes reais e ver se a faixa cai onde a intuição dos
+sócios cai. Se não cair, mexer nas constantes; os testes de honestidade
+continuam valendo e continuam rodando.
 
-Um jeito rápido de calibrar: rodar a análise com os números de dois ou três
-clientes reais e ver se a faixa cai onde a intuição dos sócios cai. Se não
-cair, mexer nas constantes — os testes de honestidade continuam valendo.
+As outras três condições para religar estão no cabeçalho de
+`faixa-suspensa.ts`, e são do briefing: a conta aparece na mesma tela, o texto
+declara que a faixa saiu do que o visitante declarou, e em lugar nenhum ela é
+chamada de diagnóstico, assessment ou avaliação de prontidão.
 
 ## 2. Decidir se preço é público · **Pedro**
 

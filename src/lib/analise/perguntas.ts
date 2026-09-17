@@ -85,8 +85,14 @@ export type Fechamento = (typeof P_FECHAMENTO)['opcoes'][number]['valor'];
 export const P_NUMERO_MEDIDO = {
   id: 'numeroMedido',
   titulo: 'Existe hoje um número em reais que dói, e que vocês já medem?',
+  /* Dizia "a pergunta mais importante das seis". Seis era o número de
+     perguntas do teste de alvo do abba-ops, de onde este bloco veio; o
+     instrumento da web nunca teve seis. Contar errado o próprio
+     instrumento, numa página cuja tese é honestidade sobre número, é o
+     pior lugar possível para errar. A frase perde a contagem e mantém o
+     que ela queria dizer, que é hierarquia, não aritmética. */
   ajuda:
-    'Esta é a pergunta mais importante das seis. Sem um número medido, não existe prova possível: só depoimento.',
+    'Se houver uma pergunta que muda a leitura inteira, é esta. Sem um número medido, não existe prova possível: só depoimento.',
   opcoes: [
     { valor: 'sim', rotulo: 'Sim, medimos e acompanhamos' },
     { valor: 'parcial', rotulo: 'Existe o número, mas a medição é frouxa' },

@@ -17,6 +17,13 @@ import type { FaixaFaturamento } from './perguntas';
 /**
  * A FAIXA EM REAIS: SUSPENSA. NENHUMA PÁGINA IMPORTA ESTE ARQUIVO.
  *
+ * ESTE ARQUIVO ESTÁ FORA DO GRAFO DE IMPORTS DO SITE, DE PROPÓSITO. Nada em
+ * `src/app` nem em `src/components` o alcança, direto ou indireto, e é teste
+ * que garante isso (`regua-do-revisor.test.ts`). Quem chegar aqui por busca
+ * de texto e achar que encontrou código morto: não é morto, é desligado, e a
+ * diferença está escrita abaixo. `premissas.ts` está na mesma situação, e só
+ * é importado daqui.
+ *
  * ════════════════════════════════════════════════════════════════════════
  * Isto é aritmética correta, testada, e fora do ar por decisão de produto.
  * Ela não foi apagada porque nada aqui está errado; ela foi desligada

@@ -72,6 +72,19 @@ export function Resultado({ dados, aoRecomecar }: {
           Teste do alvo · {qualificacao.placar.toString().replace('.', ',')} de{' '}
           {qualificacao.maximo} condições
         </p>
+
+        {/* A ORIGEM DA LEITURA, COLADA NA LEITURA.
+            ──────────────────────────────────────────────────────────────
+            Esta frase já existia mais abaixo, no bloco do limite honesto, e
+            estar na mesma PÁGINA não é o mesmo que estar na mesma TELA.
+            Quem lê "vocês estão prontos para a conversa inteira" precisa
+            saber, no mesmo campo de visão, que isso saiu do que ele mesmo
+            declarou em dez respostas fechadas, e de mais nada. A ressalva
+            que chega três blocos depois do veredito chega tarde. */}
+        <p className="mt-4 max-w-2xl text-legenda leading-[1.65] text-ardosia">
+          Esta leitura foi montada só com o que você declarou nas respostas acima. A ABBA não
+          consultou nada sobre a sua empresa, e não publica número nenhum sobre ela.
+        </p>
       </Revelar>
 
       {/* 2 · O vetor */}

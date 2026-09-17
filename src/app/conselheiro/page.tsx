@@ -69,18 +69,41 @@ export default function PaginaConselheiro() {
         }
       />
 
+      {/* ISTO ERA UM DEPOIMENTO, E DEPOIMENTO SEM AUTOR NÃO EXISTE.
+          ══════════════════════════════════════════════════════════════
+          O bloco tinha o título "o depoimento que queremos ouvir em doze
+          meses" e, embaixo, uma citação entre aspas com filete dourado. A
+          moldura era honesta: dizia com todas as letras que era o que a
+          casa QUER ouvir, não o que alguém disse.
+
+          A forma não era. Quem rola uma página não lê sobretítulo: lê
+          aspas, filete e serifa, e isso é o desenho universal de citação de
+          cliente. A trava 4 não fala só de seções chamadas "cases". Ela
+          proíbe depoimento sem aprovação nominal por escrito, e este não
+          tinha aprovação porque não tinha autor. Era o único item do site
+          que um concorrente conseguiria usar contra a ABBA, e caro
+          justamente porque a casa vende prova.
+
+          O conteúdo não morreu: virou primeira pessoa. Sem aspas, sem
+          blockquote, sem filete de citação. É promessa assinada, que é o
+          que ele sempre foi por baixo da forma errada.
+
+          Quando existir um cliente com aprovação nominal por escrito, ele
+          entra aqui do jeito certo: com nome, cargo e empresa. Até lá, não
+          existe a seção. */}
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
-          sobretitulo="O depoimento que queremos ouvir em doze meses"
+          sobretitulo="O que assumimos entregar"
           titulo="Se a entrega de um trimestre não estiver a caminho disto, o produto está sendo mal executado."
         />
-        <Revelar className="mt-12 max-w-3xl border-l-2 border-ouro pl-8">
-          <blockquote className="font-display text-lede leading-[1.55] text-navy">
-            “Antes, cada fornecedor de IA que batia na porta virava uma reunião perdida e uma
-            dúvida. Hoje temos um conselheiro que já conhece nossa operação, senta no nosso conselho
-            a cada trimestre, corta o ruído dos vendedores e nos diz com convicção o que fazer, e o
-            que não fazer.”
-          </blockquote>
+        <Revelar className="mt-12 max-w-3xl">
+          <p className="font-display text-lede leading-[1.55] text-navy">
+            O que a ABBA se compromete a entregar em doze meses: que cada fornecedor de IA que bate
+            na sua porta deixe de virar uma reunião perdida e uma dúvida. Que exista, do seu lado da
+            mesa, um conselheiro que já conhece a sua operação, senta no seu conselho a cada
+            trimestre, corta o ruído dos vendedores, e diz com convicção o que fazer e o que não
+            fazer.
+          </p>
         </Revelar>
       </Secao>
 

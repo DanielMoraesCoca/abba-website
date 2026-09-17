@@ -151,13 +151,37 @@ test('o cabeçalho mantém contraste sobre uma seção escura', async ({ page })
     window.scrollTo({ top: alvo - altura + 40, behavior: 'instant' });
   }, alturaCabecalho);
 
-  // O fundo é comparado por luminosidade, não por string: o Tailwind v4
-  // calcula em `oklab(...)`, e o primeiro número é o L. Claro é ~1, o navy
-  // da casa é ~0,2 — a distância é grande o bastante para não haver dúvida.
+  /* O fundo é comparado por luminosidade, não por string.
+     ────────────────────────────────────────────────────────────────────
+     E a leitura precisa aguentar as DUAS formas que o navegador devolve,
+     que foi o que quebrou este teste uma vez: enquanto o cabeçalho tinha
+     transparência, o Tailwind resolvia a cor com `color-mix` e o valor
+     computado saía em `oklab(...)`. O fundo virou opaco, o valor passou a
+     sair em `rgb(...)`, a expressão regular não achou nada, e o teste
+     falhou por não conseguir LER a cor — não por a cor estar errada.
+
+     Um teste que falha quando o formato muda não está medindo contraste,
+     está medindo o formato. Agora ele aceita as duas notações: em oklab o
+     primeiro número já é o L, e em rgb a luminância relativa sai da
+     fórmula da própria WCAG. Claro fica perto de 1, o navy da casa perto
+     de 0,2, e a distância não deixa dúvida. */
   const luminosidade = () =>
     cabecalho.evaluate((el) => {
-      const [, l] = /oklab\(([0-9.]+)/.exec(getComputedStyle(el).backgroundColor) ?? [];
-      return l ? Number(l) : Number.NaN;
+      const fundo = getComputedStyle(el).backgroundColor;
+
+      const emOklab = /oklab\(\s*([0-9.]+)/.exec(fundo);
+      if (emOklab?.[1]) return Number(emOklab[1]);
+
+      const emRgb = /rgba?\(\s*([0-9.]+)[,\s]+([0-9.]+)[,\s]+([0-9.]+)/.exec(fundo);
+      if (!emRgb) return Number.NaN;
+
+      const canal = (v: string) => {
+        const c = Number(v) / 255;
+        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+      };
+      return (
+        0.2126 * canal(emRgb[1]!) + 0.7152 * canal(emRgb[2]!) + 0.0722 * canal(emRgb[3]!)
+      );
     });
 
   await expect.poll(luminosidade, { timeout: 5000 }).toBeLessThan(0.5);

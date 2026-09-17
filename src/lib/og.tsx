@@ -9,21 +9,36 @@ import { EMPRESA } from '@/content/identidade';
  * link vira um retângulo cinza com um domínio. Isso já é material externo, e
  * material externo da ABBA tem padrão.
  *
- * O desenho é o mesmo da capa: navy profundo, o grafo dourado da marca ao
- * fundo, sobretítulo, título serifado. Gerado no build, uma imagem por rota.
+ * O desenho é o mesmo da capa: navy profundo, sobretítulo em ouro, título
+ * em Newsreader, e nada mais. Gerado no build, uma imagem por rota.
+ *
+ * O QUE SAIU DAQUI, E POR QUE ISTO É O LUGAR MAIS IMPORTANTE DE TER SAÍDO.
+ *
+ * Havia uma constelação de nós e linhas douradas ocupando o terço direito
+ * do cartão. Ela é o logo de cérebro aposentado em outra forma, e a régua de
+ * imagem da casa reprova circuito. A capa da home já tinha sido limpa; este
+ * arquivo passou despercebido porque ninguém abre um cartão social durante o
+ * trabalho.
+ *
+ * E ele é a superfície MAIS pública que existe: um link colado no LinkedIn
+ * ou no WhatsApp mostra este cartão antes de qualquer pessoa abrir o site.
+ * A marca aposentada estava viajando exatamente onde ela mais aparece.
  *
  * `ImageResponse` roda no Satori, que suporta flexbox e um subconjunto de
- * CSS — nada de grid, nada de variável CSS. Por isso os hexadecimais estão
- * escritos à mão aqui, e é a única exceção do repositório: o teste da régua
- * não bloqueia hex, mas se a paleta mudar no abba-ops, este arquivo é o
- * segundo lugar a mudar depois do globals.css.
+ * CSS: nada de grid, nada de variável de CSS. Por isso os hexadecimais estão
+ * escritos à mão aqui, e é a única exceção do repositório. Se a paleta mudar
+ * no abba-ops, este arquivo é o segundo lugar a mudar depois do globals.css.
  */
 
-const NAVY_900 = '#0E1729';
-const GOLD_500 = '#C2A35B';
-const GOLD_400 = '#D3B87F';
-const ICE_100 = '#FBFBFC';
-const ICE_300 = '#F1F2F4';
+/* A paleta fechada do briefing §2, escrita à mão porque o Satori não lê
+   variável de CSS. Os valores anteriores eram da paleta antiga e nenhum
+   deles existia mais: o navy estava dois pontos mais escuro, o ouro claro
+   era outro tom, e o branco era um quase-branco azulado. */
+const NAVY_ESCURO = '#101B31';
+const OURO = '#C2A35B';
+const OURO_CLARO = '#D8BE7C';
+const BRANCO = '#FFFFFF';
+const ARDOSIA_CLARA = '#C3CAD8';
 
 export const TAMANHO_OG = { width: 1200, height: 630 };
 export const TIPO_OG = 'image/png';
@@ -36,7 +51,9 @@ export const TIPO_OG = 'image/png';
 async function fonteDeTitulo(): Promise<ArrayBuffer | null> {
   try {
     const css = await fetch(
-      'https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&display=swap',
+      // Newsreader 400, que é a face de título do site. Era Source Serif 600:
+      // a fonte do CORPO, num peso que o site não carrega em lugar nenhum.
+      'https://fonts.googleapis.com/css2?family=Newsreader:wght@400&display=swap',
       { headers: { 'User-Agent': 'Mozilla/5.0' } },
     ).then((r) => r.text());
 
@@ -47,51 +64,6 @@ async function fonteDeTitulo(): Promise<ArrayBuffer | null> {
   } catch {
     return null;
   }
-}
-
-/** Nós do grafo de fundo — fixos, para o cartão ser idêntico em todo build. */
-const NOS: readonly [number, number, number][] = [
-  [812, 96, 7], [906, 148, 5], [742, 182, 6], [982, 232, 8], [858, 262, 9],
-  [1088, 196, 5], [770, 330, 6], [948, 366, 7], [1052, 320, 6], [880, 452, 8],
-  [1016, 470, 5], [1118, 402, 7], [792, 500, 6], [944, 556, 7], [1082, 552, 6],
-];
-
-const ARESTAS: readonly [number, number][] = [
-  [0, 1], [0, 2], [1, 3], [2, 4], [3, 4], [3, 5], [4, 6], [4, 7], [7, 8],
-  [8, 5], [6, 9], [7, 9], [9, 10], [10, 11], [8, 11], [9, 12], [12, 13],
-  [13, 10], [13, 14], [14, 10],
-];
-
-function Grafo() {
-  return (
-    <svg
-      width={1200}
-      height={630}
-      style={{ position: 'absolute', top: 0, left: 0 }}
-      viewBox="0 0 1200 630"
-    >
-      {ARESTAS.map(([a, b], i) => {
-        const de = NOS[a];
-        const para = NOS[b];
-        if (!de || !para) return null;
-        return (
-          <line
-            key={i}
-            x1={de[0]}
-            y1={de[1]}
-            x2={para[0]}
-            y2={para[1]}
-            stroke={GOLD_500}
-            strokeWidth={1.4}
-            strokeOpacity={0.3}
-          />
-        );
-      })}
-      {NOS.map(([cx, cy, r], i) => (
-        <circle key={i} cx={cx} cy={cy} r={r} fill={GOLD_400} fillOpacity={0.5} />
-      ))}
-    </svg>
-  );
 }
 
 export interface CartaoSocial {
@@ -112,19 +84,17 @@ export async function cartaoSocial({ sobretitulo, titulo, rodape }: CartaoSocial
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: NAVY_900,
+          background: NAVY_ESCURO,
           padding: '72px 80px',
           position: 'relative',
         }}
       >
-        <Grafo />
-
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ display: 'flex', width: 30, height: 1, background: GOLD_500 }} />
+          <div style={{ display: 'flex', width: 30, height: 1, background: OURO }} />
           <div
             style={{
               display: 'flex',
-              color: GOLD_400,
+              color: OURO_CLARO,
               fontSize: 21,
               letterSpacing: 5,
               textTransform: 'uppercase',
@@ -138,7 +108,7 @@ export async function cartaoSocial({ sobretitulo, titulo, rodape }: CartaoSocial
           style={{
             display: 'flex',
             fontFamily: fonte ? 'Titulo' : undefined,
-            color: ICE_100,
+            color: BRANCO,
             fontSize: titulo.length > 70 ? 60 : 72,
             lineHeight: 1.13,
             letterSpacing: -1.2,
@@ -153,7 +123,7 @@ export async function cartaoSocial({ sobretitulo, titulo, rodape }: CartaoSocial
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'space-between',
-            borderTop: `1px solid ${GOLD_500}55`,
+            borderTop: `1px solid ${OURO}59`,
             paddingTop: 28,
           }}
         >
@@ -161,7 +131,7 @@ export async function cartaoSocial({ sobretitulo, titulo, rodape }: CartaoSocial
             <div
               style={{
                 display: 'flex',
-                color: ICE_100,
+                color: BRANCO,
                 fontSize: 34,
                 letterSpacing: 7,
                 fontFamily: fonte ? 'Titulo' : undefined,
@@ -169,12 +139,15 @@ export async function cartaoSocial({ sobretitulo, titulo, rodape }: CartaoSocial
             >
               ABBA
             </div>
-            <div style={{ display: 'flex', color: ICE_300, opacity: 0.55, fontSize: 19, letterSpacing: 2 }}>
+            {/* Sem opacidade. O cinza a 55% marcava 2,9 contra o navy, e um
+                cartão social é lido em miniatura, num feed, muitas vezes por
+                cima de um brilho de tela. A ardósia clara cheia resolve. */}
+            <div style={{ display: 'flex', color: ARDOSIA_CLARA, fontSize: 19, letterSpacing: 2 }}>
               CONSULTORIA DE IA
             </div>
           </div>
 
-          <div style={{ display: 'flex', color: GOLD_400, fontSize: 21, opacity: 0.85 }}>
+          <div style={{ display: 'flex', color: OURO_CLARO, fontSize: 21 }}>
             {rodape ?? EMPRESA.dominio}
           </div>
         </div>
@@ -184,7 +157,7 @@ export async function cartaoSocial({ sobretitulo, titulo, rodape }: CartaoSocial
     {
       ...TAMANHO_OG,
       ...(fonte
-        ? { fonts: [{ name: 'Titulo', data: fonte, weight: 600 as const, style: 'normal' as const }] }
+        ? { fonts: [{ name: 'Titulo', data: fonte, weight: 400 as const, style: 'normal' as const }] }
         : {}),
     },
   );

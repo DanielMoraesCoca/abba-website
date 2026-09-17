@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FaixaDeGrafo } from '@/components/brand/Grafo';
 import { Capa } from '@/components/marketing/Capa';
 import { NumeroComFonte } from '@/components/marketing/NumeroComFonte';
 import { PrimeiraPergunta } from '@/components/marketing/PrimeiraPergunta';
@@ -92,14 +91,30 @@ export default function PaginaInicial() {
         </RevelarLista>
       </Secao>
 
-      {/* A faixa de grafo é o respiro entre o passo 1 e o passo 2: o único
-          elemento da página que ignora a coluna, e por isso funciona como
-          marco. Revelada por corte: a malha abre de borda a borda. Uma vez
-          só na home, de propósito. Um recurso usado duas vezes na mesma
-          página deixa de ser marco e vira maneirismo. */}
-      <Revelar modo="corte">
-        <FaixaDeGrafo semente={20260101} />
-      </Revelar>
+      {/* AQUI HAVIA UMA FAIXA DE GRAFO, E ELA SAIU.
+          ──────────────────────────────────────────────────────────────
+          Era uma malha de nós e linhas douradas atravessando a largura da
+          tela, como respiro entre o passo 1 e o passo 2. O componente
+          existia, era bem-feito, era determinístico e não custava uma
+          requisição de rede.
+
+          E era o logo de cérebro aposentado em outra forma, que é
+          exatamente o que o briefing §10.3 tirou do site: a constelação da
+          capa saiu por esse motivo, e esta faixa é a mesma figura em escala
+          de arquitetura. A própria documentação do componente dizia "a
+          marca-símbolo É um grafo", e a marca deixou de ter símbolo: ela é
+          o nome, escrito.
+
+          O respiro não sumiu junto. Quem separa o passo 1 do passo 2 agora
+          é a troca de fundo, de branco para navy, que é o único corte de
+          tom dessa força na página inteira. Um marco que já existia e
+          estava sendo somado a outro.
+
+          Onde esta página pedir imagem no futuro, a resposta continua
+          sendo a mesma do briefing §7: captura de tela real do software da
+          casa. A régua bloqueando uma frase. O registro com a métrica
+          combinada antes. É a única imagem que ninguém consegue
+          falsificar, e é o que nenhum concorrente tem. */}
 
       {/* ── Passo 2 · Por que a maioria erra ─────────────────────────────
           Fundo navy: é o único passo do argumento em que a ABBA não aparece,

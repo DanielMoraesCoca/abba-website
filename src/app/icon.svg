@@ -1,12 +1,28 @@
+<!-- O ícone da aba: a letra, não o símbolo.
+
+     O que estava aqui era o grafo de doze nós e catorze arestas, que é o
+     logo de cérebro aposentado em V5e. Ele sobreviveu à limpeza da capa e
+     da constelação porque ninguém abre o favicon durante o trabalho, e era
+     o lugar mais persistente de todos: uma aba aberta o mostra o dia
+     inteiro, em toda página do site.
+
+     A marca da ABBA é o nome, escrito, sem símbolo (briefing §4). Em 16
+     pixels quatro letras não se leem, então fica a inicial, em serifa, na
+     mesma relação de navy e ouro do resto do sistema.
+
+     A pilha de fontes repete a do site: Newsreader não existe aqui dentro,
+     e a Iowan Old Style e a Georgia são as mesmas reservas que o
+     globals.css já declara para título. Qualquer substituição cai numa
+     serifa de texto, que é o desenho certo. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="8" fill="#1B2A4A"/>
-  <g stroke="#C2A35B" stroke-width="1.6" stroke-linecap="round" opacity="0.75" fill="none">
-    <path d="M20 16 30 12 40 17M20 16 16 27M30 12 32 24M40 17 47 26M16 27 24 33M32 24 24 33M32 24 41 31M47 26 41 31M24 33 20 45M41 31 44 44M20 45 31 51M44 44 31 51M24 33 33 40M33 40 31 51"/>
-  </g>
-  <g fill="#C2A35B">
-    <circle cx="20" cy="16" r="3"/><circle cx="30" cy="12" r="2.4"/><circle cx="40" cy="17" r="2.8"/>
-    <circle cx="16" cy="27" r="2.4"/><circle cx="32" cy="24" r="3.2"/><circle cx="47" cy="26" r="2.4"/>
-    <circle cx="24" cy="33" r="2.8"/><circle cx="41" cy="31" r="2.6"/><circle cx="33" cy="40" r="2.4"/>
-    <circle cx="20" cy="45" r="2.6"/><circle cx="44" cy="44" r="2.4"/><circle cx="31" cy="51" r="3"/>
-  </g>
+  <rect width="64" height="64" rx="8" fill="#101B31"/>
+  <text
+    x="32"
+    y="46"
+    text-anchor="middle"
+    font-family="&quot;Iowan Old Style&quot;, Georgia, &quot;Times New Roman&quot;, serif"
+    font-size="44"
+    font-weight="400"
+    fill="#C2A35B"
+  >A</text>
 </svg>

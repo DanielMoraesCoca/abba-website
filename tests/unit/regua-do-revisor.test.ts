@@ -181,3 +181,55 @@ describe('a faixa em reais permanece suspensa', () => {
     ).toEqual([]);
   });
 });
+
+/**
+ * A MARCA APOSENTADA NÃO VOLTA.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * O logo antigo da ABBA era um cérebro, e ele foi aposentado. Depois disso
+ * ele reapareceu três vezes, sempre disfarçado da mesma forma: uma malha de
+ * nós ligados por linhas. Na capa da home, como constelação em canvas. Na
+ * home inteira, como faixa de grafo entre seções. No cartão social e no
+ * ícone da aba, como SVG desenhado à mão.
+ *
+ * Os três eram bem-feitos, e é por isso que sobreviveram: ninguém olha um
+ * favicon durante o trabalho, e um cartão social só aparece depois que o
+ * link já foi colado em algum lugar. O briefing §10.3 é explícito: a
+ * constelação de nós e linhas É o logo de cérebro em outra forma, a régua
+ * de imagem reprova circuito, e a marca da casa é o NOME, escrito, sem
+ * símbolo.
+ *
+ * Este teste fecha a porta pelo lado de fora. Se ele falhar, a pergunta não
+ * é como fazê-lo passar: é quem desenhou um grafo de novo, e onde.
+ *
+ * O que NÃO é violação, e por isso a contagem tem folga: a Convergência tem
+ * um ponto no encontro de três linhas, e a Linha do Programa tem um ponto
+ * por portão. São diagramas de um argumento e de um calendário, não a
+ * marca.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('o grafo aposentado', () => {
+  const TETO_DE_PONTOS = 4;
+
+  it('nenhum arquivo do site desenha uma malha de nós', () => {
+    const ofensores = ARQUIVOS.filter(({ texto }) => {
+      const pontos = (texto.match(/<circle/g) ?? []).length;
+      return pontos > TETO_DE_PONTOS;
+    }).map((a) => a.caminho);
+
+    expect(
+      ofensores,
+      'A marca da ABBA é o nome escrito, sem símbolo. Nada de nós e linhas.',
+    ).toEqual([]);
+  });
+
+  it('o ícone da aba é a letra, não o grafo', () => {
+    const icone = readFileSync(join(RAIZ, 'app/icon.svg'), 'utf8');
+    expect(icone, 'o ícone voltou a ser um grafo de nós').not.toMatch(/<circle/);
+    expect(icone, 'o ícone precisa carregar a letra da marca').toMatch(/>A</);
+  });
+
+  it('o cartão social não desenha nada além de tipografia', () => {
+    const og = readFileSync(join(RAIZ, 'lib/og.tsx'), 'utf8');
+    expect(og, 'o cartão social voltou a desenhar um grafo').not.toMatch(/<circle|<line\b/);
+  });
+});

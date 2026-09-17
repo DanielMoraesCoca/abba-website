@@ -121,9 +121,24 @@ export function Cabecalho() {
          Ver o bloco "O progresso da página" no globals.css. */
       data-progresso
       className={cn(
-        'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color,backdrop-filter] duration-500 ease-[var(--ease-micro)]',
-        superficie === 'clara' && 'border-b border-navy/10 bg-branco/92 backdrop-blur-md',
-        superficie === 'escura' && 'border-b border-branco/10 bg-navy-escuro/92 backdrop-blur-md',
+        'fixed inset-x-0 top-0 z-50 h-[var(--header-h)] transition-[background-color,border-color] duration-500 ease-[var(--ease-micro)]',
+        /* Fundo OPACO, e não vidro fosco.
+           ──────────────────────────────────────────────────────────────
+           Era `bg-branco/92` com desfoque de 12px. Fotografei no celular e
+           reprovei: oito por cento de transparência sobre uma manchete de
+           55px deixa a frase legível ATRÁS da marca. "A camada independente"
+           passando por dentro do "ABBA" não lê como vidro, lê como defeito
+           de renderização. O desfoque não salva: doze pixels é pouco para
+           tipo desse corpo, e é justamente o tipo grande que fica embaixo
+           do cabeçalho numa página que se lê.
+
+           Opaco também sai mais barato: desfoque de fundo é composição a
+           cada quadro de rolagem, e no aparelho fraco isso aparece.
+
+           O estado transparente continua existindo, e é onde o efeito
+           valia: no topo da capa, onde não há nada para atravessar. */
+        superficie === 'clara' && 'border-b border-navy/10 bg-branco',
+        superficie === 'escura' && 'border-b border-branco/10 bg-navy-escuro',
         superficie === 'transparente' && 'border-b border-transparent bg-transparent',
       )}
     >

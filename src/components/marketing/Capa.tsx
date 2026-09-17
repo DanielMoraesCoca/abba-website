@@ -56,7 +56,9 @@ export function Capa() {
           </div>
         </Revelar>
 
-        {/* A régua de fatos: prazo, estrutura, garantia. Número, prazo, nome. */}
+        {/* A régua de fatos: prazo, estrutura, profundidade. Número e nome, nunca
+            adjetivo. E nada aqui é promessa de nível de serviço: são três coisas
+            que o Programa TEM, não três coisas que a casa garante. */}
         <RevelarLista
           as="ul"
           className="mt-20 grid gap-px overflow-hidden border-y border-ardosia-clara/12 sm:mt-28 sm:grid-cols-3"

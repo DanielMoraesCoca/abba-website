@@ -25,6 +25,7 @@ const ROTAS = [
   '/assessment-gratuito',
   '/analise',
   '/contato',
+  '/quem-responde',
   '/privacidade',
   // A 404 é uma página como as outras, e é a única que ninguém revisa por
   // vontade própria — só se chega nela errando. Auditada junto.

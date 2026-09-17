@@ -14,6 +14,7 @@ import { CAMINHOS, FASES } from '@/content/caminhos';
 import { evidencia } from '@/content/evidencias';
 import { CONTATO, HEADLINE, PRATELEIRA } from '@/content/identidade';
 import { RECUSAS } from '@/content/manifesto';
+import { SOCIOS_PUBLICOS } from '@/content/socios';
 
 /**
  * A HOME É UM ARGUMENTO EM CINCO PASSOS, NESTA ORDEM.
@@ -424,10 +425,19 @@ export default function PaginaInicial() {
           ))}
         </RevelarLista>
 
-        <Revelar className="mt-12">
+        <Revelar className="mt-12 flex flex-col gap-3 sm:flex-row">
           <Botao href="/manifesto" variante="secundario">
             Ler o manifesto inteiro
           </Botao>
+          {/* A página de sócios pertence a ESTE passo, e é por aqui que se
+              chega nela: não entra no menu como categoria própria, porque
+              não é seção institucional solta. Ela aparece quando as bios
+              tiverem o ok dos sócios. Ver content/socios.ts. */}
+          {SOCIOS_PUBLICOS && (
+            <Botao href="/quem-responde" variante="secundario">
+              Ver quem responde por isto
+            </Botao>
+          )}
         </Revelar>
       </Secao>
 

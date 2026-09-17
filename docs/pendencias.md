@@ -34,6 +34,38 @@ As outras três condições para religar estão no cabeçalho de
 declara que a faixa saiu do que o visitante declarou, e em lugar nenhum ela é
 chamada de diagnóstico, assessment ou avaliação de prontidão.
 
+## 1b. Aprovar as duas bios dos sócios · **sócios**
+
+**Onde:** [`src/content/socios.ts`](../src/content/socios.ts) e a página
+[`/quem-responde`](../src/app/quem-responde/page.tsx)
+
+A página existe por decisão V5o do abba-ops: a trava 4 tira caso, depoimento
+e logo de cliente, e sem nenhuma dessas coisas o site não tem prova humana
+nenhuma. Ela está construída e **não está no ar**: `SOCIOS_PUBLICOS = false`
+a mantém fora do mapa do site, sem link em lugar nenhum, e pedindo para não
+ser indexada. É o mesmo mecanismo do preço, e pelo mesmo motivo: nome de
+pessoa em material externo é porta de uma via.
+
+**Duas coisas não bateram com o que a decisão supôs, e são o que falta:**
+
+1. **Não existem duas bios.** O `posicionamento.md` tem UMA linha, escrita
+   para servir a qualquer fundador no LinkedIn. Duas bios idênticas numa
+   página de sócios gastam a única prova humana do site para dizer a mesma
+   frase duas vezes. Falta uma linha por pessoa, e só os sócios escrevem.
+2. **Falta o nome completo do segundo sócio.** O primeiro nome aparece no
+   `CLAUDE.md` deste repositório; o sobrenome, não. Chutar sobrenome numa
+   página de sócios é pior do que deixar em branco.
+
+A bio compartilhada já foi adaptada para a régua do site, e a adaptação
+precisa de conferência: a linha aprovada termina em "instalamos os 70% que
+todo fornecedor de IA ignora", e os 70/30 são tese da casa, não estatística
+(trava 6). O numeral saiu, o argumento ficou. "Mid-market" virou "médio
+porte", que é o que o resto do site fala.
+
+Para publicar: preencher os buracos, trocar o booleano, e atualizar o teste
+em `tests/unit/conteudo.test.ts` no mesmo commit. Há um segundo teste que
+recusa a publicação se algum buraco continuar por preencher.
+
 ## 2. Decidir se preço é público · **Pedro**
 
 **Onde:** [`src/content/precos.ts`](../src/content/precos.ts) — `PRECO_PUBLICO`

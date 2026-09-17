@@ -11,6 +11,7 @@ import { PERGUNTAS } from '@/content/perguntas';
 import { TOTAL_DE_PERGUNTAS, esquemaRespostas } from '@/lib/analise/schema';
 import { colar } from '@/lib/tipografia';
 import { PRECO_PUBLICO } from '@/content/precos';
+import { SOCIOS_PUBLICOS, faltaPreencher } from '@/content/socios';
 
 describe('cânone de evidências', () => {
   // `EVIDENCIAS` é tupla literal (para derivar os ids). Ler um campo opcional
@@ -86,6 +87,23 @@ describe('o framework é o IP', () => {
         expect(item).not.toContain('?');
       }
     }
+  });
+});
+
+describe('sócios', () => {
+  it('as bios continuam fora do ar até o ok dos sócios (porta de uma via)', () => {
+    /* Mesmo mecanismo do preço, e pelo mesmo motivo: nome de pessoa em
+       material externo não se desfaz. O buscador guarda, o arquivo da web
+       guarda. Este teste não impede a publicação: obriga quem publicar a
+       mudar o teste no mesmo commit, deixando a decisão no histórico. */
+    expect(SOCIOS_PUBLICOS).toBe(false);
+  });
+
+  it('nada vai ao ar com buraco de conteúdo por preencher', () => {
+    /* A porta pode abrir por engano antes das bios existirem. Se isso
+       acontecer, o site publicaria "[PRECISA DE NOME COMPLETO]" como se
+       fosse o nome de um sócio. */
+    if (SOCIOS_PUBLICOS) expect(faltaPreencher()).toEqual([]);
   });
 });
 

@@ -12,6 +12,10 @@ const ROTAS = [
   '/analise',
   '/contato',
   '/privacidade',
+  /* Ainda não publicada (ver content/socios.ts), e auditada mesmo assim: ela
+     vai ao ar com a troca de um booleano, e página que estreia sem nunca ter
+     passado pela régua estreia com defeito. */
+  '/quem-responde',
 ];
 
 test.describe('todas as páginas', () => {
@@ -129,6 +133,7 @@ const ROTAS_COM_CAPA = [
   '/assessment-gratuito',
   '/analise',
   '/contato',
+  '/quem-responde',
   '/rota-que-nao-existe',
 ];
 

@@ -320,14 +320,20 @@ describe('as vagas de imagem', () => {
     expect(orfaos, 'Marcador aponta para tomada fora do registro.').toEqual([]);
   });
 
-  it('a tomada sem lugar no site declara isso, em vez de inventar um', () => {
-    /* FOTO 08 são os retratos individuais. O site não tem página de sócios,
-       e a outra destinação da tomada é perfil de rede social. Deixar `rotas`
-       vazio é a resposta honesta; inventar uma seção para a foto caber seria
-       a foto mandando no site. */
-    const semLugar = VAGAS_DE_IMAGEM.filter((v) => v.rotas.length === 0);
+  it('tomada sem rota não aparece marcada em página nenhuma', () => {
+    /* Hoje todas as onze têm destino: a FOTO 08, os retratos individuais,
+       era a única sem, e a decisão V5o resolveu isso criando a página que
+       faltava em vez de descartar a tomada. O teste fica porque o caso volta
+       a acontecer: a próxima tomada nova nasce sem lugar, e `rotas: []` é a
+       resposta honesta enquanto ninguém decidir onde ela entra. O que não
+       pode é existir marcador para uma vaga que se declara sem destino. */
+    const semLugar: readonly { id: string; rotas: readonly string[] }[] = VAGAS_DE_IMAGEM;
     for (const vaga of semLugar) {
-      expect(PAGINAS.some((p) => p.cru.includes(vaga.id))).toBe(false);
+      if (vaga.rotas.length > 0) continue;
+      expect(
+        PAGINAS.some((p) => p.cru.includes(vaga.id)),
+        `${vaga.id} se declara sem destino e mesmo assim está marcada numa página.`,
+      ).toBe(false);
     }
   });
 });

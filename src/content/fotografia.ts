@@ -118,10 +118,12 @@ export const VAGAS_DE_IMAGEM = [
     tomada: 'Cada sócio, isolado',
     proporcao: '1:1',
     quadro: 'Retrato de três quartos, para a página de sócios e para o perfil.',
-    /* Sem rota: o site de hoje não tem página de sócios, e a outra
-       destinação da tomada é perfil de rede social, que não é o site.
-       Inventar uma seção para a foto caber seria a foto mandando no site. */
-    rotas: [],
+    /* Esta tomada ficou SEM rota até 17/09, porque o site não tinha onde pôr
+       rosto e inventar uma seção para a foto caber seria a foto mandando no
+       site. A resposta dos sócios (V5o) não foi descartar a tomada: foi
+       criar o destino. `/quem-responde` existe por causa dela e da trava 4,
+       que tira toda outra prova humana do site. */
+    rotas: ['/quem-responde'],
   },
   {
     id: 'FOTO 09',

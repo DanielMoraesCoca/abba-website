@@ -11,7 +11,14 @@ import { PERGUNTAS } from '@/content/perguntas';
 import { TOTAL_DE_PERGUNTAS, esquemaRespostas } from '@/lib/analise/schema';
 import { colar } from '@/lib/tipografia';
 import { PRECO_PUBLICO } from '@/content/precos';
-import { SOCIOS_PUBLICOS, faltaPreencher } from '@/content/socios';
+import {
+  BIO_DA_CASA,
+  GESTICULA_VINCULO,
+  SOCIOS,
+  SOCIOS_PUBLICOS,
+  esperandoAprovacao,
+  faltaPreencher,
+} from '@/content/socios';
 
 describe('cânone de evidências', () => {
   // `EVIDENCIAS` é tupla literal (para derivar os ids). Ler um campo opcional
@@ -104,6 +111,51 @@ describe('sócios', () => {
        acontecer, o site publicaria "[PRECISA DE NOME COMPLETO]" como se
        fosse o nome de um sócio. */
     if (SOCIOS_PUBLICOS) expect(faltaPreencher()).toEqual([]);
+  });
+
+  it('nada vai ao ar com linha ainda em rascunho', () => {
+    /* Texto escrito não é texto aprovado. As duas linhas saíram da matriz de
+       chapéus do abba-ops e são fiéis a ela, e mesmo assim são rascunho até
+       os sócios lerem: é o nome deles na frase. */
+    if (SOCIOS_PUBLICOS) expect(esperandoAprovacao()).toEqual([]);
+  });
+
+  /**
+   * A TRAVA DA PARTE RELACIONADA (abba-ops, V4g item d).
+   *
+   * ──────────────────────────────────────────────────────────────────────
+   * Um dos sócios tem vínculo profissional com o fornecedor cuja tecnologia
+   * a ABBA implanta. Afirmar esse vínculo em público faria o guardião do
+   * cliente (jurídico, DPO, controladoria) enxergar parte relacionada, e a
+   * independência é o produto que esta casa vende. Declarar é decisão dos
+   * sócios COM ADVOGADO, com política escrita de conflito de interesse, e
+   * NÃO é decisão de marketing.
+   *
+   * A página de sócios é exatamente onde esse leitor chega, e exatamente
+   * quando ele está avaliando se a prova é independente.
+   *
+   * O teste guarda as duas partes que se pode verificar em texto. A parte
+   * mais escorregadia é a segunda: GESTICULAR o vínculo sem nomeá-lo é pior
+   * que nomear, porque convida a pergunta e parece esconder. E ela é a que
+   * entra com boa intenção, quando alguém quiser somar credibilidade de
+   * origem a uma bio daqui a seis meses.
+   * ────────────────────────────────────────────────────────────────────── */
+  it('toda linha descreve o chapéu na ABBA, e não um currículo', () => {
+    for (const socio of SOCIOS) {
+      expect(
+        socio.linha.startsWith('Responde'),
+        `a linha de ${socio.id} não começa em "Responde": bio que abre por origem puxa cargo de origem`,
+      ).toBe(true);
+    }
+  });
+
+  it('nenhuma linha gesticula para um vínculo de fornecedor', () => {
+    const texto = [...SOCIOS.map((s) => `${s.nome} ${s.linha}`), BIO_DA_CASA].join(' ');
+    for (const padrao of GESTICULA_VINCULO) {
+      expect(padrao.test(texto), `vocabulário que gesticula vínculo: /${padrao.source}/`).toBe(
+        false,
+      );
+    }
   });
 });
 

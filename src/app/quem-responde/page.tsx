@@ -4,7 +4,13 @@ import { Revelar, RevelarItem, RevelarLista } from '@/components/motion/Revelar'
 import { Botao } from '@/components/ui/Botao';
 import { Secao } from '@/components/ui/Secao';
 import { EMPRESA } from '@/content/identidade';
-import { BIO_DA_CASA, SOCIOS, SOCIOS_PUBLICOS, faltaPreencher } from '@/content/socios';
+import {
+  BIO_DA_CASA,
+  SOCIOS,
+  SOCIOS_PUBLICOS,
+  esperandoAprovacao,
+  faltaPreencher,
+} from '@/content/socios';
 import { metadadosDaPagina } from '@/lib/seo';
 
 /**
@@ -64,7 +70,7 @@ export const metadata = {
 };
 
 export default function PaginaQuemResponde() {
-  const buracos = faltaPreencher();
+  const pendencias = [...faltaPreencher(), ...esperandoAprovacao()];
 
   return (
     <>
@@ -84,7 +90,7 @@ export default function PaginaQuemResponde() {
         }
       />
 
-      {buracos.length > 0 && (
+      {pendencias.length > 0 && (
         /* O aviso é para os sócios, e some sozinho quando os buracos forem
            preenchidos. Ele fica em vermelho de alerta e não na paleta da
            marca de propósito: isto não é desenho de página, é uma nota de
@@ -96,7 +102,8 @@ export default function PaginaQuemResponde() {
             </p>
             <p className="mt-4 max-w-2xl text-corpo leading-[1.7] text-navy">
               Esta página não está linkada em lugar nenhum do site e pede para não ser indexada.
-              Falta preencher: {buracos.join(', ')}. Depois disso, publicar é trocar
+              Pendente: {pendencias.join(' · ')}. As duas linhas saíram da matriz de chapéus e
+              esperam o ok dos sócios. Depois disso, publicar é trocar
               <code className="mx-1.5 font-mono text-legenda">SOCIOS_PUBLICOS</code>
               para verdadeiro em <code className="font-mono text-legenda">content/socios.ts</code>.
             </p>
@@ -118,6 +125,12 @@ export default function PaginaQuemResponde() {
                   ║ destino enquanto o site não tinha onde pôr rosto. Esta é
                   ║ a página que a decisão V5o criou para ela, e o corte 1:1
                   ║ do plano é o que cabe nesta grade de duas colunas.
+                  ║
+                  ║ A LEGENDA SEGUE A MESMA TRAVA DA BIO: nada de cargo de
+                  ║ origem, nada de empresa de terceiro, nem nomeada nem
+                  ║ gesticulada. Ver o cabeçalho de content/socios.ts. O
+                  ║ texto alternativo diz o nome e o papel na ABBA, e nada
+                  ║ mais.
                   ║
                   ║ Registro: src/content/fotografia.ts. Plano: abba-ops,
                   ║ 08-materiais/marca/plano-de-fotografia.md.

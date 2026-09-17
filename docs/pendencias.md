@@ -46,15 +46,31 @@ a mantém fora do mapa do site, sem link em lugar nenhum, e pedindo para não
 ser indexada. É o mesmo mecanismo do preço, e pelo mesmo motivo: nome de
 pessoa em material externo é porta de uma via.
 
-**Duas coisas não bateram com o que a decisão supôs, e são o que falta:**
+**O que falta, em ordem de quem resolve:**
 
-1. **Não existem duas bios.** O `posicionamento.md` tem UMA linha, escrita
-   para servir a qualquer fundador no LinkedIn. Duas bios idênticas numa
-   página de sócios gastam a única prova humana do site para dizer a mesma
-   frase duas vezes. Falta uma linha por pessoa, e só os sócios escrevem.
-2. **Falta o nome completo do segundo sócio.** O primeiro nome aparece no
-   `CLAUDE.md` deste repositório; o sobrenome, não. Chutar sobrenome numa
-   página de sócios é pior do que deixar em branco.
+1. **As duas linhas precisam do ok dos sócios.** Elas estão escritas e são
+   rascunho: saíram da matriz de chapéus (P6, `abba-ops/01-setores/README.md`),
+   que já diz de que cada um responde, e por isso são fiéis. Mas é o nome
+   deles na frase, então texto escrito não é texto aprovado. Um teste recusa
+   a publicação enquanto `linhaEmRascunho` for verdadeiro.
+2. **Falta o nome completo do Daniel.** O primeiro nome está no `CLAUDE.md`
+   deste repositório; o resto, não. Inferir sobrenome de nome de usuário do
+   GitHub não é fonte para nome em site público.
+
+**A correção que a decisão V5o supôs e não existia:** ela dizia "as duas bios
+aprovadas do posicionamento.md", e o `posicionamento.md` tem UMA linha,
+escrita para servir a qualquer fundador no LinkedIn. Duas bios idênticas numa
+página de sócios gastariam a única prova humana do site para dizer a mesma
+frase duas vezes.
+
+**A trava que governa a bio do Pedro (V4g item d), e que não sai daqui:** ele
+tem vínculo profissional com o fornecedor cuja tecnologia a ABBA implanta, e
+afirmar isso em público faria o guardião do cliente enxergar parte
+relacionada. A bio não nomeia o fornecedor, não o gesticula, e descreve o que
+ele responde dentro da ABBA. Declarar o vínculo é decisão dos sócios COM
+ADVOGADO, com política escrita de conflito de interesse, e não é decisão de
+marketing. Dois testes guardam a trava: toda linha começa em "Responde", e o
+vocabulário de gesticulação é recusado.
 
 A bio compartilhada já foi adaptada para a régua do site, e a adaptação
 precisa de conferência: a linha aprovada termina em "instalamos os 70% que

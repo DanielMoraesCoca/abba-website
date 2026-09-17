@@ -52,7 +52,19 @@ export function Resultado({ dados, aoRecomecar }: {
   const { vetor, qualificacao, narrativa, empresa } = dados;
 
   return (
-    <div className="space-y-16">
+    /* A CASCATA DO RESULTADO.
+       ──────────────────────────────────────────────────────────────────
+       `data-revelar-lista` liga o escalonamento que o resto do site já usa:
+       cada bloco filho recebe `--indice` pela posição e atrasa a própria
+       entrada em `--passo`. Aqui o passo é 40ms, e não os 60ms do padrão,
+       porque estes blocos são LONGOS: com seis blocos a 60ms o último
+       espera trezentos e sessenta milissegundos depois do primeiro, e o
+       leitor já começou a ler. A 40ms o texto chega na ordem em que se lê,
+       que é o ponto, e não numa fila.
+
+       Não é uma lista de verdade, e por isso não é <ul>: é o mesmo
+       mecanismo de CSS aplicado a seções irmãs. */
+    <div data-revelar-lista style={{ '--passo': '40ms' } as React.CSSProperties} className="space-y-16">
       {/* 1 · A leitura nomeada */}
       <Revelar as="section">
         <Sobretitulo>Primeira leitura · {empresa}</Sobretitulo>

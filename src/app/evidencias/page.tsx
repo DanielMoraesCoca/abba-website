@@ -40,6 +40,7 @@ export default function PaginaEvidencias() {
 
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
+          preso
           sobretitulo="O cânone"
           titulo="Os números aprovados para uso externo."
           apoio={
@@ -106,6 +107,7 @@ export default function PaginaEvidencias() {
       <Secao tom="navy" espaco="amplo">
         <TituloDeSecao
           invertido
+          preso
           sobretitulo="O índice proibido"
           titulo="Os números que a gente baniu do próprio material."
           apoio={

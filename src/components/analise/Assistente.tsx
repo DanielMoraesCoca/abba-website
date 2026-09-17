@@ -113,6 +113,17 @@ export function Assistente() {
     setEnviando(true);
     setErro('');
 
+    /* Sobe para o topo do assistente ANTES de trocar o conteúdo.
+       ────────────────────────────────────────────────────────────────
+       A tela de espera é muito mais curta que o formulário do último
+       passo. Sem isto, a página encolhe embaixo de quem acabou de clicar e
+       a rolagem, que estava no fim do formulário, passa a apontar para o
+       rodapé: o visitante clica em "ver a leitura" e cai nos links
+       institucionais, sem nunca ver que alguma coisa começou.
+
+       Fotografado no celular, que é onde a queda é maior. */
+    topo.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
     const { empresa, setor, ...respostas } = rascunho;
 
     try {
@@ -141,6 +152,14 @@ export function Assistente() {
     }
   }
 
+  if (enviando) {
+    return (
+      <div ref={topo} className="scroll-mt-[calc(var(--header-h)+2rem)]">
+        <Esperando empresa={rascunho.empresa ?? 'sua empresa'} />
+      </div>
+    );
+  }
+
   if (resultado) {
     return (
       <div ref={topo} className="scroll-mt-[calc(var(--header-h)+2rem)]">
@@ -160,6 +179,24 @@ export function Assistente() {
 
   return (
     <div ref={topo} className="scroll-mt-[calc(var(--header-h)+2rem)]">
+      {/* O PROGRESSO É UM FIO, E NÃO UM NÚMERO.
+          ──────────────────────────────────────────────────────────────
+          "Passo 2 de 4" e "50%" são linguagem de formulário: dizem ao
+          leitor que ele está numa fila. Um fio que enche diz a mesma coisa
+          sem contar nada, e é lido de relance, que é como progresso deve
+          ser lido.
+
+          O fio é `aria-hidden` porque a informação já existe de forma
+          melhor para quem usa leitor de tela: a lista abaixo é uma <ol> com
+          `aria-current="step"` no item atual, e isso é anunciado com o nome
+          do passo, não com uma fração. Duplicar viraria ruído. */}
+      <div aria-hidden className="mb-9 h-px w-full bg-navy/10">
+        <div
+          className="h-full bg-ouro transition-[width] duration-[var(--duration-reveal)] ease-[var(--ease-abba)]"
+          style={{ width: `${((passo + 1) / PASSOS.length) * 100}%` }}
+        />
+      </div>
+
       <ol className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Etapas da análise">
         {PASSOS.map((p, i) => {
           const feito = i < passo;
@@ -171,8 +208,13 @@ export function Assistente() {
                 onClick={() => (i <= passo ? irPara(i) : undefined)}
                 disabled={i > passo}
                 aria-current={atual ? 'step' : undefined}
+                /* `min-h-11` são os 44px que a WCAG pede de alvo de toque, e
+                   o `-my-3` devolve a altura extra ao leiaute para a régua
+                   de passos não engordar. Quem responde isto é um diretor
+                   no celular, não um designer no desktop: um alvo de 22px
+                   erra, e errar aqui é voltar um passo sem querer. */
                 className={cn(
-                  'nums flex items-center gap-2 font-mono text-rotulo uppercase tracking-[0.14em] transition-colors duration-300',
+                  'nums flex min-h-11 items-center gap-2 -my-3 font-mono text-rotulo uppercase tracking-[0.14em] transition-colors duration-300',
                   atual && 'text-navy',
                   feito && 'text-ardosia hover:text-navy',
                   !atual && !feito && 'text-ardosia',
@@ -317,7 +359,7 @@ export function Assistente() {
           type="button"
           onClick={() => irPara(Math.max(passo - 1, 0))}
           disabled={passo === 0}
-          className="self-start font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia transition-colors hover:text-navy disabled:invisible"
+          className="-mx-3 inline-flex min-h-11 items-center self-start px-3 font-mono text-rotulo uppercase tracking-[0.12em] text-ardosia transition-colors hover:text-navy disabled:invisible"
         >
           ← Voltar
         </button>
@@ -325,14 +367,14 @@ export function Assistente() {
         <button
           type="button"
           onClick={() => (ultimo ? enviar() : irPara(passo + 1))}
-          disabled={!completo || enviando}
+          disabled={!completo}
           className={cn(
             'inline-flex items-center justify-center gap-2.5 rounded-[3px] px-7 py-3.5 font-medium transition-all duration-[var(--duration-micro)] ease-[var(--ease-micro)]',
             'bg-navy text-branco hover:bg-navy',
             'disabled:cursor-not-allowed disabled:bg-ardosia disabled:text-branco',
           )}
         >
-          {enviando ? 'Calculando…' : ultimo ? 'Ver a leitura preliminar' : 'Continuar'}
+          {ultimo ? 'Ver a leitura preliminar' : 'Continuar'}
         </button>
       </div>
 
@@ -342,5 +384,70 @@ export function Assistente() {
         </p>
       )}
     </div>
+  );
+}
+
+/**
+ * A TELA DE ESPERA, QUE ERA O MOMENTO MAIS FRÁGIL DA EXPERIÊNCIA INTEIRA.
+ *
+ * ════════════════════════════════════════════════════════════════════════
+ * Até aqui, clicar em "Ver a leitura preliminar" trocava o rótulo do botão
+ * para "Calculando…" e não acontecia mais nada. O formulário inteiro ficava
+ * na tela, parado, enquanto uma chamada a um modelo de linguagem levava
+ * alguns segundos. Quem já respondeu tudo e clicou não fica olhando para o
+ * botão: olha para a página, e a página não dizia nada.
+ *
+ * É a única tela do site em que o visitante FAZ alguma coisa, e era a única
+ * em que a casa deixava ele sem resposta.
+ *
+ * TRÊS DECISÕES, E CADA UMA É DOUTRINA E NÃO ENFEITE.
+ *
+ *   1. A ESPERA CONTA O QUE ESTÁ ACONTECENDO, com o nome da empresa dele na
+ *      frase. Não é "aguarde": é "a leitura já está pronta, o texto em
+ *      volta está sendo escrito". Isso é verdade literal da arquitetura: a
+ *      leitura sai de regra determinística e já existe quando a chamada
+ *      paga começa.
+ *
+ *   2. A ESPERA REPETE A TRAVA. "Nenhum número sobre a sua empresa sai de
+ *      um modelo de linguagem" é a frase mais importante do produto, e este
+ *      é o único instante em que o leitor está parado, olhando, sem nada
+ *      para ler. É o melhor lugar do site para ela, e ela estava em toda
+ *      parte menos aqui.
+ *
+ *   3. O FIO NÃO FINGE SABER QUANTO FALTA. Não há porcentagem, não há
+ *      contagem regressiva, não há "quase lá". Não existe progresso
+ *      conhecido para mostrar, e inventar um seria a mesma mentira com
+ *      aparência de precisão que a casa recusa em número. O fio diz a única
+ *      coisa verdadeira: ainda está acontecendo.
+ *
+ * `aria-busy` e `role="status"` fazem o leitor de tela anunciar a mudança
+ * sem roubar o foco de quem está navegando por teclado.
+ * ════════════════════════════════════════════════════════════════════════
+ */
+function Esperando({ empresa }: { readonly empresa: string }) {
+  return (
+    <section
+      role="status"
+      aria-busy="true"
+      className="border-t border-navy/15 pt-10"
+    >
+      <p className="font-mono text-rotulo uppercase tracking-[0.2em] text-ardosia">
+        Montando a leitura
+      </p>
+
+      <p className="mt-6 max-w-2xl text-lede leading-snug text-navy">
+        A leitura de {empresa} já está pronta. O que está sendo escrito agora é o texto em volta
+        dela.
+      </p>
+
+      <div data-fio-de-espera aria-hidden className="relative mt-9 h-px w-full overflow-hidden bg-navy/10" />
+
+      <p className="mt-9 max-w-2xl text-corpo leading-[1.7] text-ardosia">
+        Onde vocês estão e qual é o passo seguinte saem de uma regra escrita, no nosso servidor, que
+        não mudou desde que você começou a responder. O modelo de linguagem escreve a prosa, e só
+        ela: se um número escapar para o texto dele, a geração inteira é descartada e entra o texto
+        preparado. Nenhum número sobre a sua empresa sai de um modelo de linguagem.
+      </p>
+    </section>
   );
 }

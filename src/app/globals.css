@@ -583,26 +583,94 @@
   }
 }
 
-/* Entrada de um passo do assistente da Análise. A `key` no React remonta o
-   bloco; a animação é toda daqui. */
+/* ==========================================================================
+   A troca de passo da Primeira Leitura
+   --------------------------------------------------------------------------
+   A `key` no React remonta o bloco; a animação é toda daqui.
+
+   DUAS ANIMAÇÕES, NÃO UMA, E ISSO É A LIÇÃO DA VERO LIDA NO CSS DE PRODUÇÃO
+   DELES: transform e opacity não compartilham nada. Não compartilham a
+   curva, porque o deslocamento quer desacelerar no fim e a opacidade quer
+   assentar cedo; não compartilham a duração, porque a opacidade cobre
+   distância zero; e não compartilham o começo, porque a letra que aparece
+   ANTES de chegar no lugar é lida como borrão.
+
+   Uma declaração só, com as duas propriedades no mesmo `@keyframes`, força
+   as três coisas a serem iguais. Era o que estava aqui.
+
+   A ordem agora é a mesma do resto do site (`[data-revelar]`): o
+   deslocamento sai na frente com a curva de entrada, a opacidade entra
+   depois com a curva de micro. É a única tela do site em que o visitante FAZ
+   alguma coisa, e é nela que o cuidado aparece ou não aparece.
+   ========================================================================== */
+
+/* Os tempos são próprios, e menores que os da entrada por rolagem. Aqueles
+   são 900ms e 560ms porque um bloco que entra na tela enquanto a pessoa
+   rola pode se dar ao luxo de assentar devagar: ela está fazendo outra
+   coisa. Aqui ela clicou "Continuar" e está ESPERANDO. Meio segundo de
+   espera depois de um clique é lentidão, não elegância. A proporção entre
+   as três (deslocamento, opacidade, atraso) é a mesma; a escala é outra. */
 [data-passo] {
-  animation: passo-entra 420ms var(--ease-abba) both;
+  animation:
+    passo-desloca 420ms var(--ease-abba) both,
+    passo-aparece 260ms var(--ease-micro) 120ms both;
 }
 
-@keyframes passo-entra {
+@keyframes passo-desloca {
+  from {
+    transform: translateX(18px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes passo-aparece {
   from {
     opacity: 0;
-    transform: translateX(16px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
+}
+
+/* A linha de espera enquanto a camada de linguagem escreve.
+   --------------------------------------------------------------------------
+   Um fio que atravessa e volta. NÃO é barra de progresso: não existe
+   progresso conhecido para mostrar, e fingir que existe é o mesmo tipo de
+   mentira com aparência de precisão que a casa recusa em número. O fio diz
+   uma coisa só, que é a verdadeira: ainda está acontecendo. */
+@keyframes fio-de-espera {
+  0% {
+    transform: translateX(-100%) scaleX(0.35);
+  }
+  50% {
+    transform: translateX(0%) scaleX(0.6);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.35);
+  }
+}
+
+[data-fio-de-espera]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-ouro);
+  transform-origin: left center;
+  animation: fio-de-espera 1600ms var(--ease-abba) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   [data-passo] {
     animation: none;
+  }
+
+  /* O fio para de correr e vira um traço firme: quem pediu menos movimento
+     continua precisando saber que a coisa está acontecendo. */
+  [data-fio-de-espera]::after {
+    animation: none;
+    transform: scaleX(0.6);
   }
 }
 

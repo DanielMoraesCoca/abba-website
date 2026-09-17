@@ -93,6 +93,7 @@ export default function PaginaInicial() {
       <Secao tom="navy" espaco="amplo">
         <TituloDeSecao
           invertido
+          preso
           sobretitulo="Passo 02 · por que a maioria erra"
           titulo={
             <>
@@ -126,6 +127,7 @@ export default function PaginaInicial() {
       {/* ── Passo 3 · Como se faz diferente ───────────────────────────── */}
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
+          preso
           sobretitulo="Passo 03 · como se faz diferente"
           titulo={
             <>
@@ -184,6 +186,7 @@ export default function PaginaInicial() {
 
         <TituloDeSecao
           className="mt-24"
+          preso
           sobretitulo="A vitrine inteira"
           titulo="Três caminhos. Nada mais é oferecido em primeiro contato."
           apoio={
@@ -262,6 +265,7 @@ export default function PaginaInicial() {
           seção ser lida em vez de folheada. */}
       <Secao tom="gelo" espaco="amplo" alinhamento="deslocada">
         <TituloDeSecao
+          preso
           sobretitulo="AI Native · Ano 1"
           titulo="Doze meses, três fases, três portões de saída sem multa."
           apoio={
@@ -345,6 +349,7 @@ export default function PaginaInicial() {
           e é isso que torna a prova independente de nós. */}
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
+          preso
           sobretitulo="Passo 04 · por que dá para confiar"
           titulo={
             <>

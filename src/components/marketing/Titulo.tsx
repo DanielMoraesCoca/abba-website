@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { RotuloPreso } from '@/components/ui/RotuloPreso';
 import { Sobretitulo } from '@/components/ui/Sobretitulo';
 import { Revelar } from '@/components/motion/Revelar';
 
@@ -29,6 +30,7 @@ export function TituloDeSecao({
   apoio,
   invertido = false,
   centralizado = false,
+  preso = false,
   className,
 }: {
   readonly sobretitulo?: string;
@@ -36,8 +38,36 @@ export function TituloDeSecao({
   readonly apoio?: React.ReactNode;
   readonly invertido?: boolean;
   readonly centralizado?: boolean;
+  /**
+   * Prende o sobretítulo no alto enquanto a seção rola por baixo. Ver
+   * `RotuloPreso`: é a diferença entre uma página que rola e uma que
+   * conduz, e vale só em seção longa. Numa seção de uma tela, prender um
+   * rótulo é movimento sem informação.
+   */
+  readonly preso?: boolean;
   readonly className?: string;
 }) {
+  /* O rótulo preso fica FORA do `Revelar`, e isto não é arrumação: é a
+     única forma de funcionar. `Revelar` anima `transform`, e um ancestral
+     com transform vira bloco contenedor de `position: sticky`. Dentro dele
+     o rótulo prenderia contra o próprio cabeçalho, que tem a altura de duas
+     linhas, e não contra a seção. Ele não quebraria: ele simplesmente não
+     faria nada, que é pior, porque ninguém percebe. */
+  if (preso && sobretitulo) {
+    return (
+      <>
+        <RotuloPreso invertido={invertido}>{sobretitulo}</RotuloPreso>
+        <TituloDeSecao
+          titulo={titulo}
+          apoio={apoio}
+          invertido={invertido}
+          centralizado={centralizado}
+          className={cn('mt-8', className)}
+        />
+      </>
+    );
+  }
+
   return (
     <Revelar
       as="header"
@@ -50,7 +80,8 @@ export function TituloDeSecao({
       )}
       <h2
         className={cn(
-          'mt-5 text-secao leading-[1.12]',
+          sobretitulo ? 'mt-5' : '',
+          'text-secao leading-[1.12]',
           invertido ? 'text-branco' : 'text-navy',
         )}
       >

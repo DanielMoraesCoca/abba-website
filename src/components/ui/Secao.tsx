@@ -11,6 +11,26 @@ const FUNDOS: Record<Tom, string> = {
 };
 
 /**
+ * A MESMA COR, EM VARIÁVEL, PARA QUEM PRECISA MASCARAR.
+ *
+ * O rótulo preso (`RotuloPreso`) flutua sobre o conteúdo da própria seção
+ * enquanto ele rola por baixo. Para isso ele precisa de um fundo OPACO e
+ * exatamente igual ao da seção, senão o texto atravessa o rótulo: é a mesma
+ * lição que o cabeçalho de vidro deu, e ela custou uma fotografia no celular
+ * para ser aprendida.
+ *
+ * A seção não sabe quem vai usar isso. Ela só declara a própria cor numa
+ * variável, e quem precisar que leia. É o mesmo contrato do `data-fundo`,
+ * que o cabeçalho lê para saber o que está passando por baixo dele.
+ */
+const COR_DO_FUNDO: Record<Tom, string> = {
+  claro: 'var(--color-branco)',
+  gelo: 'var(--color-papel)',
+  navy: 'var(--color-navy)',
+  'navy-profundo': 'var(--color-navy-escuro)',
+};
+
+/**
  * A seção é a unidade de ritmo do site.
  *
  * ────────────────────────────────────────────────────────────────────────
@@ -65,6 +85,7 @@ export function Secao({
          baixo dele. A seção não sabe que o cabeçalho existe — ela só declara
          o próprio fundo, e quem precisa que leia. */
       data-fundo={tom === 'navy' || tom === 'navy-profundo' ? 'escuro' : 'claro'}
+      style={{ '--fundo-secao': COR_DO_FUNDO[tom] } as React.CSSProperties}
       className={cn(
         FUNDOS[tom],
         espaco === 'curto' && 'py-14 sm:py-16',

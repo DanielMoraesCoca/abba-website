@@ -68,6 +68,7 @@ export default function PaginaMetodo() {
 
       <Secao tom="claro" espaco="amplo">
         <TituloDeSecao
+          preso
           sobretitulo={`A anatomia · ${TOTAL_DIMENSOES} dimensões`}
           titulo="Nove grupos, e quase nenhum deles se enxerga de fora."
           apoio={
@@ -102,6 +103,7 @@ export default function PaginaMetodo() {
 
       <Secao tom="gelo" espaco="amplo">
         <TituloDeSecao
+          preso
           sobretitulo="O protocolo de prova"
           titulo="Quatro regras que separam prova de depoimento."
           apoio={

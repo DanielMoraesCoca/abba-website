@@ -53,10 +53,10 @@
  * Entrega e Financeiro-Admin; o Pedro tem Capacitação e Tecnologia, e
  * Tecnologia inclui segurança. Os sócios aprovam antes de publicar.
  *
- * E falta o nome completo do Daniel. O primeiro nome está no CLAUDE.md
- * deste repositório; o resto, não. Inferir sobrenome de nome de usuário do
- * GitHub não é fonte para nome em site público, e nome errado numa página de
- * sócios é o tipo de erro que o leitor nunca esquece.
+ * Os dois nomes vieram dos sócios em 18/09. Um deles precisa de conferência
+ * de GRAFIA, e o motivo está em `nomeAConferir`: "nome errado numa página de
+ * sócios é o tipo de erro que o leitor nunca esquece" é regra da casa, e ela
+ * vale tanto para o sobrenome que falta quanto para a letra que sobra.
  * ════════════════════════════════════════════════════════════════════════
  */
 
@@ -77,6 +77,23 @@ export const BIO_DA_CASA =
   'Sócio-fundador da ABBA, consultoria de transformação em IA para o médio porte brasileiro. ' +
   'Instalamos a parte que o mercado não vende.';
 
+/**
+ * O RESUMO QUE VAI PARA O BUSCADOR E PARA A PRÉVIA DE LINK.
+ *
+ * Ele mora AQUI, e não solto na página, por um motivo de trava. Este é o
+ * texto que aparece no resultado de busca e na prévia de um link colado no
+ * WhatsApp: é lido sem abrir a página, por quem talvez nunca a abra. E é o
+ * campo que uma passada futura de SEO mexe primeiro, porque é o que a
+ * ferramenta de SEO aponta.
+ *
+ * Com ele neste arquivo, a varredura de `GESTICULA_VINCULO` o alcança junto
+ * com as bios, e quem for "melhorar a descrição para busca" daqui a seis
+ * meses esbarra na mesma trava que protege o resto.
+ */
+export const RESUMO_PARA_BUSCA =
+  'As duas pessoas que respondem pelo trabalho da ABBA. Sem prêmio, sem anos de mercado, sem ' +
+  'adjetivo: nome, papel, e o que cada uma faz aqui.';
+
 export interface Socio {
   readonly id: string;
   readonly nome: string;
@@ -91,12 +108,17 @@ export interface Socio {
   readonly linha: string;
   /** Rascunho aguardando aprovação dos sócios. Bloqueia a publicação. */
   readonly linhaEmRascunho: boolean;
+  /**
+   * O que precisa ser conferido no NOME antes de publicar, quando precisa.
+   * Bloqueia a publicação enquanto estiver preenchido.
+   */
+  readonly nomeAConferir?: string;
 }
 
 export const SOCIOS = [
   {
     id: 'daniel',
-    nome: '[PRECISA DE NOME COMPLETO]',
+    nome: 'Daniel Coca',
     linha:
       'Responde pelo que a ABBA promete ao cliente: a primeira conversa, o número combinado antes, ' +
       'e o resultado que volta medido. É quem senta na mesa do primeiro contato ao conselho.',
@@ -109,6 +131,13 @@ export const SOCIOS = [
       'Responde pelo que a ABBA constrói e pelo que ela ensina: o software que mede, a plataforma ' +
       'em que o time do cliente aprende, e a segurança dos dois.',
     linhaEmRascunho: true,
+    /* A mensagem que trouxe os dois nomes escreveu "Pedrou Moura". Medido no
+       abba-ops antes de decidir: "Pedro" aparece 90 vezes, inclusive nas
+       duas decisões que tratam dele pelo nome completo (V4g e V5o) e na
+       matriz de chapéus; "Pedrou" aparece zero. Fica a grafia do registro, e
+       fica bloqueado até alguém confirmar, porque a regra que a casa aplicou
+       ao sobrenome que faltava vale igual para a letra que sobra. */
+    nomeAConferir: 'grafia: registro diz "Pedro", a mensagem dizia "Pedrou"',
   },
 ] as const satisfies readonly Socio[];
 
@@ -142,7 +171,16 @@ export function faltaPreencher(): readonly string[] {
   return buracos;
 }
 
-/** O que está escrito e ainda espera o ok dos sócios. Também bloqueia. */
+/** O que está escrito e ainda espera confirmação dos sócios. Também bloqueia. */
 export function esperandoAprovacao(): readonly string[] {
-  return SOCIOS.filter((s) => s.linhaEmRascunho).map((s) => `${s.id}: linha em rascunho`);
+  /* O tipo nominal, e não a tupla literal: `nomeAConferir` é opcional, e ler
+     um campo opcional que nem todo membro tem é erro de tipo na união. É o
+     mesmo motivo pelo qual o teste do cânone lê `readonly Evidencia[]`. */
+  const todos: readonly Socio[] = SOCIOS;
+  const pendentes: string[] = [];
+  for (const socio of todos) {
+    if (socio.linhaEmRascunho) pendentes.push(`${socio.id}: linha em rascunho`);
+    if (socio.nomeAConferir) pendentes.push(`${socio.id}: ${socio.nomeAConferir}`);
+  }
+  return pendentes;
 }

@@ -14,6 +14,7 @@ import { PRECO_PUBLICO } from '@/content/precos';
 import {
   BIO_DA_CASA,
   GESTICULA_VINCULO,
+  RESUMO_PARA_BUSCA,
   SOCIOS,
   SOCIOS_PUBLICOS,
   esperandoAprovacao,
@@ -149,8 +150,17 @@ describe('sócios', () => {
     }
   });
 
-  it('nenhuma linha gesticula para um vínculo de fornecedor', () => {
-    const texto = [...SOCIOS.map((s) => `${s.nome} ${s.linha}`), BIO_DA_CASA].join(' ');
+  it('nada que sai desta página gesticula para um vínculo de fornecedor', () => {
+    /* A varredura inclui o RESUMO_PARA_BUSCA, e isso não é zelo extra: ele é
+       o texto do resultado de busca e da prévia de link, lido por quem talvez
+       nunca abra a página, e é o primeiro campo que uma passada futura de SEO
+       mexe. Deixá-lo fora seria proteger o que o leitor lê com calma e largar
+       o que ele lê de relance. */
+    const texto = [
+      ...SOCIOS.map((s) => `${s.nome} ${s.linha}`),
+      BIO_DA_CASA,
+      RESUMO_PARA_BUSCA,
+    ].join(' ');
     for (const padrao of GESTICULA_VINCULO) {
       expect(padrao.test(texto), `vocabulário que gesticula vínculo: /${padrao.source}/`).toBe(
         false,

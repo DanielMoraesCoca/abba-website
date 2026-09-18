@@ -6,6 +6,7 @@ import { Secao } from '@/components/ui/Secao';
 import { EMPRESA } from '@/content/identidade';
 import {
   BIO_DA_CASA,
+  RESUMO_PARA_BUSCA,
   SOCIOS,
   SOCIOS_PUBLICOS,
   esperandoAprovacao,
@@ -58,9 +59,11 @@ import { metadadosDaPagina } from '@/lib/seo';
 export const metadata = {
   ...metadadosDaPagina({
     titulo: 'Quem responde',
-    descricao:
-      'As duas pessoas que respondem pelo trabalho da ABBA. Sem prêmio, sem anos de mercado, sem ' +
-      'adjetivo: nome, papel, e o que cada uma faz aqui.',
+    /* O resumo vem de content/socios.ts, e não está escrito aqui, para a
+       varredura da trava alcançá-lo junto com as bios. Ele é lido no
+       resultado de busca e na prévia de link, por quem talvez nunca abra a
+       página, e é o primeiro campo que uma passada de SEO mexe. */
+    descricao: RESUMO_PARA_BUSCA,
     caminho: '/quem-responde',
   }),
   /* Não indexar enquanto as bios não tiverem o ok dos sócios. Nome de pessoa

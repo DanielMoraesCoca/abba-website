@@ -193,6 +193,13 @@ function validar(bruta: RespostaBruta): Omit<Narrativa, 'origem'> | null {
 const TETO_GLOBAL = limiteDoAmbiente('ABBA_LIMITE_GLOBAL_LLM', 120);
 const JANELA_DO_FUSIVEL_MS = 10 * 60 * 1000;
 
+/**
+ * Quanto a casa aceita fazer alguém esperar pela prosa do modelo antes de
+ * servir o texto determinístico. Ver o comentário no ponto da chamada: o
+ * padrão do SDK são dez minutos, e ele foi medido, não suposto.
+ */
+const TETO_DA_CHAMADA_MS = 25_000;
+
 export async function gerarNarrativa(c: ContextoNarrativa): Promise<Narrativa> {
   if (!process.env.ANTHROPIC_API_KEY) {
     return narrativaDeterministica(c);
@@ -207,7 +214,36 @@ export async function gerarNarrativa(c: ContextoNarrativa): Promise<Narrativa> {
   }
 
   try {
-    const client = new Anthropic();
+    /* O TETO DE ESPERA, E POR QUE ELE PRECISA EXISTIR.
+       ══════════════════════════════════════════════════════════════════
+       A queda para o texto determinístico sempre funcionou: o `catch` lá
+       embaixo pega qualquer falha e a leitura sai igual. O que não
+       funcionava era o TEMPO que ela levava para acontecer.
+
+       Medido neste repositório, com o SDK apontado para um endereço que
+       aceita a conexão e nunca responde, que é o pior caso real (não é
+       recusa, não é erro: é silêncio):
+
+         maxRetries 0  ->  1,0 × timeout
+         maxRetries 1  ->  2,1 × timeout
+         maxRetries 2  ->  3,4 × timeout   (o padrão do SDK)
+
+       E o timeout padrão do cliente, lido do próprio objeto, é 600.000ms.
+       Dez minutos, vezes 3,4, dá mais de meia hora de tela de espera antes
+       de servir um texto que já estava pronto desde o começo. Em produção
+       o provedor da hospedagem mata a função antes disso, e aí o visitante
+       não recebe nem o determinístico: recebe erro de rede.
+
+       O teto abaixo inverte a aposta. A prosa do modelo é um bônus; a
+       leitura é o produto, e ela não depende dele. Vinte e cinco segundos
+       é generoso para uma resposta de 4000 tokens sem streaming, e é o que
+       a casa aceita fazer alguém esperar por um parágrafo.
+
+       `maxRetries: 0` é decisão, não descuido: repetir uma chamada PAGA
+       enquanto uma pessoa espera, para salvar um parágrafo que já tem
+       substituto, é a troca errada nas duas pontas. Uma tentativa, teto
+       firme, e o que estiver pronto vai para a tela. */
+    const client = new Anthropic({ timeout: TETO_DA_CHAMADA_MS, maxRetries: 0 });
     const resposta = await client.messages.create({
       model: MODELO,
       max_tokens: 4000,

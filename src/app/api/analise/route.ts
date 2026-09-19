@@ -23,6 +23,22 @@ import { identificar, limiteDoAmbiente, verificarLimite } from '@/lib/limite';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+/**
+ * O teto da plataforma, declarado, e maior que o teto interno.
+ *
+ * A chamada paga tem teto de 25s em `narrativa.ts`, e depois dele a leitura
+ * sai determinística. Este número existe para a plataforma não matar a
+ * função ANTES disso: se ela matar, o visitante não recebe o texto de
+ * reserva, recebe erro de rede, que é a única forma de essa tela quebrar de
+ * verdade.
+ *
+ * Quarenta e cinco deixa vinte segundos de folga sobre o teto interno, para
+ * a validação, a regra determinística e a serialização. Se a hospedagem
+ * impuser um limite menor que 45, é o teto de `narrativa.ts` que desce, e
+ * não este que sobe.
+ */
+export const maxDuration = 45;
+
 const MAXIMO_POR_JANELA = limiteDoAmbiente('ABBA_LIMITE_ANALISE', 8);
 const JANELA_MS = 10 * 60 * 1000;
 

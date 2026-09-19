@@ -337,3 +337,40 @@ describe('as vagas de imagem', () => {
     }
   });
 });
+
+/**
+ * O TETO DA CHAMADA PAGA NÃO VOLTA A SER O PADRÃO DO SDK.
+ *
+ * ────────────────────────────────────────────────────────────────────────
+ * `new Anthropic()` sem opções usa timeout de dez minutos e duas
+ * retentativas. Medido neste repositório contra um endereço que aceita a
+ * conexão e nunca responde, isso dá 3,4 vezes o timeout: mais de meia hora
+ * antes de cair no texto determinístico que já estava pronto desde o começo.
+ *
+ * A queda nunca esteve quebrada; o TEMPO dela estava. E é a única tela do
+ * site em que uma pessoa espera olhando.
+ *
+ * Este teste lê a fonte porque o defeito É a ausência de um argumento: não
+ * há comportamento para observar sem gastar vinte e cinco segundos de suíte
+ * ou uma chamada paga.
+ * ──────────────────────────────────────────────────────────────────────── */
+describe('a chamada paga tem teto', () => {
+  const NARRATIVA = readFileSync(join(RAIZ, 'lib/analise/narrativa.ts'), 'utf8');
+
+  it('o cliente não é construído com os padrões do SDK', () => {
+    expect(
+      /new Anthropic\(\s*\)/.test(NARRATIVA),
+      'new Anthropic() sem opções traz timeout de 10 min e 2 retentativas.',
+    ).toBe(false);
+  });
+
+  it('o teto é explícito e cabe na janela de uma função de borda', () => {
+    const ms = /TETO_DA_CHAMADA_MS\s*=\s*([\d_]+)/.exec(NARRATIVA)?.[1];
+    expect(ms, 'o teto sumiu do arquivo').toBeDefined();
+    expect(Number(ms!.replace(/_/g, ''))).toBeLessThanOrEqual(30_000);
+  });
+
+  it('não repete a chamada paga enquanto alguém espera', () => {
+    expect(NARRATIVA).toMatch(/maxRetries:\s*0/);
+  });
+});

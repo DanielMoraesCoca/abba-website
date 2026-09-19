@@ -3,6 +3,16 @@
 > Lista curta e honesta do que falta. Cada item diz **quem decide** e **onde
 > mexer**. Nenhuma delas impede o site de rodar hoje; todas impedem que ele
 > seja considerado pronto para prospect.
+>
+> **`npm run pronto` é a versão executável desta lista, e é ela que manda.**
+> Ela confere o que precisa ser verdade antes de apontar o domínio, sai com
+> código 1 enquanto alguma coisa bloquear, e diz onde mexer. Lista em dois
+> lugares é lista que diverge: quando as duas discordarem, o comando está
+> certo, porque ele lê o código e o ambiente em vez de lembrar deles.
+>
+> A diferença entre os dois níveis do comando: **BLOQUEIA** é o site não
+> deve ir ao ar assim; **AVISA** é vai ao ar com um custo que alguém precisa
+> ter aceitado.
 
 ## 1. Calibrar as premissas ANTES de religar a faixa, se religarem · **sócios**
 
@@ -97,7 +107,26 @@ Publicar é mudar um booleano — e o teste em `tests/unit/conteudo.test.ts`
 obriga quem mudar a atualizar o teste no mesmo commit, deixando a decisão
 registrada no histórico do git.
 
-## 3. Revisão jurídica da política de privacidade · **sócios + advogado**
+## 3. Identificar o controlador, e revisar com advogado · **Daniel + advogado**
+
+> **Esta pendência tem duas metades com urgências diferentes, e misturá-las
+> foi o que a manteve parada.** A revisão do advogado pode vir depois do ar:
+> o texto descreve com precisão o que o site faz, e o que falta é
+> conferência profissional, não correção de fato. A identificação do
+> controlador não pode: quem exerce um direito precisa saber contra quem
+> exerce, e até aqui a página falava em "a gente" com um e-mail no fim.
+>
+> **A metade não-adiável está pronta para receber.** O bloco existe na
+> página e lê de [`src/content/controlador.ts`](../src/content/controlador.ts):
+> quando o CNPJ sair, publicar é preencher três campos, e `npm run pronto`
+> para de bloquear sozinho. Enquanto estiverem vazios, a página mostra o
+> buraco em vez de escondê-lo.
+>
+> O terceiro campo é o **encarregado**, e ele é separado de propósito: pode
+> ser um dos sócios e pode usar o e-mail da casa, mas precisa ser escolha
+> registrada, não descuido de quem preencheu só dois campos.
+
+### A revisão jurídica, que é a metade adiável
 
 **Onde:** [`src/app/privacidade/page.tsx`](../src/app/privacidade/page.tsx)
 

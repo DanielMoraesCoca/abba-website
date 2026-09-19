@@ -1,6 +1,7 @@
 import { CapaDePagina } from '@/components/marketing/CapaDePagina';
 import { Revelar } from '@/components/motion/Revelar';
 import { Secao } from '@/components/ui/Secao';
+import { CONTROLADOR, faltaNoControlador } from '@/content/controlador';
 import { EMPRESA } from '@/content/identidade';
 import { metadadosDaPagina } from '@/lib/seo';
 
@@ -14,11 +15,23 @@ export const metadata = metadadosDaPagina({
 /**
  * Política de privacidade em linguagem direta.
  *
- * PENDÊNCIA JURÍDICA (docs/pendencias.md): este texto descreve com precisão
- * o que o site faz hoje, mas ainda não foi revisto por advogado, e a razão
- * social e o CNPJ da ABBA ainda não estão definidos. Antes do site ir ao ar,
- * um advogado revisa e os dados do controlador entram aqui.
- */
+ * ────────────────────────────────────────────────────────────────────────
+ * PENDÊNCIA JURÍDICA (docs/pendencias.md), e ela tem duas metades com
+ * urgências diferentes:
+ *
+ *   A revisão de advogado pode vir depois do ar. O texto descreve com
+ *   precisão o que o site faz, e o que falta é conferência profissional,
+ *   não correção de fato.
+ *
+ *   A identificação do controlador NÃO pode. Quem exerce um direito precisa
+ *   saber contra quem exerce, e até aqui esta página falava em "a gente" e
+ *   "nós" com um e-mail no fim. O bloco existe agora e lê de
+ *   `content/controlador.ts`: quando o CNPJ sair, publicar é preencher três
+ *   campos.
+ *
+ * Enquanto os campos estiverem vazios a página MOSTRA o buraco, e
+ * `npm run pronto` recusa o lançamento. Esconder seria pior que a ausência.
+ * ──────────────────────────────────────────────────────────────────────── */
 const BLOCOS = [
   {
     titulo: 'O que este site coleta',
@@ -85,6 +98,27 @@ export default function PaginaPrivacidade() {
               </div>
             </Revelar>
           ))}
+
+          <Revelar as="section" className="border-t border-navy/15 pt-10">
+            <h2 className="text-lede leading-snug text-navy">Quem é o controlador</h2>
+            <p className="mt-5 text-corpo leading-[1.75] text-ardosia">
+              O controlador dos dados tratados neste site é{' '}
+              <strong className="font-medium text-navy">{CONTROLADOR.razaoSocial}</strong>, inscrita
+              no CNPJ sob o número{' '}
+              <span className="nums font-medium text-navy">{CONTROLADOR.cnpj}</span>. Os pedidos dos
+              titulares são respondidos por{' '}
+              <strong className="font-medium text-navy">{CONTROLADOR.encarregado}</strong>, pelo
+              e-mail abaixo.
+            </p>
+            {faltaNoControlador().length > 0 && (
+              /* Visível, e não escondido: a página está no ar sem um dado que
+                 a lei pede, e quem abrir precisa ver isso, inclusive nós. O
+                 aviso some sozinho quando os campos forem preenchidos. */
+              <p className="mt-5 font-mono text-rotulo uppercase leading-relaxed tracking-[0.12em] text-alerta">
+                Falta preencher: {faltaNoControlador().join(' · ')}
+              </p>
+            )}
+          </Revelar>
 
           <Revelar as="section" className="border-t border-navy/15 pt-10">
             <h2 className="text-lede leading-snug text-navy">Como falar com a gente</h2>

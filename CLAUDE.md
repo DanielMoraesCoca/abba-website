@@ -1,5 +1,16 @@
 # Antes de qualquer coisa, leia a casa
 
+> **A tese da casa tem precedência.** Antes de qualquer decisão de produto, de posicionamento
+> ou de texto que o cliente lê, leia [`a-tese.md`](../abba-ops/00-identidade/a-tese.md). Se algo
+> aqui discordar dela, ela ganha e este arquivo se corrige no mesmo commit.
+>
+> **A camada deste repositório no ecossistema: canal.** O inventário vivo é
+> [`dados/repositorios.json`](../abba-ops/dados/repositorios.json) e a leitura está em
+> [`inventario-do-ecossistema.md`](../abba-ops/05-interno/inventario-do-ecossistema.md).
+> Um repositório que a casa possui e não declara é um ativo que a estratégia não usa e um
+> risco que ninguém olha.
+
+
 A fonte da verdade do negócio da ABBA é o repositório **abba-ops**, não este.
 
 Se ele estiver clonado ao lado, leia nesta ordem antes de responder qualquer coisa sobre
